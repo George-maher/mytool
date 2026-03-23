@@ -54,9 +54,9 @@ class Typography:
 
 # --- QSS Template ---
 def get_main_stylesheet():
-    return f\"\"\"
+    return f"""
     QMainWindow {{
-        background-color: {{Colors.BACKGROUND}};
+        background-color: {Colors.BACKGROUND};
     }}
 
     QWidget {{
@@ -328,4 +328,4 @@ def get_main_stylesheet():
     QCheckBox::indicator:hover {{
         border-color: {{Colors.PRIMARY}};
     }}
-    \"\"\"
+    """
