@@ -10,6 +10,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+from .reporting import ReportingEngine
 from PySide6.QtCore import QObject, Signal, Slot, QTimer
 from PySide6.QtWidgets import QMessageBox
 
@@ -42,7 +43,7 @@ class AdminChecker:
 
 
 class DatabaseManager(QObject):
-    """SQLite database manager for X-Shield"""
+    """SQLite database manager for X-Shield with improved schema and connection pooling"""
     
     database_connected = Signal()
     database_error = Signal(str)
@@ -51,22 +52,39 @@ class DatabaseManager(QObject):
         super().__init__()
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.connection = None
+        self._connection = None
         self.connect_database()
     
+    @property
+    def connection(self):
+        """Lazy database connection with simple health check"""
+        try:
+            if self._connection:
+                self._connection.execute("SELECT 1")
+            else:
+                self.connect_database()
+        except sqlite3.Error:
+            self.connect_database()
+        return self._connection
+
     def connect_database(self):
         """Connect to SQLite database"""
         try:
-            self.connection = sqlite3.connect(str(self.db_path))
-            self.connection.row_factory = sqlite3.Row
+            self._connection = sqlite3.connect(
+                str(self.db_path),
+                check_same_thread=False,
+                timeout=10
+            )
+            self._connection.row_factory = sqlite3.Row
+            self._connection.execute("PRAGMA foreign_keys = ON")
             self.create_tables()
             self.database_connected.emit()
         except Exception as e:
             self.database_error.emit(f"Database connection failed: {str(e)}")
     
     def create_tables(self):
-        """Create necessary database tables"""
-        cursor = self.connection.cursor()
+        """Create necessary database tables with enhanced audit and security schemas"""
+        cursor = self._connection.cursor()
         
         # Targets table
         cursor.execute('''
@@ -77,7 +95,9 @@ class DatabaseManager(QObject):
                 description TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 last_scanned TIMESTAMP,
-                status TEXT DEFAULT 'active'
+                status TEXT DEFAULT 'active',
+                tags TEXT,
+                criticality INTEGER DEFAULT 0
             )
         ''')
         
@@ -95,7 +115,8 @@ class DatabaseManager(QObject):
                 items_scanned INTEGER DEFAULT 0,
                 status TEXT DEFAULT 'running',
                 results TEXT,
-                FOREIGN KEY (target_id) REFERENCES targets (id)
+                stealth_level TEXT,
+                FOREIGN KEY (target_id) REFERENCES targets (id) ON DELETE CASCADE
             )
         ''')
         
@@ -110,11 +131,14 @@ class DatabaseManager(QObject):
                 description TEXT,
                 target_service TEXT,
                 cvss_score REAL,
+                cvss_vector TEXT,
                 cve_id TEXT,
+                remediation_status TEXT DEFAULT 'open',
                 recommendation TEXT,
                 discovered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (scan_id) REFERENCES scan_history (id),
-                FOREIGN KEY (target_id) REFERENCES targets (id)
+                last_seen TIMESTAMP,
+                FOREIGN KEY (scan_id) REFERENCES scan_history (id) ON DELETE SET NULL,
+                FOREIGN KEY (target_id) REFERENCES targets (id) ON DELETE CASCADE
             )
         ''')
         
@@ -357,24 +381,24 @@ class ModuleChainingEngine(QObject):
 
 
 class StealthConfiguration(QObject):
-    """Stealth and evasion configuration"""
+    """Advanced Stealth and evasion configuration with dynamic jitter and header fuzzing"""
     
     def __init__(self):
         super().__init__()
         self.user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Edge/119.0.0.0'
         ]
         self.current_agent_index = 0
         self.delays = {
-            'minimal': 0.1,
-            'normal': 0.5,
-            'stealth': 2.0,
-            'paranoid': 5.0
+            'minimal': (0.1, 0.3),
+            'normal': (0.5, 1.2),
+            'stealth': (2.0, 5.0),
+            'paranoid': (10.0, 30.0)
         }
-        self.current_delay = 'normal'
+        self.current_delay_level = 'normal'
         self.proxy_config = {
             'enabled': False,
             'host': None,
@@ -387,9 +411,39 @@ class StealthConfiguration(QObject):
         import random
         return random.choice(self.user_agents)
     
+    def get_jittered_delay(self) -> float:
+        """Get randomized delay based on current level to evade timing analysis"""
+        import random
+        min_d, max_d = self.delays.get(self.current_delay_level, (0.5, 1.2))
+        return random.uniform(min_d, max_d)
+
+    def get_fuzzed_headers(self) -> Dict[str, str]:
+        """Generate fuzzed HTTP headers to emulate different browsers/environments"""
+        import random
+        ua = self.get_random_user_agent()
+        headers = {
+            'User-Agent': ua,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language': random.choice(['en-US,en;q=0.5', 'en-GB,en;q=0.9', 'fr-FR,fr;q=0.8']),
+            'Accept-Encoding': 'gzip, deflate, br',
+            'DNT': str(random.randint(0, 1)),
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1'
+        }
+
+        # Add random cache headers
+        if random.random() > 0.5:
+            headers['Cache-Control'] = 'max-age=0'
+
+        return headers
+
     def get_delay(self) -> float:
-        """Get current delay setting"""
-        return self.delays.get(self.current_delay, 0.5)
+        """Legacy compatibility - returns jittered delay"""
+        return self.get_jittered_delay()
     
     def rotate_user_agent(self) -> str:
         """Rotate to next user agent"""
@@ -416,7 +470,9 @@ class StealthConfiguration(QObject):
 
 
 class MainCore(QObject):
-    """Main application core managing all components"""
+    """Main application core managing all components - Singleton Pattern"""
+
+    _instance = None
     
     # Core signals
     admin_required = Signal()
@@ -427,12 +483,21 @@ class MainCore(QObject):
     chain_suggested = Signal(str, list)  # module_name, suggestions
     error_occurred = Signal(str)  # error_message
     
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(MainCore, cls).__new__(cls)
+            cls._instance._initialized = False
+        return cls._instance
+
     def __init__(self):
+        if self._initialized:
+            return
         super().__init__()
         self.is_admin = False
         self.database_manager = DatabaseManager()
         self.chaining_engine = ModuleChainingEngine(self.database_manager)
         self.stealth_config = StealthConfiguration()
+        self.reporting_engine = ReportingEngine()
         
         # Connect database signals
         self.database_manager.database_connected.connect(self.on_database_connected)
@@ -446,6 +511,7 @@ class MainCore(QObject):
         
         # Setup periodic tasks
         self.setup_periodic_tasks()
+        self._initialized = True
     
     def check_admin_privileges(self):
         """Check and request admin privileges if needed"""
@@ -501,14 +567,16 @@ class MainCore(QObject):
             self.error_occurred.emit(f"Maintenance failed: {str(e)}")
     
     def get_module_parameters(self, module_name: str) -> Dict:
-        """Get parameters for module including stealth settings"""
+        """Get parameters for module including advanced stealth settings"""
         base_params = {}
         
         # Add stealth parameters
         stealth_params = {
             'user_agent': self.stealth_config.get_random_user_agent(),
-            'delay': self.stealth_config.get_delay(),
-            'proxy': self.stealth_config.get_proxy_config()
+            'headers': self.stealth_config.get_fuzzed_headers(),
+            'delay': self.stealth_config.get_jittered_delay(),
+            'proxy': self.stealth_config.get_proxy_config(),
+            'stealth_level': self.stealth_config.current_delay_level
         }
         
         base_params.update(stealth_params)

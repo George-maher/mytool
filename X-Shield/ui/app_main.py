@@ -54,302 +54,154 @@ class XShieldApp(QMainWindow):
         self.logger.info("X-Shield Professional Application initialized")
     
     def apply_theme(self):
-        """Apply qt-material dark_teal theme"""
+        """Apply SOC Command Center Midnight Neon theme"""
+        # Midnight Neon Palette: Indigo: #0f172a, Cyan: #22d3ee, Amber: #fbbf24, Rose: #f43f5e
         try:
-            apply_stylesheet(self, theme='dark_teal.xml', invert_secondary=False)
-            
-            # Additional custom styling for professional look
             self.setStyleSheet("""
                 QMainWindow {
-                    background-color: #121212;
+                    background-color: #020617;
+                }
+
+                QWidget {
+                    background-color: transparent;
+                    color: #94a3b8;
+                    font-family: 'DejaVu Sans';
                 }
                 
-                /* Enhanced Sidebar Styling */
                 #sidebar {
-                    background-color: #0d3b3b;
-                    border-right: 2px solid #1a4a4a;
+                    background-color: #0f172a;
+                    border-right: 1px solid #1e293b;
                 }
                 
-                /* Enhanced Content Area */
                 #content_area {
-                    background-color: #1a1a1a;
+                    background-color: #020617;
                 }
                 
-                /* Professional Button Styling - LARGER */
+                /* Cyber Cyan Buttons */
                 QPushButton {
-                    background-color: #2e7d32;
-                    color: white;
-                    border: none;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    font-size: 16px;
-                    min-height: 48px;
-                    min-width: 120px;
+                    background-color: #0891b2;
+                    color: #f8fafc;
+                    border: 1px solid #22d3ee;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 13px;
+                    min-height: 38px;
+                    text-transform: uppercase;
                 }
                 
                 QPushButton:hover {
-                    background-color: #388e3c;
+                    background-color: #0e7490;
+                    border: 1px solid #67e8f9;
+                    color: #ffffff;
                 }
                 
                 QPushButton:pressed {
-                    background-color: #1b5e20;
+                    background-color: #155e75;
                 }
                 
-                QPushButton:disabled {
-                    background-color: #404040;
-                    color: #888888;
-                }
-                
-                /* Enhanced Input Styling - LARGER */
+                /* Enhanced Input Styling */
                 QLineEdit, QTextEdit, QPlainTextEdit {
-                    background-color: #2d2d2d;
-                    border: 2px solid #404040;
-                    border-radius: 8px;
-                    padding: 10px 16px;
-                    color: #ffffff;
-                    font-size: 16px;
-                    selection-background-color: #2e7d32;
-                    min-height: 40px;
+                    background-color: #0f172a;
+                    border: 1px solid #1e293b;
+                    border-radius: 4px;
+                    padding: 10px 14px;
+                    color: #22d3ee;
+                    font-family: 'DejaVu Sans Mono';
+                    font-size: 14px;
+                    selection-background-color: #155e75;
                 }
                 
-                QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
-                    border: 2px solid #2e7d32;
-                    background-color: #333333;
+                QLineEdit:focus {
+                    border: 1px solid #22d3ee;
+                    background-color: #020617;
                 }
                 
-                /* Enhanced ComboBox - LARGER */
+                /* ComboBox */
                 QComboBox {
-                    background-color: #2d2d2d;
-                    border: 2px solid #404040;
-                    border-radius: 8px;
-                    padding: 10px 16px;
-                    color: #ffffff;
-                    font-size: 16px;
-                    min-width: 250px;
-                    min-height: 40px;
+                    background-color: #0f172a;
+                    border: 1px solid #1e293b;
+                    border-radius: 4px;
+                    padding: 8px 12px;
+                    color: #f8fafc;
                 }
                 
-                QComboBox:focus {
-                    border: 2px solid #2e7d32;
-                    background-color: #333333;
+                /* Frame Styling - Command Center Cards */
+                .QFrame {
+                    background-color: #0f172a;
+                    border: 1px solid #1e293b;
+                    border-radius: 2px;
+                    padding: 15px;
                 }
                 
-                QComboBox::drop-down {
-                    border: none;
-                    width: 40px;
-                }
-                
-                QComboBox::down-arrow {
-                    image: none;
-                    border-left: 6px solid transparent;
-                    border-right: 6px solid transparent;
-                    border-top: 6px solid #ffffff;
-                    margin-right: 8px;
-                }
-                
-                QComboBox QAbstractItemView {
-                    background-color: #2d2d2d;
-                    border: 2px solid #404040;
-                    color: #ffffff;
-                    selection-background-color: #2e7d32;
-                    selection-color: white;
-                    font-size: 15px;
-                    padding: 8px;
-                }
-                
-                /* Enhanced Table Styling - LARGER */
+                /* Table Styling */
                 QTableWidget {
-                    background-color: #2d2d2d;
-                    border: 2px solid #404040;
-                    border-radius: 12px;
-                    gridline-color: #404040;
-                    color: #ffffff;
-                    selection-background-color: #2e7d32;
-                    alternate-background-color: #333333;
-                    font-size: 15px;
-                }
-                
-                QTableWidget::item {
-                    padding: 12px;
-                    border-bottom: 1px solid #404040;
-                    min-height: 24px;
-                }
-                
-                QTableWidget::item:selected {
-                    background-color: #2e7d32;
-                    color: white;
+                    background-color: #020617;
+                    border: 1px solid #1e293b;
+                    gridline-color: #1e293b;
+                    color: #94a3b8;
                 }
                 
                 QHeaderView::section {
-                    background-color: #404040;
-                    color: #ffffff;
-                    padding: 12px;
-                    border: none;
-                    font-weight: 600;
-                    font-size: 16px;
-                    border-bottom: 3px solid #2e7d32;
+                    background-color: #0f172a;
+                    color: #22d3ee;
+                    padding: 10px;
+                    border: 1px solid #1e293b;
+                    font-weight: bold;
+                    text-transform: uppercase;
                 }
                 
-                /* Enhanced Status Cards - LARGER */
-                #status_card {
-                    background-color: #1e1e1e;
-                    border: 2px solid #404040;
-                    border-radius: 16px;
-                    padding: 24px;
-                }
-                
-                /* Enhanced Labels - LARGER */
+                /* Labels */
                 QLabel {
-                    color: #ffffff;
-                    font-size: 15px;
-                    border: none;
-                    background: transparent;
-                    padding: 0px;
+                    color: #94a3b8;
                 }
                 
                 QLabel#title {
-                    font-size: 28px;
-                    font-weight: 700;
-                    color: #2e7d32;
-                    padding: 8px 0px;
+                    font-size: 24px;
+                    font-weight: 800;
+                    color: #f8fafc;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
                 }
                 
-                QLabel#section_title {
-                    font-size: 20px;
-                    font-weight: 600;
-                    color: #2e7d32;
-                    padding: 12px 0px;
-                }
-                
-                QLabel#subtitle {
-                    font-size: 17px;
-                    font-weight: 500;
-                    color: #b0b0b0;
-                    padding: 6px 0px;
-                }
-                
-                QLabel#info {
-                    font-size: 14px;
-                    color: #888888;
-                    padding: 4px 0px;
-                }
-                
-                /* Terminal Styling - LARGER */
-                #terminal {
-                    background-color: #0d0d0d;
-                    color: #00ff00;
-                    border: 2px solid #404040;
-                    border-radius: 12px;
-                    font-family: 'Consolas', 'Monaco', monospace;
-                    font-size: 15px;
-                    padding: 20px;
-                }
-                
-                /* Progress Bar - LARGER */
+                /* Progress Bar */
                 QProgressBar {
-                    border: 2px solid #404040;
-                    border-radius: 8px;
+                    border: 1px solid #1e293b;
+                    border-radius: 2px;
                     text-align: center;
-                    color: white;
-                    font-weight: bold;
-                    background-color: #2d2d2d;
-                    height: 24px;
-                    font-size: 15px;
+                    background-color: #020617;
+                    height: 10px;
+                    color: transparent;
                 }
                 
                 QProgressBar::chunk {
-                    background-color: #2e7d32;
-                    border-radius: 6px;
+                    background-color: #22d3ee;
                 }
                 
-                /* Tab Widget - LARGER */
+                /* Tab Widget */
                 QTabWidget::pane {
-                    border: 2px solid #404040;
-                    background-color: #1e1e1e;
-                    border-radius: 12px;
+                    border: 1px solid #1e293b;
+                    background-color: #0f172a;
                 }
                 
                 QTabBar::tab {
-                    background-color: #2d2d2d;
-                    color: #ffffff;
-                    padding: 12px 24px;
+                    background-color: #020617;
+                    color: #64748b;
+                    padding: 10px 20px;
+                    border: 1px solid #1e293b;
+                    border-bottom: none;
                     margin-right: 2px;
-                    border-top-left-radius: 12px;
-                    border-top-right-radius: 12px;
-                    font-weight: 600;
-                    font-size: 15px;
                 }
                 
                 QTabBar::tab:selected {
-                    background-color: #2e7d32;
-                    color: white;
-                }
-                
-                QTabBar::tab:hover {
-                    background-color: #404040;
-                }
-                
-                /* Frame Styling - LARGER */
-                .QFrame {
-                    background-color: #1e1e1e;
-                    border: 2px solid #404040;
-                    border-radius: 12px;
-                    padding: 24px;
-                }
-                
-                /* SpinBox - LARGER */
-                QSpinBox {
-                    background-color: #2d2d2d;
-                    border: 2px solid #404040;
-                    border-radius: 8px;
-                    padding: 10px 16px;
-                    color: #ffffff;
-                    font-size: 16px;
-                    min-width: 120px;
-                    min-height: 40px;
-                }
-                
-                QSpinBox:focus {
-                    border: 2px solid #2e7d32;
-                    background-color: #333333;
-                }
-                
-                /* CheckBox - LARGER */
-                QCheckBox {
-                    color: #ffffff;
-                    font-size: 16px;
-                    spacing: 16px;
-                    padding: 8px 0px;
-                }
-                
-                QCheckBox::indicator {
-                    width: 24px;
-                    height: 24px;
-                    border: 2px solid #404040;
-                    border-radius: 6px;
-                    background-color: #2d2d2d;
-                }
-                
-                QCheckBox::indicator:hover {
-                    border: 2px solid #2e7d32;
-                    background-color: #333333;
-                }
-                
-                QCheckBox::indicator:checked {
-                    background-color: #2e7d32;
-                    border: 2px solid #2e7d32;
-                    image: none;
+                    background-color: #0f172a;
+                    color: #22d3ee;
+                    border-bottom: 2px solid #22d3ee;
                 }
             """)
-            
         except Exception as e:
-            self.logger.error(f"Failed to apply qt-material theme: {e}")
-            # Fallback to basic dark theme
-            self.setStyleSheet("""
-                QMainWindow { background-color: #121212; color: white; }
-                QWidget { background-color: #1e1e1e; color: white; }
-            """)
+            self.logger.error(f"Failed to apply theme: {e}")
+            self.setStyleSheet("QMainWindow { background-color: #121212; color: white; }")
     
     def setup_ui(self):
         """Setup main UI layout"""
