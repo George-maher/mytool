@@ -71,6 +71,7 @@ class TerminalWidget(QWidget):
                 padding: 8px;
                 border-radius: 4px;
                 font-weight: bold;
+                min-height: 32px;
             }
             QPushButton:hover {
                 background-color: #b91c1c;
@@ -85,6 +86,7 @@ class TerminalWidget(QWidget):
                 padding: 8px;
                 border-radius: 4px;
                 font-weight: bold;
+                min-height: 32px;
             }
             QPushButton:hover {
                 background-color: #7c3aed;

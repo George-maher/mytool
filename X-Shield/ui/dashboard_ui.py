@@ -303,23 +303,20 @@ class DashboardUI(QMainWindow):
             QPushButton:hover {
                 background-color: #1976D2;
                 border: 2px solid #1976D2;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+
             }
             
             QPushButton:pressed {
                 background-color: #0D47A1;
                 border: 2px solid #0D47A1;
-                transform: translateY(0px);
-                box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+
             }
             
             QPushButton:disabled {
                 background-color: #404040;
                 color: #808080;
                 border: 2px solid #404040;
-                transform: none;
-                box-shadow: none;
+
             }
             
             /* Success Button */
@@ -329,7 +326,7 @@ class DashboardUI(QMainWindow):
             
             QPushButton[class="success"]:hover {
                 background-color: #45a049;
-                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+
             }
             
             QPushButton[class="success"]:pressed {
@@ -343,7 +340,7 @@ class DashboardUI(QMainWindow):
             
             QPushButton[class="danger"]:hover {
                 background-color: #da190b;
-                box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+
             }
             
             QPushButton[class="danger"]:pressed {
@@ -357,7 +354,7 @@ class DashboardUI(QMainWindow):
             
             QPushButton[class="warning"]:hover {
                 background-color: #F57C00;
-                box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+
             }
             
             QPushButton[class="warning"]:pressed {
@@ -379,7 +376,7 @@ class DashboardUI(QMainWindow):
             QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             
             QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled {
@@ -403,7 +400,7 @@ class DashboardUI(QMainWindow):
             QComboBox:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             
             QComboBox::drop-down {
@@ -617,7 +614,7 @@ class DashboardUI(QMainWindow):
             QSpinBox:focus, QDoubleSpinBox:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             
             QSpinBox::up-button, QSpinBox::down-button,

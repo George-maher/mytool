@@ -182,7 +182,6 @@ class NetworkScannerPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -211,16 +210,16 @@ class NetworkScannerPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 selection-background-color: #2e7d32;
                 min-width: 300px;
+                min-height: 40px;
             }
             QLineEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
             }
         """)
         target_layout.addWidget(self.target_input)
@@ -307,26 +306,22 @@ class NetworkScannerPage(QWidget):
                 background-color: #2e7d32;
                 color: white;
                 border: none;
-                padding: 16px 32px;
+                padding: 12px 24px;
                 border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 150px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #388e3c;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
             }
             QPushButton:pressed {
                 background-color: #1b5e20;
-                transform: translateY(0px);
             }
             QPushButton:disabled {
                 background-color: #404040;
                 color: #888888;
-                transform: none;
-                box-shadow: none;
             }
         """)
         buttons_layout.addWidget(self.start_btn)
@@ -346,18 +341,16 @@ class NetworkScannerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #da190b;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+
             }
             QPushButton:pressed {
                 background-color: #b71c1c;
-                transform: translateY(0px);
+
             }
             QPushButton:disabled {
                 background-color: #404040;
                 color: #888888;
-                transform: none;
-                box-shadow: none;
+
             }
         """)
         buttons_layout.addWidget(self.stop_btn)
@@ -375,7 +368,6 @@ class NetworkScannerPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -419,7 +411,6 @@ class NetworkScannerPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 20px;
             }
         """)
         

@@ -56,7 +56,6 @@ class ReportsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -89,10 +88,11 @@ class ReportsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 min-width: 200px;
+                min-height: 40px;
             }
             QComboBox:focus {
                 border: 2px solid #2e7d32;
@@ -134,10 +134,11 @@ class ReportsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 min-width: 150px;
+                min-height: 40px;
             }
             QComboBox:focus {
                 border: 2px solid #2e7d32;
@@ -175,20 +176,18 @@ class ReportsPage(QWidget):
                 background-color: #2e7d32;
                 color: white;
                 border: none;
-                padding: 16px 32px;
+                padding: 12px 24px;
                 border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 200px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #388e3c;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
             }
             QPushButton:pressed {
                 background-color: #1b5e20;
-                transform: translateY(0px);
             }
         """)
         gen_layout.addWidget(self.generate_btn)
@@ -203,7 +202,6 @@ class ReportsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -277,7 +275,6 @@ class ReportsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
