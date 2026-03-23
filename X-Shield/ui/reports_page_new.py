@@ -28,16 +28,6 @@ class ReportsPage(QWidget):
     def setup_ui(self):
         """Setup reports UI with Midnight Neon aesthetic"""
         layout = QVBoxLayout(self)
-<<<<<<< HEAD
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
-        
-        # Title
-        title_label = QLabel("Security Reports")
-        title_label.setFont(QFont("Roboto", 24, QFont.Bold))
-        title_label.setStyleSheet("color: #2e7d32;")
-        layout.addWidget(title_label)
-=======
         layout.setContentsMargins(24, 24, 24, 24)
         layout.setSpacing(24)
 
@@ -60,7 +50,6 @@ class ReportsPage(QWidget):
         """)
         header_layout.addWidget(status_tag)
         layout.addLayout(header_layout)
->>>>>>> 7de926a9abd5c703d7cbb2de62495a46540df424
         
         # Report Generation
         self.setup_report_generation(layout)
