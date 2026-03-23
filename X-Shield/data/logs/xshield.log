@@ -1,0 +1,191 @@
+2026-03-23 13:50:54,966 - X-Shield - ERROR - Failed to load module network_scanner: metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+2026-03-23 13:50:55,325 - X-Shield - INFO - Main window initialized
+2026-03-23 13:51:44,482 - X-Shield - ERROR - Failed to load module network_scanner: metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+2026-03-23 13:51:44,812 - X-Shield - INFO - Main window initialized
+2026-03-23 13:53:33,543 - X-Shield - ERROR - Failed to load module network_scanner: metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+2026-03-23 13:53:33,845 - X-Shield - INFO - Main window initialized
+2026-03-23 14:00:44,960 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:00:45,273 - X-Shield - INFO - Main window initialized
+2026-03-23 14:00:45,350 - X-Shield - INFO - X-Shield Pentesting Framework initialized successfully
+2026-03-23 14:02:34,908 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:02:35,284 - X-Shield - INFO - Main window initialized
+2026-03-23 14:02:35,354 - X-Shield - INFO - X-Shield Pentesting Framework initialized successfully
+2026-03-23 14:07:03,459 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:08:57,019 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:09:59,864 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:10:00,240 - X-Shield - INFO - Main window initialized
+2026-03-23 14:10:00,310 - X-Shield - INFO - X-Shield Pentesting Framework initialized successfully
+2026-03-23 14:35:21,896 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:24,387 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:24,396 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:24,409 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:24,421 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:24,553 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,064 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,278 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,281 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,283 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,286 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:41,426 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:46,981 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:47,173 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:47,176 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:47,177 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:47,179 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:35:47,292 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:49,973 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:50,155 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:50,158 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:50,159 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:50,161 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:36:50,265 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,071 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,271 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,273 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,275 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,277 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:17,392 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:22,890 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:23,075 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:23,077 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:23,079 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:23,080 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:23,184 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:42:24,180 - X-Shield - INFO - Main window initialized
+2026-03-23 14:43:45,677 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:45,861 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:45,865 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:45,866 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:45,869 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:45,973 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:46,786 - X-Shield - INFO - Main window initialized
+2026-03-23 14:43:57,640 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:57,842 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:57,844 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:57,846 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:57,848 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:43:57,970 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:02,949 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:03,138 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:03,141 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:03,142 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:03,144 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:03,253 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:44:04,082 - X-Shield - INFO - Main window initialized
+2026-03-23 14:58:07,969 - X-Shield - ERROR - Failed to load module attack_stress: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:58:08,175 - X-Shield - ERROR - Failed to load module brute_force: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:58:08,186 - X-Shield - ERROR - Failed to load module network_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:58:08,190 - X-Shield - ERROR - Failed to load module osint: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:58:08,192 - X-Shield - ERROR - Failed to load module threat_intel: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:58:08,321 - X-Shield - ERROR - Failed to load module web_scanner: Cannot create a consistent method resolution order (MRO) for bases QObject, NetworkModule
+2026-03-23 14:59:52,151 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 14:59:52,378 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 14:59:52,387 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 14:59:52,398 - X-Shield - INFO - Loaded module: osint
+2026-03-23 14:59:52,409 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 14:59:52,532 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 14:59:54,809 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:06:14,720 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:06:14,909 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:06:14,911 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:06:14,913 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:06:14,915 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:06:15,029 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:06:16,366 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:06:28,449 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:06:28,638 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:06:28,640 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:06:28,642 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:06:28,644 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:06:28,760 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:06:29,931 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:07:47,267 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:07:47,470 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:07:47,472 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:07:47,474 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:07:47,476 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:07:47,600 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:07:48,892 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:07:48,893 - X-Shield - WARNING - Administrator privileges required
+2026-03-23 15:07:56,809 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:07:56,959 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:07:56,961 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:07:56,962 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:07:56,964 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:07:57,049 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:07:57,961 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:07:57,962 - X-Shield - INFO - Administrator privileges granted
+2026-03-23 15:07:58,054 - X-Shield - INFO - X-Shield Dashboard started successfully
+2026-03-23 15:08:38,029 - X-Shield - INFO - Dashboard UI closing
+2026-03-23 15:12:05,901 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:12:06,117 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:12:06,119 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:12:06,122 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:12:06,123 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:12:06,243 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:12:07,654 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:12:07,655 - X-Shield - WARNING - Administrator privileges required
+2026-03-23 15:12:12,901 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:12:13,058 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:12:13,061 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:12:13,062 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:12:13,063 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:12:13,149 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:12:14,262 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:12:14,264 - X-Shield - INFO - Administrator privileges granted
+2026-03-23 15:12:14,379 - X-Shield - INFO - X-Shield Dashboard started successfully
+2026-03-23 15:12:31,696 - X-Shield - INFO - Dashboard UI closing
+2026-03-23 15:12:39,142 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:12:39,373 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:12:39,375 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:12:39,377 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:12:39,378 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:12:39,504 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:12:40,923 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:12:40,924 - X-Shield - WARNING - Administrator privileges required
+2026-03-23 15:12:45,727 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:12:45,870 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:12:45,872 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:12:45,873 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:12:45,874 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:12:45,963 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:12:46,950 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:12:46,952 - X-Shield - INFO - Administrator privileges granted
+2026-03-23 15:12:47,058 - X-Shield - INFO - X-Shield Dashboard started successfully
+2026-03-23 15:12:57,258 - X-Shield - INFO - Dashboard UI closing
+2026-03-23 15:15:52,674 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:15:52,872 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:15:52,874 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:15:52,876 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:15:52,877 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:15:52,984 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:15:54,330 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:15:54,331 - X-Shield - WARNING - Administrator privileges required
+2026-03-23 15:16:09,185 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:16:09,339 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:16:09,341 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:16:09,342 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:16:09,343 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:16:09,427 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:16:10,521 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:16:10,522 - X-Shield - INFO - Administrator privileges granted
+2026-03-23 15:16:10,618 - X-Shield - INFO - X-Shield Dashboard started successfully
+2026-03-23 15:16:38,178 - X-Shield - INFO - Dashboard UI closing
+2026-03-23 15:20:12,326 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:20:12,523 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:20:12,525 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:20:12,527 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:20:12,529 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:20:12,640 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:20:14,115 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:20:14,116 - X-Shield - WARNING - Administrator privileges required
+2026-03-23 15:20:18,945 - X-Shield - INFO - Loaded module: attack_stress
+2026-03-23 15:20:19,133 - X-Shield - INFO - Loaded module: brute_force
+2026-03-23 15:20:19,135 - X-Shield - INFO - Loaded module: network_scanner
+2026-03-23 15:20:19,137 - X-Shield - INFO - Loaded module: osint
+2026-03-23 15:20:19,140 - X-Shield - INFO - Loaded module: threat_intel
+2026-03-23 15:20:19,248 - X-Shield - INFO - Loaded module: web_scanner
+2026-03-23 15:20:20,686 - X-Shield - INFO - Dashboard UI initialized with Material Design
+2026-03-23 15:20:20,691 - X-Shield - INFO - Administrator privileges granted
+2026-03-23 15:20:20,793 - X-Shield - INFO - X-Shield Dashboard started successfully
+2026-03-23 15:20:34,071 - X-Shield - INFO - Dashboard UI closing

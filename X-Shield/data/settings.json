@@ -1,0 +1,27 @@
+{
+  "general": {
+    "max_console_lines": 1000,
+    "auto_save_reports": true,
+    "report_directory": "data/reports"
+  },
+  "scanner": {
+    "default_threads": 5,
+    "default_timeout": 30,
+    "auto_chain": true
+  },
+  "api": {
+    "shodan_key": "",
+    "virustotal_key": "",
+    "custom_endpoints": "{}"
+  },
+  "theme": {
+    "theme": "dark_cyan",
+    "font_size": 12,
+    "enable_animations": true
+  },
+  "advanced": {
+    "debug_mode": false,
+    "log_level": "INFO",
+    "database_path": "data/xshield.db"
+  }
+}

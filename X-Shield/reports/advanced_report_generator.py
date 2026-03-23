@@ -1,0 +1,800 @@
+"""
+Advanced Reporting Module for X-Shield Framework
+Generates professional HTML reports with Tailwind CSS and interactive charts
+"""
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+import json
+import os
+from datetime import datetime
+from PySide6.QtCore import Signal, QObject, Slot
+
+try:
+    import plotly.graph_objects as go
+    import plotly.express as px
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+
+try:
+    from jinja2 import Environment, FileSystemLoader, Template
+    JINJA2_AVAILABLE = True
+except ImportError:
+    JINJA2_AVAILABLE = False
+
+
+class AdvancedReportGenerator(QObject):
+    """Generates professional pentesting reports"""
+    
+    report_generated = Signal(str)  # report_path
+    
+    def __init__(self):
+        super().__init__()
+        self.reports_dir = Path("data/reports")
+        self.reports_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create templates directory
+        self.templates_dir = Path("reports/templates")
+        self.templates_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create default template if not exists
+        self.create_default_template()
+    
+    def create_default_template(self):
+        """Create default HTML report template"""
+        template_path = self.templates_dir / "security_report.html"
+        if not template_path.exists():
+            template_content = self.get_security_report_template()
+            with open(template_path, 'w', encoding='utf-8') as f:
+                f.write(template_content)
+    
+    def get_security_report_template(self):
+        """Get the default security report HTML template"""
+        return """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Shield Security Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% if plotly_available %}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    {% endif %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            background: white;
+            color: #1e3a8a;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .risk-level {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .risk-critical { background: #dc2626; color: white; }
+        .risk-high { background: #ea580c; color: white; }
+        .risk-medium { background: #f59e0b; color: white; }
+        .risk-low { background: #10b981; color: white; }
+        .risk-info { background: #3b82f6; color: white; }
+        
+        .vulnerability-item {
+            border-left: 4px solid #e5e7eb;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .vulnerability-item:hover {
+            border-left-color: #6b7280;
+            background: #f8fafc;
+        }
+        
+        .vulnerability-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .vulnerability-severity {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .vulnerability-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        .vulnerability-target {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #1f2937;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #f3f4f6;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .timeline-time {
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #6b7280;
+            font-size: 0.875rem;
+            min-width: 120px;
+        }
+        
+        .timeline-module {
+            background: #1f2937;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #f3f4f6;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .footer {
+            background: #111827;
+            color: #9ca3af;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #374151;
+            margin-top: 2rem;
+        }
+        
+        @media print {
+            body { background: white; }
+            .card { break-inside: avoid; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🛡</div>
+                <div>
+                    <h1 class="text-2xl font-bold">X-Shield Security Report</h1>
+                    <p class="opacity-90">Professional Security Assessment Framework</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Executive Summary -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Executive Summary
+                </h2>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ risk_score }}</div>
+                <div class="stat-label">Risk Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ total_vulnerabilities }}</div>
+                <div class="stat-label">Total Vulnerabilities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ modules_executed }}</div>
+                <div class="stat-label">Modules Executed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ scan_duration }}</div>
+                <div class="stat-label">Duration (min)</div>
+            </div>
+        </div>
+        
+        {% if plotly_available %}
+        <div class="chart-container">
+            <div id="riskChart"></div>
+        </div>
+        {% endif %}
+        
+        <!-- Target Information -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-bullseye mr-2"></i>
+                    Target Information
+                </h2>
+            </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+            <p class="mb-2"><strong>Primary Target:</strong> <span class="vulnerability-target">{{ primary_target }}</span></p>
+            <p class="mb-2"><strong>Scan Scope:</strong> {{ scan_scope }}</p>
+            <p><strong>Assessment Type:</strong> {{ assessment_type }}</p>
+        </div>
+        
+        <!-- Module Results -->
+        {% for module in modules %}
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-cogs mr-2"></i>
+                    {{ module.name }} Results
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-gray-600 mb-2">Execution Details</h3>
+                    <p class="mb-1"><strong>Status:</strong> 
+                        <span class="risk-level {% if module.status == 'completed' %}risk-low{% elif module.status == 'failed' %}risk-high{% else %}risk-medium{% endif %}">
+                            {{ module.status.upper() }}
+                        </span>
+                    </p>
+                    <p class="mb-1"><strong>Duration:</strong> {{ module.duration }}s</p>
+                    <p><strong>Items Scanned:</strong> {{ module.items_scanned }}</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-gray-600 mb-2">Summary</h3>
+                    <p>{{ module.summary }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- Vulnerabilities -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Security Findings
+                </h2>
+            </div>
+        </div>
+        
+        {% if vulnerabilities %}
+        <div class="vulnerability-list">
+            {% for vuln in vulnerabilities %}
+            <div class="vulnerability-item">
+                <div>
+                    <div class="vulnerability-title">{{ vuln.title }}</div>
+                    <div class="vulnerability-severity risk-{{ vuln.severity }}">{{ vuln.severity }}</div>
+                    <div class="vulnerability-description">{{ vuln.description }}</div>
+                    {% if vuln.target %}
+                    <p class="mt-2"><strong>Target:</strong> <span class="vulnerability-target">{{ vuln.target }}</span></p>
+                    {% endif %}
+                    {% if vuln.cvss_score %}
+                    <p class="mt-2"><strong>CVSS Score:</strong> {{ vuln.cvss_score }}</p>
+                    {% endif %}
+                    {% if vuln.recommendation %}
+                    <p class="mt-2"><strong>Recommendation:</strong> {{ vuln.recommendation }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-12 text-green-500">
+            <i class="fas fa-check-circle text-5xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">No Security Issues Found</h3>
+            <p>The target appears to be secure based on scans performed.</p>
+        </div>
+        {% endif %}
+        
+        <!-- Risk Assessment -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    Risk Assessment
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-gray-600 mb-2">Risk Distribution</h3>
+                    <div class="space-y-2">
+                        {% for severity, count in risk_distribution.items() %}
+                        <div class="flex justify-between items-center">
+                            <span class="capitalize">{{ severity }}</span>
+                            <span class="risk-level risk-{{ severity }}">{{ count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-gray-600 mb-2">Risk Analysis</h3>
+                    <div class="space-y-2">
+                        <p><strong>Overall Risk:</strong> 
+                            <span class="risk-level risk-{{ overall_risk_level }}">{{ overall_risk_level.upper() }}</span>
+                        </p>
+                        <p><strong>Risk Score:</strong> {{ risk_score }}/100</p>
+                        <p><strong>Remediation Priority:</strong> {{ remediation_priority }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-clock mr-2"></i>
+                    Execution Timeline
+                </h2>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            {% for event in timeline %}
+            <div class="timeline-item">
+                <div class="timeline-time">{{ event.time }}</div>
+                <div class="flex-1 ml-4">
+                    <div class="text-gray-800">{{ event.module }}</div>
+                    <div class="timeline-module">{{ event.status }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if plotly_available %}
+        <div class="chart-container">
+            <div id="timelineChart"></div>
+        </div>
+        {% endif %}
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <i class="fas fa-shield-alt text-2xl"></i>
+                <div>
+                    <div class="font-semibold">X-Shield Pentesting Framework</div>
+                    <div class="text-sm text-gray-400">Professional Security Assessment Tool</div>
+                </div>
+            </div>
+            <div>
+                <p>Report generated on {{ generation_date }}</p>
+                <p class="text-xs text-gray-500 mt-1">This report contains confidential security information</p>
+            </div>
+        </footer>
+    </div>
+    
+    {% if plotly_available %}
+    <script>
+        // Risk Distribution Chart
+        const riskData = {{ risk_chart_data | safe }};
+        const riskLayout = {
+            title: 'Vulnerability Risk Distribution',
+            paper_bgcolor: 'rgba(255,255,255,0)',
+            plot_bgcolor: 'rgba(255,255,255,0)',
+            font: { color: '#1f2937' },
+            xaxis: { 
+                gridcolor: '#e5e7eb',
+                tickcolor: '#6b7280',
+                title: 'Risk Level',
+                titlefont: { size: 14 }
+            },
+            yaxis: { 
+                gridcolor: '#e5e7eb',
+                tickcolor: '#6b7280',
+                title: 'Count',
+                titlefont: { size: 14 }
+            },
+            margin: { l: 50, r: 20, t: 50, b: 50 }
+        };
+        
+        Plotly.newPlot('riskChart', riskData, riskLayout);
+        
+        // Timeline Chart
+        const timelineData = {{ timeline_chart_data | safe }};
+        const timelineLayout = {
+            title: 'Module Execution Timeline',
+            paper_bgcolor: 'rgba(255,255,255,0)',
+            plot_bgcolor: 'rgba(255,255,255,0)',
+            font: { color: '#1f2937' },
+            xaxis: { 
+                gridcolor: '#e5e7eb',
+                tickcolor: '#6b7280',
+                title: 'Time',
+                titlefont: { size: 14 }
+            },
+            yaxis: { 
+                gridcolor: '#e5e7eb',
+                tickcolor: '#6b7280',
+                title: 'Module',
+                titlefont: { size: 14 }
+            },
+            margin: { l: 50, r: 20, t: 50, b: 50 }
+        };
+        
+        Plotly.newPlot('timelineChart', timelineData, timelineLayout);
+    </script>
+    {% endif %}
+</body>
+</html>
+        """
+    
+    def generate_report(self, scan_data, report_title=None):
+        """Generate comprehensive HTML report"""
+        try:
+            if not JINJA2_AVAILABLE:
+                raise ImportError("Jinja2 is required for report generation")
+            
+            # Prepare report data
+            report_data = self.prepare_report_data(scan_data, report_title)
+            
+            # Setup Jinja2 environment
+            env = Environment(
+                loader=FileSystemLoader(str(self.templates_dir)),
+                autoescape=True
+            )
+            
+            # Load template
+            template = env.get_template('security_report.html')
+            
+            # Add custom filters
+            env.filters['capitalize'] = lambda x: x.capitalize() if isinstance(x, str) else x
+            
+            # Render template
+            html_content = template.render(
+                plotly_available=PLOTLY_AVAILABLE,
+                **report_data
+            )
+            
+            # Save report
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_filename = f"xshield_security_report_{timestamp}.html"
+            report_path = self.reports_dir / report_filename
+            
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write(html_content)
+            
+            # Generate JSON summary
+            self.generate_json_summary(report_data, report_path.with_suffix('.json'))
+            
+            self.report_generated.emit(str(report_path))
+            return report_path
+            
+        except Exception as e:
+            raise Exception(f"Report generation failed: {str(e)}")
+    
+    def prepare_report_data(self, scan_data, report_title=None):
+        """Prepare data for report template"""
+        if not report_title:
+            report_title = f"Security Assessment - {scan_data.get('primary_target', 'Unknown Target')}"
+        
+        # Calculate metrics
+        vulnerabilities = scan_data.get('vulnerabilities', [])
+        modules = scan_data.get('modules', [])
+        
+        # Risk score calculation (CVSS-based)
+        risk_score = self.calculate_risk_score(vulnerabilities)
+        
+        # Prepare chart data
+        risk_chart_data = self.create_risk_chart_data(vulnerabilities) if PLOTLY_AVAILABLE else []
+        timeline_chart_data = self.create_timeline_chart_data(modules) if PLOTLY_AVAILABLE else []
+        
+        # Calculate risk distribution
+        risk_distribution = self.calculate_risk_distribution(vulnerabilities)
+        overall_risk_level = self.calculate_overall_risk_level(risk_score)
+        remediation_priority = self.calculate_remediation_priority(risk_score)
+        
+        return {
+            'report_title': report_title,
+            'generation_date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'risk_score': risk_score,
+            'total_vulnerabilities': len(vulnerabilities),
+            'modules_executed': len(modules),
+            'scan_duration': self.calculate_scan_duration(modules),
+            'primary_target': scan_data.get('primary_target', 'N/A'),
+            'scan_scope': ', '.join(scan_data.get('scan_scope', ['Network Scan', 'Web Application Scan', 'Security Assessment'])),
+            'assessment_type': 'Comprehensive Security Assessment',
+            'modules': modules,
+            'vulnerabilities': vulnerabilities,
+            'risk_distribution': risk_distribution,
+            'overall_risk_level': overall_risk_level,
+            'remediation_priority': remediation_priority,
+            'risk_chart_data': json.dumps(risk_chart_data),
+            'timeline_chart_data': json.dumps(timeline_chart_data),
+            'timeline': self.create_timeline(modules)
+        }
+    
+    def calculate_risk_score(self, vulnerabilities):
+        """Calculate overall risk score (0-100) based on CVSS"""
+        if not vulnerabilities:
+            return 0
+        
+        total_score = 0
+        valid_scores = 0
+        
+        for vuln in vulnerabilities:
+            cvss_score = vuln.get('cvss_score')
+            if cvss_score is not None and isinstance(cvss_score, (int, float)):
+                total_score += cvss_score
+                valid_scores += 1
+            else:
+                # Fallback to severity-based scoring
+                severity_weights = {
+                    'critical': 9.0,
+                    'high': 7.0,
+                    'medium': 4.0,
+                    'low': 2.0,
+                    'info': 1.0
+                }
+                severity = vuln.get('severity', 'low')
+                total_score += severity_weights.get(severity, 2.0)
+                valid_scores += 1
+        
+        if valid_scores == 0:
+            return 0
+        
+        # Normalize to 0-100 scale
+        average_score = total_score / valid_scores
+        return min(100, round((average_score / 10) * 100))
+    
+    def calculate_risk_distribution(self, vulnerabilities):
+        """Calculate distribution of vulnerabilities by severity"""
+        distribution = {'critical': 0, 'high': 0, 'medium': 0, 'low': 0, 'info': 0}
+        
+        for vuln in vulnerabilities:
+            severity = vuln.get('severity', 'low')
+            if severity in distribution:
+                distribution[severity] += 1
+        
+        return distribution
+    
+    def calculate_overall_risk_level(self, risk_score):
+        """Calculate overall risk level from risk score"""
+        if risk_score >= 80:
+            return 'critical'
+        elif risk_score >= 60:
+            return 'high'
+        elif risk_score >= 40:
+            return 'medium'
+        elif risk_score >= 20:
+            return 'low'
+        else:
+            return 'info'
+    
+    def calculate_remediation_priority(self, risk_score):
+        """Calculate remediation priority based on risk score"""
+        if risk_score >= 80:
+            return 'Immediate - Critical vulnerabilities requiring urgent attention'
+        elif risk_score >= 60:
+            return 'High - Address high-risk vulnerabilities within 7 days'
+        elif risk_score >= 40:
+            return 'Medium - Schedule remediation within 30 days'
+        elif risk_score >= 20:
+            return 'Low - Address during next maintenance window'
+        else:
+            return 'Informational - Monitor and improve security posture'
+    
+    def calculate_scan_duration(self, modules):
+        """Calculate total scan duration in minutes"""
+        total_duration = sum(m.get('duration', 0) for m in modules)
+        return round(total_duration / 60, 1)
+    
+    def create_risk_chart_data(self, vulnerabilities):
+        """Create data for risk distribution chart"""
+        if not PLOTLY_AVAILABLE:
+            return []
+        
+        distribution = self.calculate_risk_distribution(vulnerabilities)
+        
+        return [{
+            'x': list(distribution.keys()),
+            'y': list(distribution.values()),
+            'type': 'bar',
+            'name': 'Vulnerabilities',
+            'marker': {
+                'color': ['#dc2626', '#ea580c', '#f59e0b', '#10b981', '#3b82f6']
+            }
+        }]
+    
+    def create_timeline_chart_data(self, modules):
+        """Create data for timeline chart"""
+        if not PLOTLY_AVAILABLE:
+            return []
+        
+        events = []
+        
+        for module in modules:
+            events.append({
+                'time': module.get('start_time', '00:00'),
+                'module': module.get('name', 'Unknown'),
+                'status': module.get('status', 'unknown')
+            })
+        
+        return [{
+            'x': [event['time'] for event in events],
+            'y': [event['module'] for event in events],
+            'type': 'scatter',
+            'mode': 'markers',
+            'name': 'Module Execution',
+            'marker': {
+                'size': 12,
+                'color': '#8b5cf6'
+            }
+        }]
+    
+    def create_timeline(self, modules):
+        """Create timeline data for template"""
+        events = []
+        
+        for module in modules:
+            events.append({
+                'time': module.get('start_time', '00:00'),
+                'module': module.get('name', 'Unknown'),
+                'status': module.get('status', 'unknown')
+            })
+        
+        return events
+    
+    def generate_json_summary(self, report_data, json_path):
+        """Generate JSON summary of report"""
+        try:
+            summary = {
+                'metadata': {
+                    'report_title': report_data['report_title'],
+                    'generation_date': report_data['generation_date'],
+                    'risk_score': report_data['risk_score']
+                },
+                'summary': {
+                    'total_vulnerabilities': report_data['total_vulnerabilities'],
+                    'modules_executed': report_data['modules_executed'],
+                    'scan_duration_minutes': report_data['scan_duration'],
+                    'overall_risk_level': report_data['overall_risk_level'],
+                    'remediation_priority': report_data['remediation_priority']
+                },
+                'target': {
+                    'primary_target': report_data['primary_target'],
+                    'scan_scope': report_data['scan_scope'],
+                    'assessment_type': report_data['assessment_type']
+                },
+                'vulnerabilities': report_data['vulnerabilities'],
+                'modules': report_data['modules'],
+                'risk_distribution': report_data['risk_distribution']
+            }
+            
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(summary, f, indent=2, ensure_ascii=False)
+                
+        except Exception as e:
+            print(f"Failed to generate JSON summary: {str(e)}")
+    
+    def get_report_list(self):
+        """Get list of generated reports"""
+        reports = []
+        
+        for report_file in self.reports_dir.glob("*.html"):
+            stat = report_file.stat()
+            reports.append({
+                'name': report_file.name,
+                'path': str(report_file),
+                'size': stat.st_size,
+                'created': datetime.fromtimestamp(stat.st_ctime).strftime("%Y-%m-%d %H:%M:%S")
+            })
+        
+        return sorted(reports, key=lambda x: x['created'], reverse=True)
+    
+    @Slot(str, dict)
+    def generate_quick_report(self, target: str, results: dict):
+        """Generate a quick report for immediate results"""
+        try:
+            quick_data = {
+                'primary_target': target,
+                'vulnerabilities': results.get('vulnerabilities', []),
+                'modules': results.get('modules', []),
+                'scan_scope': ['Quick Scan'],
+                'generation_date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            return self.generate_report(quick_data, f"Quick Report - {target}")
+            
+        except Exception as e:
+            print(f"Quick report generation failed: {str(e)}")
+            return None

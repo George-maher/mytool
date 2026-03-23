@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Shield Pentesting Report - {{ report_title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .severity-critical { border-left: 4px solid #dc2626; }
+        .severity-high { border-left: 4px solid #ea580c; }
+        .severity-medium { border-left: 4px solid #ca8a04; }
+        .severity-low { border-left: 4px solid #16a34a; }
+        .severity-info { border-left: 4px solid #3b82f6; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Header -->
+    <header class="gradient-bg shadow-2xl">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white rounded-lg p-3">
+                        <i class="fas fa-shield-alt text-3xl text-purple-600"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold text-white">X-Shield</h1>
+                        <p class="text-purple-100">Professional Pentesting Framework</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-purple-100 font-semibold">{{ report_title }}</p>
+                    <p class="text-purple-200 text-sm">Generated: {{ generation_date }}</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Executive Summary -->
+        <section class="mb-12">
+            <div class="bg-gray-800 rounded-xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-chart-line mr-3 text-purple-400"></i>
+                    Executive Summary
+                </h2>
+                
+                <!-- Risk Score Card -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold">{{ risk_score }}</div>
+                        <div class="text-red-100">Risk Score</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold">{{ total_vulnerabilities }}</div>
+                        <div class="text-orange-100">Total Vulnerabilities</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold">{{ modules_run }}</div>
+                        <div class="text-blue-100">Modules Executed</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold">{{ scan_duration }}</div>
+                        <div class="text-green-100">Duration (min)</div>
+                    </div>
+                </div>
+
+                <!-- Risk Assessment Chart -->
+                <div class="bg-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Vulnerability Distribution</h3>
+                    <div id="riskChart"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Information -->
+        <section class="mb-12">
+            <div class="bg-gray-800 rounded-xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-bullseye mr-3 text-purple-400"></i>
+                    Target Information
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-purple-300">Primary Target</h3>
+                        <p class="text-2xl font-mono text-green-400">{{ primary_target }}</p>
+                        <p class="text-gray-400 mt-2">{{ target_description }}</p>
+                    </div>
+                    <div class="bg-gray-700 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-purple-300">Scan Scope</h3>
+                        <ul class="space-y-2">
+                            {% for scope_item in scan_scope %}
+                            <li class="flex items-center text-gray-300">
+                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                {{ scope_item }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Results -->
+        <section class="mb-12">
+            <div class="bg-gray-800 rounded-xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-cogs mr-3 text-purple-400"></i>
+                    Module Execution Results
+                </h2>
+                
+                {% for module in modules %}
+                <div class="bg-gray-700 rounded-lg p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-purple-300">{{ module.name }}</h3>
+                        <span class="px-3 py-1 rounded-full text-sm font-medium
+                            {% if module.status == 'completed' %}bg-green-600 text-green-100
+                            {% elif module.status == 'failed' %}bg-red-600 text-red-100
+                            {% else %}bg-yellow-600 text-yellow-100{% endif %}">
+                            {{ module.status.upper() }}
+                        </span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <span class="text-gray-400 text-sm">Duration:</span>
+                            <span class="ml-2 font-mono">{{ module.duration }}s</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-sm">Items Scanned:</span>
+                            <span class="ml-2 font-mono">{{ module.items_scanned }}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-sm">Issues Found:</span>
+                            <span class="ml-2 font-mono text-red-400">{{ module.issues_found }}</span>
+                        </div>
+                    </div>
+                    
+                    {% if module.summary %}
+                    <p class="text-gray-300">{{ module.summary }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Vulnerabilities -->
+        <section class="mb-12">
+            <div class="bg-gray-800 rounded-xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-purple-400"></i>
+                    Vulnerabilities Found
+                </h2>
+                
+                {% if vulnerabilities %}
+                {% for vuln in vulnerabilities %}
+                <div class="bg-gray-700 rounded-lg p-6 mb-6 severity-{{ vuln.severity }}">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">{{ vuln.title }}</h3>
+                            <p class="text-gray-400 mt-1">{{ vuln.target }}</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-sm font-bold uppercase
+                            {% if vuln.severity == 'critical' %}bg-red-600 text-white
+                            {% elif vuln.severity == 'high' %}bg-orange-600 text-white
+                            {% elif vuln.severity == 'medium' %}bg-yellow-600 text-black
+                            {% elif vuln.severity == 'low' %}bg-green-600 text-white
+                            {% else %}bg-blue-600 text-white{% endif %}">
+                            {{ vuln.severity }}
+                        </span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-purple-300 mb-2">Description</h4>
+                        <p class="text-gray-300">{{ vuln.description }}</p>
+                    </div>
+                    
+                    {% if vuln.technical_details %}
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-purple-300 mb-2">Technical Details</h4>
+                        <pre class="bg-gray-800 rounded p-4 text-sm text-gray-300 overflow-x-auto">{{ vuln.technical_details }}</pre>
+                    </div>
+                    {% endif %}
+                    
+                    {% if vuln.recommendation %}
+                    <div>
+                        <h4 class="font-semibold text-purple-300 mb-2">Recommendation</h4>
+                        <p class="text-gray-300">{{ vuln.recommendation }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="bg-gray-700 rounded-lg p-8 text-center">
+                    <i class="fas fa-check-circle text-6xl text-green-400 mb-4"></i>
+                    <p class="text-xl text-gray-300">No vulnerabilities found!</p>
+                    <p class="text-gray-400 mt-2">The target appears to be secure based on the scans performed.</p>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="mb-12">
+            <div class="bg-gray-800 rounded-xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-clock mr-3 text-purple-400"></i>
+                    Execution Timeline
+                </h2>
+                <div id="timelineChart"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <i class="fas fa-shield-alt text-2xl text-purple-400"></i>
+                    <div>
+                        <p class="font-semibold">X-Shield Pentesting Framework</p>
+                        <p class="text-gray-400 text-sm">Professional Security Assessment Tool</p>
+                    </div>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">Report generated on {{ generation_date }}</p>
+                    <p class="text-gray-500 text-sm">This report contains confidential security information</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Risk Distribution Chart
+        const riskData = {{ risk_chart_data | safe }};
+        const riskLayout = {
+            title: '',
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#ffffff' },
+            xaxis: { 
+                gridcolor: '#374151',
+                tickcolor: '#9ca3af'
+            },
+            yaxis: { 
+                gridcolor: '#374151',
+                tickcolor: '#9ca3af'
+            }
+        };
+        Plotly.newPlot('riskChart', riskData, riskLayout);
+
+        // Timeline Chart
+        const timelineData = {{ timeline_chart_data | safe }};
+        const timelineLayout = {
+            title: '',
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#ffffff' },
+            xaxis: { 
+                title: 'Time',
+                gridcolor: '#374151',
+                tickcolor: '#9ca3af'
+            },
+            yaxis: { 
+                title: 'Module',
+                gridcolor: '#374151',
+                tickcolor: '#9ca3af'
+            }
+        };
+        Plotly.newPlot('timelineChart', timelineData, timelineLayout);
+    </script>
+</body>
+</html>
+        
