@@ -7,6 +7,7 @@ from typing import Any, Dict, Optional
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 from mvc.base import BaseView as MVCBaseView
 
@@ -26,15 +27,15 @@ class BaseView(MVCBaseView):
         self._layout = None
         self._components = {}
         self._styles = {
-            'primary': '#2196F3',
-            'secondary': '#FF9800',
-            'success': '#4CAF50',
-            'warning': '#FFC107',
-            'danger': '#F44336',
-            'info': '#00BCD4',
-            'dark': '#212121',
-            'light': '#FFFFFF',
-            'gray': '#9E9E9E'
+            'primary': Colors.PRIMARY,
+            'secondary': Colors.WARNING,
+            'success': Colors.SUCCESS,
+            'warning': Colors.WARNING,
+            'danger': Colors.DANGER,
+            'info': Colors.INFO,
+            'dark': Colors.BACKGROUND,
+            'light': Colors.TEXT_PRIMARY,
+            'gray': Colors.TEXT_MUTED
         }
         self._setup_ui()
     
@@ -42,8 +43,8 @@ class BaseView(MVCBaseView):
         """Setup basic UI structure"""
         self._main_widget = QWidget()
         self._layout = QVBoxLayout(self._main_widget)
-        self._layout.setContentsMargins(10, 10, 10, 10)
-        self._layout.setSpacing(10)
+        self._layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        self._layout.setSpacing(Spacing.XL)
         
         # Setup the specific view
         self.setup_view()
@@ -88,275 +89,99 @@ class BaseView(MVCBaseView):
         """Get a style color by name"""
         return self._styles.get(style_name, '#000000')
     
-    def create_label(self, text: str, style: str = 'normal', size: int = 12) -> QLabel:
-        """Create a styled label"""
+    def create_label(self, text: str, style: str = 'normal', size: int = 14) -> QLabel:
+        """Create a styled label using the design system"""
         label = QLabel(text)
-        font = QFont()
-        font.setPointSize(size)
         
         if style == 'header':
-            font.setBold(True)
-            label.setStyleSheet(f"color: {self.get_style('primary')};")
+            label.setObjectName("title")
+            label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 700; font-size: {Typography.H1_SIZE};")
         elif style == 'title':
-            font.setBold(True)
-            font.setPointSize(size + 2)
-            label.setStyleSheet(f"color: {self.get_style('dark')};")
+            label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
         elif style == 'subtitle':
-            font.setBold(True)
-            label.setStyleSheet(f"color: {self.get_style('gray')};")
+            label.setObjectName("subtitle")
+            label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: {Typography.BODY_SIZE};")
         elif style == 'error':
-            label.setStyleSheet(f"color: {self.get_style('danger')};")
+            label.setStyleSheet(f"color: {Colors.DANGER}; font-weight: 500;")
         elif style == 'success':
-            label.setStyleSheet(f"color: {self.get_style('success')};")
+            label.setStyleSheet(f"color: {Colors.SUCCESS}; font-weight: 500;")
         elif style == 'warning':
-            label.setStyleSheet(f"color: {self.get_style('warning')};")
+            label.setStyleSheet(f"color: {Colors.WARNING}; font-weight: 500;")
         elif style == 'info':
-            label.setStyleSheet(f"color: {self.get_style('info')};")
+            label.setStyleSheet(f"color: {Colors.INFO}; font-weight: 500;")
         
-        label.setFont(font)
         return label
     
     def create_button(self, text: str, style: str = 'primary') -> QWidget:
-        """Create a styled button"""
+        """Create a styled button using the design system"""
         from PySide6.QtWidgets import QPushButton
         
         button = QPushButton(text)
-        button.setMinimumHeight(32)
         
         if style == 'primary':
-            button.setStyleSheet(f"""
-                QPushButton {{
-                    background-color: {self.get_style('primary')};
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    padding: 8px 16px;
-                    font-weight: bold;
-                }}
-                QPushButton:hover {{
-                    background-color: #1976D2;
-                }}
-                QPushButton:pressed {{
-                    background-color: #0D47A1;
-                }}
-                QPushButton:disabled {{
-                    background-color: {self.get_style('gray')};
-                    color: white;
-                }}
-            """)
+            button.setObjectName("primary_btn")
         elif style == 'secondary':
-            button.setStyleSheet(f"""
-                QPushButton {{
-                    background-color: {self.get_style('secondary')};
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    padding: 8px 16px;
-                    font-weight: bold;
-                }}
-                QPushButton:hover {{
-                    background-color: #F57C00;
-                }}
-                QPushButton:pressed {{
-                    background-color: #E65100;
-                }}
-                QPushButton:disabled {{
-                    background-color: {self.get_style('gray')};
-                    color: white;
-                }}
-            """)
+            pass # Uses default button style
         elif style == 'success':
-            button.setStyleSheet(f"""
-                QPushButton {{
-                    background-color: {self.get_style('success')};
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    padding: 8px 16px;
-                    font-weight: bold;
-                }}
-                QPushButton:hover {{
-                    background-color: #388E3C;
-                }}
-                QPushButton:pressed {{
-                    background-color: #1B5E20;
-                }}
-                QPushButton:disabled {{
-                    background-color: {self.get_style('gray')};
-                    color: white;
-                }}
-            """)
+            button.setStyleSheet(f"QPushButton {{ background-color: {Colors.SUCCESS}; color: {Colors.BACKGROUND}; border-color: {Colors.SUCCESS}; }}")
         elif style == 'danger':
-            button.setStyleSheet(f"""
-                QPushButton {{
-                    background-color: {self.get_style('danger')};
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    padding: 8px 16px;
-                    font-weight: bold;
-                }}
-                QPushButton:hover {{
-                    background-color: #D32F2F;
-                }}
-                QPushButton:pressed {{
-                    background-color: #B71C1C;
-                }}
-                QPushButton:disabled {{
-                    background-color: {self.get_style('gray')};
-                    color: white;
-                }}
-            """)
+            button.setStyleSheet(f"QPushButton {{ background-color: {Colors.DANGER}; color: white; border-color: {Colors.DANGER}; }}")
         elif style == 'outline':
-            button.setStyleSheet(f"""
-                QPushButton {{
-                    background-color: transparent;
-                    color: {self.get_style('primary')};
-                    border: 2px solid {self.get_style('primary')};
-                    border-radius: 4px;
-                    padding: 6px 14px;
-                    font-weight: bold;
-                }}
-                QPushButton:hover {{
-                    background-color: {self.get_style('primary')};
-                    color: white;
-                }}
-                QPushButton:pressed {{
-                    background-color: #1976D2;
-                    color: white;
-                }}
-                QPushButton:disabled {{
-                    border-color: {self.get_style('gray')};
-                    color: {self.get_style('gray')};
-                }}
-            """)
+            button.setStyleSheet(f"QPushButton {{ background-color: transparent; color: {Colors.PRIMARY}; border-color: {Colors.PRIMARY}; }}")
         
         return button
     
     def create_input_field(self, placeholder: str = "", input_type: str = 'text') -> QWidget:
-        """Create an input field"""
+        """Create an input field using the design system"""
         from PySide6.QtWidgets import QLineEdit, QSpinBox, QDoubleSpinBox
         
         if input_type == 'text':
             field = QLineEdit()
             field.setPlaceholderText(placeholder)
-            field.setStyleSheet(f"""
-                QLineEdit {{
-                    background-color: white;
-                    border: 1px solid #DDDDDD;
-                    border-radius: 4px;
-                    padding: 8px;
-                    font-size: 12px;
-                }}
-                QLineEdit:focus {{
-                    border: 2px solid {self.get_style('primary')};
-                }}
-            """)
             return field
         elif input_type == 'number':
             field = QSpinBox()
             field.setRange(0, 999999)
-            field.setStyleSheet(f"""
-                QSpinBox {{
-                    background-color: white;
-                    border: 1px solid #DDDDDD;
-                    border-radius: 4px;
-                    padding: 8px;
-                    font-size: 12px;
-                }}
-                QSpinBox:focus {{
-                    border: 2px solid {self.get_style('primary')};
-                }}
-            """)
             return field
         elif input_type == 'decimal':
             field = QDoubleSpinBox()
             field.setRange(0.0, 999999.0)
-            field.setStyleSheet(f"""
-                QDoubleSpinBox {{
-                    background-color: white;
-                    border: 1px solid #DDDDDD;
-                    border-radius: 4px;
-                    padding: 8px;
-                    font-size: 12px;
-                }}
-                QDoubleSpinBox:focus {{
-                    border: 2px solid {self.get_style('primary')};
-                }}
-            """)
             return field
     
     def create_combo_box(self, items: list = None) -> QWidget:
-        """Create a combo box"""
+        """Create a combo box using the design system"""
         from PySide6.QtWidgets import QComboBox
         
         combo = QComboBox()
         if items:
             combo.addItems(items)
         
-        combo.setStyleSheet(f"""
-            QComboBox {{
-                background-color: white;
-                border: 1px solid #DDDDDD;
-                border-radius: 4px;
-                padding: 8px;
-                font-size: 12px;
-                min-width: 150px;
-            }}
-            QComboBox:focus {{
-                border: 2px solid {self.get_style('primary')};
-            }}
-            QComboBox::drop-down {{
-                border: none;
-                width: 20px;
-            }}
-            QComboBox::down-arrow {{
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid {self.get_style('gray')};
-                margin-right: 4px;
-            }}
-        """)
-        
         return combo
     
     def create_progress_bar(self) -> QWidget:
-        """Create a progress bar"""
+        """Create a progress bar using the design system"""
         from PySide6.QtWidgets import QProgressBar
         
         progress = QProgressBar()
-        progress.setStyleSheet(f"""
-            QProgressBar {{
-                border: none;
-                border-radius: 4px;
-                background-color: #E0E0E0;
-                height: 8px;
-            }}
-            QProgressBar::chunk {{
-                background-color: {self.get_style('primary')};
-                border-radius: 4px;
-            }}
-        """)
-        
+        progress.setTextVisible(False)
         return progress
     
     def create_status_indicator(self, status: str = 'normal') -> QWidget:
-        """Create a status indicator"""
+        """Create a status indicator using the design system"""
         from PySide6.QtWidgets import QWidget
         
         indicator = QWidget()
         indicator.setFixedSize(12, 12)
         
         colors = {
-            'normal': self.get_style('success'),
-            'warning': self.get_style('warning'),
-            'error': self.get_style('danger'),
-            'info': self.get_style('info'),
-            'disabled': self.get_style('gray')
+            'normal': Colors.SUCCESS,
+            'warning': Colors.WARNING,
+            'error': Colors.DANGER,
+            'info': Colors.INFO,
+            'disabled': Colors.TEXT_MUTED
         }
         
-        color = colors.get(status, self.get_style('gray'))
+        color = colors.get(status, Colors.TEXT_MUTED)
         indicator.setStyleSheet(f"""
             QWidget {{
                 background-color: {color};

@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot, QThread
 from PySide6.QtGui import QFont, QTextCursor
+from ui.styles import Colors, Spacing, Typography
 
 
 class WebScannerWorker(QThread):
@@ -140,30 +141,10 @@ class WebScannerPage(QWidget):
         self.setup_connections()
     
     def setup_ui(self):
-        """Setup web scanner UI with Midnight Neon aesthetic"""
+        """Setup web scanner UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(0)
-
-        # Header Section
-        header_layout = QHBoxLayout()
-        title_label = QLabel("WEB APPLICATION AUDITOR")
-        title_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
-        header_layout.addWidget(title_label)
-        header_layout.addStretch()
-
-        status_tag = QLabel("SECURITY ENGINE READY")
-        status_tag.setStyleSheet("""
-            color: #22d3ee;
-            font-weight: bold;
-            font-size: 10px;
-            background-color: rgba(34, 211, 238, 0.1);
-            border: 1px solid #22d3ee;
-            padding: 4px 12px;
-            border-radius: 4px;
-        """)
-        header_layout.addWidget(status_tag)
-        layout.addLayout(header_layout)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
 
         # Scanner Configuration
         self.setup_scanner_config(layout)
@@ -177,119 +158,57 @@ class WebScannerPage(QWidget):
         layout.addStretch()
     
     def setup_scanner_config(self, parent_layout):
-        """Setup scanner configuration"""
+        """Setup scanner configuration with modern minimal style"""
         config_frame = QFrame()
-        config_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
+        config_frame.setObjectName("card")
+        config_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setSpacing(16)
+        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        config_layout.setSpacing(Spacing.XL)
         
         # Section title
-        section_title = QLabel("AUDIT PARAMETERS")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        section_title = QLabel("Audit Parameters")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(section_title)
         
         # Target input
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(12)
+        target_layout.setSpacing(Spacing.MD)
         
-        target_label = QLabel("Target URL:")
-        target_label.setFont(QFont("Roboto", 12))
-        target_label.setStyleSheet("color: #b0b0b0;")
+        target_label = QLabel("Target URL")
+        target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         target_layout.addWidget(target_label)
         
         self.target_input = QLineEdit()
         self.target_input.setPlaceholderText("https://example.com")
-        self.target_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #22d3ee;
-                font-family: 'DejaVu Sans Mono';
-                font-size: 13px;
-                min-width: 300px;
-            }
-            QLineEdit:focus {
-                border: 1px solid #22d3ee;
-            }
-        """)
         target_layout.addWidget(self.target_input)
         
         # Get active target button
-        self.get_active_btn = QPushButton("🎯 Use Active")
-        self.get_active_btn.setStyleSheet("""
-            QPushButton {
-                background-color: rgba(34, 211, 238, 0.1);
-                color: #22d3ee;
-                border: 1px solid #22d3ee;
-                padding: 10px 20px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 11px;
-            }
-            QPushButton:hover {
-                background-color: rgba(34, 211, 238, 0.2);
-            }
-        """)
+        self.get_active_btn = QPushButton("Use Active")
+        self.get_active_btn.setProperty("class", "small")
         target_layout.addWidget(self.get_active_btn)
         
-        target_layout.addStretch()
         config_layout.addLayout(target_layout)
         
         # Scan type
         scan_type_layout = QHBoxLayout()
-        scan_type_layout.setSpacing(12)
+        scan_type_layout.setSpacing(Spacing.MD)
         
-        scan_type_label = QLabel("Scan Type:")
-        scan_type_label.setFont(QFont("Roboto", 12))
-        scan_type_label.setStyleSheet("color: #b0b0b0;")
+        scan_type_label = QLabel("Scan Type")
+        scan_type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         scan_type_layout.addWidget(scan_type_label)
         
         self.scan_type_combo = QComboBox()
         self.scan_type_combo.addItems([
             "Quick Scan", "Full Scan", "Headers Only", "Directory Brute", "Vulnerability Scan"
         ])
-        self.scan_type_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #f8fafc;
-                font-size: 12px;
-                min-width: 200px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 30px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #ffffff;
-                margin-right: 5px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                selection-color: white;
-            }
-        """)
         scan_type_layout.addWidget(self.scan_type_combo)
         
         scan_type_layout.addStretch()
@@ -297,56 +216,16 @@ class WebScannerPage(QWidget):
         
         # Control buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(12)
+        buttons_layout.setSpacing(Spacing.MD)
         
-        self.start_btn = QPushButton("🚀 Start Scan")
-        self.start_btn.setProperty("class", "large")
-        self.start_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #22d3ee;
-                color: #020617;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: 900;
-                font-size: 13px;
-                letter-spacing: 1px;
-                min-width: 200px;
-                min-height: 48px;
-            }
-            QPushButton:hover {
-                background-color: #67e8f9;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
+        self.start_btn = QPushButton("Start Web Audit")
+        self.start_btn.setObjectName("primary_btn")
+        self.start_btn.setMinimumWidth(160)
         buttons_layout.addWidget(self.start_btn)
         
-        self.stop_btn = QPushButton("⏹️ Stop Scan")
+        self.stop_btn = QPushButton("Stop")
         self.stop_btn.setEnabled(False)
-        self.stop_btn.setProperty("class", "large")
-        self.stop_btn.setStyleSheet("""
-            QPushButton {
-                background-color: transparent;
-                color: #f43f5e;
-                border: 1px solid #f43f5e;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 13px;
-                min-width: 200px;
-                min-height: 48px;
-            }
-            QPushButton:hover {
-                background-color: rgba(244, 63, 94, 0.1);
-            }
-            QPushButton:disabled {
-                border: 1px solid #1e293b;
-                color: #475569;
-            }
-        """)
+        self.stop_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.stop_btn)
         
         buttons_layout.addStretch()
@@ -355,66 +234,67 @@ class WebScannerPage(QWidget):
         parent_layout.addWidget(config_frame)
     
     def setup_terminal_output(self, parent_layout):
-        """Setup terminal output"""
+        """Setup terminal output with modern minimal style"""
         terminal_frame = QFrame()
-        terminal_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
+        terminal_frame.setObjectName("card")
+        terminal_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         terminal_layout = QVBoxLayout(terminal_frame)
-        terminal_layout.setSpacing(16)
+        terminal_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        terminal_layout.setSpacing(Spacing.MD)
         
         # Section title
-        section_title = QLabel("VULNERABILITY FEED")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        section_title = QLabel("Vulnerability Feed")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         terminal_layout.addWidget(section_title)
         
         # Terminal widget
         self.terminal = QTextEdit()
         self.terminal.setReadOnly(True)
         self.terminal.setMinimumHeight(300)
-        self.terminal.setStyleSheet("""
-            QTextEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                color: #f8fafc;
-                font-family: 'DejaVu Sans Mono', monospace;
+        self.terminal.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
                 font-size: 12px;
-                padding: 16px;
-            }
+                padding: {Spacing.MD}px;
+            }}
         """)
         
-        self.terminal.append('<span style="color: #2196F3;">[WEB SCANNER]</span> <span style="color: #ffffff;">Ready to scan web applications</span>')
+        self.terminal.append(f'<span style="color: {Colors.PRIMARY}; font-weight: 600;">[WEB SCANNER]</span> <span style="color: {Colors.TEXT_PRIMARY};">Ready to scan web applications</span>')
         
         terminal_layout.addWidget(self.terminal)
         
         parent_layout.addWidget(terminal_frame)
     
     def setup_progress_section(self, parent_layout):
-        """Setup progress section"""
+        """Setup progress section with modern minimal style"""
         progress_frame = QFrame()
-        progress_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
+        progress_frame.setObjectName("card")
+        progress_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         progress_layout = QVBoxLayout(progress_frame)
-        progress_layout.setSpacing(12)
+        progress_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        progress_layout.setSpacing(Spacing.MD)
         
         # Status label
         self.status_label = QLabel("Status: Ready")
-        self.status_label.setFont(QFont("Roboto", 12))
-        self.status_label.setStyleSheet("color: #b0b0b0;")
+        self.status_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         progress_layout.addWidget(self.status_label)
         
         # Progress bar
@@ -423,17 +303,6 @@ class WebScannerPage(QWidget):
         self.progress_bar.setValue(0)
         self.progress_bar.setFixedHeight(8)
         self.progress_bar.setTextVisible(False)
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-            }
-            QProgressBar::chunk {
-                background-color: #22d3ee;
-                border-radius: 3px;
-            }
-        """)
         progress_layout.addWidget(self.progress_bar)
         
         parent_layout.addWidget(progress_frame)
@@ -564,20 +433,20 @@ class WebScannerPage(QWidget):
             self.worker = None
     
     def add_terminal_message(self, msg_type, message):
-        """Add message to terminal with Midnight Neon color coding"""
+        """Add message to terminal with Modern Minimal color coding"""
         colors = {
-            "INFO": "#64748b",
-            "SUCCESS": "#10b981",
-            "WARNING": "#f59e0b",
-            "ERROR": "#f43f5e",
-            "RESULT": "#a855f7",
-            "FINDING": "#22d3ee",
-            "VULNERABILITY": "#f43f5e",
-            "STATUS": "#94a3b8",
-            "PROGRESS": "#334155"
+            "INFO": Colors.TEXT_SECONDARY,
+            "SUCCESS": Colors.SUCCESS,
+            "WARNING": Colors.WARNING,
+            "ERROR": Colors.DANGER,
+            "RESULT": Colors.INFO,
+            "FINDING": Colors.PRIMARY,
+            "VULNERABILITY": Colors.DANGER,
+            "STATUS": Colors.TEXT_MUTED,
+            "PROGRESS": Colors.BORDER_HOVER
         }
         
-        color = colors.get(msg_type, "#f8fafc")
+        color = colors.get(msg_type, Colors.TEXT_PRIMARY)
         
         # Move cursor to end
         cursor = self.terminal.textCursor()
@@ -587,7 +456,7 @@ class WebScannerPage(QWidget):
         from datetime import datetime
         timestamp = datetime.now().strftime("%H:%M:%S")
         
-        formatted_message = f'<span style="color: #475569;">[{timestamp}]</span> <span style="color: {color}; font-weight: bold;">[{msg_type}]</span> <span style="color: #f8fafc;">{message}</span>'
+        formatted_message = f'<span style="color: {Colors.TEXT_MUTED};">[{timestamp}]</span> <span style="color: {color}; font-weight: 600;">[{msg_type}]</span> <span style="color: {Colors.TEXT_PRIMARY};">{message}</span>'
         
         self.terminal.append(formatted_message)
         

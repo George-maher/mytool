@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 
 class SettingsPage(QWidget):
@@ -29,41 +30,18 @@ class SettingsPage(QWidget):
         self.load_settings_to_ui()
     
     def setup_ui(self):
-        """Setup settings page UI"""
+        """Setup settings page UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
         # Header
         header = QLabel("Settings")
-        header.setFont(QFont("Roboto", 24, QFont.Bold))
-        header.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        header.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
         layout.addWidget(header)
         
         # Tab widget for different setting categories
         self.tab_widget = QTabWidget()
-        self.tab_widget.setStyleSheet("""
-            QTabWidget::pane {
-                border: 2px solid #404040;
-                background-color: #1e1e1e;
-                border-radius: 8px;
-            }
-            QTabBar::tab {
-                background-color: #404040;
-                color: #e5e7eb;
-                padding: 8px 16px;
-                margin-right: 2px;
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
-            }
-            QTabBar::tab:selected {
-                background-color: #2196F3;
-                color: white;
-            }
-            QTabBar::tab:hover {
-                background-color: #505050;
-            }
-        """)
         
         # Create tabs
         self.create_general_tab()
@@ -78,103 +56,49 @@ class SettingsPage(QWidget):
         self.setup_buttons(layout)
     
     def create_general_tab(self):
-        """Create general settings tab"""
+        """Create general settings tab with modern minimal style"""
         general_widget = QWidget()
         general_layout = QVBoxLayout(general_widget)
-        general_layout.setContentsMargins(20, 20, 20, 20)
+        general_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        general_layout.setSpacing(Spacing.XL)
         
         # Application settings
-        app_group = QGroupBox("Application Settings")
-        app_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-                color: #ffffff;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-                color: #2196F3;
-            }
-        """)
+        app_layout = QVBoxLayout()
+        app_layout.setSpacing(Spacing.LG)
+
+        title = QLabel("Application Settings")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        app_layout.addWidget(title)
         
-        app_form = QFormLayout(app_group)
+        form_layout = QFormLayout()
+        form_layout.setSpacing(Spacing.LG)
         
         # Max console lines
         self.max_console_lines = QSpinBox()
         self.max_console_lines.setRange(100, 10000)
         self.max_console_lines.setValue(1000)
         self.max_console_lines.setSingleStep(100)
-        self.max_console_lines.setStyleSheet("""
-            QSpinBox {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                padding: 6px;
-                color: #ffffff;
-            }
-        """)
-        app_form.addRow("Max Console Lines:", self.max_console_lines)
+        form_layout.addRow(QLabel("Max Console Lines"), self.max_console_lines)
         
         # Auto-save reports
         self.auto_save_reports = QCheckBox("Automatically save reports after generation")
-        self.auto_save_reports.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                spacing: 10px;
-            }
-            QCheckBox::indicator {
-                width: 18px;
-                height: 18px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2196F3;
-                border-color: #2196F3;
-            }
-        """)
-        app_form.addRow("", self.auto_save_reports)
+        form_layout.addRow("", self.auto_save_reports)
         
         # Report directory
-        report_layout = QHBoxLayout()
+        report_row = QHBoxLayout()
         self.report_dir = QLineEdit()
         self.report_dir.setText("data/reports")
-        self.report_dir.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                padding: 6px;
-                color: #ffffff;
-            }
-        """)
-        report_layout.addWidget(self.report_dir)
+        report_row.addWidget(self.report_dir)
         
         browse_btn = QPushButton("Browse")
-        browse_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #404040;
-                color: white;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-            }
-            QPushButton:hover {
-                background-color: #505050;
-            }
-        """)
+        browse_btn.setProperty("class", "small")
         browse_btn.clicked.connect(self.browse_report_dir)
-        report_layout.addWidget(browse_btn)
+        report_row.addWidget(browse_btn)
         
-        app_form.addRow("Report Directory:", report_layout)
+        form_layout.addRow(QLabel("Report Directory"), report_row)
         
-        general_layout.addWidget(app_group)
+        app_layout.addLayout(form_layout)
+        general_layout.addLayout(app_layout)
         general_layout.addStretch()
         
         self.tab_widget.addTab(general_widget, "General")
@@ -557,82 +481,30 @@ class SettingsPage(QWidget):
         self.tab_widget.addTab(advanced_widget, "Advanced")
     
     def setup_buttons(self, parent_layout):
-        """Setup save/reset buttons"""
-        buttons_frame = QFrame()
-        buttons_layout = QHBoxLayout(buttons_frame)
-        buttons_layout.setContentsMargins(0, 20, 0, 0)
+        """Setup save/reset buttons with modern minimal style"""
+        buttons_layout = QHBoxLayout()
+        buttons_layout.setSpacing(Spacing.MD)
         
-        self.save_btn = QPushButton("💾 Save Settings")
-        self.save_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-        """)
+        self.save_btn = QPushButton("Save Settings")
+        self.save_btn.setObjectName("primary_btn")
+        self.save_btn.setMinimumWidth(140)
         buttons_layout.addWidget(self.save_btn)
         
-        self.reset_btn = QPushButton("🔄 Reset to Defaults")
-        self.reset_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #FF9800;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            QPushButton:hover {
-                background-color: #F57C00;
-            }
-        """)
+        self.reset_btn = QPushButton("Reset to Defaults")
+        self.reset_btn.setMinimumWidth(140)
         buttons_layout.addWidget(self.reset_btn)
         
         buttons_layout.addStretch()
         
-        self.export_btn = QPushButton("📤 Export Settings")
-        self.export_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            QPushButton:hover {
-                background-color: #1976D2;
-            }
-        """)
+        self.export_btn = QPushButton("Export")
+        self.export_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.export_btn)
         
-        self.import_btn = QPushButton("📥 Import Settings")
-        self.import_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #9C27B0;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            QPushButton:hover {
-                background-color: #7B1FA2;
-            }
-        """)
+        self.import_btn = QPushButton("Import")
+        self.import_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.import_btn)
         
-        parent_layout.addWidget(buttons_frame)
+        parent_layout.addLayout(buttons_layout)
     
     def setup_connections(self):
         """Setup signal connections"""

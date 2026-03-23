@@ -16,6 +16,7 @@ from .terminal_widget import TerminalWidget
 from .module_widget import ModuleWidget
 from .dashboard_widget import DashboardWidget
 from core.worker import ModuleWorker, ThreadManager
+from ui.styles import Colors, Spacing, Typography
 
 
 class MainWindow(QMainWindow):
@@ -336,17 +337,9 @@ class MainWindow(QMainWindow):
         self.stop_module_btn.clicked.connect(self.stop_current_module)
     
     def apply_dark_theme(self):
-        """Apply dark theme to the window"""
-        self.setStyleSheet("""
-            QMainWindow {
-                background-color: #111827;
-                color: #e5e7eb;
-            }
-            QWidget {
-                background-color: #111827;
-                color: #e5e7eb;
-            }
-        """)
+        """Apply modern minimal theme to the window"""
+        from ui.styles import get_main_stylesheet
+        self.setStyleSheet(get_main_stylesheet())
     
     def populate_module_list(self):
         """Populate module list with available modules"""

@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Signal, Qt
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 
 class ModuleWidget(QWidget):
@@ -25,19 +26,19 @@ class ModuleWidget(QWidget):
     def setup_ui(self):
         """Setup module configuration UI"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         
         # Scroll area for configuration
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
-        scroll_area.setStyleSheet("""
-            QScrollArea {
-                border: none;
-                background-color: transparent;
-            }
-        """)
+        scroll_area.setStyleSheet("border: none; background: transparent;")
         
         self.config_widget = QWidget()
         self.config_layout = QVBoxLayout(self.config_widget)
+        self.config_layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        self.config_layout.setSpacing(Spacing.XL)
+
         scroll_area.setWidget(self.config_widget)
         layout.addWidget(scroll_area)
         
@@ -48,24 +49,22 @@ class ModuleWidget(QWidget):
         """Show default message when no module is selected"""
         self.clear_config()
         
-        message_frame = QFrame()
-        message_layout = QVBoxLayout(message_frame)
-        
         message_label = QLabel("Select a module from the left panel to configure and run it.")
         message_label.setAlignment(Qt.AlignCenter)
-        message_label.setStyleSheet("""
-            QLabel {
-                color: #9ca3af;
+        message_label.setWordWrap(True)
+        message_label.setStyleSheet(f"""
+            QLabel {{
+                color: {Colors.TEXT_MUTED};
                 font-size: 16px;
-                padding: 40px;
-                background-color: #1f2937;
-                border-radius: 8px;
-                border: 2px dashed #374151;
-            }
+                padding: 64px;
+                background-color: {Colors.SURFACE};
+                border-radius: 12px;
+                border: 2px dashed {Colors.BORDER};
+            }}
         """)
         
-        message_layout.addWidget(message_label)
-        self.config_layout.addWidget(message_frame)
+        self.config_layout.addWidget(message_label)
+        self.config_layout.addStretch()
     
     def display_module_config(self, module_name, module_info):
         """Display configuration for selected module"""
@@ -90,131 +89,76 @@ class ModuleWidget(QWidget):
         self.create_action_buttons()
     
     def create_module_header(self, module_info):
-        """Create module information header"""
-        header_group = QGroupBox("Module Information")
-        header_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                color: #8b5cf6;
-                border: 2px solid #374151;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
-        """)
+        """Create module information header with modern minimal style"""
+        header_frame = QFrame()
+        header_frame.setObjectName("card")
+        header_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
-        header_layout = QFormLayout(header_group)
+        header_layout = QVBoxLayout(header_frame)
+        header_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        header_layout.setSpacing(Spacing.LG)
         
-        # Module name
-        name_label = QLabel(self.current_module)
-        name_label.setStyleSheet("color: #e5e7eb; font-weight: bold;")
-        header_layout.addRow("Name:", name_label)
+        title = QLabel("Module Information")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        header_layout.addWidget(title)
         
-        # Description
-        desc_label = QLabel(module_info.get('description', 'No description'))
-        desc_label.setWordWrap(True)
-        desc_label.setStyleSheet("color: #9ca3af;")
-        header_layout.addRow("Description:", desc_label)
+        form_layout = QFormLayout()
+        form_layout.setSpacing(Spacing.MD)
+        form_layout.setLabelAlignment(Qt.AlignRight)
         
-        # Version
-        version_label = QLabel(module_info.get('version', '1.0.0'))
-        version_label.setStyleSheet("color: #9ca3af;")
-        header_layout.addRow("Version:", version_label)
+        def add_info_row(label, value):
+            lbl = QLabel(label)
+            lbl.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+            val = QLabel(str(value))
+            val.setStyleSheet(f"color: {Colors.TEXT_PRIMARY};")
+            val.setWordWrap(True)
+            form_layout.addRow(lbl, val)
+
+        add_info_row("Name", self.current_module)
+        add_info_row("Description", module_info.get('description', 'No description'))
+        add_info_row("Version", module_info.get('version', '1.0.0'))
+        add_info_row("Author", module_info.get('author', 'Unknown'))
+        add_info_row("Category", module_info.get('category', 'General'))
         
-        # Author
-        author_label = QLabel(module_info.get('author', 'Unknown'))
-        author_label.setStyleSheet("color: #9ca3af;")
-        header_layout.addRow("Author:", author_label)
-        
-        # Category
-        category_label = QLabel(module_info.get('category', 'General'))
-        category_label.setStyleSheet("color: #9ca3af;")
-        header_layout.addRow("Category:", category_label)
-        
-        self.config_layout.addWidget(header_group)
+        header_layout.addLayout(form_layout)
+        self.config_layout.addWidget(header_frame)
     
     def create_target_config(self):
-        """Create target configuration section"""
-        target_group = QGroupBox("Target Configuration")
-        target_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                color: #8b5cf6;
-                border: 2px solid #374151;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
-        """)
+        """Create target configuration section with modern minimal style"""
+        target_frame = QFrame()
+        target_frame.setObjectName("card")
+        target_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
+
+        target_layout = QVBoxLayout(target_frame)
+        target_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        target_layout.setSpacing(Spacing.LG)
         
-        target_layout = QFormLayout(target_group)
+        title = QLabel("Target Configuration")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        target_layout.addWidget(title)
         
-        # Target input
         self.target_input = QLineEdit()
-        self.target_input.setPlaceholderText("Enter target (IP address, domain, URL, etc.)")
-        self.target_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #374151;
-                color: #e5e7eb;
-                border: 1px solid #4b5563;
-                border-radius: 6px;
-                padding: 8px;
-                font-family: 'Consolas', monospace;
-                min-height: 32px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #8b5cf6;
-            }
-        """)
-        target_layout.addRow("Target:", self.target_input)
+        self.target_input.setPlaceholderText("IP address, domain, or URL...")
+        target_layout.addWidget(self.target_input)
         
-        self.config_layout.addWidget(target_group)
+        self.config_layout.addWidget(target_frame)
     
     def create_parameters_config(self, parameters):
-        """Create module-specific parameters configuration"""
-        params_group = QGroupBox("Module Parameters")
-        params_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                color: #8b5cf6;
-                border: 2px solid #374151;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
-        """)
+        """Create module-specific parameters configuration with modern minimal style"""
+        params_frame = QFrame()
+        params_frame.setObjectName("card")
+        params_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
-        params_layout = QFormLayout(params_group)
+        params_layout = QVBoxLayout(params_frame)
+        params_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        params_layout.setSpacing(Spacing.LG)
+
+        title = QLabel("Module Parameters")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        params_layout.addWidget(title)
+
+        form_layout = QFormLayout()
+        form_layout.setSpacing(Spacing.MD)
         
         for param_name, param_config in parameters.items():
             param_type = param_config.get('type', 'string')
@@ -222,78 +166,21 @@ class ModuleWidget(QWidget):
             param_default = param_config.get('default', '')
             param_description = param_config.get('description', '')
             
-            # Create widget based on type
             if param_type == 'string':
                 widget = QLineEdit()
                 widget.setText(str(param_default))
-                widget.setStyleSheet("""
-                    QLineEdit {
-                        background-color: #374151;
-                        color: #e5e7eb;
-                        border: 1px solid #4b5563;
-                        border-radius: 6px;
-                        padding: 8px;
-                    }
-                    QLineEdit:focus {
-                        border: 2px solid #8b5cf6;
-                    }
-                """)
-            
             elif param_type == 'text':
                 widget = QTextEdit()
-                widget.setMaximumHeight(100)
+                widget.setMaximumHeight(80)
                 widget.setPlainText(str(param_default))
-                widget.setStyleSheet("""
-                    QTextEdit {
-                        background-color: #374151;
-                        color: #e5e7eb;
-                        border: 1px solid #4b5563;
-                        border-radius: 6px;
-                        padding: 8px;
-                    }
-                    QTextEdit:focus {
-                        border: 2px solid #8b5cf6;
-                    }
-                """)
-            
             elif param_type == 'integer':
                 widget = QSpinBox()
                 widget.setMinimum(param_config.get('min', 0))
                 widget.setMaximum(param_config.get('max', 999999))
                 widget.setValue(int(param_default) if param_default else 0)
-                widget.setStyleSheet("""
-                    QSpinBox {
-                        background-color: #374151;
-                        color: #e5e7eb;
-                        border: 1px solid #4b5563;
-                        border-radius: 6px;
-                        padding: 8px;
-                    }
-                    QSpinBox:focus {
-                        border: 2px solid #8b5cf6;
-                    }
-                """)
-            
             elif param_type == 'boolean':
                 widget = QCheckBox()
                 widget.setChecked(bool(param_default))
-                widget.setStyleSheet("""
-                    QCheckBox {
-                        color: #e5e7eb;
-                    }
-                    QCheckBox::indicator {
-                        width: 18px;
-                        height: 18px;
-                        border: 2px solid #4b5563;
-                        border-radius: 4px;
-                        background-color: #374151;
-                    }
-                    QCheckBox::indicator:checked {
-                        background-color: #8b5cf6;
-                        border-color: #8b5cf6;
-                    }
-                """)
-            
             elif param_type == 'choice':
                 widget = QComboBox()
                 widget.addItems(param_config.get('choices', []))
@@ -301,102 +188,40 @@ class ModuleWidget(QWidget):
                     index = widget.findText(param_default)
                     if index >= 0:
                         widget.setCurrentIndex(index)
-                widget.setStyleSheet("""
-                    QComboBox {
-                        background-color: #374151;
-                        color: #e5e7eb;
-                        border: 1px solid #4b5563;
-                        border-radius: 6px;
-                        padding: 8px;
-                    }
-                    QComboBox:focus {
-                        border: 2px solid #8b5cf6;
-                    }
-                    QComboBox::drop-down {
-                        border: none;
-                        width: 20px;
-                    }
-                    QComboBox::down-arrow {
-                        image: none;
-                        border-left: 5px solid transparent;
-                        border-right: 5px solid transparent;
-                        border-top: 5px solid #e5e7eb;
-                    }
-                """)
-            
             else:
-                # Default to string input
                 widget = QLineEdit()
                 widget.setText(str(param_default))
-                widget.setStyleSheet("""
-                    QLineEdit {
-                        background-color: #374151;
-                        color: #e5e7eb;
-                        border: 1px solid #4b5563;
-                        border-radius: 6px;
-                        padding: 8px;
-                    }
-                    QLineEdit:focus {
-                        border: 2px solid #8b5cf6;
-                    }
-                """)
             
-            # Add tooltip if description available
             if param_description:
                 widget.setToolTip(param_description)
             
-            # Store widget reference
             self.parameter_widgets[param_name] = widget
             
-            # Add to layout
-            params_layout.addRow(f"{param_label}:", widget)
+            label_widget = QLabel(f"{param_label}")
+            label_widget.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+            form_layout.addRow(label_widget, widget)
         
-        self.config_layout.addWidget(params_group)
+        params_layout.addLayout(form_layout)
+        self.config_layout.addWidget(params_frame)
     
     def create_action_buttons(self):
-        """Create action buttons for module execution"""
-        button_frame = QFrame()
-        button_layout = QHBoxLayout(button_frame)
+        """Create action buttons for module execution with modern minimal style"""
+        buttons_layout = QHBoxLayout()
+        buttons_layout.setSpacing(Spacing.MD)
         
-        # Validate configuration button
-        self.validate_btn = QPushButton("Validate Configuration")
+        self.validate_btn = QPushButton("Validate Config")
+        self.validate_btn.setObjectName("primary_btn")
+        self.validate_btn.setMinimumWidth(150)
         self.validate_btn.clicked.connect(self.validate_configuration)
-        self.validate_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #3b82f6;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 6px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #2563eb;
-            }
-        """)
-        button_layout.addWidget(self.validate_btn)
+        buttons_layout.addWidget(self.validate_btn)
         
-        # Save preset button
         self.save_preset_btn = QPushButton("Save Preset")
+        self.save_preset_btn.setMinimumWidth(120)
         self.save_preset_btn.clicked.connect(self.save_preset)
-        self.save_preset_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #8b5cf6;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 6px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #7c3aed;
-            }
-        """)
-        button_layout.addWidget(self.save_preset_btn)
+        buttons_layout.addWidget(self.save_preset_btn)
         
-        button_layout.addStretch()
-        
-        self.config_layout.addWidget(button_frame)
+        buttons_layout.addStretch()
+        self.config_layout.addLayout(buttons_layout)
     
     def clear_config(self):
         """Clear current configuration display"""

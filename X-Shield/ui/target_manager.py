@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, Signal, QTimer, QThread, Slot
 from PySide6.QtGui import QIcon, QFont, QAction
 from core.target_store import Target
+from ui.styles import Colors, Spacing, Typography
 
 
 class TargetManager(QWidget):
@@ -31,15 +32,14 @@ class TargetManager(QWidget):
         self.refresh_targets()
     
     def setup_ui(self):
-        """Setup target manager UI"""
+        """Setup target manager UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
         # Header
         header_label = QLabel("Target Manager")
-        header_label.setFont(QFont("Roboto", 24, QFont.Bold))
-        header_label.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        header_label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
         layout.addWidget(header_label)
         
         # Toolbar
@@ -50,82 +50,26 @@ class TargetManager(QWidget):
         
         # Targets table
         self.setup_targets_table(layout)
-        
-        # Target details section
-        self.setup_target_details(layout)
     
     def setup_toolbar(self, parent_layout):
-        """Setup toolbar for target operations"""
-        toolbar_frame = QFrame()
-        toolbar_layout = QHBoxLayout(toolbar_frame)
-        toolbar_layout.setContentsMargins(0, 0, 0, 0)
+        """Setup toolbar for target operations with modern style"""
+        toolbar_layout = QHBoxLayout()
+        toolbar_layout.setSpacing(Spacing.MD)
         
         # Import/Export buttons
-        self.import_btn = QPushButton("Import Targets")
-        self.import_btn.setIcon(QIcon("icons/import.png"))
-        self.import_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #1976D2;
-            }
-        """)
+        self.import_btn = QPushButton("Import")
+        self.import_btn.setProperty("class", "small")
         
-        self.export_btn = QPushButton("Export Targets")
-        self.export_btn.setIcon(QIcon("icons/export.png"))
-        self.export_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-        """)
+        self.export_btn = QPushButton("Export")
+        self.export_btn.setProperty("class", "small")
         
         # Clear all button
         self.clear_all_btn = QPushButton("Clear All")
-        self.clear_all_btn.setIcon(QIcon("icons/clear.png"))
-        self.clear_all_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #f44336;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #da190b;
-            }
-        """)
+        self.clear_all_btn.setProperty("class", "small")
         
         # Refresh button
         self.refresh_btn = QPushButton("Refresh")
-        self.refresh_btn.setIcon(QIcon("icons/refresh.png"))
-        self.refresh_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #607D8B;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #546E7A;
-            }
-        """)
+        self.refresh_btn.setProperty("class", "small")
         
         toolbar_layout.addWidget(self.import_btn)
         toolbar_layout.addWidget(self.export_btn)
@@ -133,280 +77,112 @@ class TargetManager(QWidget):
         toolbar_layout.addStretch()
         toolbar_layout.addWidget(self.refresh_btn)
         
-        parent_layout.addWidget(toolbar_frame)
+        parent_layout.addLayout(toolbar_layout)
     
     def setup_add_target_section(self, parent_layout):
-        """Setup add target section"""
-        add_group = QGroupBox("Add New Target")
-        add_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-                color: #ffffff;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-                color: #2196F3;
-            }
-        """)
+        """Setup add target section with modern minimal style"""
+        add_frame = QFrame()
+        add_frame.setObjectName("card")
+        add_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
+
+        add_layout = QVBoxLayout(add_frame)
+        add_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        add_layout.setSpacing(Spacing.XL)
         
-        add_layout = QFormLayout(add_group)
+        title = QLabel("Enroll New Node")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        add_layout.addWidget(title)
+
+        form_layout = QFormLayout()
+        form_layout.setSpacing(Spacing.LG)
         
         # Target name
         self.name_input = QLineEdit()
-        self.name_input.setPlaceholderText("Enter target name...")
-        self.name_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 16px 20px;
-                color: #ffffff;
-                font-size: 16px;
-                selection-background-color: #2196F3;
-                min-height: 24px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2196F3;
-                background-color: #333333;
-
-            }
-            QLineEdit:disabled {
-                background-color: #1e1e1e;
-                color: #666666;
-                border-color: #303030;
-            }
-        """)
-        add_layout.addRow("Name:", self.name_input)
+        self.name_input.setPlaceholderText("e.g., Primary Database")
+        name_label = QLabel("Label")
+        name_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(name_label, self.name_input)
         
         # Target type
         self.type_combo = QComboBox()
         self.type_combo.addItems(["IP Address", "Domain", "URL", "IP Range", "File"])
-        self.type_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 16px 20px;
-                color: #ffffff;
-                font-size: 16px;
-                min-width: 250px;
-                min-height: 24px;
-            }
-            QComboBox:focus {
-                border: 2px solid #2196F3;
-                background-color: #333333;
-
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 40px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-top: 6px solid #ffffff;
-                margin-right: 8px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2196F3;
-                selection-color: white;
-                border-radius: 8px;
-                padding: 4px;
-            }
-            QComboBox QAbstractItemView::item {
-                padding: 16px 20px;
-                border-radius: 4px;
-                margin: 2px;
-            }
-            QComboBox QAbstractItemView::item:selected {
-                background-color: #2196F3;
-                color: white;
-            }
-            QComboBox QAbstractItemView::item:hover {
-                background-color: #404040;
-            }
-        """)
-        add_layout.addRow("Type:", self.type_combo)
+        type_label = QLabel("Type")
+        type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(type_label, self.type_combo)
         
         # Target value
         self.value_input = QLineEdit()
-        self.value_input.setPlaceholderText("Enter target value (IP, domain, URL, etc.)...")
-        self.value_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 16px 20px;
-                color: #ffffff;
-                font-size: 16px;
-                selection-background-color: #2196F3;
-                min-height: 24px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2196F3;
-                background-color: #333333;
-
-            }
-            QLineEdit:disabled {
-                background-color: #1e1e1e;
-                color: #666666;
-                border-color: #303030;
-            }
-        """)
-        add_layout.addRow("Value:", self.value_input)
+        self.value_input.setPlaceholderText("e.g., 192.168.1.1")
+        value_label = QLabel("Address")
+        value_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(value_label, self.value_input)
         
-        # Buttonscription
+        # Description
         self.description_input = QTextEdit()
-        self.description_input.setPlaceholderText("Optional description...")
+        self.description_input.setPlaceholderText("Optional notes...")
         self.description_input.setMaximumHeight(80)
-        self.description_input.setStyleSheet("""
-            QTextEdit {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                padding: 8px;
-                color: #ffffff;
-                font-size: 14px;
-            }
-            QTextEdit:focus {
-                border: 2px solid #2196F3;
-            }
-        """)
-        add_layout.addRow("Description:", self.description_input)
+        desc_label = QLabel("Notes")
+        desc_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(desc_label, self.description_input)
+
+        add_layout.addLayout(form_layout)
         
         # Add button
-        self.add_target_btn = QPushButton("Add Target")
-        self.add_target_btn.setIcon(QIcon("icons/add.png"))
-        self.add_target_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 6px;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-            QPushButton:pressed {
-                background-color: #3d8b40;
-            }
-        """)
-        add_layout.addRow("", self.add_target_btn)
+        btn_layout = QHBoxLayout()
+        self.add_target_btn = QPushButton("Enroll Target")
+        self.add_target_btn.setObjectName("primary_btn")
+        self.add_target_btn.setMinimumWidth(140)
+        btn_layout.addWidget(self.add_target_btn)
+        btn_layout.addStretch()
+        add_layout.addLayout(btn_layout)
         
-        parent_layout.addWidget(add_group)
+        parent_layout.addWidget(add_frame)
     
     def setup_targets_table(self, parent_layout):
-        """Setup targets table"""
-        table_group = QGroupBox("Targets")
-        table_group.setStyleSheet("""
-            QGroupBox {
-                font-weight: bold;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 10px;
-                color: #ffffff;
-            }
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px 0 5px;
-                color: #2196F3;
-            }
-        """)
+        """Setup targets table with modern minimal style"""
+        table_frame = QFrame()
+        table_frame.setObjectName("card")
+        table_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
-        table_layout = QVBoxLayout(table_group)
+        table_layout = QVBoxLayout(table_frame)
+        table_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        table_layout.setSpacing(Spacing.XL)
+
+        # Header Row (Title + Search)
+        header_row = QHBoxLayout()
+        title = QLabel("Target Inventory")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
+        header_row.addWidget(title)
+
+        header_row.addStretch()
         
-        # Search bar
-        search_layout = QHBoxLayout()
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Search targets...")
-        self.search_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                padding: 8px;
-                color: #ffffff;
-                font-size: 14px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2196F3;
-            }
-        """)
-        search_layout.addWidget(QLabel("Search:"))
-        search_layout.addWidget(self.search_input)
-        search_layout.addStretch()
-        table_layout.addLayout(search_layout)
+        self.search_input.setPlaceholderText("Filter targets...")
+        self.search_input.setFixedWidth(200)
+        header_row.addWidget(self.search_input)
+        table_layout.addLayout(header_row)
         
         # Targets table
         self.targets_table = QTableWidget()
         self.targets_table.setColumnCount(7)
         self.targets_table.setHorizontalHeaderLabels([
-            "Name", "Type", "Value", "Description", "Scan Count", "Last Scanned", "Actions"
+            "Name", "Type", "Value", "Description", "Scans", "Last Active", "Actions"
         ])
         
-        # Table styling
-        self.targets_table.setStyleSheet("""
-            QTableWidget {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                gridline-color: #404040;
-                color: #ffffff;
-                selection-background-color: #2196F3;
-                alternate-background-color: #3d3d3d;
-            }
-            QTableWidget::item {
-                padding: 8px;
-                border-bottom: 1px solid #404040;
-            }
-            QTableWidget::item:selected {
-                background-color: #2196F3;
-                color: white;
-            }
-            QHeaderView::section {
-                background-color: #404040;
-                color: #ffffff;
-                padding: 8px;
-                border: none;
-                font-weight: bold;
-            }
-            QHeaderView::section:hover {
-                background-color: #505050;
-            }
-        """)
-        
-        # Table properties
         header = self.targets_table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # Name
-        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # Type
-        header.setSectionResizeMode(2, QHeaderView.Stretch)           # Value
-        header.setSectionResizeMode(3, QHeaderView.Stretch)           # Description
-        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # Scan Count
-        header.setSectionResizeMode(5, QHeaderView.ResizeToContents)  # Last Scanned
-        header.setSectionResizeMode(6, QHeaderView.ResizeToContents)  # Actions
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.Stretch)
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(5, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(6, QHeaderView.ResizeToContents)
         
-        self.targets_table.setAlternatingRowColors(True)
-        self.targets_table.setSelectionBehavior(QTableWidget.SelectRows)
-        self.targets_table.setSortingEnabled(True)
+        self.targets_table.verticalHeader().setDefaultSectionSize(50)
+        self.targets_table.verticalHeader().setVisible(False)
         
         table_layout.addWidget(self.targets_table)
-        
-        parent_layout.addWidget(table_group)
+        parent_layout.addWidget(table_frame)
     
     def setup_target_details(self, parent_layout):
         """Setup target details section"""
@@ -538,7 +314,7 @@ class TargetManager(QWidget):
         self.populate_table(targets)
     
     def populate_table(self, targets):
-        """Populate table with targets"""
+        """Populate table with targets with modern action buttons"""
         self.targets_table.setRowCount(0)
         
         for row, target in enumerate(targets):
@@ -558,7 +334,8 @@ class TargetManager(QWidget):
             self.targets_table.setItem(row, 2, value_item)
             
             # Description
-            desc_item = QTableWidgetItem(target.description[:50] + "..." if len(target.description) > 50 else target.description)
+            desc = target.description or ""
+            desc_item = QTableWidgetItem(desc[:50] + "..." if len(desc) > 50 else desc)
             self.targets_table.setItem(row, 3, desc_item)
             
             # Scan Count
@@ -566,74 +343,70 @@ class TargetManager(QWidget):
             self.targets_table.setItem(row, 4, scan_count_item)
             
             # Last Scanned
-            last_scanned = target.last_scanned
-            if last_scanned:
-                # Format date
-                from datetime import datetime
-                try:
-                    dt = datetime.fromisoformat(last_scanned)
-                    last_scanned_str = dt.strftime("%Y-%m-%d %H:%M")
-                except:
-                    last_scanned_str = last_scanned[:16]
-            else:
-                last_scanned_str = "Never"
-            
-            last_scanned_item = QTableWidgetItem(last_scanned_str)
+            last_scanned = target.last_scanned or "Never"
+            last_scanned_item = QTableWidgetItem(last_scanned[:16] if len(last_scanned) > 16 else last_scanned)
             self.targets_table.setItem(row, 5, last_scanned_item)
             
             # Actions
             actions_widget = QWidget()
             actions_layout = QHBoxLayout(actions_widget)
-            actions_layout.setContentsMargins(4, 4, 4, 4)
+            actions_layout.setContentsMargins(Spacing.XS, Spacing.XS, Spacing.XS, Spacing.XS)
+            actions_layout.setSpacing(Spacing.SM)
             
             # Scan button
-            scan_btn = QPushButton("Scan")
-            scan_btn.setStyleSheet("""
-                QPushButton {
-                    background-color: #2196F3;
-                    color: white;
-                    border: none;
-                    padding: 4px 8px;
-                    border-radius: 3px;
+            scan_btn = QPushButton("🚀")
+            scan_btn.setToolTip("Scan")
+            scan_btn.setFixedSize(28, 28)
+            scan_btn.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: transparent;
+                    color: {Colors.PRIMARY};
+                    border: 1px solid {Colors.BORDER};
+                    border-radius: 4px;
                     font-size: 12px;
-                }
-                QPushButton:hover {
-                    background-color: #1976D2;
-                }
+                }}
+                QPushButton:hover {{
+                    background-color: {Colors.SURFACE_LIGHT};
+                    border-color: {Colors.PRIMARY};
+                }}
             """)
             scan_btn.clicked.connect(lambda checked, t=target: self.scan_target(t))
             
             # Edit button
-            edit_btn = QPushButton("Edit")
-            edit_btn.setStyleSheet("""
-                QPushButton {
-                    background-color: #FF9800;
-                    color: white;
-                    border: none;
-                    padding: 4px 8px;
-                    border-radius: 3px;
+            edit_btn = QPushButton("✏️")
+            edit_btn.setToolTip("Edit")
+            edit_btn.setFixedSize(28, 28)
+            edit_btn.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: transparent;
+                    color: {Colors.INFO};
+                    border: 1px solid {Colors.BORDER};
+                    border-radius: 4px;
                     font-size: 12px;
-                }
-                QPushButton:hover {
-                    background-color: #F57C00;
-                }
+                }}
+                QPushButton:hover {{
+                    background-color: {Colors.SURFACE_LIGHT};
+                    border-color: {Colors.INFO};
+                }}
             """)
             edit_btn.clicked.connect(lambda checked, t=target: self.edit_target(t))
             
             # Delete button
-            delete_btn = QPushButton("Delete")
-            delete_btn.setStyleSheet("""
-                QPushButton {
-                    background-color: #f44336;
-                    color: white;
-                    border: none;
-                    padding: 4px 8px;
-                    border-radius: 3px;
+            delete_btn = QPushButton("🗑️")
+            delete_btn.setToolTip("Delete")
+            delete_btn.setFixedSize(28, 28)
+            delete_btn.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: transparent;
+                    color: {Colors.DANGER};
+                    border: 1px solid {Colors.BORDER};
+                    border-radius: 4px;
                     font-size: 12px;
-                }
-                QPushButton:hover {
-                    background-color: #da190b;
-                }
+                }}
+                QPushButton:hover {{
+                    background-color: {Colors.SURFACE_LIGHT};
+                    border-color: {Colors.DANGER};
+                }}
             """)
             delete_btn.clicked.connect(lambda checked, t=target: self.delete_target(t))
             

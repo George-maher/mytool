@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, Signal, Slot, QTimer
 from PySide6.QtGui import QFont
 from core.target_store import TargetStore
+from ui.styles import Colors, Spacing, Typography
 
 
 class ScannerPage(QWidget):
@@ -34,101 +35,64 @@ class ScannerPage(QWidget):
         self.refresh_targets()
     
     def setup_ui(self):
-        """Setup scanner page UI"""
+        """Setup scanner page UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
-        # Header
+        # Section Title
         header = QLabel("Security Scanners")
-        header.setFont(QFont("Roboto", 24, QFont.Bold))
-        header.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        header.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
         layout.addWidget(header)
         
+        # Scroll area for long page
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setStyleSheet("border: none; background: transparent;")
+
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
+        container_layout.setContentsMargins(0, 0, 0, 0)
+        container_layout.setSpacing(Spacing.XL)
+
         # Scanner configuration
-        self.setup_scanner_config(layout)
+        self.setup_scanner_config(container_layout)
         
         # Scanner output
-        self.setup_scanner_output(layout)
+        self.setup_scanner_output(container_layout)
         
         # Scanner results
-        self.setup_scanner_results(layout)
+        self.setup_scanner_results(container_layout)
+
+        container_layout.addStretch()
+        scroll_area.setWidget(container)
+        layout.addWidget(scroll_area)
     
     def setup_scanner_config(self, parent_layout):
-        """Setup scanner configuration section"""
+        """Setup scanner configuration section with modern minimal style"""
         config_frame = QFrame()
-        config_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 20px;
-            }
-        """)
+        config_frame.setObjectName("card")
+        config_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         config_layout = QVBoxLayout(config_frame)
+        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        config_layout.setSpacing(Spacing.XL)
         
         # Title
         title = QLabel("Scanner Configuration")
-        title.setFont(QFont("Roboto", 16, QFont.Bold))
-        title.setStyleSheet("color: #ffffff; margin-bottom: 15px;")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(title)
         
         # Scanner selection form
         form_layout = QFormLayout()
+        form_layout.setSpacing(Spacing.LG)
         
         # Target selection
         self.target_combo = QComboBox()
-        self.target_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: #ffffff;
-                font-size: 16px;
-                min-width: 350px;
-                min-height: 20px;
-            }
-            QComboBox:focus {
-                border: 2px solid #2196F3;
-                background-color: #333333;
-
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 40px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-top: 6px solid #ffffff;
-                margin-right: 8px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2196F3;
-                selection-color: white;
-                border-radius: 8px;
-                padding: 4px;
-            }
-            QComboBox QAbstractItemView::item {
-                padding: 12px 16px;
-                border-radius: 4px;
-                margin: 2px;
-            }
-            QComboBox QAbstractItemView::item:selected {
-                background-color: #2196F3;
-                color: white;
-            }
-            QComboBox QAbstractItemView::item:hover {
-                background-color: #404040;
-            }
-        """)
-        form_layout.addRow("Target:", self.target_combo)
+        self.target_combo.setMinimumWidth(300)
+        target_label = QLabel("Target Node")
+        target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(target_label, self.target_combo)
         
         # Scanner type
         self.scanner_combo = QComboBox()
@@ -140,102 +104,34 @@ class ScannerPage(QWidget):
             "Attack/Stress",
             "Threat Intelligence"
         ])
-        self.scanner_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 6px;
-                padding: 8px;
-                color: #ffffff;
-                font-size: 14px;
-                min-width: 300px;
-            }
-            QComboBox:focus {
-                border: 2px solid #2196F3;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid #ffffff;
-                margin-right: 4px;
-            }
-        """)
-        form_layout.addRow("Scanner Type:", self.scanner_combo)
+        type_label = QLabel("Scanner Type")
+        type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(type_label, self.scanner_combo)
         
         # Scanner parameters (dynamic)
         self.params_widget = QWidget()
         self.params_layout = QVBoxLayout(self.params_widget)
-        form_layout.addRow("Parameters:", self.params_widget)
+        self.params_layout.setContentsMargins(0, 0, 0, 0)
+        self.params_layout.setSpacing(Spacing.MD)
+
+        params_label = QLabel("Parameters")
+        params_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500;")
+        form_layout.addRow(params_label, self.params_widget)
         
         config_layout.addLayout(form_layout)
         
         # Control buttons
         button_layout = QHBoxLayout()
+        button_layout.setSpacing(Spacing.MD)
         
-        self.start_btn = QPushButton("🚀 Start Scan")
-        self.start_btn.setProperty("class", "success")
-        self.start_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 20px 40px;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: 18px;
-                min-height: 30px;
-                min-width: 180px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-
-            }
-            QPushButton:pressed {
-                background-color: #3d8b40;
-
-            }
-            QPushButton:disabled {
-                background-color: #404040;
-                color: #888888;
-
-            }
-        """)
+        self.start_btn = QPushButton("Start Analysis")
+        self.start_btn.setObjectName("primary_btn")
+        self.start_btn.setMinimumWidth(160)
         button_layout.addWidget(self.start_btn)
         
-        self.stop_btn = QPushButton("⏹️ Stop Scan")
+        self.stop_btn = QPushButton("Stop")
         self.stop_btn.setEnabled(False)
-        self.stop_btn.setProperty("class", "danger")
-        self.stop_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #f44336;
-                color: white;
-                border: none;
-                padding: 20px 40px;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: 18px;
-                min-height: 30px;
-                min-width: 180px;
-            }
-            QPushButton:hover {
-                background-color: #da190b;
-
-            }
-            QPushButton:pressed {
-                background-color: #b71c1c;
-
-            }
-            QPushButton:disabled {
-                background-color: #404040;
-                color: #888888;
-
-            }
-        """)
+        self.stop_btn.setMinimumWidth(100)
         button_layout.addWidget(self.stop_btn)
         
         button_layout.addStretch()
@@ -244,80 +140,60 @@ class ScannerPage(QWidget):
         parent_layout.addWidget(config_frame)
     
     def setup_scanner_output(self, parent_layout):
-        """Setup scanner output section"""
+        """Setup scanner output section with modern minimal style"""
         output_frame = QFrame()
-        output_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 20px;
-            }
-        """)
+        output_frame.setObjectName("card")
+        output_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         output_layout = QVBoxLayout(output_frame)
+        output_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        output_layout.setSpacing(Spacing.LG)
         
         # Title
-        title = QLabel("Scanner Output")
-        title.setFont(QFont("Roboto", 16, QFont.Bold))
-        title.setStyleSheet("color: #ffffff; margin-bottom: 15px;")
+        title = QLabel("Live Analysis Feed")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         output_layout.addWidget(title)
         
         # Progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                border: none;
-                border-radius: 6px;
-                background-color: #2d2d2d;
-                height: 8px;
-            }
-            QProgressBar::chunk {
-                background-color: #2196F3;
-                border-radius: 6px;
-            }
-        """)
+        self.progress_bar.setFixedHeight(8)
+        self.progress_bar.setTextVisible(False)
         output_layout.addWidget(self.progress_bar)
         
         # Output text
         self.output_text = QTextEdit()
         self.output_text.setReadOnly(True)
-        self.output_text.setMaximumHeight(200)
-        self.output_text.setStyleSheet("""
-            QTextEdit {
-                background-color: #0d1117;
-                border: 1px solid #404040;
-                border-radius: 6px;
-                color: #c9d1d9;
-                padding: 8px;
-                font-family: 'Consolas', monospace;
+        self.output_text.setMinimumHeight(200)
+        self.output_text.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
                 font-size: 12px;
-            }
+                padding: {Spacing.MD}px;
+            }}
         """)
-        self.output_text.setText("Scanner output will appear here...")
+        self.output_text.setText("Awaiting scan initiation...")
         output_layout.addWidget(self.output_text)
         
         parent_layout.addWidget(output_frame)
     
     def setup_scanner_results(self, parent_layout):
-        """Setup scanner results section"""
+        """Setup scanner results section with modern minimal style"""
         results_frame = QFrame()
-        results_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 20px;
-            }
-        """)
+        results_frame.setObjectName("card")
+        results_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         results_layout = QVBoxLayout(results_frame)
+        results_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        results_layout.setSpacing(Spacing.LG)
         
         # Title
-        title = QLabel("Scan Results")
-        title.setFont(QFont("Roboto", 16, QFont.Bold))
-        title.setStyleSheet("color: #ffffff; margin-bottom: 15px;")
+        title = QLabel("Scan Results Inventory")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         results_layout.addWidget(title)
         
         # Results table
@@ -325,44 +201,16 @@ class ScannerPage(QWidget):
         self.results_table.setColumnCount(4)
         self.results_table.setHorizontalHeaderLabels(["Type", "Severity", "Description", "Target"])
         
-        self.results_table.setStyleSheet("""
-            QTableWidget {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 6px;
-                gridline-color: #404040;
-                color: #ffffff;
-                selection-background-color: #2196F3;
-                alternate-background-color: #3d3d3d;
-            }
-            QTableWidget::item {
-                padding: 8px;
-                border-bottom: 1px solid #404040;
-            }
-            QTableWidget::item:selected {
-                background-color: #2196F3;
-                color: white;
-            }
-            QHeaderView::section {
-                background-color: #404040;
-                color: #ffffff;
-                padding: 8px;
-                border: none;
-                font-weight: bold;
-            }
-        """)
-        
         header = self.results_table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # Type
-        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # Severity
-        header.setSectionResizeMode(2, QHeaderView.Stretch)           # Description
-        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # Target
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
         
-        self.results_table.setAlternatingRowColors(True)
-        self.results_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.results_table.verticalHeader().setDefaultSectionSize(50)
+        self.results_table.verticalHeader().setVisible(False)
         
         results_layout.addWidget(self.results_table)
-        
         parent_layout.addWidget(results_frame)
     
     def setup_connections(self):

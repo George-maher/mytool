@@ -6,11 +6,12 @@ Statistics and overview with Material Design
 from datetime import datetime, timedelta
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel, QFrame,
-    QScrollArea, QProgressBar, QSizePolicy, QTextEdit
+    QScrollArea, QProgressBar, QSizePolicy, QTextEdit, QPushButton
 )
 from PySide6.QtCore import Qt, QTimer, Signal, Slot
 from PySide6.QtGui import QFont
 from core.target_store import TargetStore
+from ui.styles import Colors, Spacing, Typography
 
 
 class StatCard(QFrame):
@@ -21,43 +22,46 @@ class StatCard(QFrame):
         self.setup_ui(title, value, color, icon)
     
     def setup_ui(self, title, value, color, icon):
-        """Setup stat card UI"""
-        self.setFixedSize(150, 120)
+        """Setup stat card UI with modern minimal style"""
+        self.setObjectName("card")
+        self.setMinimumWidth(180)
+        self.setMinimumHeight(120)
         self.setStyleSheet(f"""
-            QFrame {{
-                background-color: #1e1e1e;
-                border: 2px solid {color};
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
                 border-radius: 12px;
-                margin: 5px;
             }}
-            QFrame:hover {{
-                background-color: #2d2d2d;
+            QFrame#card:hover {{
+                border-color: {color};
             }}
         """)
         
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(16, 16, 16, 16)
-        layout.setSpacing(8)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.SM)
+
+        # Header (Icon + Title)
+        header = QHBoxLayout()
+        header.setSpacing(Spacing.MD)
         
-        # Icon
         icon_label = QLabel(icon)
-        icon_label.setFont(QFont("Segoe UI Emoji", 24))
-        icon_label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(icon_label)
+        icon_label.setFont(QFont("Segoe UI Emoji", 14))
+        header.addWidget(icon_label)
+
+        title_label = QLabel(title.upper())
+        title_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 600; font-size: 11px; letter-spacing: 0.05em;")
+        header.addWidget(title_label)
+        header.addStretch()
+        layout.addLayout(header)
         
         # Value
         value_label = QLabel(str(value))
-        value_label.setFont(QFont("Roboto", 28, QFont.Bold))
-        value_label.setAlignment(Qt.AlignCenter)
+        value_label.setFont(QFont(Typography.FAMILY_MONO, 20, QFont.Bold))
         value_label.setStyleSheet(f"color: {color};")
         layout.addWidget(value_label)
         
-        # Title
-        title_label = QLabel(title)
-        title_label.setFont(QFont("Roboto", 12))
-        title_label.setAlignment(Qt.AlignCenter)
-        title_label.setStyleSheet("color: #b0b0b0;")
-        layout.addWidget(title_label)
+        layout.addStretch()
     
     def update_value(self, value):
         """Update card value"""
@@ -79,37 +83,41 @@ class DashboardOverview(QWidget):
         self.refresh_stats()
     
     def setup_ui(self):
-        """Setup dashboard overview UI"""
+        """Setup dashboard overview UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(20)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
-        # Header
-        header = QLabel("Dashboard Overview")
-        header.setFont(QFont("Roboto", 24, QFont.Bold))
-        header.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        # Section Title
+        header = QLabel("Global Dashboard")
+        header.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
         layout.addWidget(header)
         
         # Statistics cards
         self.setup_stats_cards(layout)
         
-        # Recent activity
-        self.setup_recent_activity(layout)
+        # Recent activity and Quick Actions row
+        content_row = QHBoxLayout()
+        content_row.setSpacing(Spacing.XL)
         
-        # Quick actions
-        self.setup_quick_actions(layout)
+        self.setup_recent_activity(content_row)
+        self.setup_quick_actions(content_row)
+
+        layout.addLayout(content_row)
+        layout.addStretch()
     
     def setup_stats_cards(self, parent_layout):
         """Setup statistics cards"""
         cards_frame = QFrame()
         cards_layout = QHBoxLayout(cards_frame)
-        cards_layout.setSpacing(10)
+        cards_layout.setContentsMargins(0, 0, 0, 0)
+        cards_layout.setSpacing(Spacing.LG)
         
         # Create stat cards
-        self.targets_card = StatCard("Active Targets", 0, "#2196F3", "🎯")
-        self.scans_card = StatCard("Total Scans", 0, "#4CAF50", "🔍")
-        self.vulns_card = StatCard("Vulnerabilities", 0, "#f44336", "⚠️")
-        self.score_card = StatCard("Security Score", "85", "#FF9800", "📊")
+        self.targets_card = StatCard("Active Targets", 0, Colors.PRIMARY, "🎯")
+        self.scans_card = StatCard("Total Scans", 0, Colors.SUCCESS, "🔍")
+        self.vulns_card = StatCard("Vulnerabilities", 0, Colors.DANGER, "⚠️")
+        self.score_card = StatCard("Security Score", "85", Colors.WARNING, "📊")
         
         cards_layout.addWidget(self.targets_card)
         cards_layout.addWidget(self.scans_card)
@@ -120,128 +128,76 @@ class DashboardOverview(QWidget):
         parent_layout.addWidget(cards_frame)
     
     def setup_recent_activity(self, parent_layout):
-        """Setup recent activity section"""
+        """Setup recent activity section with modern minimal style"""
         activity_frame = QFrame()
-        activity_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 16px;
-            }
-        """)
+        activity_frame.setObjectName("card")
+        activity_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         activity_layout = QVBoxLayout(activity_frame)
+        activity_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        activity_layout.setSpacing(Spacing.LG)
         
         # Title
         title = QLabel("Recent Activity")
-        title.setFont(QFont("Roboto", 16, QFont.Bold))
-        title.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         activity_layout.addWidget(title)
         
         # Activity list
         self.activity_text = QTextEdit()
         self.activity_text.setReadOnly(True)
-        self.activity_text.setMaximumHeight(200)
-        self.activity_text.setStyleSheet("""
-            QTextEdit {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 6px;
-                color: #c9d1d9;
-                padding: 8px;
-                font-family: 'Consolas', monospace;
+        self.activity_text.setMinimumHeight(200)
+        self.activity_text.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
                 font-size: 12px;
-            }
+                padding: {Spacing.MD}px;
+            }}
         """)
         self.activity_text.setText("No recent activity...")
         activity_layout.addWidget(self.activity_text)
         
-        parent_layout.addWidget(activity_frame)
+        parent_layout.addWidget(activity_frame, 2)  # Stretch factor 2
     
     def setup_quick_actions(self, parent_layout):
-        """Setup quick actions section"""
+        """Setup quick actions section with modern minimal style"""
         actions_frame = QFrame()
-        actions_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 16px;
-            }
-        """)
+        actions_frame.setObjectName("card")
+        actions_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         actions_layout = QVBoxLayout(actions_frame)
+        actions_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        actions_layout.setSpacing(Spacing.LG)
         
         # Title
         title = QLabel("Quick Actions")
-        title.setFont(QFont("Roboto", 16, QFont.Bold))
-        title.setStyleSheet("color: #ffffff; margin-bottom: 10px;")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         actions_layout.addWidget(title)
         
-        # Action buttons
-        buttons_layout = QHBoxLayout()
-        
-        from PySide6.QtWidgets import QPushButton
+        # Action buttons stack
+        buttons_stack = QVBoxLayout()
+        buttons_stack.setSpacing(Spacing.MD)
         
         # Quick scan button
-        quick_scan_btn = QPushButton("🚀 Quick Scan")
-        quick_scan_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 14px;
-            }
-            QPushButton:hover {
-                background-color: #1976D2;
-            }
-        """)
-        buttons_layout.addWidget(quick_scan_btn)
+        quick_scan_btn = QPushButton("🚀 Launch Quick Scan")
+        quick_scan_btn.setObjectName("primary_btn")
+        buttons_stack.addWidget(quick_scan_btn)
         
         # Add target button
-        add_target_btn = QPushButton("➕ Add Target")
-        add_target_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 14px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-        """)
-        buttons_layout.addWidget(add_target_btn)
+        add_target_btn = QPushButton("➕ Enroll New Target")
+        buttons_stack.addWidget(add_target_btn)
         
         # Generate report button
-        report_btn = QPushButton("📋 Generate Report")
-        report_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #FF9800;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: bold;
-                font-size: 14px;
-            }
-            QPushButton:hover {
-                background-color: #F57C00;
-            }
-        """)
-        buttons_layout.addWidget(report_btn)
+        report_btn = QPushButton("📋 Generate New Audit")
+        buttons_stack.addWidget(report_btn)
         
-        buttons_layout.addStretch()
-        actions_layout.addLayout(buttons_layout)
+        buttons_stack.addStretch()
+        actions_layout.addLayout(buttons_stack)
         
-        parent_layout.addWidget(actions_frame)
+        parent_layout.addWidget(actions_frame, 1)  # Stretch factor 1
     
     def setup_connections(self):
         """Setup signal connections"""
