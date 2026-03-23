@@ -42,12 +42,7 @@ class StackedContent(QWidget):
         
         # Stacked widget for pages
         self.stacked_widget = QStackedWidget()
-        self.stacked_widget.setStyleSheet("""
-            QStackedWidget {
-                background-color: #1a1a1a;
-                border: none;
-            }
-        """)
+        self.stacked_widget.setStyleSheet("background-color: #0f172a; border: none;")
         layout.addWidget(self.stacked_widget)
     
     def create_header(self):
@@ -56,8 +51,8 @@ class StackedContent(QWidget):
         header_frame.setFixedHeight(60)
         header_frame.setStyleSheet("""
             QFrame {
-                background-color: #1a1a1a;
-                border-bottom: 2px solid #2d2d2d;
+                background-color: #0f172a;
+                border-bottom: 1px solid #1e293b;
             }
             QLabel {
                 border: none;
@@ -71,16 +66,14 @@ class StackedContent(QWidget):
         
         # Page title
         self.page_title = QLabel("Dashboard")
-        self.page_title.setFont(QFont("Roboto", 20, QFont.Bold))
-        self.page_title.setStyleSheet("color: #2e7d32;")
+        self.page_title.setStyleSheet("color: #10b981; font-size: 14px; font-weight: bold;")
         header_layout.addWidget(self.page_title)
         
         header_layout.addStretch()
         
         # Status indicator
-        self.status_indicator = QLabel("🟢 System Ready")
-        self.status_indicator.setFont(QFont("Roboto", 12))
-        self.status_indicator.setStyleSheet("color: #4CAF50;")
+        self.status_indicator = QLabel("● System Ready")
+        self.status_indicator.setStyleSheet("color: #10b981; font-size: 14px;")
         header_layout.addWidget(self.status_indicator)
         
         return header_frame
