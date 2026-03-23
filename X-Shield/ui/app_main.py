@@ -38,8 +38,8 @@ class XShieldApp(QMainWindow):
         
         # Window setup
         self.setWindowTitle("X-Shield Cybersecurity Framework")
-        self.setGeometry(100, 100, 1600, 1000)
-        self.setMinimumSize(1200, 800)
+        self.setGeometry(100, 100, 1000, 1000)
+        self.setMinimumSize(1000, 800)
         
         # Apply qt-material dark_teal theme
         self.apply_theme()

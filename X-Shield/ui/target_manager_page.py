@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
     QFrame, QScrollArea, QTextEdit, QMessageBox, QFileDialog
 )
 from PySide6.QtCore import Qt, Signal, Slot
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QColor
 
 
 class TargetManagerPage(QWidget):
@@ -28,8 +28,8 @@ class TargetManagerPage(QWidget):
     def setup_ui(self):
         """Setup target manager UI"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
-        layout.setSpacing(20)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(10)
         
         # Title
         title_label = QLabel("Target Manager")
@@ -412,13 +412,13 @@ class TargetManagerPage(QWidget):
             # Status
             status_item = QTableWidgetItem(target.status)
             if target.status == "Active":
-                status_item.setStyleSheet("color: #4CAF50;")
+                status_item.setForeground(QColor('#4CAF50'))
             elif target.status == "Scanning":
-                status_item.setStyleSheet("color: #FF9800;")
+                status_item.setForeground(QColor('#FF9800'))
             elif target.status == "Completed":
-                status_item.setStyleSheet("color: #2196F3;")
+                status_item.setForeground(QColor('#2196F3'))
             else:
-                status_item.setStyleSheet("color: #f44336;")
+                status_item.setForeground(QColor('#f44336'))
             self.target_table.setItem(row, 2, status_item)
             
             # Description

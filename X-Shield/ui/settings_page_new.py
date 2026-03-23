@@ -27,8 +27,8 @@ class SettingsPage(QWidget):
     def setup_ui(self):
         """Setup settings UI"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
-        layout.setSpacing(20)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(10)
         
         # Title
         title_label = QLabel("Settings & Configuration")

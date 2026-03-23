@@ -33,7 +33,7 @@ class ReportsPage(QWidget):
         """Setup reports page UI"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(20)
+        layout.setSpacing(10)
         
         # Header
         header = QLabel("Security Reports")

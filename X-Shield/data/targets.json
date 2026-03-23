@@ -1,4 +1,158 @@
 {
-  "targets": [],
-  "active_target_id": null
+  "targets": [
+    {
+      "id": "e4faa877-7318-4933-9631-4be64e0beef9",
+      "type": "IP Address",
+      "value": "https://mintalitat.web.app/",
+      "description": "",
+      "status": "Active",
+      "created_at": "2026-03-23T16:50:56.386133",
+      "updated_at": "2026-03-23T17:27:29.397769",
+      "scan_results": {
+        "network_scanner": {
+          "findings": [
+            {
+              "details": "Host https://mintalitat.web.app/ is responding to ping",
+              "type": "host_alive"
+            },
+            {
+              "details": "Port 22 is open",
+              "type": "open_port"
+            },
+            {
+              "details": "Port 80 is open",
+              "type": "open_port"
+            },
+            {
+              "details": "Port 443 is open",
+              "type": "open_port"
+            },
+            {
+              "details": "Port 8080 is open",
+              "type": "open_port"
+            },
+            {
+              "details": "Port 22: SSH",
+              "type": "service"
+            },
+            {
+              "details": "Port 80: HTTP",
+              "type": "service"
+            },
+            {
+              "details": "Port 443: HTTPS",
+              "type": "service"
+            },
+            {
+              "details": "Port 8080: HTTP-Alt",
+              "type": "service"
+            },
+            {
+              "details": "OS fingerprint: Linux (likely Ubuntu)",
+              "type": "os_info"
+            }
+          ],
+          "scan_type": "network",
+          "summary": "Network scan completed for https://mintalitat.web.app/. Found 10 findings and 2 potential vulnerabilities.",
+          "target": "https://mintalitat.web.app/",
+          "timestamp": null,
+          "vulnerabilities": [
+            {
+              "description": "SSH server version may have known vulnerabilities",
+              "severity": "Medium",
+              "title": "SSH Version 7.4"
+            },
+            {
+              "description": "Server header exposes server information",
+              "severity": "Low",
+              "title": "HTTP Server Header"
+            }
+          ]
+        },
+        "web_scanner": {
+          "findings": [
+            {
+              "details": "Server: Apache/2.4.41",
+              "type": "server_header"
+            },
+            {
+              "details": "Found directory: /admin",
+              "type": "directory"
+            },
+            {
+              "details": "Found directory: /backup",
+              "type": "directory"
+            },
+            {
+              "details": "Found directory: /config",
+              "type": "directory"
+            },
+            {
+              "details": "Technologies: PHP, MySQL, jQuery",
+              "type": "technology"
+            },
+            {
+              "details": "Missing X-Frame-Options header",
+              "type": "security_header"
+            }
+          ],
+          "scan_type": "web",
+          "summary": "Web scan completed for https://mintalitat.web.app/. Found 6 findings and 2 vulnerabilities.",
+          "target": "https://mintalitat.web.app/",
+          "timestamp": null,
+          "vulnerabilities": [
+            {
+              "description": "Potential SQL injection in search parameter",
+              "severity": "High",
+              "title": "SQL Injection"
+            },
+            {
+              "description": "Cross-site scripting in comment field",
+              "severity": "Medium",
+              "title": "XSS Vulnerability"
+            }
+          ]
+        },
+        "osint": {
+          "findings": [
+            {
+              "details": "Domain registered: 2019-01-15, Expires: 2024-01-15",
+              "type": "domain_info"
+            },
+            {
+              "details": "A: 192.168.1.1, MX: mail.example.com",
+              "type": "dns_record"
+            },
+            {
+              "details": "Found subdomain: api.example.com",
+              "type": "subdomain"
+            },
+            {
+              "details": "Found subdomain: blog.example.com",
+              "type": "subdomain"
+            },
+            {
+              "details": "Found subdomain: dev.example.com",
+              "type": "subdomain"
+            },
+            {
+              "details": "Found emails: admin@example.com, support@example.com",
+              "type": "email"
+            },
+            {
+              "details": "LinkedIn: Example Corp, Twitter: @examplecorp",
+              "type": "social_media"
+            }
+          ],
+          "scan_type": "osint",
+          "summary": "OSINT completed for https://mintalitat.web.app/. Found 7 pieces of information.",
+          "target": "https://mintalitat.web.app/",
+          "timestamp": null,
+          "vulnerabilities": []
+        }
+      },
+      "tags": []
+    }
+  ],
+  "active_target_id": "e4faa877-7318-4933-9631-4be64e0beef9"
 }

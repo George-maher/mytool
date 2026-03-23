@@ -28,8 +28,8 @@ class ReportsPage(QWidget):
     def setup_ui(self):
         """Setup reports UI"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
-        layout.setSpacing(20)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(10)
         
         # Title
         title_label = QLabel("Security Reports")
@@ -332,13 +332,14 @@ class ReportsPage(QWidget):
                 return
             
             # Generate mock report data
+            from datetime import datetime
             report_data = {
                 'report_name': f"{report_type}_{len(self.reports_table) + 1}",
                 'report_type': report_type,
                 'format': format_type,
                 'targets': len(targets),
                 'vulnerabilities': 0,
-                'generated_at': None
+                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
             
             # Count vulnerabilities
@@ -552,21 +553,27 @@ The security posture requires improvement. Implement the recommended actions to 
     
     def load_reports(self):
         """Load existing reports (mock data)"""
+        # Clear existing reports first
+        self.reports_table.setRowCount(0)
+        
         # Add some mock reports for demonstration
+        from datetime import datetime
         mock_reports = [
             {
                 'report_name': 'Security_Assessment_1',
                 'report_type': 'Executive Summary',
                 'format': 'PDF',
                 'targets': 3,
-                'vulnerabilities': 12
+                'vulnerabilities': 12,
+                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             },
             {
                 'report_name': 'Vulnerability_Report_1',
                 'report_type': 'Vulnerability Report',
                 'format': 'HTML',
                 'targets': 1,
-                'vulnerabilities': 8
+                'vulnerabilities': 8,
+                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
         ]
         

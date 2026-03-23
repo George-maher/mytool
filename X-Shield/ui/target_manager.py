@@ -34,7 +34,7 @@ class TargetManager(QWidget):
         """Setup target manager UI"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(20)
+        layout.setSpacing(10)
         
         # Header
         header_label = QLabel("Target Manager")

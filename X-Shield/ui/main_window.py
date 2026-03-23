@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         
         # Window properties
         self.setWindowTitle("X-Shield Pentesting Framework")
-        self.setGeometry(100, 100, 1400, 900)
+        self.setGeometry(100, 100, 1000, 900)
         
         # Initialize UI components
         self.setup_ui()
