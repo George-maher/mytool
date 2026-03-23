@@ -132,16 +132,30 @@ class OSINTPage(QWidget):
         self.setup_connections()
     
     def setup_ui(self):
-        """Setup OSINT UI"""
+        """Setup OSINT UI with Midnight Neon aesthetic"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
-        layout.setSpacing(20)
-        
-        # Title
-        title_label = QLabel("OSINT Intelligence")
-        title_label.setFont(QFont("Roboto", 24, QFont.Bold))
-        title_label.setStyleSheet("color: #2e7d32;")
-        layout.addWidget(title_label)
+        layout.setContentsMargins(24, 24, 24, 24)
+        layout.setSpacing(24)
+
+        # Header Section
+        header_layout = QHBoxLayout()
+        title_label = QLabel("INTEL GATHERING (OSINT)")
+        title_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
+        header_layout.addWidget(title_label)
+        header_layout.addStretch()
+
+        status_tag = QLabel("INTEL MODULE ACTIVE")
+        status_tag.setStyleSheet("""
+            color: #fbbf24;
+            font-weight: bold;
+            font-size: 10px;
+            background-color: rgba(251, 191, 36, 0.1);
+            border: 1px solid #fbbf24;
+            padding: 4px 12px;
+            border-radius: 4px;
+        """)
+        header_layout.addWidget(status_tag)
+        layout.addLayout(header_layout)
         
         # OSINT Configuration
         self.setup_osint_config(layout)
@@ -159,9 +173,10 @@ class OSINTPage(QWidget):
         config_frame = QFrame()
         config_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -169,9 +184,8 @@ class OSINTPage(QWidget):
         config_layout.setSpacing(16)
         
         # Section title
-        section_title = QLabel("OSINT Configuration")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title = QLabel("RECONNAISSANCE PARAMETERS")
+        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
         config_layout.addWidget(section_title)
         
         # Target input
@@ -187,19 +201,17 @@ class OSINTPage(QWidget):
         self.target_input.setPlaceholderText("Domain, company name, or email")
         self.target_input.setStyleSheet("""
             QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
                 padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                selection-background-color: #2e7d32;
+                color: #22d3ee;
+                font-family: 'DejaVu Sans Mono';
+                font-size: 13px;
                 min-width: 300px;
-                min-height: 40px;
             }
             QLineEdit:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
+                border: 1px solid #22d3ee;
             }
         """)
         target_layout.addWidget(self.target_input)
@@ -208,16 +220,16 @@ class OSINTPage(QWidget):
         self.get_active_btn = QPushButton("🎯 Use Active")
         self.get_active_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                padding: 12px 20px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 14px;
+                background-color: rgba(34, 211, 238, 0.1);
+                color: #22d3ee;
+                border: 1px solid #22d3ee;
+                padding: 10px 20px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 11px;
             }
             QPushButton:hover {
-                background-color: #1976D2;
+                background-color: rgba(34, 211, 238, 0.2);
             }
         """)
         target_layout.addWidget(self.get_active_btn)
@@ -240,17 +252,16 @@ class OSINTPage(QWidget):
         ])
         self.osint_type_combo.setStyleSheet("""
             QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: #ffffff;
-                font-size: 14px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 10px 16px;
+                color: #f8fafc;
+                font-size: 12px;
                 min-width: 200px;
             }
             QComboBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
+                border: 1px solid #22d3ee;
             }
             QComboBox::drop-down {
                 border: none;
@@ -283,25 +294,22 @@ class OSINTPage(QWidget):
         self.start_btn = QPushButton("🔍 Start OSINT")
         self.start_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2e7d32;
-                color: white;
+                background-color: #22d3ee;
+                color: #020617;
                 border: none;
                 padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
+                border-radius: 4px;
+                font-weight: 900;
+                font-size: 13px;
+                letter-spacing: 1px;
                 min-width: 150px;
-                min-height: 48px;
             }
             QPushButton:hover {
-                background-color: #388e3c;
-            }
-            QPushButton:pressed {
-                background-color: #1b5e20;
+                background-color: #67e8f9;
             }
             QPushButton:disabled {
-                background-color: #404040;
-                color: #888888;
+                background-color: #1e293b;
+                color: #475569;
             }
         """)
         buttons_layout.addWidget(self.start_btn)
@@ -310,27 +318,21 @@ class OSINTPage(QWidget):
         self.stop_btn.setEnabled(False)
         self.stop_btn.setStyleSheet("""
             QPushButton {
-                background-color: #f44336;
-                color: white;
-                border: none;
-                padding: 16px 32px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
+                background-color: transparent;
+                color: #f43f5e;
+                border: 1px solid #f43f5e;
+                padding: 12px 24px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 13px;
                 min-width: 150px;
             }
             QPushButton:hover {
-                background-color: #da190b;
-
-            }
-            QPushButton:pressed {
-                background-color: #b71c1c;
-
+                background-color: rgba(244, 63, 94, 0.1);
             }
             QPushButton:disabled {
-                background-color: #404040;
-                color: #888888;
-
+                border: 1px solid #1e293b;
+                color: #475569;
             }
         """)
         buttons_layout.addWidget(self.stop_btn)
@@ -345,9 +347,10 @@ class OSINTPage(QWidget):
         terminal_frame = QFrame()
         terminal_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -355,9 +358,8 @@ class OSINTPage(QWidget):
         terminal_layout.setSpacing(16)
         
         # Section title
-        section_title = QLabel("OSINT Results")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title = QLabel("INTELLIGENCE HARVEST")
+        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
         terminal_layout.addWidget(section_title)
         
         # Terminal widget
@@ -366,12 +368,12 @@ class OSINTPage(QWidget):
         self.terminal.setMinimumHeight(300)
         self.terminal.setStyleSheet("""
             QTextEdit {
-                background-color: #0d0d0d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                color: #00ff00;
-                font-family: 'Consolas', 'Monaco', monospace;
-                font-size: 13px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                color: #f8fafc;
+                font-family: 'DejaVu Sans Mono', monospace;
+                font-size: 12px;
                 padding: 16px;
             }
         """)
@@ -387,9 +389,10 @@ class OSINTPage(QWidget):
         progress_frame = QFrame()
         progress_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -406,19 +409,17 @@ class OSINTPage(QWidget):
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
+        self.progress_bar.setFixedHeight(8)
+        self.progress_bar.setTextVisible(False)
         self.progress_bar.setStyleSheet("""
             QProgressBar {
-                border: 2px solid #404040;
-                border-radius: 8px;
-                text-align: center;
-                color: white;
-                font-weight: bold;
-                background-color: #2d2d2d;
-                height: 20px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
             }
             QProgressBar::chunk {
-                background-color: #2e7d32;
-                border-radius: 6px;
+                background-color: #22d3ee;
+                border-radius: 3px;
             }
         """)
         progress_layout.addWidget(self.progress_bar)
@@ -545,19 +546,19 @@ class OSINTPage(QWidget):
             self.worker = None
     
     def add_terminal_message(self, msg_type, message):
-        """Add message to terminal with color coding"""
+        """Add message to terminal with Midnight Neon color coding"""
         colors = {
-            "INFO": "#2196F3",
-            "SUCCESS": "#4CAF50",
-            "WARNING": "#FF9800",
-            "ERROR": "#f44336",
-            "RESULT": "#9C27B0",
-            "INTEL": "#FFC107",
-            "STATUS": "#00BCD4",
-            "PROGRESS": "#607D8B"
+            "INFO": "#64748b",
+            "SUCCESS": "#10b981",
+            "WARNING": "#f59e0b",
+            "ERROR": "#f43f5e",
+            "RESULT": "#a855f7",
+            "INTEL": "#22d3ee",
+            "STATUS": "#94a3b8",
+            "PROGRESS": "#334155"
         }
         
-        color = colors.get(msg_type, "#ffffff")
+        color = colors.get(msg_type, "#f8fafc")
         
         # Move cursor to end
         cursor = self.terminal.textCursor()
@@ -567,7 +568,7 @@ class OSINTPage(QWidget):
         from datetime import datetime
         timestamp = datetime.now().strftime("%H:%M:%S")
         
-        formatted_message = f'<span style="color: #888888;">[{timestamp}]</span> <span style="color: {color};">[{msg_type}]</span> <span style="color: #ffffff;">{message}</span>'
+        formatted_message = f'<span style="color: #475569;">[{timestamp}]</span> <span style="color: {color}; font-weight: bold;">[{msg_type}]</span> <span style="color: #f8fafc;">{message}</span>'
         
         self.terminal.append(formatted_message)
         

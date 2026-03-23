@@ -34,6 +34,7 @@ class BaseModule(QObject):
         self.logger = logger
         self._stop_requested = False
         self._is_running = False
+        self._state = "IDLE"
         
         # Results storage
         self.results = {
@@ -47,8 +48,17 @@ class BaseModule(QObject):
             'vulnerabilities': [],
             'items_scanned': 0,
             'summary': '',
-            'status': 'not_started'
+            'status': 'not_started',
+            'telemetry': []
         }
+
+    @property
+    def state(self) -> str:
+        return self._state
+
+    def _update_state(self, new_state: str):
+        self._state = new_state
+        self.logger.info(f"Module {self.NAME} state transition: {new_state}")
     
     @abstractmethod
     def execute(self, target: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
@@ -92,6 +102,7 @@ class BaseModule(QObject):
         """Initialize execution"""
         self._stop_requested = False
         self._is_running = True
+        self._update_state("RUNNING")
         self.results['start_time'] = time.time()
         self.results['target'] = target
         self.results['parameters'] = parameters
@@ -107,6 +118,7 @@ class BaseModule(QObject):
         self.results['status'] = 'completed'
         
         self._is_running = False
+        self._update_state("FINISHED")
         self.logger.module_complete(self.NAME, self.results['execution_time'])
         self.status_signal.emit(f"{self.NAME} scan completed")
         self.finished.emit(self.results)
@@ -125,12 +137,18 @@ class BaseModule(QObject):
     
     def add_finding(self, finding_type: str, details: Dict[str, Any]):
         """Add a finding to the results"""
+        now = time.time()
         finding = {
             'type': finding_type,
-            'timestamp': time.time(),
+            'timestamp': now,
             'details': details
         }
         self.results['findings'].append(finding)
+        self.results['telemetry'].append({
+            'timestamp': now,
+            'event': 'FINDING_DISCOVERED',
+            'type': finding_type
+        })
         self.finding_signal.emit(finding_type, details)
         
         self.logger.info(f"Finding: {finding_type} - {details}")

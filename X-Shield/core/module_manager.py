@@ -13,7 +13,7 @@ import time
 
 
 class ModuleManager(QObject):
-    """Manages all pentesting modules"""
+    """Manages all pentesting modules with a Registry Pattern"""
     
     # Signals
     module_started = Signal(str, str)  # module_name, target
@@ -24,38 +24,49 @@ class ModuleManager(QObject):
     def __init__(self, logger):
         super().__init__()
         self.logger = logger
-        self.loaded_modules = {}
+        self._registry = {} # module_name -> module_class
         self.running_modules = {}
         self.module_results = {}
         
         # Load all modules
         self.load_modules()
+
+    @property
+    def loaded_modules(self):
+        return self._registry
     
     def load_modules(self):
-        """Load all available pentesting modules"""
+        """Load all available pentesting modules with error isolation"""
         modules_path = Path(__file__).parent.parent / "modules"
         
+        if not modules_path.exists():
+            self.logger.error(f"Modules path not found: {modules_path}")
+            return
+
         for module_dir in modules_path.iterdir():
             if module_dir.is_dir() and (module_dir / "__init__.py").exists():
                 module_name = module_dir.name
                 try:
-                    # Import module
+                    # Isolate module loading to prevent system crash
                     spec = importlib.util.spec_from_file_location(
                         f"modules.{module_name}",
                         module_dir / "__init__.py"
                     )
+                    if spec is None or spec.loader is None:
+                        continue
+
                     module = importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(module)
                     
-                    # Check if module has required interface
+                    # Validate and Register
                     if hasattr(module, 'Module') and inspect.isclass(module.Module):
-                        self.loaded_modules[module_name] = module.Module
-                        self.logger.info(f"Loaded module: {module_name}")
+                        self._registry[module_name] = module.Module
+                        self.logger.info(f"Registered module: {module_name}")
                     else:
-                        self.logger.warning(f"Module {module_name} missing required interface")
+                        self.logger.warning(f"Module {module_name} failed validation (missing Module class)")
                         
                 except Exception as e:
-                    self.logger.error(f"Failed to load module {module_name}: {str(e)}")
+                    self.logger.error(f"Fatal error during registration of {module_name}: {str(e)}")
     
     def get_available_modules(self):
         """Get list of available modules"""

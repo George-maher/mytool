@@ -26,16 +26,30 @@ class ReportsPage(QWidget):
         self.load_reports()
     
     def setup_ui(self):
-        """Setup reports UI"""
+        """Setup reports UI with Midnight Neon aesthetic"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
-        layout.setSpacing(20)
-        
-        # Title
-        title_label = QLabel("Security Reports")
-        title_label.setFont(QFont("Roboto", 24, QFont.Bold))
-        title_label.setStyleSheet("color: #2e7d32;")
-        layout.addWidget(title_label)
+        layout.setContentsMargins(24, 24, 24, 24)
+        layout.setSpacing(24)
+
+        # Header Section
+        header_layout = QHBoxLayout()
+        title_label = QLabel("REPORTING ENGINE")
+        title_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
+        header_layout.addWidget(title_label)
+        header_layout.addStretch()
+
+        status_tag = QLabel("ENGINE READY")
+        status_tag.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: bold;
+            font-size: 10px;
+            background-color: rgba(34, 211, 238, 0.1);
+            border: 1px solid #22d3ee;
+            padding: 4px 12px;
+            border-radius: 4px;
+        """)
+        header_layout.addWidget(status_tag)
+        layout.addLayout(header_layout)
         
         # Report Generation
         self.setup_report_generation(layout)
@@ -53,9 +67,10 @@ class ReportsPage(QWidget):
         gen_frame = QFrame()
         gen_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -63,9 +78,8 @@ class ReportsPage(QWidget):
         gen_layout.setSpacing(16)
         
         # Section title
-        section_title = QLabel("Generate Report")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title = QLabel("GENERATE AUDIT")
+        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
         gen_layout.addWidget(section_title)
         
         # Report options
@@ -85,18 +99,16 @@ class ReportsPage(QWidget):
         ])
         self.report_type_combo.setStyleSheet("""
             QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
                 padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
+                color: #f8fafc;
+                font-size: 13px;
                 min-width: 200px;
-                min-height: 40px;
             }
             QComboBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
+                border: 1px solid #22d3ee;
             }
             QComboBox::drop-down {
                 border: none;
@@ -131,18 +143,16 @@ class ReportsPage(QWidget):
         self.format_combo.addItems(["PDF", "HTML", "JSON", "CSV"])
         self.format_combo.setStyleSheet("""
             QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
                 padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
+                color: #f8fafc;
+                font-size: 13px;
                 min-width: 150px;
-                min-height: 40px;
             }
             QComboBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
+                border: 1px solid #22d3ee;
             }
             QComboBox::drop-down {
                 border: none;
@@ -170,24 +180,25 @@ class ReportsPage(QWidget):
         gen_layout.addLayout(options_layout)
         
         # Generate button
-        self.generate_btn = QPushButton("📊 Generate Report")
+        self.generate_btn = QPushButton("EXECUTE REPORT GENERATION")
         self.generate_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2e7d32;
-                color: white;
+                background-color: #22d3ee;
+                color: #020617;
                 border: none;
                 padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
+                border-radius: 4px;
+                font-weight: 900;
+                font-size: 13px;
+                letter-spacing: 1px;
                 min-width: 200px;
-                min-height: 48px;
             }
             QPushButton:hover {
-                background-color: #388e3c;
+                background-color: #67e8f9;
             }
-            QPushButton:pressed {
-                background-color: #1b5e20;
+            QPushButton:disabled {
+                background-color: #1e293b;
+                color: #475569;
             }
         """)
         gen_layout.addWidget(self.generate_btn)
@@ -199,9 +210,10 @@ class ReportsPage(QWidget):
         table_frame = QFrame()
         table_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -209,9 +221,8 @@ class ReportsPage(QWidget):
         table_layout.setSpacing(16)
         
         # Section title
-        section_title = QLabel("Generated Reports")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title = QLabel("ARCHIVED AUDITS")
+        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
         table_layout.addWidget(section_title)
         
         # Reports table
@@ -224,29 +235,26 @@ class ReportsPage(QWidget):
         # Setup table styling
         self.reports_table.setStyleSheet("""
             QTableWidget {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                gridline-color: #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                alternate-background-color: #333333;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                gridline-color: #1e293b;
+                color: #f8fafc;
+                selection-background-color: rgba(34, 211, 238, 0.2);
+                font-size: 12px;
             }
             QTableWidget::item {
                 padding: 12px;
-                border-bottom: 1px solid #404040;
-            }
-            QTableWidget::item:selected {
-                background-color: #2e7d32;
-                color: white;
+                border-bottom: 1px solid #1e293b;
             }
             QHeaderView::section {
-                background-color: #404040;
-                color: #ffffff;
+                background-color: #0f172a;
+                color: #64748b;
                 padding: 12px;
                 border: none;
-                font-weight: 600;
-                border-bottom: 2px solid #2e7d32;
+                font-weight: bold;
+                font-size: 11px;
+                letter-spacing: 1px;
             }
         """)
         
@@ -272,9 +280,10 @@ class ReportsPage(QWidget):
         details_frame = QFrame()
         details_frame.setStyleSheet("""
             QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
+                background-color: #0f172a;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                padding: 20px;
             }
         """)
         
@@ -282,9 +291,8 @@ class ReportsPage(QWidget):
         details_layout.setSpacing(16)
         
         # Section title
-        section_title = QLabel("Report Preview")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title = QLabel("CONTENT INSPECTION")
+        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
         details_layout.addWidget(section_title)
         
         # Report preview
@@ -293,12 +301,12 @@ class ReportsPage(QWidget):
         self.report_preview.setMinimumHeight(200)
         self.report_preview.setStyleSheet("""
             QTextEdit {
-                background-color: #0d0d0d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                color: #ffffff;
-                font-family: 'Consolas', 'Monaco', monospace;
-                font-size: 13px;
+                background-color: #020617;
+                border: 1px solid #1e293b;
+                border-radius: 4px;
+                color: #f8fafc;
+                font-family: 'DejaVu Sans Mono', monospace;
+                font-size: 12px;
                 padding: 16px;
             }
         """)
@@ -395,14 +403,14 @@ class ReportsPage(QWidget):
         view_btn.setFixedSize(32, 32)
         view_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
+                background-color: rgba(34, 211, 238, 0.1);
+                color: #22d3ee;
+                border: 1px solid #22d3ee;
                 border-radius: 4px;
                 font-size: 12px;
             }
             QPushButton:hover {
-                background-color: #1976D2;
+                background-color: rgba(34, 211, 238, 0.2);
             }
         """)
         view_btn.clicked.connect(lambda: self.view_report(report_data))
@@ -414,14 +422,14 @@ class ReportsPage(QWidget):
         download_btn.setFixedSize(32, 32)
         download_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2e7d32;
-                color: white;
-                border: none;
+                background-color: rgba(16, 185, 129, 0.1);
+                color: #10b981;
+                border: 1px solid #10b981;
                 border-radius: 4px;
                 font-size: 12px;
             }
             QPushButton:hover {
-                background-color: #388e3c;
+                background-color: rgba(16, 185, 129, 0.2);
             }
         """)
         download_btn.clicked.connect(lambda: self.download_report(report_data))
@@ -433,14 +441,14 @@ class ReportsPage(QWidget):
         delete_btn.setFixedSize(32, 32)
         delete_btn.setStyleSheet("""
             QPushButton {
-                background-color: #f44336;
-                color: white;
-                border: none;
+                background-color: rgba(244, 63, 94, 0.1);
+                color: #f43f5e;
+                border: 1px solid #f43f5e;
                 border-radius: 4px;
                 font-size: 12px;
             }
             QPushButton:hover {
-                background-color: #da190b;
+                background-color: rgba(244, 63, 94, 0.2);
             }
         """)
         delete_btn.clicked.connect(lambda: self.delete_report(report_data))
