@@ -23,15 +23,16 @@ class StatusCard(QFrame):
     def setup_ui(self, title, value, subtitle, color, icon):
         """Setup card UI"""
         self.setStyleSheet(f"""
-            QFrame {{
+            StatusCard {{
                 background-color: #1e1e1e;
                 border: 2px solid {color};
                 border-radius: 12px;
-                padding: 16px;
             }}
             QLabel {{
                 color: #ffffff;
                 background-color: transparent;
+                border: none;
+                padding: 0px;
             }}
         """)
         
@@ -172,7 +173,6 @@ class DashboardPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 20px;
             }
         """)
         
@@ -218,7 +218,6 @@ class DashboardPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 20px;
             }
         """)
         
@@ -269,7 +268,6 @@ class DashboardPage(QWidget):
                     }}
                     QProgressBar::chunk {{
                         background-color: {color};
-                        border-radius: 4px;
                     }}
                 """)
                 indicator_layout.addWidget(progress)

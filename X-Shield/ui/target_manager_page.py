@@ -57,7 +57,6 @@ class TargetManagerPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -82,17 +81,16 @@ class TargetManagerPage(QWidget):
             QLineEdit {
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 16px 20px;
+                border-radius: 8px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 16px;
                 selection-background-color: #2e7d32;
-                min-height: 28px;
+                min-height: 40px;
             }
             QLineEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 12px rgba(46, 125, 50, 0.4);
             }
         """)
         form_layout.addWidget(QLabel("Target IP/URL:"), 0, 0)
@@ -105,12 +103,12 @@ class TargetManagerPage(QWidget):
             QComboBox {
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 16px 20px;
+                border-radius: 8px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 16px;
                 min-width: 250px;
-                min-height: 28px;
+                min-height: 40px;
             }
             QComboBox:focus {
                 border: 2px solid #2e7d32;
@@ -148,8 +146,8 @@ class TargetManagerPage(QWidget):
             QTextEdit {
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
-                border-radius: 12px;
-                padding: 16px 20px;
+                border-radius: 8px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 16px;
                 selection-background-color: #2e7d32;
@@ -157,7 +155,6 @@ class TargetManagerPage(QWidget):
             QTextEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 12px rgba(46, 125, 50, 0.4);
             }
         """)
         form_layout.addWidget(QLabel("Description:"), 2, 0)
@@ -172,22 +169,18 @@ class TargetManagerPage(QWidget):
                 background-color: #2e7d32;
                 color: white;
                 border: none;
-                padding: 20px 40px;
-                border-radius: 12px;
+                padding: 12px 24px;
+                border-radius: 8px;
                 font-weight: 600;
                 font-size: 18px;
                 min-width: 200px;
-                min-height: 32px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #388e3c;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(46, 125, 50, 0.4);
             }
             QPushButton:pressed {
                 background-color: #1b5e20;
-                transform: translateY(0px);
-                box-shadow: 0 2px 4px rgba(46, 125, 50, 0.3);
             }
         """)
         input_layout.addWidget(self.add_target_btn)
@@ -202,7 +195,6 @@ class TargetManagerPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -228,7 +220,7 @@ class TargetManagerPage(QWidget):
             QTableWidget {
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
-                border-radius: 12px;
+                border-radius: 8px;
                 gridline-color: #404040;
                 color: #ffffff;
                 selection-background-color: #2e7d32;
@@ -236,7 +228,7 @@ class TargetManagerPage(QWidget):
                 font-size: 15px;
             }
             QTableWidget::item {
-                padding: 16px;
+                padding: 12px;
                 border-bottom: 1px solid #404040;
                 min-height: 24px;
             }
@@ -247,7 +239,7 @@ class TargetManagerPage(QWidget):
             QHeaderView::section {
                 background-color: #404040;
                 color: #ffffff;
-                padding: 16px;
+                padding: 12px;
                 border: none;
                 font-weight: 600;
                 font-size: 16px;
@@ -285,22 +277,18 @@ class TargetManagerPage(QWidget):
                 background-color: #2196F3;
                 color: white;
                 border: none;
-                padding: 16px 32px;
-                border-radius: 12px;
+                padding: 12px 24px;
+                border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 120px;
-                min-height: 24px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #1976D2;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
             }
             QPushButton:pressed {
                 background-color: #0D47A1;
-                transform: translateY(0px);
-                box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
             }
         """)
         buttons_layout.addWidget(self.import_btn)
@@ -311,22 +299,18 @@ class TargetManagerPage(QWidget):
                 background-color: #FF9800;
                 color: white;
                 border: none;
-                padding: 16px 32px;
-                border-radius: 12px;
+                padding: 12px 24px;
+                border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 120px;
-                min-height: 24px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #F57C00;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(255, 152, 0, 0.4);
             }
             QPushButton:pressed {
                 background-color: #E65100;
-                transform: translateY(0px);
-                box-shadow: 0 2px 4px rgba(255, 152, 0, 0.3);
             }
         """)
         buttons_layout.addWidget(self.export_btn)
@@ -337,22 +321,18 @@ class TargetManagerPage(QWidget):
                 background-color: #f44336;
                 color: white;
                 border: none;
-                padding: 16px 32px;
-                border-radius: 12px;
+                padding: 12px 24px;
+                border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 120px;
-                min-height: 24px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #da190b;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
             }
             QPushButton:pressed {
                 background-color: #b71c1c;
-                transform: translateY(0px);
-                box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
             }
         """)
         buttons_layout.addWidget(self.clear_btn)
@@ -474,7 +454,6 @@ class TargetManagerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #388e3c;
-                transform: scale(1.1);
             }
         """)
         active_btn.clicked.connect(lambda: self.set_active_target(target_id))
@@ -494,7 +473,6 @@ class TargetManagerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #1976D2;
-                transform: scale(1.1);
             }
         """)
         edit_btn.clicked.connect(lambda: self.edit_target(target_id))
@@ -514,7 +492,6 @@ class TargetManagerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #da190b;
-                transform: scale(1.1);
             }
         """)
         delete_btn.clicked.connect(lambda: self.delete_target(target_id))

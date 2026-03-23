@@ -106,6 +106,11 @@ class ModuleWidget(QWidget):
                 left: 10px;
                 padding: 0 5px 0 5px;
             }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
+            }
         """)
         
         header_layout = QFormLayout(header_group)
@@ -155,6 +160,11 @@ class ModuleWidget(QWidget):
                 left: 10px;
                 padding: 0 5px 0 5px;
             }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
+            }
         """)
         
         target_layout = QFormLayout(target_group)
@@ -170,6 +180,7 @@ class ModuleWidget(QWidget):
                 border-radius: 6px;
                 padding: 8px;
                 font-family: 'Consolas', monospace;
+                min-height: 32px;
             }
             QLineEdit:focus {
                 border: 2px solid #8b5cf6;
@@ -195,6 +206,11 @@ class ModuleWidget(QWidget):
                 subcontrol-origin: margin;
                 left: 10px;
                 padding: 0 5px 0 5px;
+            }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
             }
         """)
         

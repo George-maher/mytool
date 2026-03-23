@@ -428,7 +428,7 @@ class DashboardWidget(QWidget):
             QPushButton:hover {
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
                     stop:0 #059669, stop:1 #047857);
-                transform: translateY(-2px);
+
             }
             QPushButton:pressed {
                 background: #047857;
@@ -1033,7 +1033,7 @@ class DashboardWidget(QWidget):
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
                     stop:0 #374151, stop:1 #4b5563);
                 border: 2px solid {color};
-                transform: translateY(-2px);
+
             }}
         """)
         

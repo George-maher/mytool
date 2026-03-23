@@ -47,7 +47,7 @@ class SettingsPage(QWidget):
             QTabBar::tab {
                 background-color: #2d2d2d;
                 color: #ffffff;
-                padding: 12px 20px;
+                padding: 10px 16px;
                 margin-right: 2px;
                 border-top-left-radius: 8px;
                 border-top-right-radius: 8px;
@@ -95,7 +95,6 @@ class SettingsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -123,10 +122,11 @@ class SettingsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 min-width: 200px;
+                min-height: 40px;
             }
             QComboBox:focus {
                 border: 2px solid #2e7d32;
@@ -199,10 +199,11 @@ class SettingsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 min-width: 150px;
+                min-height: 40px;
             }
             QComboBox:focus {
                 border: 2px solid #2e7d32;
@@ -251,7 +252,6 @@ class SettingsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -280,10 +280,11 @@ class SettingsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 min-width: 100px;
+                min-height: 40px;
             }
             QSpinBox:focus {
                 border: 2px solid #2e7d32;
@@ -373,7 +374,6 @@ class SettingsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -401,16 +401,16 @@ class SettingsPage(QWidget):
                 background-color: #2d2d2d;
                 border: 2px solid #404040;
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 16px;
                 color: #ffffff;
                 font-size: 14px;
                 selection-background-color: #2e7d32;
                 min-width: 300px;
+                min-height: 40px;
             }
             QLineEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
             }
         """)
         proxy_layout.addWidget(self.proxy_input)
@@ -443,7 +443,7 @@ class SettingsPage(QWidget):
             QLineEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+
             }
         """)
         user_agent_layout.addWidget(self.user_agent_input)
@@ -497,7 +497,6 @@ class SettingsPage(QWidget):
                 background-color: #1e1e1e;
                 border: 2px solid #404040;
                 border-radius: 12px;
-                padding: 24px;
             }
         """)
         
@@ -535,7 +534,7 @@ class SettingsPage(QWidget):
             QLineEdit:focus {
                 border: 2px solid #2e7d32;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+
             }
         """)
         api_key_layout.addWidget(self.api_key_input)
@@ -612,20 +611,18 @@ class SettingsPage(QWidget):
                 background-color: #2e7d32;
                 color: white;
                 border: none;
-                padding: 16px 32px;
+                padding: 12px 24px;
                 border-radius: 8px;
                 font-weight: 600;
                 font-size: 16px;
                 min-width: 150px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #388e3c;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
             }
             QPushButton:pressed {
                 background-color: #1b5e20;
-                transform: translateY(0px);
             }
         """)
         buttons_layout.addWidget(self.save_btn)
@@ -644,12 +641,11 @@ class SettingsPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #F57C00;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+
             }
             QPushButton:pressed {
                 background-color: #E65100;
-                transform: translateY(0px);
+
             }
         """)
         buttons_layout.addWidget(self.reset_btn)
@@ -668,12 +664,11 @@ class SettingsPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #1976D2;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+
             }
             QPushButton:pressed {
                 background-color: #0D47A1;
-                transform: translateY(0px);
+
             }
         """)
         buttons_layout.addWidget(self.export_btn)
@@ -692,12 +687,11 @@ class SettingsPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #7B1FA2;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);
+
             }
             QPushButton:pressed {
                 background-color: #4A148C;
-                transform: translateY(0px);
+
             }
         """)
         buttons_layout.addWidget(self.import_btn)

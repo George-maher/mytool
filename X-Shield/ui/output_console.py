@@ -45,6 +45,11 @@ class OutputConsole(QWidget):
                 background-color: #1e1e1e;
                 border-bottom: 1px solid #2d2d2d;
             }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
+            }
         """)
         
         header_layout = QHBoxLayout(header)
@@ -102,6 +107,11 @@ class OutputConsole(QWidget):
                 background-color: #1e1e1e;
                 border-top: 1px solid #2d2d2d;
             }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
+            }
         """)
         
         controls_layout = QHBoxLayout(controls_frame)
@@ -118,6 +128,7 @@ class OutputConsole(QWidget):
                 padding: 4px 8px;
                 color: #ffffff;
                 font-size: 12px;
+                min-height: 24px;
             }
             QComboBox:focus {
                 border: 1px solid #2196F3;
@@ -149,6 +160,7 @@ class OutputConsole(QWidget):
                 padding: 6px 12px;
                 border-radius: 4px;
                 font-size: 12px;
+                min-height: 24px;
             }
             QPushButton:hover {
                 background-color: #505050;
@@ -165,6 +177,7 @@ class OutputConsole(QWidget):
                 padding: 6px 12px;
                 border-radius: 4px;
                 font-size: 12px;
+                min-height: 24px;
             }
             QPushButton:hover {
                 background-color: #1976D2;

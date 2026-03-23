@@ -80,61 +80,54 @@ class XShieldApp(QMainWindow):
                     background-color: #2e7d32;
                     color: white;
                     border: none;
-                    padding: 16px 32px;
-                    border-radius: 12px;
+                    padding: 12px 24px;
+                    border-radius: 8px;
                     font-weight: 600;
                     font-size: 16px;
-                    min-height: 24px;
+                    min-height: 48px;
                     min-width: 120px;
                 }
                 
                 QPushButton:hover {
                     background-color: #388e3c;
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 12px rgba(46, 125, 50, 0.4);
                 }
                 
                 QPushButton:pressed {
                     background-color: #1b5e20;
-                    transform: translateY(0px);
-                    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.3);
                 }
                 
                 QPushButton:disabled {
                     background-color: #404040;
                     color: #888888;
-                    transform: none;
-                    box-shadow: none;
                 }
                 
                 /* Enhanced Input Styling - LARGER */
                 QLineEdit, QTextEdit, QPlainTextEdit {
                     background-color: #2d2d2d;
                     border: 2px solid #404040;
-                    border-radius: 12px;
-                    padding: 16px 20px;
+                    border-radius: 8px;
+                    padding: 10px 16px;
                     color: #ffffff;
                     font-size: 16px;
                     selection-background-color: #2e7d32;
-                    min-height: 28px;
+                    min-height: 40px;
                 }
                 
                 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
                     border: 2px solid #2e7d32;
                     background-color: #333333;
-                    box-shadow: 0 0 12px rgba(46, 125, 50, 0.4);
                 }
                 
                 /* Enhanced ComboBox - LARGER */
                 QComboBox {
                     background-color: #2d2d2d;
                     border: 2px solid #404040;
-                    border-radius: 12px;
-                    padding: 16px 20px;
+                    border-radius: 8px;
+                    padding: 10px 16px;
                     color: #ffffff;
                     font-size: 16px;
                     min-width: 250px;
-                    min-height: 28px;
+                    min-height: 40px;
                 }
                 
                 QComboBox:focus {
@@ -178,7 +171,7 @@ class XShieldApp(QMainWindow):
                 }
                 
                 QTableWidget::item {
-                    padding: 16px;
+                    padding: 12px;
                     border-bottom: 1px solid #404040;
                     min-height: 24px;
                 }
@@ -191,7 +184,7 @@ class XShieldApp(QMainWindow):
                 QHeaderView::section {
                     background-color: #404040;
                     color: #ffffff;
-                    padding: 16px;
+                    padding: 12px;
                     border: none;
                     font-weight: 600;
                     font-size: 16px;
@@ -210,6 +203,9 @@ class XShieldApp(QMainWindow):
                 QLabel {
                     color: #ffffff;
                     font-size: 15px;
+                    border: none;
+                    background: transparent;
+                    padding: 0px;
                 }
                 
                 QLabel#title {
@@ -295,7 +291,7 @@ class XShieldApp(QMainWindow):
                 }
                 
                 /* Frame Styling - LARGER */
-                QFrame {
+                .QFrame {
                     background-color: #1e1e1e;
                     border: 2px solid #404040;
                     border-radius: 12px;
@@ -306,12 +302,12 @@ class XShieldApp(QMainWindow):
                 QSpinBox {
                     background-color: #2d2d2d;
                     border: 2px solid #404040;
-                    border-radius: 12px;
-                    padding: 16px 20px;
+                    border-radius: 8px;
+                    padding: 10px 16px;
                     color: #ffffff;
                     font-size: 16px;
                     min-width: 120px;
-                    min-height: 28px;
+                    min-height: 40px;
                 }
                 
                 QSpinBox:focus {
