@@ -212,8 +212,10 @@ class ReportsPage(QWidget):
                 padding: 12px 24px;
                 border-radius: 4px;
                 font-weight: 900;
-                font-size: 12px;
+                font-size: 13px;
                 letter-spacing: 1px;
+                min-width: 200px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #67e8f9;
@@ -360,6 +362,8 @@ class ReportsPage(QWidget):
                 border-radius: 4px;
                 font-weight: bold;
                 font-size: 10px;
+                min-width: 120px;
+                min-height: 38px;
             }
             QPushButton:hover {
                 background-color: #67e8f9;
@@ -382,6 +386,8 @@ class ReportsPage(QWidget):
                 border-radius: 4px;
                 font-weight: bold;
                 font-size: 10px;
+                min-width: 120px;
+                min-height: 38px;
             }
             QPushButton:hover {
                 background-color: #fbbf24;
@@ -404,6 +410,8 @@ class ReportsPage(QWidget):
                 border-radius: 4px;
                 font-weight: bold;
                 font-size: 10px;
+                min-width: 120px;
+                min-height: 38px;
             }
             QPushButton:hover {
                 background-color: #fb7185;
