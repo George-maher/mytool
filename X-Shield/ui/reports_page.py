@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot, QTimer
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 
 class ReportsPage(QWidget):
@@ -30,30 +31,15 @@ class ReportsPage(QWidget):
         self.refresh_reports()
     
     def setup_ui(self):
-        """Setup reports page UI with Midnight Neon aesthetic"""
+        """Setup reports page UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
 
-        # Header Section
-        header_layout = QHBoxLayout()
-        header = QLabel("REPORTING ENGINE")
-        header.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
-        header_layout.addWidget(header)
-        header_layout.addStretch()
-
-        status_tag = QLabel("READY")
-        status_tag.setStyleSheet("""
-            color: #22d3ee;
-            font-weight: bold;
-            font-size: 10px;
-            background-color: rgba(34, 211, 238, 0.1);
-            border: 1px solid #22d3ee;
-            padding: 4px 12px;
-            border-radius: 4px;
-        """)
-        header_layout.addWidget(status_tag)
-        layout.addLayout(header_layout)
+        # Section Title
+        header = QLabel("Reporting Engine")
+        header.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
+        layout.addWidget(header)
         
         # Report generation section
         self.setup_report_generation(layout)
@@ -65,30 +51,29 @@ class ReportsPage(QWidget):
         self.setup_report_preview(layout)
     
     def setup_report_generation(self, parent_layout):
-        """Setup report generation section"""
+        """Setup report generation section with modern minimal style"""
         gen_frame = QFrame()
-        gen_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
-        """)
+        gen_frame.setObjectName("card")
+        gen_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         gen_layout = QVBoxLayout(gen_frame)
+        gen_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        gen_layout.setSpacing(Spacing.XL)
         
         # Title
-        title = QLabel("GENERATE AUDIT")
-        title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;")
+        title = QLabel("Generate Audit Report")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         gen_layout.addWidget(title)
         
         # Report options
         options_layout = QHBoxLayout()
+        options_layout.setSpacing(Spacing.XL)
         
         # Report type
         type_layout = QVBoxLayout()
-        type_layout.addWidget(QLabel("Report Type:"))
+        type_label = QLabel("Report Type")
+        type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
+        type_layout.addWidget(type_label)
         
         self.report_type_combo = QComboBox()
         self.report_type_combo.addItems([
@@ -98,171 +83,65 @@ class ReportsPage(QWidget):
             "Web Application Report",
             "Executive Summary"
         ])
-        self.report_type_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 8px;
-                color: #f8fafc;
-                font-size: 12px;
-                min-width: 200px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid #ffffff;
-                margin-right: 4px;
-            }
-        """)
         type_layout.addWidget(self.report_type_combo)
         options_layout.addLayout(type_layout)
         
         # Date range
         date_layout = QVBoxLayout()
-        date_layout.addWidget(QLabel("Date Range:"))
+        date_label = QLabel("Date Range")
+        date_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
+        date_layout.addWidget(date_label)
         
         self.date_range_combo = QComboBox()
-        self.date_range_combo.addItems([
-            "Last 24 Hours",
-            "Last 7 Days",
-            "Last 30 Days",
-            "All Time"
-        ])
-        self.date_range_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 8px;
-                color: #f8fafc;
-                font-size: 12px;
-                min-width: 150px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid #ffffff;
-                margin-right: 4px;
-            }
-        """)
+        self.date_range_combo.addItems(["Last 24 Hours", "Last 7 Days", "Last 30 Days", "All Time"])
         date_layout.addWidget(self.date_range_combo)
         options_layout.addLayout(date_layout)
         
         # Format
         format_layout = QVBoxLayout()
-        format_layout.addWidget(QLabel("Format:"))
+        format_label = QLabel("Format")
+        format_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
+        format_layout.addWidget(format_label)
         
         self.format_combo = QComboBox()
         self.format_combo.addItems(["HTML", "PDF", "JSON", "CSV"])
-        self.format_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 8px;
-                color: #f8fafc;
-                font-size: 12px;
-                min-width: 100px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid #ffffff;
-                margin-right: 4px;
-            }
-        """)
         format_layout.addWidget(self.format_combo)
         options_layout.addLayout(format_layout)
         
         options_layout.addStretch()
         gen_layout.addLayout(options_layout)
         
-        # Generate button
-        self.generate_btn = QPushButton("EXECUTE REPORT GENERATION")
-        self.generate_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #22d3ee;
-                color: #020617;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: 900;
-                font-size: 13px;
-                letter-spacing: 1px;
-                min-width: 200px;
-                min-height: 48px;
-            }
-            QPushButton:hover {
-                background-color: #67e8f9;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
-        gen_layout.addWidget(self.generate_btn)
+        # Generate button row
+        btn_row = QHBoxLayout()
+        self.generate_btn = QPushButton("Generate Report")
+        self.generate_btn.setObjectName("primary_btn")
+        self.generate_btn.setMinimumWidth(160)
+        btn_row.addWidget(self.generate_btn)
+        btn_row.addStretch()
+        gen_layout.addLayout(btn_row)
         
         # Progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                border: none;
-                border-radius: 6px;
-                background-color: #2d2d2d;
-                height: 8px;
-            }
-            QProgressBar::chunk {
-                background-color: #4CAF50;
-                border-radius: 6px;
-            }
-        """)
+        self.progress_bar.setFixedHeight(8)
+        self.progress_bar.setTextVisible(False)
         gen_layout.addWidget(self.progress_bar)
         
         parent_layout.addWidget(gen_frame)
     
     def setup_report_list(self, parent_layout):
-        """Setup report list section"""
+        """Setup report list section with modern minimal style"""
         list_frame = QFrame()
-        list_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
-        """)
+        list_frame.setObjectName("card")
+        list_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         list_layout = QVBoxLayout(list_frame)
+        list_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        list_layout.setSpacing(Spacing.XL)
         
         # Title
-        title = QLabel("ARCHIVED AUDITS")
-        title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;")
+        title = QLabel("Archived Audits")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         list_layout.addWidget(title)
         
         # Reports table
@@ -272,155 +151,69 @@ class ReportsPage(QWidget):
             "Name", "Type", "Created", "Size", "Actions"
         ])
         
-        self.reports_table.setStyleSheet("""
-            QTableWidget {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                gridline-color: #1e293b;
-                color: #f8fafc;
-                selection-background-color: rgba(34, 211, 238, 0.2);
-                font-size: 11px;
-            }
-            QTableWidget::item {
-                padding: 12px;
-                border-bottom: 1px solid #1e293b;
-            }
-            QHeaderView::section {
-                background-color: #0f172a;
-                color: #64748b;
-                padding: 12px;
-                border: none;
-                font-weight: bold;
-                font-size: 10px;
-                letter-spacing: 1px;
-            }
-        """)
-        
         header = self.reports_table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.Stretch)           # Name
-        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # Type
-        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)  # Created
-        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # Size
-        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # Actions
+        header.setSectionResizeMode(0, QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
         
-        self.reports_table.setAlternatingRowColors(True)
-        self.reports_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.reports_table.verticalHeader().setDefaultSectionSize(50)
+        self.reports_table.verticalHeader().setVisible(False)
         
         list_layout.addWidget(self.reports_table)
-        
         parent_layout.addWidget(list_frame)
     
     def setup_report_preview(self, parent_layout):
-        """Setup report preview section"""
+        """Setup report preview section with modern minimal style"""
         preview_frame = QFrame()
-        preview_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
-            }
-        """)
+        preview_frame.setObjectName("card")
+        preview_frame.setStyleSheet(f"QFrame#card {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: 12px; }}")
         
         preview_layout = QVBoxLayout(preview_frame)
+        preview_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        preview_layout.setSpacing(Spacing.LG)
         
         # Title
-        title = QLabel("CONTENT INSPECTION")
-        title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;")
+        title = QLabel("Report Content Preview")
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         preview_layout.addWidget(title)
         
         # Preview text
         self.preview_text = QTextEdit()
         self.preview_text.setReadOnly(True)
-        self.preview_text.setMaximumHeight(200)
-        self.preview_text.setStyleSheet("""
-            QTextEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                color: #f8fafc;
-                padding: 12px;
-                font-family: 'DejaVu Sans Mono', monospace;
-                font-size: 11px;
-            }
+        self.preview_text.setMinimumHeight(200)
+        self.preview_text.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
+                font-size: 12px;
+                padding: {Spacing.MD}px;
+            }}
         """)
-        self.preview_text.setText("Select a report to preview...")
+        self.preview_text.setText("Select a report from the table to preview its contents...")
         preview_layout.addWidget(self.preview_text)
         
         # Preview actions
         actions_layout = QHBoxLayout()
+        actions_layout.setSpacing(Spacing.MD)
         
-        self.open_btn = QPushButton("OPEN")
+        self.open_btn = QPushButton("Open")
         self.open_btn.setEnabled(False)
-        self.open_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #22d3ee;
-                color: #020617;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 10px;
-                min-width: 120px;
-                min-height: 38px;
-            }
-            QPushButton:hover {
-                background-color: #67e8f9;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
+        self.open_btn.setMinimumWidth(100)
         actions_layout.addWidget(self.open_btn)
         
-        self.export_btn = QPushButton("EXPORT")
+        self.export_btn = QPushButton("Export")
         self.export_btn.setEnabled(False)
-        self.export_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #f59e0b;
-                color: #020617;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 10px;
-                min-width: 120px;
-                min-height: 38px;
-            }
-            QPushButton:hover {
-                background-color: #fbbf24;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
+        self.export_btn.setMinimumWidth(100)
         actions_layout.addWidget(self.export_btn)
         
-        self.delete_btn = QPushButton("PURGE")
+        self.delete_btn = QPushButton("Purge")
         self.delete_btn.setEnabled(False)
-        self.delete_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #f43f5e;
-                color: #f8fafc;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 10px;
-                min-width: 120px;
-                min-height: 38px;
-            }
-            QPushButton:hover {
-                background-color: #fb7185;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
+        self.delete_btn.setMinimumWidth(100)
         actions_layout.addWidget(self.delete_btn)
         
         actions_layout.addStretch()
@@ -583,7 +376,7 @@ class ReportsPage(QWidget):
         return report_path
     
     def add_report_to_list(self, report_path, report_type, format_type):
-        """Add report to the list"""
+        """Add report to the list with modern actions"""
         try:
             # Get file size
             file_size = os.path.getsize(report_path)
@@ -618,21 +411,24 @@ class ReportsPage(QWidget):
             # Actions
             actions_widget = QWidget()
             actions_layout = QHBoxLayout(actions_widget)
-            actions_layout.setContentsMargins(4, 4, 4, 4)
+            actions_layout.setContentsMargins(Spacing.XS, Spacing.XS, Spacing.XS, Spacing.XS)
+            actions_layout.setSpacing(Spacing.SM)
             
             view_btn = QPushButton("👁️")
-            view_btn.setStyleSheet("""
-                QPushButton {
-                    background-color: #2196F3;
-                    color: white;
-                    border: none;
-                    padding: 4px 8px;
-                    border-radius: 3px;
+            view_btn.setToolTip("View Externally")
+            view_btn.setFixedSize(28, 28)
+            view_btn.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: transparent;
+                    color: {Colors.PRIMARY};
+                    border: 1px solid {Colors.BORDER};
+                    border-radius: 4px;
                     font-size: 12px;
-                }
-                QPushButton:hover {
-                    background-color: #1976D2;
-                }
+                }}
+                QPushButton:hover {{
+                    background-color: {Colors.SURFACE_LIGHT};
+                    border-color: {Colors.PRIMARY};
+                }}
             """)
             view_btn.clicked.connect(lambda checked, path=report_path: self.view_report(path))
             

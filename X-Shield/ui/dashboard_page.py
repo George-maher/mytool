@@ -9,51 +9,47 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, QTimer, Signal, Slot
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 
 class StatusCard(QFrame):
-    """Status card widget for dashboard with Midnight Neon aesthetic"""
+    """Status card widget for dashboard with Modern Minimal aesthetic"""
     
     def __init__(self, title: str, value: str, subtitle: str = "", 
-                 color: str = "#22d3ee", icon: str = "📊"):
+                 color: str = Colors.PRIMARY, icon: str = "📊"):
         super().__init__()
+        self.setObjectName("card")
         self.setMinimumHeight(120)
         self.setup_ui(title, value, subtitle, color, icon)
     
     def setup_ui(self, title, value, subtitle, color, icon):
         """Setup card UI"""
         self.setStyleSheet(f"""
-            StatusCard {{
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 6px;
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
             }}
-            StatusCard:hover {{
-                border: 1px solid {color};
-            }}
-            QLabel {{
-                color: #f8fafc;
-                background-color: transparent;
-                border: none;
-                padding: 0px;
+            QFrame#card:hover {{
+                border-color: {color};
             }}
         """)
         
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.SM)
         
         # Header with icon and title
         header_layout = QHBoxLayout()
-        header_layout.setSpacing(12)
+        header_layout.setSpacing(Spacing.MD)
         
         icon_label = QLabel(icon)
-        icon_label.setFont(QFont("Segoe UI Emoji", 18))
-        icon_label.setFixedSize(24, 24)
+        icon_label.setFont(QFont("Segoe UI Emoji", 14))
+        icon_label.setFixedSize(20, 20)
         header_layout.addWidget(icon_label)
         
         title_label = QLabel(title.upper())
-        title_label.setStyleSheet("color: #64748b; font-weight: bold; font-size: 11px; letter-spacing: 1px;")
+        title_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 600; font-size: 11px; letter-spacing: 0.05em;")
         header_layout.addWidget(title_label)
         
         header_layout.addStretch()
@@ -61,14 +57,14 @@ class StatusCard(QFrame):
         
         # Value
         value_label = QLabel(value)
-        value_label.setFont(QFont("DejaVu Sans Mono", 24, QFont.Bold))
+        value_label.setFont(QFont(Typography.FAMILY_MONO, 20, QFont.Bold))
         value_label.setStyleSheet(f"color: {color};")
         layout.addWidget(value_label)
         
         # Subtitle
         if subtitle:
             subtitle_label = QLabel(subtitle)
-            subtitle_label.setStyleSheet("color: #475569; font-size: 10px; font-weight: bold;")
+            subtitle_label.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-weight: 500;")
             layout.addWidget(subtitle_label)
     
     def update_value(self, value: str, subtitle: str = ""):
@@ -111,31 +107,13 @@ class DashboardPage(QWidget):
     def setup_ui(self):
         """Setup dashboard UI"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(24, 24, 24, 24)
-        layout.setSpacing(24)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
-        # Title Section
-        title_layout = QHBoxLayout()
-
-        title_label = QLabel("COMMAND CENTER")
-        title_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
-        title_layout.addWidget(title_label)
-
-        title_layout.addStretch()
-
-        status_tag = QLabel("SYSTEM OPERATIONAL")
-        status_tag.setStyleSheet("""
-            color: #10b981;
-            font-weight: bold;
-            font-size: 10px;
-            background-color: rgba(16, 185, 129, 0.1);
-            border: 1px solid #10b981;
-            padding: 4px 12px;
-            border-radius: 4px;
-        """)
-        title_layout.addWidget(status_tag)
-
-        layout.addLayout(title_layout)
+        # Overview Section Title
+        overview_title = QLabel("Overview")
+        overview_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
+        layout.addWidget(overview_title)
         
         # Status Cards
         self.setup_status_cards(layout)
@@ -158,26 +136,26 @@ class DashboardPage(QWidget):
         """Setup status cards grid"""
         cards_frame = QFrame()
         cards_layout = QGridLayout(cards_frame)
-        cards_layout.setSpacing(16)
+        cards_layout.setSpacing(Spacing.LG)
         cards_layout.setContentsMargins(0, 0, 0, 0)
         
         # Create status cards
         self.cards = {}
         
         # Total Targets
-        self.cards['targets'] = StatusCard("Targets", "0", "ACTIVE NODES", "#22d3ee", "🎯")
+        self.cards['targets'] = StatusCard("Targets", "0", "ACTIVE NODES", Colors.PRIMARY, "🎯")
         cards_layout.addWidget(self.cards['targets'], 0, 0)
         
         # Active Scans
-        self.cards['scans'] = StatusCard("Threads", "0", "SCAN OPERATIONS", "#f59e0b", "🔍")
+        self.cards['scans'] = StatusCard("Threads", "0", "SCAN OPERATIONS", Colors.WARNING, "🔍")
         cards_layout.addWidget(self.cards['scans'], 0, 1)
         
         # Vulnerabilities Found
-        self.cards['vulnerabilities'] = StatusCard("Breaches", "0", "THREAT FINDINGS", "#f43f5e", "⚠️")
+        self.cards['vulnerabilities'] = StatusCard("Breaches", "0", "THREAT FINDINGS", Colors.DANGER, "⚠️")
         cards_layout.addWidget(self.cards['vulnerabilities'], 0, 2)
         
         # System Health
-        self.cards['health'] = StatusCard("Integrity", "100%", "CORE STATUS", "#10b981", "💚")
+        self.cards['health'] = StatusCard("Integrity", "100%", "CORE STATUS", Colors.SUCCESS, "💚")
         cards_layout.addWidget(self.cards['health'], 0, 3)
         
         parent_layout.addWidget(cards_frame)
@@ -185,37 +163,38 @@ class DashboardPage(QWidget):
     def setup_recent_activity(self, parent_layout):
         """Setup recent activity section"""
         activity_frame = QFrame()
-        activity_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-            }
+        activity_frame.setObjectName("card")
+        activity_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         activity_layout = QVBoxLayout(activity_frame)
-        activity_layout.setContentsMargins(20, 20, 20, 20)
-        activity_layout.setSpacing(16)
+        activity_layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        activity_layout.setSpacing(Spacing.LG)
         
         # Title
         title_label = QLabel("LIVE TELEMETRY")
-        title_label.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        title_label.setStyleSheet(f"color: {Colors.PRIMARY}; font-weight: 600; font-size: 12px; letter-spacing: 0.05em;")
         activity_layout.addWidget(title_label)
         
         # Activity log
         self.activity_log = QTextEdit()
         self.activity_log.setReadOnly(True)
         self.activity_log.setMaximumHeight(300)
-        self.activity_log.setStyleSheet("""
-            QTextEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                color: #f8fafc;
-                font-family: 'DejaVu Sans Mono', monospace;
+        self.activity_log.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
                 font-size: 11px;
-                padding: 12px;
-            }
+                padding: {Spacing.MD}px;
+            }}
         """)
         
         # Add initial log entries
@@ -229,38 +208,39 @@ class DashboardPage(QWidget):
     def setup_system_health(self, parent_layout):
         """Setup system health section"""
         health_frame = QFrame()
-        health_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-            }
+        health_frame.setObjectName("card")
+        health_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         health_layout = QVBoxLayout(health_frame)
-        health_layout.setContentsMargins(20, 20, 20, 20)
-        health_layout.setSpacing(16)
+        health_layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        health_layout.setSpacing(Spacing.LG)
         
         # Title
         title_label = QLabel("SYSTEM HEALTH")
-        title_label.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        title_label.setStyleSheet(f"color: {Colors.PRIMARY}; font-weight: 600; font-size: 12px; letter-spacing: 0.05em;")
         health_layout.addWidget(title_label)
         
         # Health indicators
         self.health_indicators = {}
         
         indicators = [
-            ("CPU LOAD", "15%", "#10b981"),
-            ("MEMORY ADDR", "42%", "#22d3ee"),
-            ("STORAGE", "78%", "#f59e0b"),
-            ("UPLINK", "ACTIVE", "#10b981")
+            ("CPU LOAD", "15%", Colors.SUCCESS),
+            ("MEMORY ADDR", "42%", Colors.PRIMARY),
+            ("STORAGE", "78%", Colors.WARNING),
+            ("UPLINK", "ACTIVE", Colors.SUCCESS)
         ]
         
         for label_text, value, color in indicators:
             indicator_layout = QHBoxLayout()
             
             label = QLabel(label_text)
-            label.setStyleSheet("color: #64748b; font-size: 10px; font-weight: bold;")
+            label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 10px; font-weight: 600;")
             indicator_layout.addWidget(label)
             
             indicator_layout.addStretch()
@@ -271,17 +251,17 @@ class DashboardPage(QWidget):
                 progress.setRange(0, 100)
                 progress.setValue(int(value.replace("%", "")))
                 progress.setFixedWidth(120)
-                progress.setFixedHeight(8)
+                progress.setFixedHeight(6)
                 progress.setTextVisible(False)
                 progress.setStyleSheet(f"""
                     QProgressBar {{
-                        background-color: #020617;
-                        border: 1px solid #1e293b;
-                        border-radius: 4px;
+                        background-color: {Colors.BACKGROUND};
+                        border: 1px solid {Colors.BORDER};
+                        border-radius: 3px;
                     }}
                     QProgressBar::chunk {{
                         background-color: {color};
-                        border-radius: 3px;
+                        border-radius: 2px;
                     }}
                 """)
                 indicator_layout.addWidget(progress)
@@ -289,7 +269,7 @@ class DashboardPage(QWidget):
             else:
                 # Label for status values
                 value_label = QLabel(value)
-                value_label.setStyleSheet(f"color: {color}; font-weight: bold; font-family: 'DejaVu Sans Mono'; font-size: 11px;")
+                value_label.setStyleSheet(f"color: {color}; font-weight: 600; font-family: {Typography.FAMILY_MONO}; font-size: 11px;")
                 indicator_layout.addWidget(value_label)
                 self.health_indicators[label_text] = value_label
             
@@ -362,23 +342,23 @@ class DashboardPage(QWidget):
         self.add_activity_entry("Target Updated", f"{target_data['value']} status: {target_data['status']}", "info")
     
     def add_activity_entry(self, source: str, message: str, entry_type: str = "info"):
-        """Add entry to activity log with Midnight Neon styling"""
+        """Add entry to activity log with Modern Minimal styling"""
         import datetime
         
         timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         
         # Color coding for different types
         colors = {
-            "system": "#22d3ee",
-            "info": "#64748b",
-            "warning": "#f59e0b",
-            "error": "#f43f5e",
-            "success": "#10b981"
+            "system": Colors.PRIMARY,
+            "info": Colors.TEXT_SECONDARY,
+            "warning": Colors.WARNING,
+            "error": Colors.DANGER,
+            "success": Colors.SUCCESS
         }
         
-        color = colors.get(entry_type, "#f8fafc")
+        color = colors.get(entry_type, Colors.TEXT_PRIMARY)
         
-        entry = f'<span style="color: #475569;">[{timestamp}]</span> <span style="color: #22d3ee; font-weight: bold;">{source.upper()}:</span> <span style="color: {color};">{message}</span>'
+        entry = f'<span style="color: {Colors.TEXT_MUTED};">[{timestamp}]</span> <span style="color: {Colors.PRIMARY}; font-weight: 600;">{source.upper()}:</span> <span style="color: {color};">{message}</span>'
         
         self.activity_log.append(entry)
         

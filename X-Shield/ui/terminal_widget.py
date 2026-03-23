@@ -3,10 +3,11 @@ Terminal Widget for X-Shield Framework
 Real-time log display with terminal-like interface
 """
 
-from PySide6.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QPushButton
+from PySide6.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QHBoxLayout, QPushButton
 from PySide6.QtCore import Qt, QTimer, Signal
 from PySide6.QtGui import QFont, QColor, QTextCursor, QTextCharFormat
 from datetime import datetime
+from ui.styles import Colors, Spacing, Typography
 
 
 class TerminalWidget(QWidget):
@@ -23,29 +24,33 @@ class TerminalWidget(QWidget):
         self.auto_scroll_timer.start(100)
     
     def setup_ui(self):
-        """Setup terminal UI"""
+        """Setup terminal UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(5)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.MD)
         
         # Terminal display
         self.terminal = QTextEdit()
         self.terminal.setReadOnly(True)
-        self.terminal.setFont(QFont("Consolas", 10))
+        self.terminal.setFont(QFont(Typography.FAMILY_MONO, 10))
         layout.addWidget(self.terminal)
         
         # Control buttons
-        button_layout = QVBoxLayout()
+        button_layout = QHBoxLayout()
+        button_layout.setSpacing(Spacing.SM)
         
         self.clear_btn = QPushButton("Clear")
+        self.clear_btn.setProperty("class", "small")
         self.clear_btn.clicked.connect(self.clear_terminal)
         button_layout.addWidget(self.clear_btn)
         
         self.pause_btn = QPushButton("Pause")
+        self.pause_btn.setProperty("class", "small")
         self.pause_btn.setCheckable(True)
         self.pause_btn.clicked.connect(self.toggle_pause)
         button_layout.addWidget(self.pause_btn)
         
+        button_layout.addStretch()
         layout.addLayout(button_layout)
         
         # State
@@ -53,57 +58,57 @@ class TerminalWidget(QWidget):
         self.max_lines = 1000
     
     def setup_styles(self):
-        """Setup terminal styles"""
-        self.terminal.setStyleSheet("""
-            QTextEdit {
-                background-color: #000000;
-                color: #00ff00;
-                border: 1px solid #333333;
-                border-radius: 6px;
-                font-family: 'Consolas', 'Courier New', monospace;
-            }
+        """Setup terminal styles with design system"""
+        self.terminal.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                color: {Colors.TEXT_PRIMARY};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                padding: {Spacing.MD}px;
+            }}
         """)
         
-        self.clear_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #dc2626;
-                color: white;
-                border: none;
-                padding: 8px;
-                border-radius: 4px;
-                font-weight: bold;
-                min-height: 32px;
-            }
-            QPushButton:hover {
-                background-color: #b91c1c;
-            }
+        self.clear_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: transparent;
+                border: 1px solid {Colors.BORDER};
+                color: {Colors.DANGER};
+            }}
+            QPushButton:hover {{
+                background-color: {Colors.SURFACE_LIGHT};
+                border-color: {Colors.DANGER};
+            }}
         """)
         
-        self.pause_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #8b5cf6;
-                color: white;
-                border: none;
-                padding: 8px;
-                border-radius: 4px;
-                font-weight: bold;
-                min-height: 32px;
-            }
-            QPushButton:hover {
-                background-color: #7c3aed;
-            }
-            QPushButton:checked {
-                background-color: #dc2626;
-            }
+        self.pause_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: transparent;
+                border: 1px solid {Colors.BORDER};
+                color: {Colors.INFO};
+            }}
+            QPushButton:hover {{
+                background-color: {Colors.SURFACE_LIGHT};
+                border-color: {Colors.INFO};
+            }}
+            QPushButton:checked {{
+                background-color: {Colors.INFO};
+                color: {Colors.BACKGROUND};
+                border-color: {Colors.INFO};
+            }}
         """)
     
     def append_log(self, level, message, timestamp):
-        """Append log message to terminal"""
+        """Append log message to terminal with design system colors"""
         if self.paused:
             return
         
         # Format message
-        formatted_time = timestamp.split()[1]  # Get time part only
+        try:
+            formatted_time = timestamp.split()[1]  # Get time part only
+        except IndexError:
+            formatted_time = timestamp
+
         formatted_message = f"[{formatted_time}] {level}: {message}"
         
         # Move cursor to end
@@ -114,19 +119,17 @@ class TerminalWidget(QWidget):
         char_format = QTextCharFormat()
         
         if level == "DEBUG":
-            char_format.setForeground(QColor("#00ffff"))  # Cyan
+            char_format.setForeground(QColor(Colors.TEXT_MUTED))
         elif level == "INFO":
-            char_format.setForeground(QColor("#00ff00"))  # Green
+            char_format.setForeground(QColor(Colors.PRIMARY))
         elif level == "WARNING":
-            char_format.setForeground(QColor("#ffff00"))  # Yellow
-        elif level == "ERROR":
-            char_format.setForeground(QColor("#ff0000"))  # Red
-        elif level == "CRITICAL":
-            char_format.setForeground(QColor("#ff00ff"))  # Magenta
+            char_format.setForeground(QColor(Colors.WARNING))
+        elif level == "ERROR" or level == "CRITICAL":
+            char_format.setForeground(QColor(Colors.DANGER))
         elif level == "SUCCESS":
-            char_format.setForeground(QColor("#00ff88"))  # Light green
+            char_format.setForeground(QColor(Colors.SUCCESS))
         else:
-            char_format.setForeground(QColor("#ffffff"))  # White
+            char_format.setForeground(QColor(Colors.TEXT_PRIMARY))
         
         cursor.setCharFormat(char_format)
         cursor.insertText(formatted_message + "\n")

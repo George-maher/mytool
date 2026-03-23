@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 # Import all page components
 from ui.dashboard_page import DashboardPage
@@ -33,8 +34,8 @@ class StackedContent(QWidget):
     def setup_ui(self):
         """Setup main UI layout"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(5)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         
         # Header bar
         header = self.create_header()
@@ -42,38 +43,34 @@ class StackedContent(QWidget):
         
         # Stacked widget for pages
         self.stacked_widget = QStackedWidget()
-        self.stacked_widget.setStyleSheet("background-color: #0f172a; border: none;")
+        self.stacked_widget.setStyleSheet(f"background-color: {Colors.BACKGROUND}; border: none;")
         layout.addWidget(self.stacked_widget)
     
     def create_header(self):
         """Create header bar with page title"""
         header_frame = QFrame()
-        header_frame.setFixedHeight(60)
-        header_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border-bottom: 1px solid #1e293b;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
+        header_frame.setFixedHeight(80)
+        header_frame.setStyleSheet(f"""
+            QFrame {{
+                background-color: {Colors.BACKGROUND};
+                border-bottom: 1px solid {Colors.BORDER};
+            }}
         """)
         
         header_layout = QHBoxLayout(header_frame)
-        header_layout.setContentsMargins(30, 0, 30, 0)
+        header_layout.setContentsMargins(Spacing.XXL, 0, Spacing.XXL, 0)
         
         # Page title
         self.page_title = QLabel("Dashboard")
-        self.page_title.setStyleSheet("color: #10b981; font-size: 14px; font-weight: bold;")
+        self.page_title.setObjectName("title")
+        self.page_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: {Typography.H1_SIZE}; font-weight: 700;")
         header_layout.addWidget(self.page_title)
         
         header_layout.addStretch()
         
         # Status indicator
-        self.status_indicator = QLabel("● System Ready")
-        self.status_indicator.setStyleSheet("color: #10b981; font-size: 14px;")
+        self.status_indicator = QLabel("● System Operational")
+        self.status_indicator.setStyleSheet(f"color: {Colors.SUCCESS}; font-size: 13px; font-weight: 500;")
         header_layout.addWidget(self.status_indicator)
         
         return header_frame

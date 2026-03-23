@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont, QIcon
+from ui.styles import Colors, Spacing, Typography
 
 
 class SidebarButton(QPushButton):
@@ -30,47 +31,47 @@ class SidebarButton(QPushButton):
         
         # Create layout
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 10, 12, 10)
-        layout.setSpacing(15)
+        layout.setContentsMargins(Spacing.LG, Spacing.SM, Spacing.LG, Spacing.SM)
+        layout.setSpacing(Spacing.MD)
         
         # Icon label
         icon_label = QLabel(icon_text)
-        icon_label.setFont(QFont("Segoe UI Emoji", 20))
+        icon_label.setFont(QFont("Segoe UI Emoji", 16))
         icon_label.setAlignment(Qt.AlignCenter)
-        icon_label.setFixedSize(30, 30)
-        icon_label.setStyleSheet("border: none; background: transparent;")
+        icon_label.setFixedSize(24, 24)
+        icon_label.setStyleSheet("border: none; background: transparent; color: inherit;")
         layout.addWidget(icon_label)
         
         # Text label
         text_label = QLabel(label_text)
-        text_label.setFont(QFont("Roboto", 14, QFont.Medium))
-        text_label.setStyleSheet("border: none; background: transparent;")
+        text_label.setFont(QFont(Typography.FAMILY_SANS, 10, QFont.Medium))
+        text_label.setStyleSheet("border: none; background: transparent; color: inherit;")
         layout.addWidget(text_label)
         
         layout.addStretch()
     
     def setup_style(self):
-        """Setup button styling with Midnight Neon aesthetic"""
-        self.setStyleSheet("""
-            QPushButton {
+        """Setup button styling with Modern Minimal aesthetic"""
+        self.setStyleSheet(f"""
+            QPushButton {{
                 background-color: transparent;
                 border: none;
-                border-radius: 4px;
-                color: #64748b;
+                border-radius: 6px;
+                color: {Colors.TEXT_SECONDARY};
                 text-align: left;
                 padding: 0px;
-                margin: 2px 10px;
-                min-height: 48px;
-            }
-            QPushButton:hover {
-                background-color: rgba(34, 211, 238, 0.05);
-                color: #22d3ee;
-            }
-            QPushButton:checked {
-                background-color: rgba(34, 211, 238, 0.1);
-                color: #22d3ee;
-                border-left: 3px solid #22d3ee;
-            }
+                margin: 2px {Spacing.SM}px;
+                min-height: 40px;
+            }}
+            QPushButton:hover {{
+                background-color: {Colors.SURFACE_LIGHT};
+                color: {Colors.TEXT_PRIMARY};
+            }}
+            QPushButton:checked {{
+                background-color: {Colors.PRIMARY_MUTED};
+                color: {Colors.PRIMARY};
+                font-weight: 600;
+            }}
         """)
 
 
@@ -109,34 +110,34 @@ class Sidebar(QWidget):
         """Setup sidebar header"""
         header_frame = QFrame()
         header_frame.setFixedHeight(80)
-        header_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border-bottom: 1px solid #1e293b;
-            }
+        header_frame.setStyleSheet(f"""
+            QFrame {{
+                background-color: transparent;
+                border-bottom: 1px solid {Colors.BORDER};
+            }}
         """)
         
         header_layout = QHBoxLayout(header_frame)
-        header_layout.setContentsMargins(20, 0, 20, 0)
-        header_layout.setSpacing(12)
+        header_layout.setContentsMargins(Spacing.XL, 0, Spacing.XL, 0)
+        header_layout.setSpacing(Spacing.MD)
         
         # Logo
         logo_label = QLabel("🛡️")
-        logo_label.setFont(QFont("Segoe UI Emoji", 24))
+        logo_label.setFont(QFont("Segoe UI Emoji", 18))
         logo_label.setAlignment(Qt.AlignCenter)
-        logo_label.setFixedSize(40, 40)
-        logo_label.setStyleSheet("""
-            QLabel {
-                background-color: rgba(34, 211, 238, 0.1);
-                border: 1px solid #22d3ee;
-                border-radius: 4px;
-            }
+        logo_label.setFixedSize(36, 36)
+        logo_label.setStyleSheet(f"""
+            QLabel {{
+                background-color: {Colors.SURFACE_LIGHT};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+            }}
         """)
         header_layout.addWidget(logo_label)
         
         # App name
         app_label = QLabel("X-SHIELD")
-        app_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 18px; letter-spacing: 3px;")
+        app_label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 800; font-size: 18px; letter-spacing: 1px;")
         header_layout.addWidget(app_label)
         
         parent_layout.addWidget(header_frame)
@@ -146,30 +147,28 @@ class Sidebar(QWidget):
         # Scroll area for navigation
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
-        scroll_area.setStyleSheet("""
-            QScrollArea {
+        scroll_area.setStyleSheet(f"""
+            QScrollArea {{
                 border: none;
-                background-color: #0f172a;
-            }
-            QScrollArea > QWidget > QWidget {
-                background-color: #0f172a;
-            }
+                background-color: transparent;
+            }}
         """)
         
         nav_widget = QWidget()
         nav_layout = QVBoxLayout(nav_widget)
-        nav_layout.setContentsMargins(0, 20, 0, 20)
-        nav_layout.setSpacing(2)
+        nav_layout.setContentsMargins(0, Spacing.XL, 0, Spacing.XL)
+        nav_layout.setSpacing(Spacing.XS)
         
         # Navigation title
-        nav_title = QLabel("NAVIGATION")
-        nav_title.setFont(QFont("Roboto", 11, QFont.Bold))
-        nav_title.setStyleSheet("""
-            QLabel {
-                color: #666666;
-                padding: 8px 20px;
-                margin-top: 10px;
-            }
+        nav_title = QLabel("Main Menu")
+        nav_title.setFont(QFont(Typography.FAMILY_SANS, 9, QFont.Bold))
+        nav_title.setStyleSheet(f"""
+            QLabel {{
+                color: {Colors.TEXT_MUTED};
+                padding: 8px {Spacing.XL}px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }}
         """)
         nav_layout.addWidget(nav_title)
         
@@ -221,42 +220,42 @@ class Sidebar(QWidget):
         """Setup user info footer"""
         footer_frame = QFrame()
         footer_frame.setFixedHeight(80)
-        footer_frame.setStyleSheet("""
-            QFrame {
-                background-color: #0f172a;
-                border-top: 1px solid #1e293b;
-            }
+        footer_frame.setStyleSheet(f"""
+            QFrame {{
+                background-color: transparent;
+                border-top: 1px solid {Colors.BORDER};
+            }}
         """)
         
         footer_layout = QHBoxLayout(footer_frame)
-        footer_layout.setContentsMargins(20, 0, 20, 0)
-        footer_layout.setSpacing(12)
+        footer_layout.setContentsMargins(Spacing.XL, 0, Spacing.XL, 0)
+        footer_layout.setSpacing(Spacing.MD)
         
         # User avatar
         avatar_label = QLabel("👤")
-        avatar_label.setFont(QFont("Segoe UI Emoji", 20))
+        avatar_label.setFont(QFont("Segoe UI Emoji", 16))
         avatar_label.setAlignment(Qt.AlignCenter)
-        avatar_label.setFixedSize(36, 36)
-        avatar_label.setStyleSheet("""
-            QLabel {
-                background-color: #1e293b;
-                border-radius: 4px;
-                border: 1px solid #334155;
-            }
+        avatar_label.setFixedSize(32, 32)
+        avatar_label.setStyleSheet(f"""
+            QLabel {{
+                background-color: {Colors.SURFACE_LIGHT};
+                border-radius: 16px;
+                border: 1px solid {Colors.BORDER};
+            }}
         """)
         footer_layout.addWidget(avatar_label)
         
         # User info
         user_info_layout = QVBoxLayout()
         user_info_layout.setContentsMargins(0, 0, 0, 0)
-        user_info_layout.setSpacing(2)
+        user_info_layout.setSpacing(0)
         
-        username_label = QLabel("ADMIN")
-        username_label.setStyleSheet("color: #f8fafc; font-weight: bold; font-size: 12px; letter-spacing: 1px;")
+        username_label = QLabel("Administrator")
+        username_label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: 13px;")
         user_info_layout.addWidget(username_label)
         
-        status_label = QLabel("SYSTEM ONLINE")
-        status_label.setStyleSheet("color: #10b981; font-size: 10px; font-weight: bold;")
+        status_label = QLabel("System Online")
+        status_label.setStyleSheet(f"color: {Colors.SUCCESS}; font-size: 11px; font-weight: 500;")
         user_info_layout.addWidget(status_label)
         
         footer_layout.addLayout(user_info_layout)

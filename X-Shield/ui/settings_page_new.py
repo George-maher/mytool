@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
+from ui.styles import Colors, Spacing, Typography
 
 
 class SettingsPage(QWidget):
@@ -25,42 +26,13 @@ class SettingsPage(QWidget):
         self.load_settings()
     
     def setup_ui(self):
-        """Setup settings UI"""
+        """Setup settings UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(10)
-        
-        # Title
-        title_label = QLabel("Settings & Configuration")
-        title_label.setFont(QFont("Roboto", 24, QFont.Bold))
-        title_label.setStyleSheet("color: #2e7d32;")
-        layout.addWidget(title_label)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
         # Tab widget for different settings categories
         self.settings_tabs = QTabWidget()
-        self.settings_tabs.setStyleSheet("""
-            QTabWidget::pane {
-                border: 2px solid #404040;
-                background-color: #1e1e1e;
-                border-radius: 8px;
-            }
-            QTabBar::tab {
-                background-color: #2d2d2d;
-                color: #ffffff;
-                padding: 10px 16px;
-                margin-right: 2px;
-                border-top-left-radius: 8px;
-                border-top-right-radius: 8px;
-                font-weight: 600;
-            }
-            QTabBar::tab:selected {
-                background-color: #2e7d32;
-                color: white;
-            }
-            QTabBar::tab:hover {
-                background-color: #404040;
-            }
-        """)
         
         # General Settings Tab
         self.setup_general_tab()
@@ -85,155 +57,48 @@ class SettingsPage(QWidget):
         """Setup general settings tab"""
         general_widget = QWidget()
         general_layout = QVBoxLayout(general_widget)
-        general_layout.setContentsMargins(30, 30, 30, 30)
-        general_layout.setSpacing(20)
+        general_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        general_layout.setSpacing(Spacing.XL)
         
         # Application settings
-        app_frame = QFrame()
-        app_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-            }
-        """)
-        
-        app_layout = QVBoxLayout(app_frame)
-        app_layout.setSpacing(16)
+        app_layout = QVBoxLayout()
+        app_layout.setSpacing(Spacing.LG)
         
         section_title = QLabel("Application Settings")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         app_layout.addWidget(section_title)
         
         # Theme selection
         theme_layout = QHBoxLayout()
-        theme_layout.setSpacing(12)
-        
-        theme_label = QLabel("Theme:")
-        theme_label.setFont(QFont("Roboto", 12))
-        theme_label.setStyleSheet("color: #b0b0b0;")
+        theme_layout.setSpacing(Spacing.MD)
+        theme_label = QLabel("Theme")
+        theme_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         theme_layout.addWidget(theme_label)
         
         self.theme_combo = QComboBox()
-        self.theme_combo.addItems(["Dark Teal", "Dark Blue", "Dark Red", "Light"])
-        self.theme_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                min-width: 200px;
-                min-height: 40px;
-            }
-            QComboBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 30px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #ffffff;
-                margin-right: 5px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                selection-color: white;
-            }
-        """)
+        self.theme_combo.addItems(["Modern Minimal (Slate)", "Cyber Dark", "High Contrast"])
         theme_layout.addWidget(self.theme_combo)
-        
         theme_layout.addStretch()
         app_layout.addLayout(theme_layout)
         
         # Auto-save
         self.autosave_checkbox = QCheckBox("Auto-save scan results")
-        self.autosave_checkbox.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                font-size: 14px;
-                spacing: 12px;
-            }
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:hover {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2e7d32;
-                border: 2px solid #2e7d32;
-                image: none;
-            }
-        """)
         app_layout.addWidget(self.autosave_checkbox)
         
         # Log level
         log_layout = QHBoxLayout()
-        log_layout.setSpacing(12)
-        
-        log_label = QLabel("Log Level:")
-        log_label.setFont(QFont("Roboto", 12))
-        log_label.setStyleSheet("color: #b0b0b0;")
+        log_layout.setSpacing(Spacing.MD)
+        log_label = QLabel("Log Level")
+        log_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         log_layout.addWidget(log_label)
         
         self.log_level_combo = QComboBox()
         self.log_level_combo.addItems(["DEBUG", "INFO", "WARNING", "ERROR"])
-        self.log_level_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                min-width: 150px;
-                min-height: 40px;
-            }
-            QComboBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 30px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #ffffff;
-                margin-right: 5px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                selection-color: white;
-            }
-        """)
         log_layout.addWidget(self.log_level_combo)
-        
         log_layout.addStretch()
         app_layout.addLayout(log_layout)
         
-        general_layout.addWidget(app_frame)
+        general_layout.addLayout(app_layout)
         general_layout.addStretch()
         
         self.settings_tabs.addTab(general_widget, "General")
@@ -242,120 +107,50 @@ class SettingsPage(QWidget):
         """Setup scanner settings tab"""
         scanner_widget = QWidget()
         scanner_layout = QVBoxLayout(scanner_widget)
-        scanner_layout.setContentsMargins(30, 30, 30, 30)
-        scanner_layout.setSpacing(20)
+        scanner_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        scanner_layout.setSpacing(Spacing.XL)
         
         # Scanner configuration
-        scanner_frame = QFrame()
-        scanner_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-            }
-        """)
-        
-        config_layout = QVBoxLayout(scanner_frame)
-        config_layout.setSpacing(16)
+        config_layout = QVBoxLayout()
+        config_layout.setSpacing(Spacing.LG)
         
         section_title = QLabel("Scanner Configuration")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(section_title)
         
         # Max concurrent scans
         concurrent_layout = QHBoxLayout()
-        concurrent_layout.setSpacing(12)
-        
-        concurrent_label = QLabel("Max Concurrent Scans:")
-        concurrent_label.setFont(QFont("Roboto", 12))
-        concurrent_label.setStyleSheet("color: #b0b0b0;")
+        concurrent_layout.setSpacing(Spacing.MD)
+        concurrent_label = QLabel("Max Concurrent Scans")
+        concurrent_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         concurrent_layout.addWidget(concurrent_label)
         
         self.concurrent_scans_spin = QSpinBox()
         self.concurrent_scans_spin.setRange(1, 10)
         self.concurrent_scans_spin.setValue(3)
-        self.concurrent_scans_spin.setStyleSheet("""
-            QSpinBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                min-width: 100px;
-                min-height: 40px;
-            }
-            QSpinBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-        """)
         concurrent_layout.addWidget(self.concurrent_scans_spin)
-        
         concurrent_layout.addStretch()
         config_layout.addLayout(concurrent_layout)
         
         # Default timeout
         timeout_layout = QHBoxLayout()
-        timeout_layout.setSpacing(12)
-        
-        timeout_label = QLabel("Default Timeout (seconds):")
-        timeout_label.setFont(QFont("Roboto", 12))
-        timeout_label.setStyleSheet("color: #b0b0b0;")
+        timeout_layout.setSpacing(Spacing.MD)
+        timeout_label = QLabel("Default Timeout (s)")
+        timeout_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         timeout_layout.addWidget(timeout_label)
         
         self.timeout_spin = QSpinBox()
         self.timeout_spin.setRange(10, 300)
         self.timeout_spin.setValue(60)
-        self.timeout_spin.setStyleSheet("""
-            QSpinBox {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                min-width: 100px;
-            }
-            QSpinBox:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-        """)
         timeout_layout.addWidget(self.timeout_spin)
-        
         timeout_layout.addStretch()
         config_layout.addLayout(timeout_layout)
         
         # Enable verbose logging
         self.verbose_checkbox = QCheckBox("Enable verbose scanner output")
-        self.verbose_checkbox.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                font-size: 14px;
-                spacing: 12px;
-            }
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:hover {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2e7d32;
-                border: 2px solid #2e7d32;
-                image: none;
-            }
-        """)
         config_layout.addWidget(self.verbose_checkbox)
         
-        scanner_layout.addWidget(scanner_frame)
+        scanner_layout.addLayout(config_layout)
         scanner_layout.addStretch()
         
         self.settings_tabs.addTab(scanner_widget, "Scanners")
@@ -364,121 +159,48 @@ class SettingsPage(QWidget):
         """Setup network settings tab"""
         network_widget = QWidget()
         network_layout = QVBoxLayout(network_widget)
-        network_layout.setContentsMargins(30, 30, 30, 30)
-        network_layout.setSpacing(20)
+        network_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        network_layout.setSpacing(Spacing.XL)
         
         # Network configuration
-        network_frame = QFrame()
-        network_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-            }
-        """)
-        
-        config_layout = QVBoxLayout(network_frame)
-        config_layout.setSpacing(16)
+        config_layout = QVBoxLayout()
+        config_layout.setSpacing(Spacing.LG)
         
         section_title = QLabel("Network Configuration")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(section_title)
         
         # Proxy settings
         proxy_layout = QHBoxLayout()
-        proxy_layout.setSpacing(12)
-        
-        proxy_label = QLabel("HTTP Proxy:")
-        proxy_label.setFont(QFont("Roboto", 12))
-        proxy_label.setStyleSheet("color: #b0b0b0;")
+        proxy_layout.setSpacing(Spacing.MD)
+        proxy_label = QLabel("HTTP Proxy")
+        proxy_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         proxy_layout.addWidget(proxy_label)
         
         self.proxy_input = QLineEdit()
         self.proxy_input.setPlaceholderText("http://proxy:port")
-        self.proxy_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 10px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                selection-background-color: #2e7d32;
-                min-width: 300px;
-                min-height: 40px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-        """)
         proxy_layout.addWidget(self.proxy_input)
-        
         proxy_layout.addStretch()
         config_layout.addLayout(proxy_layout)
         
         # User agent
         user_agent_layout = QHBoxLayout()
-        user_agent_layout.setSpacing(12)
-        
-        ua_label = QLabel("User Agent:")
-        ua_label.setFont(QFont("Roboto", 12))
-        ua_label.setStyleSheet("color: #b0b0b0;")
+        user_agent_layout.setSpacing(Spacing.MD)
+        ua_label = QLabel("User Agent")
+        ua_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         user_agent_layout.addWidget(ua_label)
         
         self.user_agent_input = QLineEdit()
         self.user_agent_input.setPlaceholderText("X-Shield/2.0.0")
-        self.user_agent_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                selection-background-color: #2e7d32;
-                min-width: 300px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-
-            }
-        """)
         user_agent_layout.addWidget(self.user_agent_input)
-        
         user_agent_layout.addStretch()
         config_layout.addLayout(user_agent_layout)
         
         # Enable proxy
         self.enable_proxy_checkbox = QCheckBox("Enable HTTP proxy")
-        self.enable_proxy_checkbox.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                font-size: 14px;
-                spacing: 12px;
-            }
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:hover {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2e7d32;
-                border: 2px solid #2e7d32;
-                image: none;
-            }
-        """)
         config_layout.addWidget(self.enable_proxy_checkbox)
         
-        network_layout.addWidget(network_frame)
+        network_layout.addLayout(config_layout)
         network_layout.addStretch()
         
         self.settings_tabs.addTab(network_widget, "Network")
@@ -487,213 +209,63 @@ class SettingsPage(QWidget):
         """Setup security settings tab"""
         security_widget = QWidget()
         security_layout = QVBoxLayout(security_widget)
-        security_layout.setContentsMargins(30, 30, 30, 30)
-        security_layout.setSpacing(20)
+        security_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        security_layout.setSpacing(Spacing.XL)
         
         # Security configuration
-        security_frame = QFrame()
-        security_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border: 2px solid #404040;
-                border-radius: 12px;
-            }
-        """)
-        
-        config_layout = QVBoxLayout(security_frame)
-        config_layout.setSpacing(16)
+        config_layout = QVBoxLayout()
+        config_layout.setSpacing(Spacing.LG)
         
         section_title = QLabel("Security Settings")
-        section_title.setFont(QFont("Roboto", 16, QFont.Bold))
-        section_title.setStyleSheet("color: #2e7d32;")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(section_title)
         
         # API Key
         api_key_layout = QHBoxLayout()
-        api_key_layout.setSpacing(12)
-        
-        api_key_label = QLabel("API Key:")
-        api_key_label.setFont(QFont("Roboto", 12))
-        api_key_label.setStyleSheet("color: #b0b0b0;")
+        api_key_layout.setSpacing(Spacing.MD)
+        api_key_label = QLabel("API Key")
+        api_key_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         api_key_layout.addWidget(api_key_label)
         
         self.api_key_input = QLineEdit()
         self.api_key_input.setPlaceholderText("Enter your API key")
         self.api_key_input.setEchoMode(QLineEdit.Password)
-        self.api_key_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: #ffffff;
-                font-size: 14px;
-                selection-background-color: #2e7d32;
-                min-width: 300px;
-            }
-            QLineEdit:focus {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-
-            }
-        """)
         api_key_layout.addWidget(self.api_key_input)
-        
         api_key_layout.addStretch()
         config_layout.addLayout(api_key_layout)
         
         # Security checkboxes
         self.encryption_checkbox = QCheckBox("Enable data encryption")
-        self.encryption_checkbox.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                font-size: 14px;
-                spacing: 12px;
-            }
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:hover {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2e7d32;
-                border: 2px solid #2e7d32;
-                image: none;
-            }
-        """)
         config_layout.addWidget(self.encryption_checkbox)
         
         self.secure_storage_checkbox = QCheckBox("Secure storage for sensitive data")
-        self.secure_storage_checkbox.setStyleSheet("""
-            QCheckBox {
-                color: #ffffff;
-                font-size: 14px;
-                spacing: 12px;
-            }
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-                border: 2px solid #404040;
-                border-radius: 4px;
-                background-color: #2d2d2d;
-            }
-            QCheckBox::indicator:hover {
-                border: 2px solid #2e7d32;
-                background-color: #333333;
-            }
-            QCheckBox::indicator:checked {
-                background-color: #2e7d32;
-                border: 2px solid #2e7d32;
-                image: none;
-            }
-        """)
         config_layout.addWidget(self.secure_storage_checkbox)
         
-        security_layout.addWidget(security_frame)
+        security_layout.addLayout(config_layout)
         security_layout.addStretch()
         
         self.settings_tabs.addTab(security_widget, "Security")
     
     def setup_action_buttons(self, parent_layout):
-        """Setup action buttons"""
+        """Setup action buttons with modern minimal style"""
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(12)
+        buttons_layout.setSpacing(Spacing.MD)
         
-        self.save_btn = QPushButton("💾 Save Settings")
-        self.save_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2e7d32;
-                color: white;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
-                min-width: 150px;
-                min-height: 48px;
-            }
-            QPushButton:hover {
-                background-color: #388e3c;
-            }
-            QPushButton:pressed {
-                background-color: #1b5e20;
-            }
-        """)
+        self.save_btn = QPushButton("Save Settings")
+        self.save_btn.setObjectName("primary_btn")
+        self.save_btn.setMinimumWidth(140)
         buttons_layout.addWidget(self.save_btn)
         
-        self.reset_btn = QPushButton("🔄 Reset to Defaults")
-        self.reset_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #FF9800;
-                color: white;
-                border: none;
-                padding: 16px 32px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
-                min-width: 150px;
-            }
-            QPushButton:hover {
-                background-color: #F57C00;
-
-            }
-            QPushButton:pressed {
-                background-color: #E65100;
-
-            }
-        """)
+        self.reset_btn = QPushButton("Reset to Defaults")
+        self.reset_btn.setMinimumWidth(140)
         buttons_layout.addWidget(self.reset_btn)
         
-        self.export_btn = QPushButton("📤 Export Settings")
-        self.export_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                padding: 16px 32px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
-                min-width: 150px;
-            }
-            QPushButton:hover {
-                background-color: #1976D2;
-
-            }
-            QPushButton:pressed {
-                background-color: #0D47A1;
-
-            }
-        """)
+        self.export_btn = QPushButton("Export")
+        self.export_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.export_btn)
         
-        self.import_btn = QPushButton("📥 Import Settings")
-        self.import_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #9C27B0;
-                color: white;
-                border: none;
-                padding: 16px 32px;
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 16px;
-                min-width: 150px;
-            }
-            QPushButton:hover {
-                background-color: #7B1FA2;
-
-            }
-            QPushButton:pressed {
-                background-color: #4A148C;
-
-            }
-        """)
+        self.import_btn = QPushButton("Import")
+        self.import_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.import_btn)
         
         buttons_layout.addStretch()

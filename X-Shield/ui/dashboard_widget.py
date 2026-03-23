@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, QTimer, Signal
 from PySide6.QtGui import QFont, QPixmap, QBrush, QColor, QPen
+from ui.styles import Colors, Spacing, Typography
 
 
 class StatusDelegate(QStyledItemDelegate):
@@ -53,42 +54,13 @@ class DashboardWidget(QWidget):
         self.setup_timer()
     
     def setup_ui(self):
-        """Setup dashboard UI with tabs"""
+        """Setup dashboard UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(8, 8, 8, 8)
-        layout.setSpacing(8)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
         
         # Main tab widget
         self.tab_widget = QTabWidget()
-        self.tab_widget.setStyleSheet("""
-            QTabWidget::pane {
-                border: 2px solid #374151;
-                background-color: #1f2937;
-                border-radius: 12px;
-                padding: 8px;
-            }
-            QTabBar::tab {
-                background-color: #374151;
-                color: #e5e7eb;
-                padding: 12px 20px;
-                margin-right: 4px;
-                border-top-left-radius: 8px;
-                border-top-right-radius: 8px;
-                font-weight: 600;
-                font-size: 13px;
-                min-width: 100px;
-            }
-            QTabBar::tab:selected {
-                background-color: #8b5cf6;
-                color: white;
-                border-bottom: 3px solid #6d28d9;
-            }
-            QTabBar::tab:hover:!selected {
-                background-color: #4b5563;
-                color: white;
-                border-bottom: 2px solid #6b7280;
-            }
-        """)
         
         # Create tabs
         self.create_overview_tab()
@@ -102,88 +74,41 @@ class DashboardWidget(QWidget):
         layout.addWidget(self.tab_widget)
     
     def create_overview_tab(self):
-        """Create overview tab with main statistics"""
+        """Create overview tab with main statistics and modern design"""
         overview_widget = QWidget()
         overview_layout = QVBoxLayout(overview_widget)
-        
-        # Header
-        header_frame = QFrame()
-        header_frame.setStyleSheet("""
-            QFrame {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                    stop:0 #1f2937, stop:1 #374151);
-                border-radius: 16px;
-                padding: 24px;
-                border: 2px solid #374151;
-                margin: 8px;
-            }
-        """)
-        
-        header_layout = QVBoxLayout(header_frame)
-        
-        title_label = QLabel("X-Shield Dashboard")
-        title_label.setFont(QFont("Inter", 28, QFont.Bold))
-        title_label.setStyleSheet("""
-            color: #8b5cf6; 
-            background-color: rgba(139, 92, 246, 0.1);
-            padding: 12px 24px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        """)
-        header_layout.addWidget(title_label)
-        
-        subtitle_label = QLabel("Real-time overview of security assessment activities")
-        subtitle_label.setStyleSheet("color: #9ca3af; font-size: 16px; margin-left: 12px;")
-        header_layout.addWidget(subtitle_label)
-        
-        overview_layout.addWidget(header_frame)
+        overview_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        overview_layout.setSpacing(Spacing.XL)
         
         # Statistics cards
         stats_frame = QFrame()
-        stats_frame.setStyleSheet("""
-            QFrame {
-                background-color: transparent;
-            }
-        """)
-        
         stats_layout = QGridLayout(stats_frame)
-        stats_layout.setSpacing(15)
+        stats_layout.setContentsMargins(0, 0, 0, 0)
+        stats_layout.setSpacing(Spacing.LG)
         
         # Create stat cards
-        self.scans_completed_card = self.create_stat_card(
-            "Scans Completed", "0", "#10b981", "✓"
-        )
+        self.scans_completed_card = self.create_stat_card("Scans Completed", "0", Colors.SUCCESS, "✓")
         stats_layout.addWidget(self.scans_completed_card, 0, 0)
         
-        self.vulnerabilities_found_card = self.create_stat_card(
-            "Vulnerabilities Found", "0", "#ef4444", "⚠"
-        )
+        self.vulnerabilities_found_card = self.create_stat_card("Vulnerabilities", "0", Colors.DANGER, "⚠")
         stats_layout.addWidget(self.vulnerabilities_found_card, 0, 1)
         
-        self.modules_active_card = self.create_stat_card(
-            "Active Modules", "0", "#f59e0b", "⚙"
-        )
+        self.modules_active_card = self.create_stat_card("Active Modules", "0", Colors.WARNING, "⚙")
         stats_layout.addWidget(self.modules_active_card, 0, 2)
         
-        self.risk_score_card = self.create_stat_card(
-            "Average Risk Score", "0", "#8b5cf6", "🛡"
-        )
+        self.risk_score_card = self.create_stat_card("Risk Score", "0", Colors.PRIMARY, "🛡")
         stats_layout.addWidget(self.risk_score_card, 1, 0)
         
-        self.targets_scanned_card = self.create_stat_card(
-            "Targets Scanned", "0", "#3b82f6", "🎯"
-        )
+        self.targets_scanned_card = self.create_stat_card("Targets", "0", Colors.INFO, "🎯")
         stats_layout.addWidget(self.targets_scanned_card, 1, 1)
         
-        self.reports_generated_card = self.create_stat_card(
-            "Reports Generated", "0", "#06b6d4", "📄"
-        )
+        self.reports_generated_card = self.create_stat_card("Reports", "0", Colors.SUCCESS, "📄")
         stats_layout.addWidget(self.reports_generated_card, 1, 2)
         
         overview_layout.addWidget(stats_frame)
         overview_layout.addStretch()
         
-        self.tab_widget.addTab(overview_widget, "📊 Overview")
+        self.tab_widget.addTab(overview_widget, "Overview")
     
     def create_modules_tab(self):
         """Create modules tab with module status and controls"""
@@ -1018,94 +943,63 @@ class DashboardWidget(QWidget):
         self.tab_widget.addTab(system_widget, "⚙️ System")
     
     def create_stat_card(self, title, value, color, icon):
-        """Create a single statistics card"""
+        """Create a single statistics card with modern minimal style"""
         card = QFrame()
+        card.setObjectName("card")
+        card.setMinimumHeight(120)
         card.setStyleSheet(f"""
-            QFrame {{
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                    stop:0 #1f2937, stop:1 #374151);
-                border: 2px solid {color};
-                border-radius: 16px;
-                padding: 24px;
-                margin: 4px;
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
             }}
-            QFrame:hover {{
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                    stop:0 #374151, stop:1 #4b5563);
-                border: 2px solid {color};
-
+            QFrame#card:hover {{
+                border-color: {color};
             }}
         """)
         
         card_layout = QVBoxLayout(card)
-        card_layout.setSpacing(12)
+        card_layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        card_layout.setSpacing(Spacing.SM)
         
-        # Title and icon
-        title_layout = QHBoxLayout()
+        header = QHBoxLayout()
+        header.setSpacing(Spacing.MD)
         
         icon_label = QLabel(icon)
-        icon_label.setStyleSheet(f"""
-            QLabel {{
-                color: {color};
-                font-size: 28px;
-                font-weight: bold;
-                background-color: rgba(139, 92, 246, 0.1);
-                padding: 8px;
-                border-radius: 8px;
-                min-width: 40px;
-                max-width: 40px;
-                text-align: center;
-            }}
-        """)
-        title_layout.addWidget(icon_label)
+        icon_label.setFont(QFont("Segoe UI Emoji", 14))
+        header.addWidget(icon_label)
         
-        title_label = QLabel(title)
-        title_label.setStyleSheet("""
-            color: #9ca3af; 
-            font-size: 14px; 
-            font-weight: 500;
-            margin-left: 12px;
-        """)
-        title_layout.addWidget(title_label)
+        title_label = QLabel(title.upper())
+        title_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 600; font-size: 11px; letter-spacing: 0.05em;")
+        header.addWidget(title_label)
+        header.addStretch()
+        card_layout.addLayout(header)
         
-        title_layout.addStretch()
-        card_layout.addLayout(title_layout)
-        
-        # Value
-        value_label = QLabel(value)
-        value_label.setFont(QFont("Inter", 36, QFont.Bold))
-        value_label.setStyleSheet(f"""
-            color: {color}; 
-            background-color: rgba(139, 92, 246, 0.05);
-            padding: 8px 16px;
-            border-radius: 8px;
-            margin: 8px 0;
-        """)
+        value_label = QLabel(str(value))
+        value_label.setFont(QFont(Typography.FAMILY_MONO, 24, QFont.Bold))
+        value_label.setStyleSheet(f"color: {color};")
         card_layout.addWidget(value_label)
         
-        # Store references for updates
         card.value_label = value_label
-        
         return card
     
     def create_status_item(self, label_text, value_text):
-        """Create a single status item"""
+        """Create a single status item with design system style"""
         item_frame = QFrame()
         item_layout = QHBoxLayout(item_frame)
+        item_layout.setContentsMargins(0, Spacing.XS, 0, Spacing.XS)
         
         label = QLabel(label_text)
-        label.setStyleSheet("color: #9ca3af; font-size: 14px;")
+        label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 13px;")
         item_layout.addWidget(label)
         
         item_layout.addStretch()
         
         value = QLabel(value_text)
-        value.setStyleSheet("color: #10b981; font-weight: bold;")
+        value.setStyleSheet(f"color: {Colors.SUCCESS}; font-weight: 600; font-family: {Typography.FAMILY_MONO};")
         item_layout.addWidget(value)
         
-        # Store reference for updates
         item_frame.value_label = value
-        
         return item_frame
     
     def setup_timer(self):

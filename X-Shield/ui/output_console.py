@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, QTimer, Signal, Slot
 from PySide6.QtGui import QFont, QColor, QTextCursor, QTextCharFormat
+from ui.styles import Colors, Spacing, Typography
 
 
 class OutputConsole(QWidget):
@@ -22,10 +23,10 @@ class OutputConsole(QWidget):
         self.max_lines = 1000  # Maximum lines to keep in console
         
     def setup_ui(self):
-        """Setup output console UI"""
+        """Setup output console UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(5)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         
         # Console header
         self.setup_header(layout)
@@ -40,25 +41,21 @@ class OutputConsole(QWidget):
         """Setup console header"""
         header = QFrame()
         header.setFixedHeight(40)
-        header.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border-bottom: 1px solid #2d2d2d;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
+        header.setStyleSheet(f"""
+            QFrame {{
+                background-color: {Colors.SURFACE};
+                border-top: 1px solid {Colors.BORDER};
+                border-bottom: 1px solid {Colors.BORDER};
+            }}
         """)
         
         header_layout = QHBoxLayout(header)
-        header_layout.setContentsMargins(12, 8, 12, 8)
+        header_layout.setContentsMargins(Spacing.LG, 0, Spacing.LG, 0)
         
         # Title
         title = QLabel("Output Console")
-        title.setFont(QFont("Roboto", 12, QFont.Bold))
-        title.setStyleSheet("color: #ffffff;")
+        title.setFont(QFont(Typography.FAMILY_SANS, 10, QFont.Bold))
+        title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY};")
         header_layout.addWidget(title)
         
         # Status indicator
@@ -82,18 +79,14 @@ class OutputConsole(QWidget):
         # Console text area
         self.console = QTextEdit()
         self.console.setReadOnly(True)
-        self.console.setFont(QFont("Consolas", 10))
-        self.console.setStyleSheet("""
-            QTextEdit {
-                background-color: #0d1117;
-                color: #c9d1d9;
+        self.console.setFont(QFont(Typography.FAMILY_MONO, 10))
+        self.console.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                color: {Colors.TEXT_PRIMARY};
                 border: none;
-                padding: 8px;
-                selection-background-color: #264f78;
-            }
-            QTextEdit:focus {
-                border: none;
-            }
+                padding: {Spacing.MD}px;
+            }}
         """)
         
         parent_layout.addWidget(self.console)
@@ -102,87 +95,37 @@ class OutputConsole(QWidget):
         """Setup console controls"""
         controls_frame = QFrame()
         controls_frame.setFixedHeight(40)
-        controls_frame.setStyleSheet("""
-            QFrame {
-                background-color: #1e1e1e;
-                border-top: 1px solid #2d2d2d;
-            }
-            QLabel {
-                border: none;
-                background: transparent;
-                padding: 0px;
-            }
+        controls_frame.setStyleSheet(f"""
+            QFrame {{
+                background-color: {Colors.SURFACE};
+                border-top: 1px solid {Colors.BORDER};
+            }}
         """)
         
         controls_layout = QHBoxLayout(controls_frame)
-        controls_layout.setContentsMargins(12, 8, 12, 8)
+        controls_layout.setContentsMargins(Spacing.LG, 0, Spacing.LG, 0)
         
         # Filter dropdown
+        filter_label = QLabel("Filter:")
+        filter_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 12px;")
+        controls_layout.addWidget(filter_label)
+
         self.filter_combo = QComboBox()
         self.filter_combo.addItems(["All", "Info", "Success", "Warning", "Error"])
-        self.filter_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #2d2d2d;
-                border: 1px solid #404040;
-                border-radius: 4px;
-                padding: 4px 8px;
-                color: #ffffff;
-                font-size: 12px;
-                min-height: 24px;
-            }
-            QComboBox:focus {
-                border: 1px solid #2196F3;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid #ffffff;
-                margin-right: 4px;
-            }
-        """)
-        controls_layout.addWidget(QLabel("Filter:"))
+        self.filter_combo.setProperty("class", "small")
+        self.filter_combo.setFixedWidth(100)
         controls_layout.addWidget(self.filter_combo)
         
         controls_layout.addStretch()
         
         # Control buttons
         self.clear_btn = QPushButton("Clear")
-        self.clear_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #404040;
-                color: #ffffff;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-size: 12px;
-                min-height: 24px;
-            }
-            QPushButton:hover {
-                background-color: #505050;
-            }
-        """)
+        self.clear_btn.setProperty("class", "small")
         controls_layout.addWidget(self.clear_btn)
         
         self.save_btn = QPushButton("Save Log")
-        self.save_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: #ffffff;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                font-size: 12px;
-                min-height: 24px;
-            }
-            QPushButton:hover {
-                background-color: #1976D2;
-            }
-        """)
+        self.save_btn.setProperty("class", "small")
+        self.save_btn.setObjectName("primary_btn")
         controls_layout.addWidget(self.save_btn)
         
         parent_layout.addWidget(controls_frame)
@@ -194,13 +137,7 @@ class OutputConsole(QWidget):
         self.filter_combo.currentTextChanged.connect(self.filter_messages)
     
     def append_message(self, message, level="info", timestamp=None):
-        """Append message to console
-        
-        Args:
-            message: Message text
-            level: Message level ('info', 'success', 'warning', 'error')
-            timestamp: Optional timestamp (defaults to current time)
-        """
+        """Append message to console with design system colors"""
         if timestamp is None:
             timestamp = datetime.now()
         
@@ -218,15 +155,15 @@ class OutputConsole(QWidget):
         char_format = cursor.charFormat()
         
         if level == "info":
-            char_format.setForeground(QColor("#58a6ff"))  # Blue
+            char_format.setForeground(QColor(Colors.PRIMARY))
         elif level == "success":
-            char_format.setForeground(QColor("#3fb950"))  # Green
+            char_format.setForeground(QColor(Colors.SUCCESS))
         elif level == "warning":
-            char_format.setForeground(QColor("#d29922"))  # Yellow
+            char_format.setForeground(QColor(Colors.WARNING))
         elif level == "error":
-            char_format.setForeground(QColor("#f85149"))  # Red
+            char_format.setForeground(QColor(Colors.DANGER))
         else:
-            char_format.setForeground(QColor("#c9d1d9"))  # Default gray
+            char_format.setForeground(QColor(Colors.TEXT_PRIMARY))
         
         cursor.setCharFormat(char_format)
         cursor.insertText(formatted_message + "\n")

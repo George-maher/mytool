@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot, QThread, QTimer
 from PySide6.QtGui import QFont, QTextCursor
+from ui.styles import Colors, Spacing, Typography
 
 
 class NetworkScannerWorker(QThread):
@@ -152,58 +153,11 @@ class NetworkScannerPage(QWidget):
         self.setup_connections()
     
     def setup_ui(self):
-        """Setup network scanner UI with modern design system"""
+        """Setup network scanner UI with modern minimal design"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(40, 40, 40, 40)
-        layout.setSpacing(40)
+        layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
+        layout.setSpacing(Spacing.XL)
 
-        # Modern Header Section
-        header_frame = QFrame()
-        header_frame.setStyleSheet("""
-            QFrame {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                border: 2px solid #334155;
-                border-radius: 20px;
-                padding: 32px;
-                margin-bottom: 32px;
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            }
-        """)
-        header_layout = QVBoxLayout(header_frame)
-        header_layout.setSpacing(20)
-        
-        title_row = QHBoxLayout()
-        title_row.setSpacing(20)
-        
-        title_label = QLabel("NETWORK ANALYZER")
-        title_label.setStyleSheet("""
-            color: #f8fafc;
-            font-weight: 800;
-            font-size: 32px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
-        title_row.addWidget(title_label)
-        title_row.addStretch()
-
-        status_tag = QLabel("MODULE READY")
-        status_tag.setStyleSheet("""
-            color: #22d3ee;
-            font-weight: 700;
-            font-size: 14px;
-            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(34, 211, 238, 0.1) 100%);
-            border: 2px solid #22d3ee;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
-        title_row.addWidget(status_tag)
-        header_layout.addLayout(title_row)
-        layout.addWidget(header_frame)
-        
         # Scanner Configuration
         self.setup_scanner_config(layout)
         
@@ -218,82 +172,54 @@ class NetworkScannerPage(QWidget):
     def setup_scanner_config(self, parent_layout):
         """Setup modern scanner configuration section"""
         config_frame = QFrame()
-        config_frame.setStyleSheet("""
-            QFrame {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                border: 2px solid #334155;
-                border-radius: 20px;
-                padding: 40px;
-                margin-bottom: 32px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            }
+        config_frame.setObjectName("card")
+        config_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setSpacing(32)
+        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        config_layout.setSpacing(Spacing.XL)
         
         # Modern Section Title
-        section_title = QLabel("SCAN CONFIGURATION")
-        section_title.setStyleSheet("""
-            color: #22d3ee;
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
+        section_title = QLabel("Scan Configuration")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         config_layout.addWidget(section_title)
         
         # Target selection
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(20)
+        target_layout.setSpacing(Spacing.MD)
         
-        target_label = QLabel("Target Address")
-        target_label.setStyleSheet("""
-            color: #f8fafc;
-            font-weight: 600;
-            font-size: 14px;
-            margin-right: 12px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
+        target_label = QLabel("Target")
+        target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         target_layout.addWidget(target_label)
         
         self.target_input = QLineEdit()
-        self.target_input.setPlaceholderText("Enter target IP or hostname...")
-        # Input styling is now handled by global theme
+        self.target_input.setPlaceholderText("e.g., 192.168.1.1")
         target_layout.addWidget(self.target_input)
         
-        config_layout.addLayout(target_layout)
-        
-        # Modern Get Active Target Button
-        self.get_active_btn = QPushButton("Use Active Target")
+        self.get_active_btn = QPushButton("Use Active")
         self.get_active_btn.setProperty("class", "small")
-        # Button styling is now handled by global theme
         target_layout.addWidget(self.get_active_btn)
         
-        target_layout.addStretch()
         config_layout.addLayout(target_layout)
         
         # Modern Scan Type Selection
         scan_type_layout = QHBoxLayout()
-        scan_type_layout.setSpacing(20)
+        scan_type_layout.setSpacing(Spacing.MD)
         
         scan_type_label = QLabel("Scan Type")
-        scan_type_label.setStyleSheet("""
-            color: #f8fafc;
-            font-weight: 600;
-            font-size: 14px;
-            margin-right: 12px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
+        scan_type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         scan_type_layout.addWidget(scan_type_label)
         
         self.scan_type_combo = QComboBox()
         self.scan_type_combo.addItems([
             "Quick Scan", "Full Scan", "Port Scan", "Service Scan", "OS Detection"
         ])
-        # ComboBox styling is now handled by global theme
         scan_type_layout.addWidget(self.scan_type_combo)
         
         scan_type_layout.addStretch()
@@ -301,17 +227,16 @@ class NetworkScannerPage(QWidget):
         
         # Modern Control Buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(20)
+        buttons_layout.setSpacing(Spacing.MD)
         
-        self.start_btn = QPushButton("Start Scan")
-        self.start_btn.setProperty("class", "large")
-        # Button styling is now handled by global theme
+        self.start_btn = QPushButton("Start Analysis")
+        self.start_btn.setObjectName("primary_btn")
+        self.start_btn.setMinimumWidth(160)
         buttons_layout.addWidget(self.start_btn)
         
-        self.stop_btn = QPushButton("Stop Scan")
+        self.stop_btn = QPushButton("Stop")
         self.stop_btn.setEnabled(False)
-        self.stop_btn.setProperty("class", "large")
-        # Button styling is now handled by global theme
+        self.stop_btn.setMinimumWidth(100)
         buttons_layout.addWidget(self.stop_btn)
         
         buttons_layout.addStretch()
@@ -322,41 +247,42 @@ class NetworkScannerPage(QWidget):
     def setup_terminal_output(self, parent_layout):
         """Setup modern terminal output section"""
         terminal_frame = QFrame()
-        terminal_frame.setStyleSheet("""
-            QFrame {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                border: 2px solid #334155;
-                border-radius: 20px;
-                padding: 40px;
-                margin-bottom: 32px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            }
+        terminal_frame.setObjectName("card")
+        terminal_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         terminal_layout = QVBoxLayout(terminal_frame)
-        terminal_layout.setSpacing(24)
+        terminal_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        terminal_layout.setSpacing(Spacing.MD)
         
         # Modern Section Title
-        section_title = QLabel("LIVE ANALYSIS FEED")
-        section_title.setStyleSheet("""
-            color: #22d3ee;
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
+        section_title = QLabel("Live Analysis Feed")
+        section_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H3_SIZE};")
         terminal_layout.addWidget(section_title)
         
         # Modern Terminal Widget
         self.terminal = QTextEdit()
         self.terminal.setReadOnly(True)
         self.terminal.setMinimumHeight(300)
-        # Terminal styling is now handled by global theme
+        self.terminal.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 8px;
+                color: {Colors.TEXT_PRIMARY};
+                font-family: {Typography.FAMILY_MONO};
+                font-size: 12px;
+                padding: {Spacing.MD}px;
+            }}
+        """)
         
         # Add initial message
-        self.terminal.append('<span style="color: #22d3ee; font-weight: bold;">[NETWORK SCANNER]</span> <span style="color: #f8fafc;">Ready to scan targets</span>')
+        self.terminal.append(f'<span style="color: {Colors.PRIMARY}; font-weight: 600;">[NETWORK SCANNER]</span> <span style="color: {Colors.TEXT_PRIMARY};">Ready to scan targets</span>')
         
         terminal_layout.addWidget(self.terminal)
         parent_layout.addWidget(terminal_frame)
@@ -364,38 +290,30 @@ class NetworkScannerPage(QWidget):
     def setup_progress_section(self, parent_layout):
         """Setup modern progress section"""
         progress_frame = QFrame()
-        progress_frame.setStyleSheet("""
-            QFrame {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                border: 2px solid #334155;
-                border-radius: 20px;
-                padding: 40px;
-                margin-bottom: 32px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            }
+        progress_frame.setObjectName("card")
+        progress_frame.setStyleSheet(f"""
+            QFrame#card {{
+                background-color: {Colors.SURFACE};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 12px;
+            }}
         """)
         
         progress_layout = QVBoxLayout(progress_frame)
-        progress_layout.setSpacing(24)
+        progress_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        progress_layout.setSpacing(Spacing.MD)
         
         # Modern Status Label
         self.status_label = QLabel("Status: Ready")
-        self.status_label.setStyleSheet("""
-            color: #f8fafc;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 16px;
-            font-family: 'Inter', -apple-system, sans-serif;
-        """)
+        self.status_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
         progress_layout.addWidget(self.status_label)
         
         # Modern Progress Bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
-        self.progress_bar.setFixedHeight(12)
+        self.progress_bar.setFixedHeight(8)
         self.progress_bar.setTextVisible(False)
-        # Progress bar styling is now handled by global theme
         progress_layout.addWidget(self.progress_bar)
         
         parent_layout.addWidget(progress_frame)
@@ -535,20 +453,20 @@ class NetworkScannerPage(QWidget):
             self.worker = None
     
     def add_terminal_message(self, msg_type, message):
-        """Add message to terminal with Midnight Neon color coding"""
+        """Add message to terminal with Modern Minimal color coding"""
         colors = {
-            "INFO": "#64748b",
-            "SUCCESS": "#10b981",
-            "WARNING": "#f59e0b",
-            "ERROR": "#f43f5e",
-            "RESULT": "#a855f7",
-            "FINDING": "#22d3ee",
-            "VULNERABILITY": "#f43f5e",
-            "STATUS": "#94a3b8",
-            "PROGRESS": "#334155"
+            "INFO": Colors.TEXT_SECONDARY,
+            "SUCCESS": Colors.SUCCESS,
+            "WARNING": Colors.WARNING,
+            "ERROR": Colors.DANGER,
+            "RESULT": Colors.INFO,
+            "FINDING": Colors.PRIMARY,
+            "VULNERABILITY": Colors.DANGER,
+            "STATUS": Colors.TEXT_MUTED,
+            "PROGRESS": Colors.BORDER_HOVER
         }
         
-        color = colors.get(msg_type, "#f8fafc")
+        color = colors.get(msg_type, Colors.TEXT_PRIMARY)
         
         # Move cursor to end
         cursor = self.terminal.textCursor()
@@ -558,7 +476,7 @@ class NetworkScannerPage(QWidget):
         from datetime import datetime
         timestamp = datetime.now().strftime("%H:%M:%S")
         
-        formatted_message = f'<span style="color: #475569;">[{timestamp}]</span> <span style="color: {color}; font-weight: bold;">[{msg_type}]</span> <span style="color: #f8fafc;">{message}</span>'
+        formatted_message = f'<span style="color: {Colors.TEXT_MUTED};">[{timestamp}]</span> <span style="color: {color}; font-weight: 600;">[{msg_type}]</span> <span style="color: {Colors.TEXT_PRIMARY};">{message}</span>'
         
         self.terminal.append(formatted_message)
         
