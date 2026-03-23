@@ -3,6 +3,8 @@ Reports Page for X-Shield MVC Architecture
 Analysis and reports generation interface
 """
 
+import os
+from datetime import datetime
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
     QTextEdit, QTableWidget, QTableWidgetItem, QHeaderView, QFrame,
@@ -11,6 +13,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
 from ui.styles import Colors, Spacing, Typography
+from reports.advanced_report_generator import AdvancedReportGenerator
 
 
 class ReportsPage(QWidget):
@@ -21,6 +24,7 @@ class ReportsPage(QWidget):
         self.app = parent
         self.logger = parent.get_logger() if parent else None
         self.target_manager = parent.get_target_manager() if parent else None
+        self.report_generator = AdvancedReportGenerator()
         
         self.setup_ui()
         self.setup_connections()
@@ -68,6 +72,18 @@ class ReportsPage(QWidget):
         options_layout = QHBoxLayout()
         options_layout.setSpacing(Spacing.XL)
         
+        # Target Selection
+        target_layout = QVBoxLayout()
+        target_layout.setSpacing(Spacing.SM)
+        target_label = QLabel("Select Target")
+        target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
+        target_layout.addWidget(target_label)
+
+        self.target_combo = QComboBox()
+        self.target_combo.addItem("All Targets", "all")
+        target_layout.addWidget(self.target_combo)
+        options_layout.addLayout(target_layout)
+
         # Report type
         type_layout = QVBoxLayout()
         type_layout.setSpacing(Spacing.SM)
@@ -90,7 +106,7 @@ class ReportsPage(QWidget):
         format_layout.addWidget(format_label)
         
         self.format_combo = QComboBox()
-        self.format_combo.addItems(["PDF", "HTML", "JSON", "CSV"])
+        self.format_combo.addItems(["HTML", "PDF", "JSON", "CSV"])
         format_layout.addWidget(self.format_combo)
         options_layout.addLayout(format_layout)
         
@@ -198,47 +214,89 @@ class ReportsPage(QWidget):
         self.generate_btn.clicked.connect(self.generate_report)
         self.reports_table.itemSelectionChanged.connect(self.on_selection_changed)
     
+    def refresh_targets(self):
+        """Refresh target selection combo box"""
+        if not self.target_manager:
+            return
+
+        current_id = self.target_combo.currentData()
+        self.target_combo.clear()
+        self.target_combo.addItem("All Targets", "all")
+
+        for target in self.target_manager.get_all_targets():
+            self.target_combo.addItem(f"{target.value} ({target.type})", target.id)
+
+        # Try to restore selection
+        index = self.target_combo.findData(current_id)
+        if index >= 0:
+            self.target_combo.setCurrentIndex(index)
+
     def generate_report(self):
-        """Generate a new report"""
+        """Generate a new report using actual scan data"""
         report_type = self.report_type_combo.currentText()
         format_type = self.format_combo.currentText()
+        target_id = self.target_combo.currentData()
         
         if not self.target_manager:
             QMessageBox.warning(self, "Warning", "Target manager not available")
             return
         
         try:
-            # Get all targets and their scan results
-            targets = self.target_manager.get_all_targets()
-            
+            # Prepare scan data for the generator
+            if target_id == "all":
+                targets = self.target_manager.get_all_targets()
+                primary_target = "Multiple Targets"
+            else:
+                target = self.target_manager.get_target(target_id)
+                if not target:
+                    QMessageBox.warning(self, "Error", "Selected target not found")
+                    return
+                targets = [target]
+                primary_target = target.value
+
             if not targets:
                 QMessageBox.warning(self, "No Data", "No targets found. Please add targets and run scans first.")
                 return
+
+            # Consolidate vulnerabilities and modules from targets
+            all_vulnerabilities = []
+            all_modules = []
             
-            # Generate mock report data
-            from datetime import datetime
-            report_data = {
-                'report_name': f"{report_type}_{len(self.reports_table) + 1}",
-                'report_type': report_type,
-                'format': format_type,
-                'targets': len(targets),
-                'vulnerabilities': 0,
-                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            for t in targets:
+                for scanner, results in t.scan_results.items():
+                    if isinstance(results, dict):
+                        vulns = results.get('vulnerabilities', [])
+                        for v in vulns:
+                            v_copy = v.copy()
+                            if 'target' not in v_copy:
+                                v_copy['target'] = t.value
+                            all_vulnerabilities.append(v_copy)
+
+                        # Add module info
+                        all_modules.append({
+                            'name': scanner,
+                            'status': 'completed',
+                            'duration': results.get('duration', 0),
+                            'items_scanned': results.get('items_scanned', 0),
+                            'issues_found': len(vulns),
+                            'summary': results.get('summary', f'Scan of {t.value} completed')
+                        })
+
+            scan_data = {
+                'primary_target': primary_target,
+                'vulnerabilities': all_vulnerabilities,
+                'modules': all_modules,
+                'scan_scope': [report_type]
             }
+
+            # Use the actual generator
+            report_path = self.report_generator.generate_report(scan_data, report_title=f"{report_type} - {primary_target}")
             
-            # Count vulnerabilities
-            for target in targets:
-                for scan_results in target.scan_results.values():
-                    if isinstance(scan_results, dict) and 'vulnerabilities' in scan_results:
-                        report_data['vulnerabilities'] += len(scan_results['vulnerabilities'])
-            
-            # Add to table
-            self.add_report_to_table(report_data)
-            
-            QMessageBox.information(self, "Success", f"Report generated successfully: {report_data['report_name']}")
+            self.load_reports() # Refresh table
+            QMessageBox.information(self, "Success", f"Report generated successfully: {os.path.basename(report_path)}")
             
             if self.logger:
-                self.logger.info(f"Generated {report_type} report in {format_type} format")
+                self.logger.info(f"Generated {report_type} report for {primary_target}")
                 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to generate report: {str(e)}")
@@ -255,13 +313,10 @@ class ReportsPage(QWidget):
         self.reports_table.setItem(row, 1, QTableWidgetItem(report_data['report_type']))
         
         # Target
-        target_text = f"{report_data['targets']} target(s)"
-        self.reports_table.setItem(row, 2, QTableWidgetItem(target_text))
+        self.reports_table.setItem(row, 2, QTableWidgetItem(report_data['target']))
         
         # Generated
-        from datetime import datetime
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-        self.reports_table.setItem(row, 3, QTableWidgetItem(timestamp))
+        self.reports_table.setItem(row, 3, QTableWidgetItem(report_data['generated_at']))
         
         # Actions
         actions_widget = self.create_report_actions_widget(report_data)
@@ -291,28 +346,8 @@ class ReportsPage(QWidget):
                 border-color: {Colors.PRIMARY};
             }}
         """)
-        view_btn.clicked.connect(lambda: self.view_report(report_data))
+        view_btn.clicked.connect(lambda: self.view_report_file(report_data['path']))
         layout.addWidget(view_btn)
-        
-        # Download button
-        download_btn = QPushButton("💾")
-        download_btn.setToolTip("Download")
-        download_btn.setFixedSize(28, 28)
-        download_btn.setStyleSheet(f"""
-            QPushButton {{
-                background-color: transparent;
-                color: {Colors.SUCCESS};
-                border: 1px solid {Colors.BORDER};
-                border-radius: 4px;
-                font-size: 12px;
-            }}
-            QPushButton:hover {{
-                background-color: {Colors.SURFACE_LIGHT};
-                border-color: {Colors.SUCCESS};
-            }}
-        """)
-        download_btn.clicked.connect(lambda: self.download_report(report_data))
-        layout.addWidget(download_btn)
         
         # Delete button
         delete_btn = QPushButton("🗑️")
@@ -331,77 +366,18 @@ class ReportsPage(QWidget):
                 border-color: {Colors.DANGER};
             }}
         """)
-        delete_btn.clicked.connect(lambda: self.delete_report(report_data))
+        delete_btn.clicked.connect(lambda: self.delete_report_file(report_data))
         layout.addWidget(delete_btn)
         
         return widget
     
-    def view_report(self, report_data):
-        """View report content"""
-        # Generate mock report content
-        content = f"""
-========================================
-{report_data['report_name'].upper()}
-========================================
+    def view_report_file(self, report_path):
+        """Open report in system browser"""
+        import webbrowser
+        webbrowser.open(f"file://{os.path.abspath(report_path)}")
 
-Report Type: {report_data['report_type']}
-Format: {report_data['format']}
-Generated: {report_data.get('generated_at', 'Unknown')}
-Targets Scanned: {report_data['targets']}
-Vulnerabilities Found: {report_data['vulnerabilities']}
-
-EXECUTIVE SUMMARY:
-==================
-This security assessment was conducted on {report_data['targets']} target(s).
-A total of {report_data['vulnerabilities']} potential vulnerabilities were identified.
-
-FINDINGS:
-=========
-High Severity: {report_data['vulnerabilities'] // 3}
-Medium Severity: {report_data['vulnerabilities'] // 2}
-Low Severity: {report_data['vulnerabilities'] - (report_data['vulnerabilities'] // 3 + report_data['vulnerabilities'] // 2)}
-
-RECOMMENDATIONS:
-================
-1. Address all high and medium severity vulnerabilities immediately
-2. Implement regular security scanning and monitoring
-3. Update and patch systems regularly
-4. Conduct security awareness training for staff
-
-CONCLUSION:
-==========
-The security posture requires improvement. Implement the recommended actions to enhance security.
-        """
-        
-        self.report_preview.setText(content)
-    
-    def download_report(self, report_data):
-        """Download report"""
-        file_path, _ = QFileDialog.getSaveFileName(
-            self, "Save Report", f"{report_data['report_name']}.{report_data['format'].lower()}", 
-            f"{report_data['format']} Files (*.{report_data['format'].lower()})"
-        )
-        
-        if file_path:
-            try:
-                # Mock file creation
-                with open(file_path, 'w') as f:
-                    f.write(f"Report: {report_data['report_name']}\n")
-                    f.write(f"Type: {report_data['report_type']}\n")
-                    f.write(f"Format: {report_data['format']}\n")
-                    f.write(f"Targets: {report_data['targets']}\n")
-                    f.write(f"Vulnerabilities: {report_data['vulnerabilities']}\n")
-                
-                QMessageBox.information(self, "Success", f"Report saved to {file_path}")
-                
-                if self.logger:
-                    self.logger.info(f"Report downloaded: {file_path}")
-                    
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to save report: {str(e)}")
-    
-    def delete_report(self, report_data):
-        """Delete report"""
+    def delete_report_file(self, report_data):
+        """Delete report file"""
         reply = QMessageBox.question(
             self, "Delete Report", 
             f"Are you sure you want to delete report '{report_data['report_name']}'?",
@@ -409,15 +385,20 @@ The security posture requires improvement. Implement the recommended actions to 
         )
         
         if reply == QMessageBox.Yes:
-            # Find and remove row
-            for row in range(self.reports_table.rowCount()):
-                item = self.reports_table.item(row, 0)
-                if item and item.text() == report_data['report_name']:
-                    self.reports_table.removeRow(row)
-                    break
-            
-            QMessageBox.information(self, "Success", "Report deleted successfully")
-    
+            try:
+                if os.path.exists(report_data['path']):
+                    os.remove(report_data['path'])
+
+                # Also delete JSON summary if it exists
+                json_path = report_data['path'].replace('.html', '.json')
+                if os.path.exists(json_path):
+                    os.remove(json_path)
+
+                self.load_reports()
+                QMessageBox.information(self, "Success", "Report deleted successfully")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to delete report: {str(e)}")
+
     def on_selection_changed(self):
         """Handle table selection change"""
         selected_items = self.reports_table.selectedItems()
@@ -425,50 +406,74 @@ The security posture requires improvement. Implement the recommended actions to 
             row = selected_items[0].row()
             report_name = self.reports_table.item(row, 0).text()
             
-            # Find report data and view it
-            for i in range(self.reports_table.rowCount()):
-                if self.reports_table.item(i, 0).text() == report_name:
-                    report_data = {
-                        'report_name': report_name,
-                        'report_type': self.reports_table.item(i, 1).text(),
-                        'format': 'HTML',
-                        'targets': int(self.reports_table.item(i, 2).text().split()[0]),
-                        'vulnerabilities': 5  # Mock data
-                    }
-                    self.view_report(report_data)
-                    break
+            # Find report file and preview it
+            reports_dir = "data/reports"
+            if os.path.exists(reports_dir):
+                for filename in os.listdir(reports_dir):
+                    if filename == report_name:
+                        report_path = os.path.join(reports_dir, filename)
+                        self.preview_report(report_path)
+                        break
     
+    def preview_report(self, report_path):
+        """Preview report content in text edit"""
+        try:
+            if report_path.endswith('.html'):
+                with open(report_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                # Simple HTML to text conversion for preview
+                import re
+                text = re.sub('<[^<]+?>', '', content)
+                self.report_preview.setText(text[:2000] + ("..." if len(text) > 2000 else ""))
+            elif report_path.endswith('.json'):
+                with open(report_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                self.report_preview.setText(content)
+            else:
+                self.report_preview.setText(f"Preview not available for this format. Use the 👁️ icon to view.")
+        except Exception as e:
+            self.report_preview.setText(f"Error previewing report: {str(e)}")
+
     def load_reports(self):
-        """Load existing reports (mock data)"""
-        # Clear existing reports first
+        """Load existing reports from data/reports"""
         self.reports_table.setRowCount(0)
         
-        # Add some mock reports for demonstration
-        from datetime import datetime
-        mock_reports = [
-            {
-                'report_name': 'Security_Assessment_1',
-                'report_type': 'Executive Summary',
-                'format': 'PDF',
-                'targets': 3,
-                'vulnerabilities': 12,
-                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            },
-            {
-                'report_name': 'Vulnerability_Report_1',
-                'report_type': 'Vulnerability Report',
-                'format': 'HTML',
-                'targets': 1,
-                'vulnerabilities': 8,
-                'generated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            }
-        ]
-        
-        for report_data in mock_reports:
-            self.add_report_to_table(report_data)
-    
+        reports_dir = "data/reports"
+        if not os.path.exists(reports_dir):
+            return
+
+        for filename in os.listdir(reports_dir):
+            if filename.endswith('.html'):
+                report_path = os.path.join(reports_dir, filename)
+                stat = os.stat(report_path)
+
+                # Try to get info from JSON summary if available
+                json_path = report_path.replace('.html', '.json')
+                report_type = "Security Report"
+                target = "Unknown"
+
+                if os.path.exists(json_path):
+                    try:
+                        import json
+                        with open(json_path, 'r') as f:
+                            data = json.load(f)
+                            report_type = data.get('metadata', {}).get('report_title', report_type).split(' - ')[0]
+                            target = data.get('target', {}).get('primary_target', target)
+                    except:
+                        pass
+
+                report_data = {
+                    'report_name': filename,
+                    'report_type': report_type,
+                    'target': target,
+                    'path': report_path,
+                    'generated_at': datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M")
+                }
+                self.add_report_to_table(report_data)
+
     def on_enter(self):
         """Called when page is entered"""
+        self.refresh_targets()
         self.load_reports()
         if self.logger:
             self.logger.info("Reports page entered")
