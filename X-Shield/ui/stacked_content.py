@@ -59,6 +59,11 @@ class StackedContent(QWidget):
                 background-color: #1a1a1a;
                 border-bottom: 2px solid #2d2d2d;
             }
+            QLabel {
+                border: none;
+                background: transparent;
+                padding: 0px;
+            }
         """)
         
         header_layout = QHBoxLayout(header_frame)

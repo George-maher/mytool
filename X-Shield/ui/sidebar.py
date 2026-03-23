@@ -30,19 +30,21 @@ class SidebarButton(QPushButton):
         
         # Create layout
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(24, 20, 24, 20)
-        layout.setSpacing(20)
+        layout.setContentsMargins(12, 10, 12, 10)
+        layout.setSpacing(15)
         
         # Icon label
         icon_label = QLabel(icon_text)
-        icon_label.setFont(QFont("Segoe UI Emoji", 24))
+        icon_label.setFont(QFont("Segoe UI Emoji", 20))
         icon_label.setAlignment(Qt.AlignCenter)
-        icon_label.setFixedSize(40, 40)
+        icon_label.setFixedSize(30, 30)
+        icon_label.setStyleSheet("border: none; background: transparent;")
         layout.addWidget(icon_label)
         
         # Text label
         text_label = QLabel(label_text)
-        text_label.setFont(QFont("Roboto", 16, QFont.Medium))
+        text_label.setFont(QFont("Roboto", 14, QFont.Medium))
+        text_label.setStyleSheet("border: none; background: transparent;")
         layout.addWidget(text_label)
         
         layout.addStretch()
@@ -53,26 +55,24 @@ class SidebarButton(QPushButton):
             QPushButton {
                 background-color: transparent;
                 border: none;
-                border-radius: 12px;
+                border-radius: 8px;
                 color: #b0b0b0;
                 text-align: left;
                 padding: 0px;
-                margin: 6px 16px;
-                min-height: 24px;
+                margin: 4px 12px;
+                min-height: 50px;
             }
             QPushButton:hover {
-                background-color: rgba(255, 255, 255, 0.15);
+                background-color: rgba(255, 255, 255, 0.1);
                 color: #ffffff;
-                transform: translateX(4px);
             }
             QPushButton:checked {
-                background-color: rgba(46, 125, 50, 0.4);
+                background-color: rgba(46, 125, 50, 0.3);
                 color: #2e7d32;
-                border-left: 6px solid #2e7d32;
-                font-weight: 600;
+                border-left: 4px solid #2e7d32;
             }
             QPushButton:pressed {
-                background-color: rgba(255, 255, 255, 0.2);
+                background-color: rgba(255, 255, 255, 0.15);
             }
         """)
 

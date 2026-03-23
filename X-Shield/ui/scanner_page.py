@@ -93,7 +93,7 @@ class ScannerPage(QWidget):
             QComboBox:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             QComboBox::drop-down {
                 border: none;
@@ -193,19 +193,16 @@ class ScannerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #45a049;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+
             }
             QPushButton:pressed {
                 background-color: #3d8b40;
-                transform: translateY(0px);
-                box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4);
+
             }
             QPushButton:disabled {
                 background-color: #404040;
                 color: #888888;
-                transform: none;
-                box-shadow: none;
+
             }
         """)
         button_layout.addWidget(self.start_btn)
@@ -227,19 +224,16 @@ class ScannerPage(QWidget):
             }
             QPushButton:hover {
                 background-color: #da190b;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+
             }
             QPushButton:pressed {
                 background-color: #b71c1c;
-                transform: translateY(0px);
-                box-shadow: 0 3px 10px rgba(244, 67, 54, 0.4);
+
             }
             QPushButton:disabled {
                 background-color: #404040;
                 color: #888888;
-                transform: none;
-                box-shadow: none;
+
             }
         """)
         button_layout.addWidget(self.stop_btn)

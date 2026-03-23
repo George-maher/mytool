@@ -174,7 +174,7 @@ class TargetManager(QWidget):
             QLineEdit:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             QLineEdit:disabled {
                 background-color: #1e1e1e;
@@ -201,7 +201,7 @@ class TargetManager(QWidget):
             QComboBox:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             QComboBox::drop-down {
                 border: none;
@@ -255,7 +255,7 @@ class TargetManager(QWidget):
             QLineEdit:focus {
                 border: 2px solid #2196F3;
                 background-color: #333333;
-                box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+
             }
             QLineEdit:disabled {
                 background-color: #1e1e1e;
