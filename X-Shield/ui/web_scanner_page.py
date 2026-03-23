@@ -142,8 +142,8 @@ class WebScannerPage(QWidget):
     def setup_ui(self):
         """Setup web scanner UI with Midnight Neon aesthetic"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(24, 24, 24, 24)
-        layout.setSpacing(24)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(0)
 
         # Header Section
         header_layout = QHBoxLayout()
@@ -300,6 +300,7 @@ class WebScannerPage(QWidget):
         buttons_layout.setSpacing(12)
         
         self.start_btn = QPushButton("🚀 Start Scan")
+        self.start_btn.setProperty("class", "large")
         self.start_btn.setStyleSheet("""
             QPushButton {
                 background-color: #22d3ee;
@@ -310,7 +311,8 @@ class WebScannerPage(QWidget):
                 font-weight: 900;
                 font-size: 13px;
                 letter-spacing: 1px;
-                min-width: 150px;
+                min-width: 200px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: #67e8f9;
@@ -324,6 +326,7 @@ class WebScannerPage(QWidget):
         
         self.stop_btn = QPushButton("⏹️ Stop Scan")
         self.stop_btn.setEnabled(False)
+        self.stop_btn.setProperty("class", "large")
         self.stop_btn.setStyleSheet("""
             QPushButton {
                 background-color: transparent;
@@ -333,7 +336,8 @@ class WebScannerPage(QWidget):
                 border-radius: 4px;
                 font-weight: bold;
                 font-size: 13px;
-                min-width: 150px;
+                min-width: 200px;
+                min-height: 48px;
             }
             QPushButton:hover {
                 background-color: rgba(244, 63, 94, 0.1);

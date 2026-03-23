@@ -26,7 +26,7 @@ class StatusCard(QFrame):
             StatusCard {{
                 background-color: #0f172a;
                 border: 1px solid #1e293b;
-                border-radius: 4px;
+                border-radius: 6px;
             }}
             StatusCard:hover {{
                 border: 1px solid {color};

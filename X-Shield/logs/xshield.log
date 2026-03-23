@@ -407,3 +407,593 @@
 2026-03-23 18:59:02 - XShield - INFO - Reports page entered
 2026-03-23 18:59:03 - XShield - INFO - X-Shield Application closing
 2026-03-23 18:59:03 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 19:01:55 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 19:01:55 - XShield - INFO - Target Manager initialized
+2026-03-23 19:01:56 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 19:01:58 - XShield - INFO - Target Manager page entered
+2026-03-23 19:01:59 - XShield - INFO - Network Scanner page entered
+2026-03-23 19:02:00 - XShield - INFO - OSINT page entered
+2026-03-23 19:02:01 - XShield - INFO - Reports page entered
+2026-03-23 19:02:01 - XShield - INFO - OSINT page entered
+2026-03-23 19:02:03 - XShield - INFO - Reports page entered
+2026-03-23 19:02:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 19:02:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 19:03:26 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 19:03:26 - XShield - INFO - Target Manager initialized
+2026-03-23 19:03:27 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 19:03:30 - XShield - INFO - Target Manager page entered
+2026-03-23 19:03:31 - XShield - INFO - Network Scanner page entered
+2026-03-23 19:03:37 - XShield - INFO - Web Scanner page entered
+2026-03-23 19:03:38 - XShield - INFO - OSINT page entered
+2026-03-23 19:03:39 - XShield - INFO - Reports page entered
+2026-03-23 19:03:40 - XShield - INFO - OSINT page entered
+2026-03-23 19:03:43 - XShield - INFO - Target Manager page entered
+2026-03-23 19:03:43 - XShield - INFO - Dashboard page entered
+2026-03-23 19:03:48 - XShield - INFO - Settings page entered
+2026-03-23 19:03:50 - XShield - INFO - Reports page entered
+2026-03-23 19:03:52 - XShield - INFO - OSINT page entered
+2026-03-23 19:03:52 - XShield - INFO - Web Scanner page entered
+2026-03-23 19:03:53 - XShield - INFO - Network Scanner page entered
+2026-03-23 19:03:53 - XShield - INFO - Target Manager page entered
+2026-03-23 19:03:53 - XShield - INFO - Dashboard page entered
+2026-03-23 19:03:56 - XShield - INFO - X-Shield Application closing
+2026-03-23 19:03:56 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 19:04:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 19:04:07 - XShield - INFO - Target Manager initialized
+2026-03-23 19:04:08 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 19:04:14 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 19:04:14 - XShield - INFO - Target Manager initialized
+2026-03-23 19:04:15 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:29:32 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:29:32 - XShield - INFO - Target Manager initialized
+2026-03-23 20:29:33 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:29:37 - XShield - INFO - Target Manager page entered
+2026-03-23 20:29:43 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:29:47 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:29:48 - XShield - INFO - OSINT page entered
+2026-03-23 20:29:53 - XShield - INFO - Reports page entered
+2026-03-23 20:29:55 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:29:55 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:30:58 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:30:58 - XShield - INFO - Target Manager initialized
+2026-03-23 20:30:59 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:31:00 - XShield - INFO - Target Manager page entered
+2026-03-23 20:31:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:31:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:31:15 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:31:15 - XShield - INFO - Target Manager initialized
+2026-03-23 20:31:15 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:31:17 - XShield - INFO - Target Manager page entered
+2026-03-23 20:31:26 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:31:26 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:31:47 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:31:47 - XShield - INFO - Target Manager initialized
+2026-03-23 20:31:47 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:31:50 - XShield - INFO - Target Manager page entered
+2026-03-23 20:31:51 - XShield - INFO - Target Manager page entered
+2026-03-23 20:31:56 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:31:57 - XShield - INFO - Target Manager page entered
+2026-03-23 20:32:01 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:32:01 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:32:42 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:32:42 - XShield - INFO - Target Manager initialized
+2026-03-23 20:32:43 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:32:44 - XShield - INFO - Target Manager page entered
+2026-03-23 20:32:45 - XShield - INFO - Dashboard page entered
+2026-03-23 20:32:45 - XShield - INFO - Target Manager page entered
+2026-03-23 20:32:48 - XShield - INFO - Dashboard page entered
+2026-03-23 20:32:50 - XShield - INFO - Target Manager page entered
+2026-03-23 20:32:53 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:32:54 - XShield - INFO - Dashboard page entered
+2026-03-23 20:32:55 - XShield - INFO - Target Manager page entered
+2026-03-23 20:32:59 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:32:59 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:33:38 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:33:38 - XShield - INFO - Target Manager initialized
+2026-03-23 20:33:39 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:33:42 - XShield - INFO - Target Manager page entered
+2026-03-23 20:33:43 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:33:44 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:33:44 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:33:45 - XShield - INFO - Target Manager page entered
+2026-03-23 20:33:49 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:33:49 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:34:04 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:34:04 - XShield - INFO - Target Manager initialized
+2026-03-23 20:34:05 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:34:10 - XShield - INFO - Target Manager page entered
+2026-03-23 20:34:15 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:34:16 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:34:16 - XShield - INFO - OSINT page entered
+2026-03-23 20:34:17 - XShield - INFO - Reports page entered
+2026-03-23 20:34:18 - XShield - INFO - Settings page entered
+2026-03-23 20:34:20 - XShield - INFO - Target Manager page entered
+2026-03-23 20:34:21 - XShield - INFO - Dashboard page entered
+2026-03-23 20:34:23 - XShield - INFO - Target Manager page entered
+2026-03-23 20:34:25 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:34:25 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:35:15 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:35:15 - XShield - INFO - Target Manager initialized
+2026-03-23 20:35:16 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:35:18 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:19 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:35:20 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:35:21 - XShield - INFO - OSINT page entered
+2026-03-23 20:35:22 - XShield - INFO - Reports page entered
+2026-03-23 20:35:23 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:35:23 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:24 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:35:27 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:33 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:35:33 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:35:40 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:35:40 - XShield - INFO - Target Manager initialized
+2026-03-23 20:35:41 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:35:43 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:45 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:35:46 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:46 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:47 - XShield - INFO - Dashboard page entered
+2026-03-23 20:35:49 - XShield - INFO - Target Manager page entered
+2026-03-23 20:35:50 - XShield - INFO - Dashboard page entered
+2026-03-23 20:35:58 - XShield - INFO - Target Manager page entered
+2026-03-23 20:36:00 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:36:00 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:38:57 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:38:57 - XShield - INFO - Target Manager initialized
+2026-03-23 20:39:08 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:39:08 - XShield - INFO - Target Manager initialized
+2026-03-23 20:39:08 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:39:10 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:39:12 - XShield - INFO - Dashboard page entered
+2026-03-23 20:39:13 - XShield - INFO - Target Manager page entered
+2026-03-23 20:39:16 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:39:21 - XShield - INFO - Target Manager page entered
+2026-03-23 20:39:22 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:39:27 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:39:27 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:39:46 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:39:46 - XShield - INFO - Target Manager initialized
+2026-03-23 20:39:47 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:39:49 - XShield - INFO - Target Manager page entered
+2026-03-23 20:39:50 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:39:51 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:39:52 - XShield - INFO - OSINT page entered
+2026-03-23 20:39:53 - XShield - INFO - Reports page entered
+2026-03-23 20:39:54 - XShield - INFO - Settings page entered
+2026-03-23 20:39:54 - XShield - INFO - Reports page entered
+2026-03-23 20:39:55 - XShield - INFO - OSINT page entered
+2026-03-23 20:39:56 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:39:56 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:40:06 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:40:06 - XShield - INFO - Target Manager initialized
+2026-03-23 20:40:14 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:40:14 - XShield - INFO - Target Manager initialized
+2026-03-23 20:40:14 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:40:26 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:40:26 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:40:33 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:40:33 - XShield - INFO - Target Manager initialized
+2026-03-23 20:40:34 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:40:37 - XShield - INFO - Target Manager page entered
+2026-03-23 20:40:38 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:40:39 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:40:39 - XShield - INFO - OSINT page entered
+2026-03-23 20:40:40 - XShield - INFO - Reports page entered
+2026-03-23 20:40:41 - XShield - INFO - OSINT page entered
+2026-03-23 20:40:43 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:40:43 - XShield - INFO - Target Manager page entered
+2026-03-23 20:40:44 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:40:44 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:40:52 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:40:52 - XShield - INFO - Target Manager initialized
+2026-03-23 20:40:53 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:40:57 - XShield - INFO - Target Manager page entered
+2026-03-23 20:40:58 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:40:59 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:41:00 - XShield - INFO - OSINT page entered
+2026-03-23 20:41:01 - XShield - INFO - Reports page entered
+2026-03-23 20:41:01 - XShield - INFO - Settings page entered
+2026-03-23 20:41:03 - XShield - INFO - Dashboard page entered
+2026-03-23 20:41:04 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:41:04 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:41:17 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:41:17 - XShield - INFO - Target Manager initialized
+2026-03-23 20:41:18 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:41:22 - XShield - INFO - Target Manager page entered
+2026-03-23 20:41:23 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:41:24 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:41:25 - XShield - INFO - Target Manager page entered
+2026-03-23 20:41:26 - XShield - INFO - Dashboard page entered
+2026-03-23 20:41:27 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:41:27 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:41:37 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:41:37 - XShield - INFO - Target Manager initialized
+2026-03-23 20:41:38 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:41:44 - XShield - INFO - Target Manager page entered
+2026-03-23 20:41:45 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:41:45 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:41:46 - XShield - INFO - OSINT page entered
+2026-03-23 20:41:46 - XShield - INFO - Reports page entered
+2026-03-23 20:41:47 - XShield - INFO - Settings page entered
+2026-03-23 20:41:49 - XShield - INFO - Target Manager page entered
+2026-03-23 20:41:50 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:41:51 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:41:53 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:41:53 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:42:15 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:42:15 - XShield - INFO - Target Manager initialized
+2026-03-23 20:42:16 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:42:20 - XShield - INFO - Target Manager page entered
+2026-03-23 20:42:21 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:42:22 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:42:23 - XShield - INFO - OSINT page entered
+2026-03-23 20:42:23 - XShield - INFO - Reports page entered
+2026-03-23 20:42:25 - XShield - INFO - OSINT page entered
+2026-03-23 20:42:25 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:42:26 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:42:26 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:42:28 - XShield - INFO - Target Manager page entered
+2026-03-23 20:42:29 - XShield - INFO - Dashboard page entered
+2026-03-23 20:42:30 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:42:30 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:42:51 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:42:51 - XShield - INFO - Target Manager initialized
+2026-03-23 20:42:51 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:42:55 - XShield - INFO - Target Manager page entered
+2026-03-23 20:42:56 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:42:57 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:42:57 - XShield - INFO - OSINT page entered
+2026-03-23 20:42:58 - XShield - INFO - Reports page entered
+2026-03-23 20:42:58 - XShield - INFO - Settings page entered
+2026-03-23 20:42:59 - XShield - INFO - Target Manager page entered
+2026-03-23 20:42:59 - XShield - INFO - Dashboard page entered
+2026-03-23 20:43:01 - XShield - INFO - Target Manager page entered
+2026-03-23 20:43:02 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:43:03 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:43:04 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:43:04 - XShield - INFO - Target Manager page entered
+2026-03-23 20:43:05 - XShield - INFO - Dashboard page entered
+2026-03-23 20:43:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:43:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:43:24 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:43:24 - XShield - INFO - Target Manager initialized
+2026-03-23 20:43:25 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:43:28 - XShield - INFO - Target Manager page entered
+2026-03-23 20:43:29 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:43:29 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:43:30 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:43:30 - XShield - INFO - OSINT page entered
+2026-03-23 20:43:32 - XShield - INFO - Settings page entered
+2026-03-23 20:43:32 - XShield - INFO - Reports page entered
+2026-03-23 20:43:34 - XShield - INFO - Dashboard page entered
+2026-03-23 20:43:34 - XShield - INFO - Target Manager page entered
+2026-03-23 20:43:35 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:43:39 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:43:39 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:43:49 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:43:49 - XShield - INFO - Target Manager initialized
+2026-03-23 20:43:50 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:43:53 - XShield - INFO - Target Manager page entered
+2026-03-23 20:44:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:44:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:44:09 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:44:09 - XShield - INFO - Target Manager initialized
+2026-03-23 20:44:09 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:44:16 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:44:16 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:44:22 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:44:22 - XShield - INFO - Target Manager initialized
+2026-03-23 20:44:23 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:44:27 - XShield - INFO - Target Manager page entered
+2026-03-23 20:44:27 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:44:32 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:44:32 - XShield - INFO - OSINT page entered
+2026-03-23 20:44:33 - XShield - INFO - Reports page entered
+2026-03-23 20:44:33 - XShield - INFO - Settings page entered
+2026-03-23 20:44:34 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:44:34 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:44:46 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:44:46 - XShield - INFO - Target Manager initialized
+2026-03-23 20:44:47 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:44:51 - XShield - INFO - Target Manager page entered
+2026-03-23 20:44:51 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:44:52 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:44:53 - XShield - INFO - OSINT page entered
+2026-03-23 20:44:54 - XShield - INFO - Reports page entered
+2026-03-23 20:44:55 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:44:55 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:45:14 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:45:14 - XShield - INFO - Target Manager initialized
+2026-03-23 20:45:15 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:45:18 - XShield - INFO - Target Manager page entered
+2026-03-23 20:45:19 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:45:19 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:45:20 - XShield - INFO - OSINT page entered
+2026-03-23 20:45:29 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:45:29 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:46:05 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:46:05 - XShield - INFO - Target Manager initialized
+2026-03-23 20:46:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:46:08 - XShield - INFO - Target Manager page entered
+2026-03-23 20:46:08 - XShield - INFO - Target Manager page entered
+2026-03-23 20:46:08 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:46:09 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:46:13 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:46:13 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:46:27 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:46:27 - XShield - INFO - Target Manager initialized
+2026-03-23 20:46:28 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:46:31 - XShield - INFO - Target Manager page entered
+2026-03-23 20:46:35 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:46:35 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:46:45 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:46:45 - XShield - INFO - Target Manager initialized
+2026-03-23 20:46:45 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:46:47 - XShield - INFO - Target Manager page entered
+2026-03-23 20:46:54 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:46:54 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:47:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:47:07 - XShield - INFO - Target Manager initialized
+2026-03-23 20:47:08 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:47:11 - XShield - INFO - Target Manager page entered
+2026-03-23 20:47:15 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:47:15 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:47:22 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:47:22 - XShield - INFO - Target Manager initialized
+2026-03-23 20:47:22 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:47:25 - XShield - INFO - Target Manager page entered
+2026-03-23 20:47:35 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:47:35 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:48:06 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:48:06 - XShield - INFO - Target Manager initialized
+2026-03-23 20:48:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:48:08 - XShield - INFO - Target Manager page entered
+2026-03-23 20:48:12 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:48:12 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:48:27 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:48:27 - XShield - INFO - Target Manager initialized
+2026-03-23 20:48:28 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:48:30 - XShield - INFO - Target Manager page entered
+2026-03-23 20:48:32 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:48:32 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:48:44 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:48:44 - XShield - INFO - Target Manager initialized
+2026-03-23 20:48:45 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:48:48 - XShield - INFO - Target Manager page entered
+2026-03-23 20:48:52 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:48:52 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:48:58 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:48:58 - XShield - INFO - Target Manager initialized
+2026-03-23 20:48:59 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:49:01 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:49:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:49:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:49:12 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:49:12 - XShield - INFO - Target Manager initialized
+2026-03-23 20:49:13 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:49:14 - XShield - INFO - Target Manager page entered
+2026-03-23 20:49:22 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:49:22 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:49:33 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:49:33 - XShield - INFO - Target Manager initialized
+2026-03-23 20:49:34 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:49:36 - XShield - INFO - Target Manager page entered
+2026-03-23 20:49:43 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:49:43 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:49:53 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:49:53 - XShield - INFO - Target Manager initialized
+2026-03-23 20:49:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:49:56 - XShield - INFO - Target Manager page entered
+2026-03-23 20:49:59 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:49:59 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:50:16 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:50:16 - XShield - INFO - Target Manager initialized
+2026-03-23 20:50:17 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:50:19 - XShield - INFO - Target Manager page entered
+2026-03-23 20:50:24 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:50:24 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:50:53 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:50:53 - XShield - INFO - Target Manager initialized
+2026-03-23 20:50:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:50:56 - XShield - INFO - Target Manager page entered
+2026-03-23 20:51:02 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:51:02 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:51:13 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:51:13 - XShield - INFO - Target Manager initialized
+2026-03-23 20:51:14 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:51:16 - XShield - INFO - Target Manager page entered
+2026-03-23 20:51:21 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:51:21 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:51:28 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:51:28 - XShield - INFO - Target Manager initialized
+2026-03-23 20:51:29 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:51:32 - XShield - INFO - Target Manager page entered
+2026-03-23 20:51:33 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:51:33 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:51:40 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:51:40 - XShield - INFO - Target Manager initialized
+2026-03-23 20:51:41 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:51:44 - XShield - INFO - Target Manager page entered
+2026-03-23 20:51:46 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:51:46 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:52:27 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:52:27 - XShield - INFO - Target Manager initialized
+2026-03-23 20:52:27 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:52:29 - XShield - INFO - Target Manager page entered
+2026-03-23 20:52:39 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:52:39 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:53:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:53:07 - XShield - INFO - Target Manager initialized
+2026-03-23 20:53:08 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:53:09 - XShield - INFO - Target Manager page entered
+2026-03-23 20:53:14 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:53:14 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:53:24 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:53:24 - XShield - INFO - Target Manager initialized
+2026-03-23 20:53:25 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:53:26 - XShield - INFO - Target Manager page entered
+2026-03-23 20:53:28 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:53:28 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:53:45 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:53:45 - XShield - INFO - Target Manager initialized
+2026-03-23 20:53:46 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:53:48 - XShield - INFO - Target Manager page entered
+2026-03-23 20:53:50 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:53:50 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:53:54 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:53:54 - XShield - INFO - Target Manager initialized
+2026-03-23 20:53:55 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:53:56 - XShield - INFO - Target Manager page entered
+2026-03-23 20:53:59 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:53:59 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:54:48 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:54:48 - XShield - INFO - Target Manager initialized
+2026-03-23 20:54:49 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:54:50 - XShield - INFO - Target Manager page entered
+2026-03-23 20:54:55 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:54:55 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:55:05 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:55:05 - XShield - INFO - Target Manager initialized
+2026-03-23 20:55:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:55:09 - XShield - INFO - Target Manager page entered
+2026-03-23 20:55:16 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:55:16 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:55:23 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:55:23 - XShield - INFO - Target Manager initialized
+2026-03-23 20:55:24 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:55:26 - XShield - INFO - Target Manager page entered
+2026-03-23 20:55:33 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:55:33 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:55:54 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:55:54 - XShield - INFO - Target Manager initialized
+2026-03-23 20:55:55 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:55:57 - XShield - INFO - Target Manager page entered
+2026-03-23 20:56:03 - XShield - INFO - X-Shield Application closing
+2026-03-23 20:56:03 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 20:58:34 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:58:34 - XShield - INFO - Target Manager initialized
+2026-03-23 20:58:35 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:59:41 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:59:41 - XShield - INFO - Target Manager initialized
+2026-03-23 20:59:42 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:59:48 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 20:59:48 - XShield - INFO - Target Manager initialized
+2026-03-23 20:59:49 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 20:59:50 - XShield - INFO - Target Manager page entered
+2026-03-23 20:59:51 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:59:53 - XShield - INFO - Dashboard page entered
+2026-03-23 20:59:53 - XShield - INFO - Target Manager page entered
+2026-03-23 20:59:56 - XShield - INFO - Network Scanner page entered
+2026-03-23 20:59:56 - XShield - INFO - Web Scanner page entered
+2026-03-23 20:59:57 - XShield - INFO - OSINT page entered
+2026-03-23 20:59:57 - XShield - INFO - Reports page entered
+2026-03-23 20:59:58 - XShield - INFO - Settings page entered
+2026-03-23 20:59:59 - XShield - INFO - Reports page entered
+2026-03-23 21:00:00 - XShield - INFO - OSINT page entered
+2026-03-23 21:00:00 - XShield - INFO - OSINT page entered
+2026-03-23 21:00:01 - XShield - INFO - OSINT page entered
+2026-03-23 21:00:01 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:00:02 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:00:06 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:00:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:06:03 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:06:03 - XShield - INFO - Target Manager initialized
+2026-03-23 21:06:05 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:07:04 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:07:04 - XShield - INFO - Target Manager initialized
+2026-03-23 21:07:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:07:12 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:14 - XShield - INFO - Dashboard page entered
+2026-03-23 21:07:15 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:15 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:07:16 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:07:16 - XShield - INFO - OSINT page entered
+2026-03-23 21:07:17 - XShield - INFO - Reports page entered
+2026-03-23 21:07:18 - XShield - INFO - Settings page entered
+2026-03-23 21:07:18 - XShield - INFO - OSINT page entered
+2026-03-23 21:07:19 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:07:20 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:07:21 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:22 - XShield - INFO - Dashboard page entered
+2026-03-23 21:07:24 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:25 - XShield - INFO - Reports page entered
+2026-03-23 21:07:25 - XShield - INFO - Settings page entered
+2026-03-23 21:07:26 - XShield - INFO - Reports page entered
+2026-03-23 21:07:26 - XShield - INFO - OSINT page entered
+2026-03-23 21:07:26 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:27 - XShield - INFO - Dashboard page entered
+2026-03-23 21:07:29 - XShield - INFO - Target Manager page entered
+2026-03-23 21:07:30 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:07:30 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:07:55 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:07:55 - XShield - INFO - Target Manager initialized
+2026-03-23 21:07:56 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:08:38 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:08:38 - XShield - INFO - Target Manager initialized
+2026-03-23 21:08:39 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:08:41 - XShield - INFO - Target Manager page entered
+2026-03-23 21:08:49 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:08:49 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:08:56 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:08:56 - XShield - INFO - Target Manager initialized
+2026-03-23 21:08:58 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:09:00 - XShield - INFO - Target Manager page entered
+2026-03-23 21:09:02 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:09:02 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:10:50 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:10:50 - XShield - INFO - Target Manager initialized
+2026-03-23 21:10:51 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:10:53 - XShield - INFO - Target Manager page entered
+2026-03-23 21:10:56 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:10:56 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:11:04 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:11:04 - XShield - INFO - Target Manager initialized
+2026-03-23 21:11:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:11:08 - XShield - INFO - Target Manager page entered
+2026-03-23 21:11:12 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:11:12 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:15:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:15:07 - XShield - INFO - Target Manager initialized
+2026-03-23 21:15:09 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:15:11 - XShield - INFO - Target Manager page entered
+2026-03-23 21:15:12 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:15:13 - XShield - INFO - Target Manager page entered
+2026-03-23 21:15:13 - XShield - INFO - Dashboard page entered
+2026-03-23 21:15:14 - XShield - INFO - Target Manager page entered
+2026-03-23 21:15:15 - XShield - INFO - Dashboard page entered
+2026-03-23 21:15:16 - XShield - INFO - Target Manager page entered
+2026-03-23 21:15:18 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:15:18 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:17:03 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:17:03 - XShield - INFO - Target Manager initialized
+2026-03-23 21:17:05 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:17:06 - XShield - INFO - Target Manager page entered
+2026-03-23 21:17:07 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:17:07 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:17:10 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:17:10 - XShield - INFO - Target Manager page entered
+2026-03-23 21:17:11 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:17:11 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:17:13 - XShield - INFO - OSINT page entered
+2026-03-23 21:17:14 - XShield - INFO - Reports page entered
+2026-03-23 21:17:15 - XShield - INFO - OSINT page entered
+2026-03-23 21:17:18 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:17:18 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:17:19 - XShield - INFO - Target Manager page entered
+2026-03-23 21:17:20 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:17:20 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:17:22 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:17:22 - XShield - INFO - Target Manager cleanup completed
+2026-03-23 21:18:06 - XShield - INFO - Loaded 1 targets from file
+2026-03-23 21:18:06 - XShield - INFO - Target Manager initialized
+2026-03-23 21:18:07 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-23 21:18:09 - XShield - INFO - Target Manager page entered
+2026-03-23 21:18:10 - XShield - INFO - Network Scanner page entered
+2026-03-23 21:18:11 - XShield - INFO - Web Scanner page entered
+2026-03-23 21:18:11 - XShield - INFO - OSINT page entered
+2026-03-23 21:18:12 - XShield - INFO - Reports page entered
+2026-03-23 21:18:12 - XShield - INFO - OSINT page entered
+2026-03-23 21:18:13 - XShield - INFO - Reports page entered
+2026-03-23 21:18:14 - XShield - INFO - X-Shield Application closing
+2026-03-23 21:18:14 - XShield - INFO - Target Manager cleanup completed

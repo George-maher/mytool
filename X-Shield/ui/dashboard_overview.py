@@ -22,7 +22,7 @@ class StatCard(QFrame):
     
     def setup_ui(self, title, value, color, icon):
         """Setup stat card UI"""
-        self.setFixedSize(200, 120)
+        self.setFixedSize(150, 120)
         self.setStyleSheet(f"""
             QFrame {{
                 background-color: #1e1e1e;

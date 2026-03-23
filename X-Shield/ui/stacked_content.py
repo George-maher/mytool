@@ -33,8 +33,8 @@ class StackedContent(QWidget):
     def setup_ui(self):
         """Setup main UI layout"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(5)
         
         # Header bar
         header = self.create_header()

@@ -25,7 +25,8 @@ class TerminalWidget(QWidget):
     def setup_ui(self):
         """Setup terminal UI"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(5, 5, 5, 5)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(5)
         
         # Terminal display
         self.terminal = QTextEdit()

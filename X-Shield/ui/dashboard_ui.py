@@ -65,8 +65,8 @@ class DashboardUI(QMainWindow):
     def setup_ui(self):
         """Setup main dashboard UI"""
         self.setWindowTitle("X-Shield - Professional Pentesting Framework")
-        self.setGeometry(100, 100, 1600, 1000)
-        self.setMinimumSize(1200, 800)
+        self.setGeometry(100, 100, 1000, 1000)
+        self.setMinimumSize(1000, 800)
         
         # Create central widget
         central_widget = QWidget()

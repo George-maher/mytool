@@ -26,17 +26,57 @@ class TargetManagerPage(QWidget):
         self.load_targets()
     
     def setup_ui(self):
-        """Setup target manager UI with Midnight Neon aesthetic"""
+        """Setup target manager UI with modern design system"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(30, 30, 30, 30)
+        layout.setContentsMargins(40, 40, 40, 40)
         layout.setSpacing(20)
         
-        # Title
-        title_label = QLabel("Target Manager")
-        title_label.setObjectName("title")
-        title_label.setFont(QFont("Roboto", 28, QFont.Bold))
-        title_label.setStyleSheet("color: #2e7d32;")
-        layout.addWidget(title_label)
+        # Modern Header Section
+        header_frame = QFrame()
+        header_frame.setStyleSheet("""
+            QFrame {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 32px;
+                margin-bottom: 24px;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            }
+        """)
+        header_layout = QVBoxLayout(header_frame)
+        header_layout.setSpacing(16)
+        
+        title_row = QHBoxLayout()
+        title_row.setSpacing(20)
+        
+        title_label = QLabel("TARGET MANAGEMENT")
+        title_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 800;
+            font-size: 32px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        title_row.addWidget(title_label)
+        title_row.addStretch()
+        
+        status_tag = QLabel("SYSTEM ACTIVE")
+        status_tag.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 14px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(34, 211, 238, 0.1) 100%);
+            border: 2px solid #22d3ee;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        title_row.addWidget(status_tag)
+        header_layout.addLayout(title_row)
+        layout.addWidget(header_frame)
         
         # Target Input Section
         self.setup_target_input(layout)
@@ -50,187 +90,144 @@ class TargetManagerPage(QWidget):
         layout.addStretch()
     
     def setup_target_input(self, parent_layout):
-        """Setup target input section"""
+        """Setup modern target input section"""
         input_frame = QFrame()
         input_frame.setStyleSheet("""
             QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 40px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
         
         input_layout = QVBoxLayout(input_frame)
-        input_layout.setSpacing(16)
+        input_layout.setSpacing(32)
         
-        # Section title
+        # Modern Section Title
         section_title = QLabel("ENROLL NEW NODE")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        section_title.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         input_layout.addWidget(section_title)
         
-        # Input form
+        # Modern Input Form
         form_layout = QGridLayout()
-        form_layout.setSpacing(16)
+        form_layout.setSpacing(24)
+        form_layout.setContentsMargins(0, 0, 0, 0)
         
-        # Target IP/URL
+        # Modern Target IP/URL Input
+        target_label = QLabel("Target Address")
+        target_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        form_layout.addWidget(target_label, 0, 0)
+        
         self.target_input = QLineEdit()
         self.target_input.setPlaceholderText("Enter target IP, domain, or URL...")
-        self.target_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #22d3ee;
-                font-family: 'DejaVu Sans Mono';
-                font-size: 14px;
-            }
-            QLineEdit:focus {
-                border: 1px solid #22d3ee;
-            }
-        """)
-        form_layout.addWidget(QLabel("Target IP/URL:"), 0, 0)
+        # Input styling is now handled by global theme
         form_layout.addWidget(self.target_input, 0, 1)
         
-        # Target Type
+        # Modern Target Type Selection
+        type_label = QLabel("Target Type")
+        type_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        form_layout.addWidget(type_label, 1, 0)
+        
         self.target_type_combo = QComboBox()
         self.target_type_combo.addItems(["IP Address", "Domain", "URL", "IP Range", "File"])
-        self.target_type_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #f8fafc;
-                font-size: 14px;
-                min-width: 250px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 40px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-top: 6px solid #ffffff;
-                margin-right: 8px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                selection-color: white;
-                font-size: 15px;
-                padding: 8px;
-            }
-        """)
-        form_layout.addWidget(QLabel("Target Type:"), 1, 0)
+        # ComboBox styling is now handled by global theme
         form_layout.addWidget(self.target_type_combo, 1, 1)
         
-        # Description
+        # Modern Description Input
+        desc_label = QLabel("Description")
+        desc_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        form_layout.addWidget(desc_label, 2, 0)
+        
         self.description_input = QTextEdit()
         self.description_input.setPlaceholderText("Optional description...")
-        self.description_input.setMaximumHeight(100)
-        self.description_input.setStyleSheet("""
-            QTextEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #f8fafc;
-                font-size: 14px;
-            }
-            QTextEdit:focus {
-                border: 1px solid #22d3ee;
-            }
-        """)
-        form_layout.addWidget(QLabel("Description:"), 2, 0)
+        self.description_input.setMaximumHeight(200)
+        # TextEdit styling is now handled by global theme
         form_layout.addWidget(self.description_input, 2, 1)
         
         input_layout.addLayout(form_layout)
         
-        # Add button
-        self.add_target_btn = QPushButton("🎯 Add Target")
-        self.add_target_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #22d3ee;
-                color: #020617;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: 900;
-                font-size: 14px;
-                letter-spacing: 1px;
-                min-width: 200px;
-            }
-            QPushButton:hover {
-                background-color: #67e8f9;
-            }
-        """)
-        input_layout.addWidget(self.add_target_btn)
+        # Modern Add Target Button
+        button_layout = QHBoxLayout()
+        button_layout.setSpacing(16)
+        button_layout.addStretch()
+        
+        self.add_target_btn = QPushButton("Add Target")
+        self.add_target_btn.setProperty("class", "large")
+        # Button styling is now handled by global theme
+        button_layout.addWidget(self.add_target_btn)
+        input_layout.addLayout(button_layout)
         
         parent_layout.addWidget(input_frame)
     
     def setup_target_table(self, parent_layout):
-        """Setup target table section"""
+        """Setup modern target table section"""
         table_frame = QFrame()
         table_frame.setStyleSheet("""
             QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 40px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
         
         table_layout = QVBoxLayout(table_frame)
-        table_layout.setSpacing(16)
+        table_layout.setSpacing(32)
         
-        # Section title
-        section_title = QLabel("INVENTORY")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        # Modern Section Title
+        section_title = QLabel("TARGET INVENTORY")
+        section_title.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         table_layout.addWidget(section_title)
         
-        # Target table
+        # Modern Target Table
         self.target_table = QTableWidget()
         self.target_table.setColumnCount(6)
         self.target_table.setHorizontalHeaderLabels([
             "Target", "Type", "Status", "Description", "Created", "Actions"
         ])
         
-        # Setup table styling
-        self.target_table.setStyleSheet("""
-            QTableWidget {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                gridline-color: #1e293b;
-                color: #f8fafc;
-                selection-background-color: rgba(34, 211, 238, 0.2);
-                font-size: 13px;
-            }
-            QTableWidget::item {
-                padding: 12px;
-                border-bottom: 1px solid #1e293b;
-            }
-            QHeaderView::section {
-                background-color: #0f172a;
-                color: #64748b;
-                padding: 12px;
-                border: none;
-                font-weight: bold;
-                font-size: 11px;
-                letter-spacing: 1px;
-            }
-        """)
+        # Table styling is now handled by global theme
         
-        # Set column widths
+        # Set column widths for better proportions
         header = self.target_table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.Stretch)  # Target
         header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # Type
@@ -238,86 +235,86 @@ class TargetManagerPage(QWidget):
         header.setSectionResizeMode(3, QHeaderView.Stretch)  # Description
         header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # Created
         header.setSectionResizeMode(5, QHeaderView.Fixed)  # Actions
-        header.resizeSection(5, 140)
+        header.resizeSection(5, 180)  # Wider action column
         
-        # Set row height
+        # Set row height for better readability
         self.target_table.verticalHeader().setDefaultSectionSize(60)
         self.target_table.verticalHeader().setVisible(False)
         
         table_layout.addWidget(self.target_table)
-        
         parent_layout.addWidget(table_frame)
     
     def setup_action_buttons(self, parent_layout):
-        """Setup action buttons section"""
-        buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(12)
-        
-        # Import/Export buttons
-        self.import_btn = QPushButton("📥 Import")
-        self.import_btn.setStyleSheet("""
-            QPushButton {
-                background-color: rgba(34, 211, 238, 0.1);
-                color: #22d3ee;
-                border: 1px solid #22d3ee;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 13px;
-                min-width: 120px;
-            }
-            QPushButton:hover {
-                background-color: rgba(34, 211, 238, 0.2);
+        """Setup modern action buttons section"""
+        buttons_frame = QFrame()
+        buttons_frame.setStyleSheet("""
+            QFrame {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 32px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
+        
+        buttons_layout = QHBoxLayout(buttons_frame)
+        buttons_layout.setSpacing(20)
+        
+        # Modern Action Buttons
+        self.import_btn = QPushButton("Import Targets")
+        self.import_btn.setProperty("class", "small")
+        # Button styling is now handled by global theme
         buttons_layout.addWidget(self.import_btn)
         
-        self.export_btn = QPushButton("📤 Export")
-        self.export_btn.setStyleSheet("""
-            QPushButton {
-                background-color: rgba(245, 158, 11, 0.1);
-                color: #f59e0b;
-                border: 1px solid #f59e0b;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 13px;
-                min-width: 120px;
-            }
-            QPushButton:hover {
-                background-color: rgba(245, 158, 11, 0.2);
-            }
-        """)
+        self.export_btn = QPushButton("Export Targets")
+        self.export_btn.setProperty("class", "small")
+        # Button styling is now handled by global theme
         buttons_layout.addWidget(self.export_btn)
         
-        self.clear_btn = QPushButton("🗑️ Clear All")
-        self.clear_btn.setStyleSheet("""
-            QPushButton {
-                background-color: transparent;
-                color: #f43f5e;
-                border: 1px solid #f43f5e;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 13px;
-                min-width: 120px;
-            }
-            QPushButton:hover {
-                background-color: rgba(244, 63, 94, 0.1);
-            }
-        """)
+        self.clear_btn = QPushButton("Clear All")
+        self.clear_btn.setProperty("class", "small")
+        # Button styling is now handled by global theme
         buttons_layout.addWidget(self.clear_btn)
         
         buttons_layout.addStretch()
         
-        # Active target indicator
-        self.active_target_label = QLabel("No active target")
-        self.active_target_label.setObjectName("subtitle")
-        self.active_target_label.setFont(QFont("Roboto", 16, QFont.Bold))
-        self.active_target_label.setStyleSheet("color: #FF9800;")
-        buttons_layout.addWidget(self.active_target_label)
+        # Modern Status Indicator
+        status_container = QFrame()
+        status_container.setStyleSheet("""
+            QFrame {
+                background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%);
+                border: 2px solid #22d3ee;
+                border-radius: 12px;
+                padding: 16px 24px;
+            }
+        """)
         
-        parent_layout.addLayout(buttons_layout)
+        status_layout = QVBoxLayout(status_container)
+        status_layout.setSpacing(8)
+        
+        status_label = QLabel("Active Target")
+        status_label.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        status_layout.addWidget(status_label)
+        
+        self.active_target_label = QLabel("No active target")
+        self.active_target_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        status_layout.addWidget(self.active_target_label)
+        
+        buttons_layout.addWidget(status_container)
+        parent_layout.addWidget(buttons_frame)
     
     def setup_connections(self):
         """Setup signal connections"""

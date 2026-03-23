@@ -152,30 +152,57 @@ class NetworkScannerPage(QWidget):
         self.setup_connections()
     
     def setup_ui(self):
-        """Setup network scanner UI with Midnight Neon aesthetic"""
+        """Setup network scanner UI with modern design system"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(24, 24, 24, 24)
-        layout.setSpacing(24)
+        layout.setContentsMargins(40, 40, 40, 40)
+        layout.setSpacing(40)
 
-        # Header Section
-        header_layout = QHBoxLayout()
+        # Modern Header Section
+        header_frame = QFrame()
+        header_frame.setStyleSheet("""
+            QFrame {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 32px;
+                margin-bottom: 32px;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            }
+        """)
+        header_layout = QVBoxLayout(header_frame)
+        header_layout.setSpacing(20)
+        
+        title_row = QHBoxLayout()
+        title_row.setSpacing(20)
+        
         title_label = QLabel("NETWORK ANALYZER")
-        title_label.setStyleSheet("color: #f8fafc; font-weight: 900; font-size: 24px; letter-spacing: 4px;")
-        header_layout.addWidget(title_label)
-        header_layout.addStretch()
+        title_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 800;
+            font-size: 32px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
+        title_row.addWidget(title_label)
+        title_row.addStretch()
 
         status_tag = QLabel("MODULE READY")
         status_tag.setStyleSheet("""
             color: #22d3ee;
-            font-weight: bold;
-            font-size: 10px;
-            background-color: rgba(34, 211, 238, 0.1);
-            border: 1px solid #22d3ee;
-            padding: 4px 12px;
-            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(34, 211, 238, 0.1) 100%);
+            border: 2px solid #22d3ee;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', -apple-system, sans-serif;
         """)
-        header_layout.addWidget(status_tag)
-        layout.addLayout(header_layout)
+        title_row.addWidget(status_tag)
+        header_layout.addLayout(title_row)
+        layout.addWidget(header_frame)
         
         # Scanner Configuration
         self.setup_scanner_config(layout)
@@ -189,172 +216,102 @@ class NetworkScannerPage(QWidget):
         layout.addStretch()
     
     def setup_scanner_config(self, parent_layout):
-        """Setup scanner configuration section"""
+        """Setup modern scanner configuration section"""
         config_frame = QFrame()
         config_frame.setStyleSheet("""
             QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 40px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
         
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setSpacing(16)
+        config_layout.setSpacing(32)
         
-        # Section title
-        section_title = QLabel("CONFIGURATION")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        # Modern Section Title
+        section_title = QLabel("SCAN CONFIGURATION")
+        section_title.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         config_layout.addWidget(section_title)
         
         # Target selection
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(12)
+        target_layout.setSpacing(20)
         
-        target_label = QLabel("Target:")
-        target_label.setFont(QFont("Roboto", 12))
-        target_label.setStyleSheet("color: #b0b0b0;")
+        target_label = QLabel("Target Address")
+        target_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 12px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         target_layout.addWidget(target_label)
         
         self.target_input = QLineEdit()
         self.target_input.setPlaceholderText("Enter target IP or hostname...")
-        self.target_input.setStyleSheet("""
-            QLineEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #22d3ee;
-                font-family: 'DejaVu Sans Mono';
-                font-size: 13px;
-                min-width: 300px;
-            }
-            QLineEdit:focus {
-                border: 1px solid #22d3ee;
-            }
-        """)
+        # Input styling is now handled by global theme
         target_layout.addWidget(self.target_input)
         
-        # Get active target button
-        self.get_active_btn = QPushButton("🎯 Use Active")
-        self.get_active_btn.setStyleSheet("""
-            QPushButton {
-                background-color: rgba(34, 211, 238, 0.1);
-                color: #22d3ee;
-                border: 1px solid #22d3ee;
-                padding: 10px 20px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 11px;
-            }
-            QPushButton:hover {
-                background-color: rgba(34, 211, 238, 0.2);
-            }
-        """)
+        config_layout.addLayout(target_layout)
+        
+        # Modern Get Active Target Button
+        self.get_active_btn = QPushButton("Use Active Target")
+        self.get_active_btn.setProperty("class", "small")
+        # Button styling is now handled by global theme
         target_layout.addWidget(self.get_active_btn)
         
         target_layout.addStretch()
         config_layout.addLayout(target_layout)
         
-        # Scan type
+        # Modern Scan Type Selection
         scan_type_layout = QHBoxLayout()
-        scan_type_layout.setSpacing(12)
+        scan_type_layout.setSpacing(20)
         
-        scan_type_label = QLabel("Scan Type:")
-        scan_type_label.setFont(QFont("Roboto", 12))
-        scan_type_label.setStyleSheet("color: #b0b0b0;")
+        scan_type_label = QLabel("Scan Type")
+        scan_type_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 12px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         scan_type_layout.addWidget(scan_type_label)
         
         self.scan_type_combo = QComboBox()
         self.scan_type_combo.addItems([
             "Quick Scan", "Full Scan", "Port Scan", "Service Scan", "OS Detection"
         ])
-        self.scan_type_combo.setStyleSheet("""
-            QComboBox {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 10px 16px;
-                color: #f8fafc;
-                font-size: 12px;
-                min-width: 200px;
-            }
-            QComboBox:focus {
-                border: 1px solid #22d3ee;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 30px;
-            }
-            QComboBox::down-arrow {
-                image: none;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 5px solid #ffffff;
-                margin-right: 5px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #2d2d2d;
-                border: 2px solid #404040;
-                color: #ffffff;
-                selection-background-color: #2e7d32;
-                selection-color: white;
-            }
-        """)
+        # ComboBox styling is now handled by global theme
         scan_type_layout.addWidget(self.scan_type_combo)
         
         scan_type_layout.addStretch()
         config_layout.addLayout(scan_type_layout)
         
-        # Control buttons
+        # Modern Control Buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(12)
+        buttons_layout.setSpacing(20)
         
-        self.start_btn = QPushButton("🚀 Start Scan")
-        self.start_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #22d3ee;
-                color: #020617;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: 900;
-                font-size: 13px;
-                letter-spacing: 1px;
-                min-width: 150px;
-            }
-            QPushButton:hover {
-                background-color: #67e8f9;
-            }
-            QPushButton:disabled {
-                background-color: #1e293b;
-                color: #475569;
-            }
-        """)
+        self.start_btn = QPushButton("Start Scan")
+        self.start_btn.setProperty("class", "large")
+        # Button styling is now handled by global theme
         buttons_layout.addWidget(self.start_btn)
         
-        self.stop_btn = QPushButton("⏹️ Stop Scan")
+        self.stop_btn = QPushButton("Stop Scan")
         self.stop_btn.setEnabled(False)
-        self.stop_btn.setStyleSheet("""
-            QPushButton {
-                background-color: transparent;
-                color: #f43f5e;
-                border: 1px solid #f43f5e;
-                padding: 12px 24px;
-                border-radius: 4px;
-                font-weight: bold;
-                font-size: 13px;
-                min-width: 150px;
-            }
-            QPushButton:hover {
-                background-color: rgba(244, 63, 94, 0.1);
-            }
-            QPushButton:disabled {
-                border: 1px solid #1e293b;
-                color: #475569;
-            }
-        """)
+        self.stop_btn.setProperty("class", "large")
+        # Button styling is now handled by global theme
         buttons_layout.addWidget(self.stop_btn)
         
         buttons_layout.addStretch()
@@ -363,86 +320,82 @@ class NetworkScannerPage(QWidget):
         parent_layout.addWidget(config_frame)
     
     def setup_terminal_output(self, parent_layout):
-        """Setup terminal output section"""
+        """Setup modern terminal output section"""
         terminal_frame = QFrame()
         terminal_frame.setStyleSheet("""
             QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 40px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
         
         terminal_layout = QVBoxLayout(terminal_frame)
-        terminal_layout.setSpacing(16)
+        terminal_layout.setSpacing(24)
         
-        # Section title
+        # Modern Section Title
         section_title = QLabel("LIVE ANALYSIS FEED")
-        section_title.setStyleSheet("color: #22d3ee; font-weight: bold; font-size: 12px; letter-spacing: 2px;")
+        section_title.setStyleSheet("""
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         terminal_layout.addWidget(section_title)
         
-        # Terminal widget
+        # Modern Terminal Widget
         self.terminal = QTextEdit()
         self.terminal.setReadOnly(True)
         self.terminal.setMinimumHeight(300)
-        self.terminal.setStyleSheet("""
-            QTextEdit {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                color: #f8fafc;
-                font-family: 'DejaVu Sans Mono', monospace;
-                font-size: 12px;
-                padding: 16px;
-            }
-        """)
+        # Terminal styling is now handled by global theme
         
         # Add initial message
-        self.terminal.append('<span style="color: #2196F3;">[NETWORK SCANNER]</span> <span style="color: #ffffff;">Ready to scan targets</span>')
+        self.terminal.append('<span style="color: #22d3ee; font-weight: bold;">[NETWORK SCANNER]</span> <span style="color: #f8fafc;">Ready to scan targets</span>')
         
         terminal_layout.addWidget(self.terminal)
-        
         parent_layout.addWidget(terminal_frame)
     
     def setup_progress_section(self, parent_layout):
-        """Setup progress section"""
+        """Setup modern progress section"""
         progress_frame = QFrame()
         progress_frame.setStyleSheet("""
             QFrame {
-                background-color: #0f172a;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-                padding: 20px;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                border: 2px solid #334155;
+                border-radius: 20px;
+                padding: 40px;
+                margin-bottom: 32px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
         """)
         
         progress_layout = QVBoxLayout(progress_frame)
-        progress_layout.setSpacing(12)
+        progress_layout.setSpacing(24)
         
-        # Status label
+        # Modern Status Label
         self.status_label = QLabel("Status: Ready")
-        self.status_label.setFont(QFont("Roboto", 12))
-        self.status_label.setStyleSheet("color: #b0b0b0;")
+        self.status_label.setStyleSheet("""
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-family: 'Inter', -apple-system, sans-serif;
+        """)
         progress_layout.addWidget(self.status_label)
         
-        # Progress bar
+        # Modern Progress Bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
-        self.progress_bar.setFixedHeight(8)
+        self.progress_bar.setFixedHeight(12)
         self.progress_bar.setTextVisible(False)
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                background-color: #020617;
-                border: 1px solid #1e293b;
-                border-radius: 4px;
-            }
-            QProgressBar::chunk {
-                background-color: #22d3ee;
-                border-radius: 3px;
-            }
-        """)
+        # Progress bar styling is now handled by global theme
         progress_layout.addWidget(self.progress_bar)
         
         parent_layout.addWidget(progress_frame)
