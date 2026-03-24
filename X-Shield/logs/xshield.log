@@ -804,3 +804,40 @@
 2026-03-24 16:21:42 - XShield - INFO - Module network_scanner completed with 0 findings
 2026-03-24 16:21:50 - XShield - INFO - X-Shield Application closing
 2026-03-24 16:21:50 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:00:44 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:00:44 - XShield - INFO - Target Manager initialized
+2026-03-24 15:00:44 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:00:44 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:00:44 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:00:44 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:00:44 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:00:44 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:00:44 - XShield - INFO - Target added: 127.0.0.1 (IP)
+2026-03-24 15:01:27 - XShield - INFO - Loaded 2 targets from file
+2026-03-24 15:01:27 - XShield - INFO - Target Manager initialized
+2026-03-24 15:01:28 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:01:28 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:01:28 - XShield - INFO - Registered module: osint
+2026-03-24 15:01:29 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:01:29 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:01:29 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:01:29 - XShield - INFO - Target added: 127.0.0.1 (IP)
+2026-03-24 15:01:53 - XShield - INFO - Loaded 3 targets from file
+2026-03-24 15:01:53 - XShield - INFO - Target Manager initialized
+2026-03-24 15:01:53 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:01:53 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:01:53 - XShield - INFO - Registered module: osint
+2026-03-24 15:01:54 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:01:54 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:01:54 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:01:54 - XShield - INFO - Target added: 127.0.0.1 (IP)
+2026-03-24 15:08:42 - XShield - INFO - Hydrated 4 targets from persistence layer
+2026-03-24 15:08:42 - XShield - INFO - Target Manager (v2) successfully initialized
+2026-03-24 15:08:42 - XShield - INFO - Successfully registered module: threat_intel
+2026-03-24 15:08:42 - XShield - INFO - Successfully registered module: web_scanner
+2026-03-24 15:08:42 - XShield - INFO - Successfully registered module: osint
+2026-03-24 15:08:43 - XShield - INFO - Successfully registered module: attack_stress
+2026-03-24 15:08:43 - XShield - INFO - Successfully registered module: brute_force
+2026-03-24 15:08:43 - XShield - INFO - Successfully registered module: network_scanner
+2026-03-24 15:08:43 - XShield - INFO - New Target Identified: 127.0.0.1 (IP)
+2026-03-24 15:08:43 - XShield - INFO - Target Focus Switched: 25208a11-8468-4616-a469-8f97442a0b93

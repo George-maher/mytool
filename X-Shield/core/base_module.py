@@ -1,42 +1,43 @@
 """
-Base Module Interface for X-Shield Framework
-All pentesting modules must inherit from this base class
+Base Module Interface for X-Shield Framework v2
+Enhanced for complex task chaining and detailed telemetry
 """
 
-from abc import ABC, abstractmethod
-from PySide6.QtCore import Signal, QObject, Slot
 import time
-from typing import Dict, Any, List
+from abc import ABC, abstractmethod
+from typing import Dict, Any, List, Optional
+from PySide6.QtCore import Signal, QObject, Slot
 
 
 class BaseModule(QObject):
-    """Base class for all pentesting modules"""
+    """Base class for all pentesting modules in X-Shield v2"""
     
-    # Module metadata (to be overridden by subclasses)
+    # Module metadata
     NAME = "Base Module"
     DESCRIPTION = "Base module for pentesting framework"
-    VERSION = "1.0.0"
+    VERSION = "2.0.0"
     AUTHOR = "X-Shield Team"
     CATEGORY = "General"
     
     # Module parameters configuration
     PARAMETERS = {}
     
-    # Signals
-    progress_signal = Signal(int, int)  # current, total
-    status_signal = Signal(str)  # status message
-    finding_signal = Signal(str, dict)  # finding type, details
-    vulnerability_signal = Signal(dict)  # vulnerability details
-    finished = Signal(dict)  # results
+    # Signals for UI and Core coordination
+    progress_signal = Signal(str, int, int)  # module_name, current, total
+    status_signal = Signal(str, str)  # module_name, status message
+    finding_signal = Signal(str, str, dict)  # module_name, finding type, details
+    vulnerability_signal = Signal(str, dict)  # module_name, vulnerability details
+    log_signal = Signal(str, str, str)  # module_name, level, message
+    finished = Signal(str, dict)  # module_name, results
     
-    def __init__(self, logger):
+    def __init__(self, logger=None):
         super().__init__()
         self.logger = logger
         self._stop_requested = False
         self._is_running = False
         self._state = "IDLE"
         
-        # Results storage
+        # Results storage (v2 Enhanced)
         self.results = {
             'module_name': self.NAME,
             'start_time': None,
@@ -49,7 +50,8 @@ class BaseModule(QObject):
             'items_scanned': 0,
             'summary': '',
             'status': 'not_started',
-            'telemetry': []
+            'telemetry': [],
+            'errors': []
         }
 
     @property
@@ -58,33 +60,16 @@ class BaseModule(QObject):
 
     def _update_state(self, new_state: str):
         self._state = new_state
-        self.logger.info(f"Module {self.NAME} state transition: {new_state}")
+        self.log("DEBUG", f"State transition: {new_state}")
     
     @abstractmethod
     def execute(self, target: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Main module execution method
-        
-        Args:
-            target: The target to scan (IP, domain, URL, etc.)
-            parameters: Dictionary of module-specific parameters
-            
-        Returns:
-            Dictionary containing scan results
-        """
+        """Main module execution method (to be implemented by subclasses)"""
         pass
     
     @abstractmethod
     def validate_target(self, target: str) -> bool:
-        """
-        Validate if the target is appropriate for this module
-        
-        Args:
-            target: The target to validate
-            
-        Returns:
-            True if target is valid, False otherwise
-        """
+        """Validate if the target is appropriate for this module"""
         pass
     
     @Slot()
@@ -92,14 +77,14 @@ class BaseModule(QObject):
         """Stop module execution"""
         self._stop_requested = True
         self._is_running = False
-        self.logger.info(f"Stop requested for module {self.NAME}")
+        self.log("WARNING", "Stop requested by user or system")
     
     def is_running(self) -> bool:
         """Check if module is currently running"""
         return self._is_running
     
     def _start_execution(self, target: str, parameters: Dict[str, Any]):
-        """Initialize execution"""
+        """Initialize execution environment"""
         self._stop_requested = False
         self._is_running = True
         self._update_state("RUNNING")
@@ -108,35 +93,56 @@ class BaseModule(QObject):
         self.results['parameters'] = parameters
         self.results['status'] = 'running'
         
-        self.logger.module_start(self.NAME)
-        self.status_signal.emit(f"Starting {self.NAME} scan...")
+        self.log("INFO", f"Initiating {self.NAME} execution on {target}")
+        self.status_signal.emit(self.NAME, f"Starting {self.NAME}...")
     
     def _finish_execution(self):
-        """Finalize execution"""
+        """Finalize execution and emit results"""
         self.results['end_time'] = time.time()
         self.results['execution_time'] = self.results['end_time'] - self.results['start_time']
         self.results['status'] = 'completed'
         
         self._is_running = False
         self._update_state("FINISHED")
-        self.logger.module_complete(self.NAME, self.results['execution_time'])
-        self.status_signal.emit(f"{self.NAME} scan completed")
-        self.finished.emit(self.results)
+        self.log("INFO", f"Execution completed in {self.results['execution_time']:.2f}s")
+        self.status_signal.emit(self.NAME, f"{self.NAME} completed")
+        self.finished.emit(self.NAME, self.results)
     
     def _handle_error(self, error: Exception):
-        """Handle execution error"""
+        """Handle execution error gracefully"""
         self.results['end_time'] = time.time()
         self.results['execution_time'] = self.results['end_time'] - self.results['start_time']
         self.results['status'] = 'failed'
-        self.results['error'] = str(error)
+        error_msg = str(error)
+        self.results['errors'].append(error_msg)
         
         self._is_running = False
-        self.logger.module_error(self.NAME, str(error))
-        self.status_signal.emit(f"{self.NAME} scan failed: {str(error)}")
-        self.finished.emit(self.results)
+        self._update_state("ERROR")
+        self.log("ERROR", f"Execution failed: {error_msg}")
+        self.status_signal.emit(self.NAME, f"Failed: {error_msg}")
+        self.finished.emit(self.NAME, self.results)
+
+    def log(self, level: str, message: str):
+        """Log message and emit signal for UI terminal"""
+        if self.logger:
+            if level == "DEBUG": self.logger.debug(f"[{self.NAME}] {message}")
+            elif level == "INFO": self.logger.info(f"[{self.NAME}] {message}")
+            elif level == "WARNING": self.logger.warning(f"[{self.NAME}] {message}")
+            elif level == "ERROR": self.logger.error(f"[{self.NAME}] {message}")
+            elif level == "CRITICAL": self.logger.critical(f"[{self.NAME}] {message}")
+
+        self.log_signal.emit(self.NAME, level, message)
+
+        # Add to telemetry
+        self.results['telemetry'].append({
+            'timestamp': time.time(),
+            'event': 'LOG',
+            'level': level,
+            'message': message
+        })
     
     def add_finding(self, finding_type: str, details: Dict[str, Any]):
-        """Add a finding to the results"""
+        """Add a general finding to results"""
         now = time.time()
         finding = {
             'type': finding_type,
@@ -144,150 +150,70 @@ class BaseModule(QObject):
             'details': details
         }
         self.results['findings'].append(finding)
-        self.results['telemetry'].append({
-            'timestamp': now,
-            'event': 'FINDING_DISCOVERED',
-            'type': finding_type
-        })
-        self.finding_signal.emit(finding_type, details)
-        
-        self.logger.info(f"Finding: {finding_type} - {details}")
+        self.finding_signal.emit(self.NAME, finding_type, details)
+        self.log("INFO", f"Finding discovered: {finding_type}")
     
     def add_vulnerability(self, vulnerability: Dict[str, Any]):
-        """Add a vulnerability to the results"""
-        # Ensure required fields
-        required_fields = ['title', 'severity', 'description']
-        for field in required_fields:
+        """Add a security vulnerability to results"""
+        required = ['title', 'severity', 'description']
+        for field in required:
             if field not in vulnerability:
-                raise ValueError(f"Vulnerability missing required field: {field}")
+                self.log("ERROR", f"Vulnerability missing required field: {field}")
+                return
         
         vulnerability['timestamp'] = time.time()
         vulnerability['module'] = self.NAME
         self.results['vulnerabilities'].append(vulnerability)
-        self.vulnerability_signal.emit(vulnerability)
+        self.vulnerability_signal.emit(self.NAME, vulnerability)
         
-        self.logger.vulnerability_found(
-            vulnerability['severity'],
-            vulnerability.get('target', 'Unknown'),
-            vulnerability['title']
-        )
+        sev = vulnerability['severity'].upper()
+        self.log("WARNING", f"VULNERABILITY [{sev}]: {vulnerability['title']}")
     
     def update_progress(self, current: int, total: int):
-        """Update progress"""
-        self.progress_signal.emit(current, total)
-        self.logger.scan_progress(current, total, self.results.get('target'))
+        """Update execution progress"""
+        self.progress_signal.emit(self.NAME, current, total)
     
     def set_summary(self, summary: str):
-        """Set execution summary"""
+        """Set final summary of module execution"""
         self.results['summary'] = summary
     
-    def increment_items_scanned(self, count: int = 1):
-        """Increment items scanned counter"""
+    def increment_scanned(self, count: int = 1):
+        """Increment scanned items counter"""
         self.results['items_scanned'] += count
-    
-    def get_results(self) -> Dict[str, Any]:
-        """Get current results"""
-        return self.results.copy()
-    
-    @classmethod
-    def get_module_info(cls) -> Dict[str, Any]:
-        """Get module information"""
-        return {
-            'name': cls.NAME,
-            'description': cls.DESCRIPTION,
-            'version': cls.VERSION,
-            'author': cls.AUTHOR,
-            'category': cls.CATEGORY,
-            'parameters': cls.PARAMETERS
-        }
-    
-    @classmethod
-    def validate_parameters(cls, parameters: Dict[str, Any]) -> tuple[bool, str]:
-        """
-        Validate module parameters
-        
-        Args:
-            parameters: Dictionary of parameters to validate
-            
-        Returns:
-            Tuple of (is_valid, error_message)
-        """
-        for param_name, param_config in cls.PARAMETERS.items():
-            param_type = param_config.get('type', 'string')
-            required = param_config.get('required', False)
-            
-            # Check if required parameter is missing
-            if required and param_name not in parameters:
-                return False, f"Required parameter '{param_name}' is missing"
-            
-            # Validate parameter type
-            if param_name in parameters:
-                value = parameters[param_name]
-                
-                if param_type == 'integer':
-                    try:
-                        int(value)
-                    except (ValueError, TypeError):
-                        return False, f"Parameter '{param_name}' must be an integer"
-                
-                elif param_type == 'boolean':
-                    if not isinstance(value, bool):
-                        return False, f"Parameter '{param_name}' must be a boolean"
-                
-                elif param_type == 'choice':
-                    choices = param_config.get('choices', [])
-                    if value not in choices:
-                        return False, f"Parameter '{param_name}' must be one of: {choices}"
-        
-        return True, "Parameters are valid"
 
 
 class NetworkModule(BaseModule):
     """Base class for network-related modules"""
-    
     CATEGORY = "Network"
     
     def validate_target(self, target: str) -> bool:
-        """Validate network target (IP address or hostname)"""
         import re
-        
-        # IP address validation
         ip_pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
         if re.match(ip_pattern, target):
-            parts = target.split('.')
-            return all(0 <= int(part) <= 255 for part in parts)
-        
-        # Hostname validation
+            return all(0 <= int(part) <= 255 for part in target.split('.'))
         hostname_pattern = r'^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)*$'
         return bool(re.match(hostname_pattern, target))
 
 
 class WebModule(BaseModule):
     """Base class for web-related modules"""
-    
     CATEGORY = "Web"
     
     def validate_target(self, target: str) -> bool:
-        """Validate web target (URL)"""
         return target.startswith(('http://', 'https://'))
 
 
-class ExploitationModule(BaseModule):
-    """Base class for exploitation modules"""
-    
-    CATEGORY = "Exploitation"
+class AttackModule(BaseModule):
+    """Base class for attack and stress testing modules"""
+    CATEGORY = "Attack"
     
     def validate_target(self, target: str) -> bool:
-        """Validate exploitation target"""
-        # More permissive validation for exploitation
         return len(target) > 0
 
 
 class OSINTModule(BaseModule):
     """Base class for OSINT modules"""
-    
     CATEGORY = "OSINT"
     
     def validate_target(self, target: str) -> bool:
-        """Validate OSINT target (domain, email, etc.)"""
         return len(target) > 0

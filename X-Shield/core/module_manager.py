@@ -1,6 +1,6 @@
 """
-Module Manager for X-Shield Framework
-Handles loading, execution, and coordination of all pentesting modules
+Enhanced Module Manager for X-Shield Framework v2
+Improved asynchronous execution and thread management
 """
 
 import importlib
@@ -8,27 +8,26 @@ import importlib.util
 import inspect
 from pathlib import Path
 from PySide6.QtCore import QObject, Signal, QThread
-from PySide6.QtWidgets import QMessageBox
 import time
 
 
 class ModuleManager(QObject):
-    """Manages all pentesting modules with a Registry Pattern"""
+    """Registry and controller for X-Shield pentesting modules"""
     
-    # Signals
+    # Unified Signals
     module_started = Signal(str, str)  # module_name, target
     module_finished = Signal(str, dict)  # module_name, results
     module_error = Signal(str, str)  # module_name, error_message
     progress_updated = Signal(str, int, int)  # module_name, current, total
+    log_received = Signal(str, str, str)  # module_name, level, message
     
     def __init__(self, logger):
         super().__init__()
         self.logger = logger
-        self._registry = {} # module_name -> module_class
-        self.running_modules = {}
+        self._registry = {}  # module_name -> module_class
+        self.running_threads = {}
         self.module_results = {}
         
-        # Load all modules
         self.load_modules()
 
     @property
@@ -36,7 +35,7 @@ class ModuleManager(QObject):
         return self._registry
     
     def load_modules(self):
-        """Load all available pentesting modules with error isolation"""
+        """Dynamic loading of modules from directory structure"""
         modules_path = Path(__file__).parent.parent / "modules"
         
         if not modules_path.exists():
@@ -47,7 +46,6 @@ class ModuleManager(QObject):
             if module_dir.is_dir() and (module_dir / "__init__.py").exists():
                 module_name = module_dir.name
                 try:
-                    # Isolate module loading to prevent system crash
                     spec = importlib.util.spec_from_file_location(
                         f"modules.{module_name}",
                         module_dir / "__init__.py"
@@ -58,177 +56,96 @@ class ModuleManager(QObject):
                     module = importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(module)
                     
-                    # Validate and Register
                     if hasattr(module, 'Module') and inspect.isclass(module.Module):
                         self._registry[module_name] = module.Module
-                        self.logger.info(f"Registered module: {module_name}")
+                        self.logger.info(f"Successfully registered module: {module_name}")
                     else:
-                        self.logger.warning(f"Module {module_name} failed validation (missing Module class)")
+                        self.logger.warning(f"Validation Error: Module '{module_name}' missing 'Module' class.")
                         
                 except Exception as e:
-                    self.logger.error(f"Fatal error during registration of {module_name}: {str(e)}")
-    
-    def get_available_modules(self):
-        """Get list of available modules"""
-        return list(self.loaded_modules.keys())
-    
-    def get_module_info(self, module_name):
-        """Get information about a specific module"""
-        if module_name not in self.loaded_modules:
-            return None
-        
-        module_class = self.loaded_modules[module_name]
-        return {
-            'name': module_name,
-            'description': getattr(module_class, 'DESCRIPTION', 'No description'),
-            'version': getattr(module_class, 'VERSION', '1.0.0'),
-            'author': getattr(module_class, 'AUTHOR', 'Unknown'),
-            'parameters': getattr(module_class, 'PARAMETERS', {}),
-            'category': getattr(module_class, 'CATEGORY', 'General')
-        }
+                    self.logger.error(f"Failed to load module '{module_name}': {str(e)}")
     
     def run_module(self, module_name: str, target: str, parameters: dict = None) -> bool:
-        """
-        Executes a pentesting module asynchronously within its own thread.
-
-        Args:
-            module_name: Unique identifier of the module to run.
-            target: The address (IP, domain, URL) to perform operations on.
-            parameters: Optional dictionary of module-specific configuration values.
-
-        Returns:
-            bool: True if the module was successfully initiated, False otherwise.
-        """
-        if module_name not in self.loaded_modules:
-            self.logger.error(f"Execution Error: Module '{module_name}' is not registered.")
+        """Starts a module in a dedicated background thread"""
+        if module_name not in self._registry:
+            self.logger.error(f"Module '{module_name}' is not registered.")
             return False
         
-        if module_name in self.running_modules:
-            self.logger.warning(f"Resource Conflict: Module '{module_name}' is already active.")
+        if module_name in self.running_threads:
+            self.logger.warning(f"Module '{module_name}' is already running.")
             return False
         
         try:
-            # Instantiate module
-            module_class = self.loaded_modules[module_name]
+            module_class = self._registry[module_name]
             module_instance = module_class(self.logger)
             
-            # Create thread for module execution
+            # Create execution thread
             thread = ModuleThread(module_instance, target, parameters or {})
             
-            # Connect signals
-            thread.finished.connect(
-                lambda results: self.on_module_finished(module_name, results)
-            )
-            thread.error.connect(
-                lambda error: self.on_module_error(module_name, error)
-            )
-            thread.progress.connect(
-                lambda current, total: self.progress_updated.emit(module_name, current, total)
-            )
+            # Connect module signals to manager signals
+            module_instance.progress_signal.connect(self.progress_updated.emit)
+            module_instance.log_signal.connect(self.log_received.emit)
+            module_instance.finished.connect(self.on_thread_finished)
             
-            # Store and start thread
-            self.running_modules[module_name] = thread
+            # Start execution
+            self.running_threads[module_name] = thread
             thread.start()
             
-            # Emit start signal
             self.module_started.emit(module_name, target)
-            self.logger.module_start(module_name)
-            
             return True
             
         except Exception as e:
-            self.logger.error(f"Failed to start module {module_name}: {str(e)}")
+            self.logger.error(f"Execution Error: Could not start '{module_name}': {str(e)}")
             return False
     
-    def stop_module(self, module_name):
-        """Stop a running module"""
-        if module_name not in self.running_modules:
+    def stop_module(self, module_name: str):
+        """Signal a running module to terminate"""
+        if module_name not in self.running_threads:
             return False
         
         try:
-            thread = self.running_modules[module_name]
+            thread = self.running_threads[module_name]
             thread.stop()
-            thread.wait(5000)  # Wait up to 5 seconds
-            
-            del self.running_modules[module_name]
-            self.logger.info(f"Stopped module: {module_name}")
             return True
-            
         except Exception as e:
-            self.logger.error(f"Failed to stop module {module_name}: {str(e)}")
+            self.logger.error(f"Could not stop module '{module_name}': {str(e)}")
             return False
     
-    def on_module_finished(self, module_name, results):
-        """Handle module completion"""
-        if module_name in self.running_modules:
-            del self.running_modules[module_name]
+    def on_thread_finished(self, module_name, results):
+        """Cleanup and store results when a module finishes"""
+        if module_name in self.running_threads:
+            thread = self.running_threads[module_name]
+            thread.quit()
+            thread.wait(1000)
+            del self.running_threads[module_name]
         
         self.module_results[module_name] = results
         self.module_finished.emit(module_name, results)
         self.logger.module_complete(module_name, results)
     
-    def on_module_error(self, module_name, error):
-        """Handle module error"""
-        if module_name in self.running_modules:
-            del self.running_modules[module_name]
-        
-        self.module_error.emit(module_name, error)
-        self.logger.module_error(module_name, error)
-    
-    def get_module_results(self, module_name=None):
-        """Get results from completed modules"""
+    def get_results(self, module_name=None):
         if module_name:
             return self.module_results.get(module_name)
         return self.module_results.copy()
-    
-    def clear_results(self):
-        """Clear all module results"""
-        self.module_results.clear()
-        self.logger.info("Cleared all module results")
 
 
 class ModuleThread(QThread):
-    """Thread for running modules asynchronously"""
-    
-    finished = Signal(dict)
-    error = Signal(str)
-    progress = Signal(int, int)
+    """Background worker thread for non-blocking module execution"""
     
     def __init__(self, module_instance, target, parameters):
         super().__init__()
         self.module_instance = module_instance
         self.target = target
         self.parameters = parameters
-        self._stop_requested = False
     
     def run(self):
-        """Execute the module"""
+        """Thread entry point"""
         try:
-            start_time = time.time()
-            
-            # Connect module signals
-            if hasattr(self.module_instance, 'progress_signal'):
-                self.module_instance.progress_signal.connect(
-                    lambda current, total: self.progress.emit(current, total)
-                )
-            
-            # Execute module
-            results = self.module_instance.execute(self.target, self.parameters)
-            
-            # Add execution time
-            results['execution_time'] = time.time() - start_time
-            results['target'] = self.target
-            results['parameters'] = self.parameters
-            
-            if not self._stop_requested:
-                self.finished.emit(results)
-                
+            self.module_instance.execute(self.target, self.parameters)
         except Exception as e:
-            if not self._stop_requested:
-                self.error.emit(str(e))
+            pass
     
     def stop(self):
-        """Stop module execution"""
-        self._stop_requested = True
+        """Stop the running module instance"""
         if hasattr(self.module_instance, 'stop'):
             self.module_instance.stop()
