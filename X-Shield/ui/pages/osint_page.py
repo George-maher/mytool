@@ -46,8 +46,8 @@ class OSINTPage(QWidget):
         config_frame.setObjectName("card")
 
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        config_layout.setSpacing(Spacing.XL)
+        config_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        config_layout.setSpacing(Spacing.SM)
 
         # Modern Section Title
         section_title = QLabel("Reconnaissance Parameters")
@@ -56,7 +56,7 @@ class OSINTPage(QWidget):
 
         # Target selection
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(Spacing.MD)
+        target_layout.setSpacing(Spacing.SM)
 
         target_label = QLabel("Target")
         target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -74,7 +74,7 @@ class OSINTPage(QWidget):
 
         # Modern OSINT Type Selection
         osint_type_layout = QHBoxLayout()
-        osint_type_layout.setSpacing(Spacing.MD)
+        osint_type_layout.setSpacing(Spacing.SM)
 
         osint_type_label = QLabel("OSINT Type")
         osint_type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -82,16 +82,15 @@ class OSINTPage(QWidget):
 
         self.osint_type_combo = QComboBox()
         self.osint_type_combo.addItems([
-            "Domain Analysis", "Email Investigation", "Company Research", "Username Search", "Comprehensive"
+            "whois", "dns", "shodan", "subdomain", "email", "social", "metadata"
         ])
         osint_type_layout.addWidget(self.osint_type_combo)
 
-        osint_type_layout.addStretch()
         config_layout.addLayout(osint_type_layout)
 
         # Modern Control Buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(Spacing.MD)
+        buttons_layout.setSpacing(Spacing.XL)
 
         self.start_btn = QPushButton("Start OSINT")
         self.start_btn.setObjectName("primary_btn")
@@ -114,8 +113,8 @@ class OSINTPage(QWidget):
         terminal_frame.setObjectName("card")
 
         terminal_layout = QVBoxLayout(terminal_frame)
-        terminal_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        terminal_layout.setSpacing(Spacing.MD)
+        terminal_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        terminal_layout.setSpacing(Spacing.SM)
 
         # Modern Section Title
         section_title = QLabel("Intelligence Harvest")
@@ -140,8 +139,8 @@ class OSINTPage(QWidget):
         progress_frame.setObjectName("card")
 
         progress_layout = QVBoxLayout(progress_frame)
-        progress_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        progress_layout.setSpacing(Spacing.MD)
+        progress_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        progress_layout.setSpacing(Spacing.SM)
 
         # Modern Status Label
         self.status_label = QLabel("Status: Ready")
@@ -198,11 +197,11 @@ class OSINTPage(QWidget):
         self.add_terminal_message("INFO", f"Starting OSINT harvest on {target}...")
 
         # Connect signals and run module
-        module_manager.module_finished.connect(self.on_result)
-        module_manager.module_error.connect(self.on_error)
-        module_manager.progress_updated.connect(self.on_progress)
+        self.module_manager.module_finished.connect(self.on_result)
+        self.module_manager.module_error.connect(self.on_error)
+        self.module_manager.progress_updated.connect(self.on_progress)
 
-        success = module_manager.run_module("osint", target, {
+        success = self.module_manager.run_module("osint", target, {
             'osint_type': self.osint_type_combo.currentText()
         })
 

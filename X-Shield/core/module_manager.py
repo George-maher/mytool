@@ -165,7 +165,7 @@ class ModuleManager(QObject):
         
         self.module_results[module_name] = results
         self.module_finished.emit(module_name, results)
-        self.logger.module_complete(module_name)
+        self.logger.module_complete(module_name, results)
     
     def on_module_error(self, module_name, error):
         """Handle module error"""

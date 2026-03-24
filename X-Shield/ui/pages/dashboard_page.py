@@ -48,7 +48,7 @@ class StatusCard(QFrame):
         icon_label.setFixedSize(20, 20)
         header_layout.addWidget(icon_label)
         
-        title_label = QLabel(title.upper())
+        title_label = QLabel(title)
         title_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 600; font-size: 11px; letter-spacing: 0.05em;")
         header_layout.addWidget(title_label)
         

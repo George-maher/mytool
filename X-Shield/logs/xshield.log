@@ -1,0 +1,806 @@
+2026-03-24 14:55:08 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 14:55:08 - XShield - INFO - Target Manager initialized
+2026-03-24 14:55:08 - XShield - INFO - Registered module: attack_stress
+2026-03-24 14:55:08 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 14:55:08 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 14:55:08 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 14:55:08 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 14:55:08 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 14:55:09 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 14:55:15 - XShield - INFO - Reports page entered
+2026-03-24 14:55:15 - XShield - INFO - Settings page entered
+2026-03-24 14:55:18 - XShield - INFO - Reports page entered
+2026-03-24 14:55:21 - XShield - INFO - X-Shield Application closing
+2026-03-24 14:55:21 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 14:56:10 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 14:56:10 - XShield - INFO - Target Manager initialized
+2026-03-24 14:56:10 - XShield - INFO - Registered module: attack_stress
+2026-03-24 14:56:10 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 14:56:10 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 14:56:10 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 14:56:10 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 14:56:10 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 14:56:11 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 14:56:23 - XShield - INFO - Reports page entered
+2026-03-24 14:56:24 - XShield - INFO - Settings page entered
+2026-03-24 14:56:45 - XShield - INFO - X-Shield Application closing
+2026-03-24 14:56:45 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 14:57:06 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 14:57:06 - XShield - INFO - Target Manager initialized
+2026-03-24 14:57:06 - XShield - INFO - Registered module: attack_stress
+2026-03-24 14:57:06 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 14:57:06 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 14:57:06 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 14:57:06 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 14:57:06 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 14:57:07 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 14:57:15 - XShield - INFO - Reports page entered
+2026-03-24 14:57:16 - XShield - INFO - Settings page entered
+2026-03-24 14:57:21 - XShield - INFO - Settings saved successfully
+2026-03-24 14:57:23 - XShield - INFO - Settings saved successfully
+2026-03-24 14:57:55 - XShield - INFO - X-Shield Application closing
+2026-03-24 14:57:55 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:01:02 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:01:02 - XShield - INFO - Target Manager initialized
+2026-03-24 15:01:02 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:01:02 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:01:02 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:01:02 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:01:02 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:01:02 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:01:02 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:01:10 - XShield - INFO - Reports page entered
+2026-03-24 15:01:10 - XShield - INFO - Settings page entered
+2026-03-24 15:01:11 - XShield - INFO - Reports page entered
+2026-03-24 15:01:17 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:01:17 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:03:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:03:07 - XShield - INFO - Target Manager initialized
+2026-03-24 15:03:07 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:03:07 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:03:07 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:03:07 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:03:07 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:03:07 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:03:31 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:03:31 - XShield - INFO - Target Manager initialized
+2026-03-24 15:03:31 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:03:31 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:03:31 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:03:31 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:03:31 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:03:31 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:03:32 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:03:42 - XShield - INFO - Reports page entered
+2026-03-24 15:03:43 - XShield - INFO - Settings page entered
+2026-03-24 15:03:43 - XShield - INFO - Reports page entered
+2026-03-24 15:04:03 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:04:03 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:08:39 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:08:39 - XShield - INFO - Target Manager initialized
+2026-03-24 15:08:39 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:08:39 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:08:39 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:08:39 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:08:39 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:08:39 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:08:40 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:08:49 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:08:49 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:12:23 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:12:23 - XShield - INFO - Target Manager initialized
+2026-03-24 15:12:23 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:12:23 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:12:23 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:12:23 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:12:23 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:12:23 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:12:24 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:12:40 - XShield - INFO - Settings page entered
+2026-03-24 15:12:41 - XShield - INFO - Reports page entered
+2026-03-24 15:12:48 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:12:48 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:13:20 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:13:20 - XShield - INFO - Target Manager initialized
+2026-03-24 15:13:20 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:13:20 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:13:20 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:13:20 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:13:20 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:13:20 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:13:21 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:13:34 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:13:34 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:13:53 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:13:53 - XShield - INFO - Target Manager initialized
+2026-03-24 15:13:53 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:13:53 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:13:53 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:13:53 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:13:53 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:13:53 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:13:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:14:00 - XShield - INFO - Reports page entered
+2026-03-24 15:14:02 - XShield - INFO - Settings page entered
+2026-03-24 15:14:03 - XShield - INFO - Reports page entered
+2026-03-24 15:14:06 - XShield - INFO - Reports page entered
+2026-03-24 15:14:19 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:14:19 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:14:30 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:14:30 - XShield - INFO - Target Manager initialized
+2026-03-24 15:14:30 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:14:30 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:14:30 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:14:30 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:14:30 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:14:30 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:14:31 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:14:37 - XShield - INFO - Reports page entered
+2026-03-24 15:14:37 - XShield - INFO - Settings page entered
+2026-03-24 15:14:51 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:14:51 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:15:07 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:15:07 - XShield - INFO - Target Manager initialized
+2026-03-24 15:15:07 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:15:07 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:15:07 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:15:07 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:15:07 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:15:07 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:15:08 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:15:17 - XShield - INFO - Reports page entered
+2026-03-24 15:15:19 - XShield - INFO - Settings page entered
+2026-03-24 15:15:20 - XShield - INFO - Reports page entered
+2026-03-24 15:15:36 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:15:36 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:15:49 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:15:49 - XShield - INFO - Target Manager initialized
+2026-03-24 15:15:49 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:15:49 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:15:49 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:15:49 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:15:49 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:15:49 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:15:50 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:15:57 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:15:57 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:16:03 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:16:03 - XShield - INFO - Target Manager initialized
+2026-03-24 15:16:03 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:16:03 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:16:03 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:16:03 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:16:03 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:16:03 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:16:03 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:16:11 - XShield - INFO - Reports page entered
+2026-03-24 15:16:11 - XShield - INFO - Settings page entered
+2026-03-24 15:16:12 - XShield - INFO - Reports page entered
+2026-03-24 15:16:18 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:16:18 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:16:28 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:16:28 - XShield - INFO - Target Manager initialized
+2026-03-24 15:16:28 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:16:28 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:16:28 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:16:28 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:16:28 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:16:28 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:16:28 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:16:33 - XShield - INFO - Reports page entered
+2026-03-24 15:16:41 - XShield - INFO - Reports page entered
+2026-03-24 15:16:48 - XShield - INFO - Generated Executive Summary report for https://mintalitat.web.app/
+2026-03-24 15:17:03 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:17:03 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:17:08 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:17:08 - XShield - INFO - Target Manager initialized
+2026-03-24 15:17:08 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:17:08 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:17:08 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:17:08 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:17:08 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:17:08 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:17:09 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:17:12 - XShield - INFO - Reports page entered
+2026-03-24 15:17:21 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:17:21 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:17:28 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:17:28 - XShield - INFO - Target Manager initialized
+2026-03-24 15:17:28 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:17:28 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:17:28 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:17:28 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:17:28 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:17:28 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:17:29 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:17:33 - XShield - INFO - Reports page entered
+2026-03-24 15:17:34 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:17:34 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:22:00 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:22:00 - XShield - INFO - Target Manager initialized
+2026-03-24 15:22:00 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:22:00 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:22:00 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:22:00 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:22:00 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:22:00 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:22:01 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:22:23 - XShield - INFO - Reports page entered
+2026-03-24 15:22:26 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:22:26 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:23:29 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:23:29 - XShield - INFO - Target Manager initialized
+2026-03-24 15:23:29 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:23:29 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:23:29 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:23:29 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:23:29 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:23:29 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:23:30 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:23:37 - XShield - INFO - Reports page entered
+2026-03-24 15:23:38 - XShield - INFO - Settings page entered
+2026-03-24 15:23:38 - XShield - INFO - Reports page entered
+2026-03-24 15:23:41 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:23:41 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:26:41 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:26:41 - XShield - INFO - Target Manager initialized
+2026-03-24 15:26:41 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:26:41 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:26:41 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:26:41 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:26:41 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:26:41 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:26:42 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:26:48 - XShield - INFO - Reports page entered
+2026-03-24 15:26:49 - XShield - INFO - Settings page entered
+2026-03-24 15:26:49 - XShield - INFO - Reports page entered
+2026-03-24 15:26:53 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:26:53 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:27:00 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:27:00 - XShield - INFO - Target Manager initialized
+2026-03-24 15:27:00 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:27:00 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:27:00 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:27:00 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:27:00 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:27:00 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:27:00 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:27:08 - XShield - INFO - Reports page entered
+2026-03-24 15:27:09 - XShield - INFO - Settings page entered
+2026-03-24 15:27:09 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:27:09 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:28:53 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:28:53 - XShield - INFO - Target Manager initialized
+2026-03-24 15:28:53 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:28:53 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:28:53 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:28:53 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:28:53 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:28:53 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:28:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:28:58 - XShield - INFO - Reports page entered
+2026-03-24 15:29:06 - XShield - INFO - Settings page entered
+2026-03-24 15:29:07 - XShield - INFO - Reports page entered
+2026-03-24 15:29:09 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:29:09 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:30:52 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:30:52 - XShield - INFO - Target Manager initialized
+2026-03-24 15:30:52 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:30:52 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:30:52 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:30:52 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:30:52 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:30:52 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:30:53 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:31:21 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:31:21 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:31:59 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:31:59 - XShield - INFO - Target Manager initialized
+2026-03-24 15:31:59 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:31:59 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:31:59 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:31:59 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:31:59 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:31:59 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:31:59 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:32:10 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:32:10 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:32:18 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:32:18 - XShield - INFO - Target Manager initialized
+2026-03-24 15:32:18 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:32:18 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:32:18 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:32:18 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:32:18 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:32:18 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:32:19 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:32:24 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:32:24 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:32:41 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:32:41 - XShield - INFO - Target Manager initialized
+2026-03-24 15:32:41 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:32:41 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:32:41 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:32:41 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:32:41 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:32:41 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:32:42 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:32:50 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:32:50 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:33:28 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:33:28 - XShield - INFO - Target Manager initialized
+2026-03-24 15:33:28 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:33:28 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:33:28 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:33:28 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:33:28 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:33:28 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:33:29 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:33:35 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:33:35 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:33:41 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:33:41 - XShield - INFO - Target Manager initialized
+2026-03-24 15:33:41 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:33:41 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:33:41 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:33:41 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:33:41 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:33:41 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:33:42 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:33:52 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:33:52 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:35:16 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:35:16 - XShield - INFO - Target Manager initialized
+2026-03-24 15:35:16 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:35:16 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:35:16 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:35:16 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:35:16 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:35:16 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:35:17 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:35:24 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:35:24 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:35:53 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:35:53 - XShield - INFO - Target Manager initialized
+2026-03-24 15:35:53 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:35:53 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:35:53 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:35:53 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:35:53 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:35:53 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:35:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:35:58 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:35:58 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:36:05 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:36:05 - XShield - INFO - Target Manager initialized
+2026-03-24 15:36:05 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:36:05 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:36:05 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:36:05 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:36:05 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:36:05 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:36:06 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:36:14 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:36:14 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:36:58 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:36:58 - XShield - INFO - Target Manager initialized
+2026-03-24 15:36:58 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:36:58 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:36:58 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:36:58 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:36:58 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:36:58 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:36:59 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:37:28 - XShield - INFO - Settings page entered
+2026-03-24 15:37:37 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:37:37 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:37:50 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:37:50 - XShield - INFO - Target Manager initialized
+2026-03-24 15:37:50 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:37:50 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:37:50 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:37:50 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:37:50 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:37:50 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:37:51 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:37:59 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:37:59 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:38:34 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:38:34 - XShield - INFO - Target Manager initialized
+2026-03-24 15:38:34 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:38:34 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:38:34 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:38:34 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:38:34 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:38:34 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:38:35 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:38:49 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:38:49 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:40:47 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:40:47 - XShield - INFO - Target Manager initialized
+2026-03-24 15:40:47 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:40:47 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:40:47 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:40:47 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:40:47 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:40:47 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:40:48 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:40:50 - XShield - INFO - Settings page entered
+2026-03-24 15:40:53 - XShield - INFO - Reports page entered
+2026-03-24 15:41:07 - XShield - INFO - Generated Executive Summary report for https://mintalitat.web.app/
+2026-03-24 15:41:10 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:41:10 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:42:12 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:42:12 - XShield - INFO - Target Manager initialized
+2026-03-24 15:42:12 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:42:12 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:42:12 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:42:12 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:42:12 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:42:12 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:42:13 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:42:14 - XShield - INFO - Reports page entered
+2026-03-24 15:42:26 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:42:26 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:42:57 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:42:57 - XShield - INFO - Target Manager initialized
+2026-03-24 15:42:57 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:42:57 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:42:57 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:42:57 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:42:57 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:42:57 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:42:58 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:42:59 - XShield - INFO - Reports page entered
+2026-03-24 15:43:06 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:43:06 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:44:59 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:44:59 - XShield - INFO - Target Manager initialized
+2026-03-24 15:44:59 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:44:59 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:44:59 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:44:59 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:44:59 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:44:59 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:45:00 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:45:10 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:45:10 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:46:38 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:46:38 - XShield - INFO - Target Manager initialized
+2026-03-24 15:46:38 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:46:38 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:46:38 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:46:38 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:46:38 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:46:38 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:46:39 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:47:27 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:47:27 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:48:47 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:48:47 - XShield - INFO - Target Manager initialized
+2026-03-24 15:48:47 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:48:47 - XShield - ERROR - Fatal error during registration of brute_force: No module named 'requests'
+2026-03-24 15:48:47 - XShield - ERROR - Fatal error during registration of network_scanner: No module named 'scapy'
+2026-03-24 15:48:47 - XShield - ERROR - Fatal error during registration of osint: No module named 'requests'
+2026-03-24 15:48:47 - XShield - ERROR - Fatal error during registration of threat_intel: No module named 'requests'
+2026-03-24 15:48:47 - XShield - ERROR - Fatal error during registration of web_scanner: No module named 'requests'
+2026-03-24 15:48:48 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:48:54 - XShield - INFO - Reports page entered
+2026-03-24 15:48:55 - XShield - INFO - Settings page entered
+2026-03-24 15:48:56 - XShield - INFO - Reports page entered
+2026-03-24 15:49:18 - XShield - INFO - Settings page entered
+2026-03-24 15:49:27 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:49:27 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:50:50 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:50:50 - XShield - INFO - Target Manager initialized
+2026-03-24 15:50:51 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:50:53 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:50:53 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:50:53 - XShield - INFO - Registered module: osint
+2026-03-24 15:50:53 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:50:53 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:50:54 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:51:06 - XShield - ERROR - Failed to start module network_scanner: 'XShieldLogger' object has no attribute 'module_start'
+2026-03-24 15:51:06 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:12 - XShield - ERROR - Failed to start module network_scanner: 'XShieldLogger' object has no attribute 'module_start'
+2026-03-24 15:51:12 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:15 - XShield - ERROR - Failed to start module network_scanner: 'XShieldLogger' object has no attribute 'module_start'
+2026-03-24 15:51:15 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:17 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:51:17 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:51:35 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:51:35 - XShield - INFO - Target Manager initialized
+2026-03-24 15:51:36 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:51:37 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:51:37 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:51:37 - XShield - INFO - Registered module: osint
+2026-03-24 15:51:37 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:51:37 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:51:37 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:51:41 - XShield - INFO - Module network_scanner started
+2026-03-24 15:51:41 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:41 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:51:41 - XShield - ERROR - Module Network Scanner error: Unknown scan type: Quick Scan
+2026-03-24 15:51:46 - XShield - INFO - Module network_scanner started
+2026-03-24 15:51:46 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:46 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:51:46 - XShield - ERROR - Module Network Scanner error: Unknown scan type: Port Scan
+2026-03-24 15:51:57 - XShield - INFO - Module network_scanner started
+2026-03-24 15:51:57 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:51:57 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:51:57 - XShield - ERROR - Module Network Scanner error: Unknown scan type: Full Scan
+2026-03-24 15:52:03 - XShield - INFO - Module osint started
+2026-03-24 15:52:03 - XShield - INFO - Module OSINT state transition: RUNNING
+2026-03-24 15:52:03 - XShield - INFO - Module OSINT started
+2026-03-24 15:52:03 - XShield - ERROR - WHOIS lookup error: HTTPSConnectionPool(host='whois.whoisxml.com', port=443): Max retries exceeded with url: /whois.xml/whois.xml?domain=mintalitat.web.app&outputFormat=JSON (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1081)')))
+2026-03-24 15:52:07 - XShield - ERROR - Subdomain enumeration error for https://riddler.io/search/https://mintalitat.web.app/: HTTPSConnectionPool(host='riddler.io', port=443): Max retries exceeded with url: /search/https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='riddler.io', port=443): Failed to resolve 'riddler.io' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 15:52:07 - XShield - ERROR - Subdomain enumeration error for https://dns.bufferover.run/dns?q=.https://mintalitat.web.app/: HTTPSConnectionPool(host='dns.bufferover.run', port=443): Max retries exceeded with url: /dns?q=.https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='dns.bufferover.run', port=443): Failed to resolve 'dns.bufferover.run' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 15:52:08 - XShield - ERROR - Subdomain enumeration error for https://crt.sh/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 15:52:08 - XShield - ERROR - Subdomain enumeration error for https://subdomainfinder.c99.nl/scans/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 15:52:08 - XShield - ERROR - Module OSINT error: cannot access local variable 'found_subdomains' where it is not associated with a value
+2026-03-24 15:52:34 - XShield - INFO - Module network_scanner started
+2026-03-24 15:52:34 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:52:34 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:52:34 - XShield - ERROR - Module Network Scanner error: Unknown scan type: Full Scan
+2026-03-24 15:52:46 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:52:46 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:58:12 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:58:12 - XShield - INFO - Target Manager initialized
+2026-03-24 15:58:13 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:58:14 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:58:14 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:58:14 - XShield - INFO - Registered module: osint
+2026-03-24 15:58:14 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:58:14 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:58:15 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 15:58:23 - XShield - INFO - Module network_scanner started
+2026-03-24 15:58:23 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:58:23 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:58:24 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 15:58:24 - XShield - ERROR - Module Network Scanner error: XShieldLogger.module_complete() takes 2 positional arguments but 3 were given
+2026-03-24 15:58:24 - XShield - INFO - Module network_scanner completed
+2026-03-24 15:58:29 - XShield - INFO - Module network_scanner started
+2026-03-24 15:58:29 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 15:58:29 - XShield - INFO - Module Network Scanner started
+2026-03-24 15:58:29 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 15:58:29 - XShield - ERROR - Module Network Scanner error: XShieldLogger.module_complete() takes 2 positional arguments but 3 were given
+2026-03-24 15:58:29 - XShield - INFO - Module network_scanner completed
+2026-03-24 15:58:49 - XShield - INFO - Module web_scanner started
+2026-03-24 15:58:49 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 15:58:49 - XShield - INFO - Module Web Scanner started
+2026-03-24 15:58:55 - XShield - INFO - Module osint started
+2026-03-24 15:58:55 - XShield - INFO - Module OSINT state transition: RUNNING
+2026-03-24 15:58:55 - XShield - INFO - Module OSINT started
+2026-03-24 15:59:01 - XShield - INFO - Stop requested for module OSINT
+2026-03-24 15:59:01 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 15:59:01 - XShield - ERROR - Module Web Scanner error: XShieldLogger.module_complete() takes 2 positional arguments but 3 were given
+2026-03-24 15:59:06 - XShield - INFO - Stopped module: osint
+2026-03-24 15:59:06 - XShield - INFO - Module web_scanner completed
+2026-03-24 15:59:06 - XShield - ERROR - WHOIS lookup error: HTTPSConnectionPool(host='whois.whoisxml.com', port=443): Max retries exceeded with url: /whois.xml/whois.xml?domain=mintalitat.web.app&outputFormat=JSON (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1081)')))
+2026-03-24 15:59:06 - XShield - INFO - Module OSINT state transition: FINISHED
+2026-03-24 15:59:06 - XShield - ERROR - Module OSINT error: XShieldLogger.module_complete() takes 2 positional arguments but 3 were given
+2026-03-24 15:59:14 - XShield - INFO - X-Shield Application closing
+2026-03-24 15:59:14 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 15:59:41 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 15:59:41 - XShield - INFO - Target Manager initialized
+2026-03-24 15:59:42 - XShield - INFO - Registered module: attack_stress
+2026-03-24 15:59:43 - XShield - INFO - Registered module: brute_force
+2026-03-24 15:59:43 - XShield - INFO - Registered module: network_scanner
+2026-03-24 15:59:43 - XShield - INFO - Registered module: osint
+2026-03-24 15:59:43 - XShield - INFO - Registered module: threat_intel
+2026-03-24 15:59:43 - XShield - INFO - Registered module: web_scanner
+2026-03-24 15:59:44 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 16:00:07 - XShield - INFO - Module network_scanner started
+2026-03-24 16:00:07 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:00:07 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:00:07 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:00:07 - XShield - ERROR - Module Network Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:07 - XShield - INFO - Module network_scanner completed
+2026-03-24 16:00:09 - XShield - INFO - Module network_scanner started
+2026-03-24 16:00:09 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:00:09 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:00:09 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:00:09 - XShield - ERROR - Module Network Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:09 - XShield - INFO - Module network_scanner completed
+2026-03-24 16:00:12 - XShield - INFO - Module network_scanner started
+2026-03-24 16:00:12 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:00:12 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:00:12 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:00:12 - XShield - ERROR - Module Network Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:12 - XShield - INFO - Module network_scanner completed
+2026-03-24 16:00:17 - XShield - INFO - Module web_scanner started
+2026-03-24 16:00:17 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:00:17 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:00:17 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:00:17 - XShield - ERROR - Module Web Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:17 - XShield - INFO - Module web_scanner completed
+2026-03-24 16:00:21 - XShield - INFO - Module web_scanner started
+2026-03-24 16:00:21 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:00:21 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:00:21 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:00:21 - XShield - ERROR - Module Web Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:21 - XShield - INFO - Module web_scanner completed
+2026-03-24 16:00:26 - XShield - INFO - Module web_scanner started
+2026-03-24 16:00:26 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:00:26 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:00:27 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:00:27 - XShield - ERROR - Module Web Scanner error: 'float' object has no attribute 'get'
+2026-03-24 16:00:27 - XShield - INFO - Module web_scanner completed
+2026-03-24 16:00:34 - XShield - INFO - Module osint started
+2026-03-24 16:00:34 - XShield - INFO - Module OSINT state transition: RUNNING
+2026-03-24 16:00:34 - XShield - INFO - Module OSINT started
+2026-03-24 16:00:35 - XShield - ERROR - WHOIS lookup error: HTTPSConnectionPool(host='whois.whoisxml.com', port=443): Max retries exceeded with url: /whois.xml/whois.xml?domain=mintalitat.web.app&outputFormat=JSON (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1081)')))
+2026-03-24 16:00:37 - XShield - INFO - Reports page entered
+2026-03-24 16:00:41 - XShield - INFO - Generated Executive Summary report for https://mintalitat.web.app/
+2026-03-24 16:00:48 - XShield - INFO - Settings page entered
+2026-03-24 16:00:49 - XShield - ERROR - Subdomain enumeration error for https://dns.bufferover.run/dns?q=.https://mintalitat.web.app/: HTTPSConnectionPool(host='dns.bufferover.run', port=443): Max retries exceeded with url: /dns?q=.https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='dns.bufferover.run', port=443): Failed to resolve 'dns.bufferover.run' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:00:49 - XShield - ERROR - Subdomain enumeration error for https://riddler.io/search/https://mintalitat.web.app/: HTTPSConnectionPool(host='riddler.io', port=443): Max retries exceeded with url: /search/https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='riddler.io', port=443): Failed to resolve 'riddler.io' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:00:50 - XShield - ERROR - Subdomain enumeration error for https://subdomainfinder.c99.nl/scans/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:00:50 - XShield - ERROR - Subdomain enumeration error for https://crt.sh/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:00:50 - XShield - ERROR - Module OSINT error: cannot access local variable 'found_subdomains' where it is not associated with a value
+2026-03-24 16:00:50 - XShield - INFO - Module osint completed
+2026-03-24 16:00:57 - XShield - INFO - X-Shield Application closing
+2026-03-24 16:00:57 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 16:01:40 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 16:01:40 - XShield - INFO - Target Manager initialized
+2026-03-24 16:01:41 - XShield - INFO - Registered module: attack_stress
+2026-03-24 16:01:42 - XShield - INFO - Registered module: brute_force
+2026-03-24 16:01:42 - XShield - INFO - Registered module: network_scanner
+2026-03-24 16:01:42 - XShield - INFO - Registered module: osint
+2026-03-24 16:01:42 - XShield - INFO - Registered module: threat_intel
+2026-03-24 16:01:42 - XShield - INFO - Registered module: web_scanner
+2026-03-24 16:01:43 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 16:01:53 - XShield - INFO - Module network_scanner started
+2026-03-24 16:01:53 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:01:53 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:01:54 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:01:54 - XShield - INFO - Module Network Scanner completed. Results type: <class 'float'>
+2026-03-24 16:01:54 - XShield - INFO - Module Network Scanner completed with non-dict results: 0.17489385604858398
+2026-03-24 16:01:54 - XShield - ERROR - Module Network Scanner error: 'Module' object has no attribute 'scan_complete'
+2026-03-24 16:01:54 - XShield - INFO - Module network_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:01:54 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:01:56 - XShield - INFO - Module network_scanner started
+2026-03-24 16:01:56 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:01:56 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:01:57 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:01:57 - XShield - INFO - Module Network Scanner completed. Results type: <class 'float'>
+2026-03-24 16:01:57 - XShield - INFO - Module Network Scanner completed with non-dict results: 0.18883132934570312
+2026-03-24 16:01:57 - XShield - ERROR - Module Network Scanner error: 'Module' object has no attribute 'scan_complete'
+2026-03-24 16:01:57 - XShield - INFO - Module network_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:01:57 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:02:06 - XShield - INFO - Module web_scanner started
+2026-03-24 16:02:06 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:02:06 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:02:07 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:02:07 - XShield - INFO - Module Web Scanner completed. Results type: <class 'float'>
+2026-03-24 16:02:07 - XShield - INFO - Module Web Scanner completed with non-dict results: 0.6609265804290771
+2026-03-24 16:02:07 - XShield - INFO - Module web_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:02:07 - XShield - INFO - Module web_scanner completed with 0 findings
+2026-03-24 16:02:13 - XShield - INFO - Module osint started
+2026-03-24 16:02:13 - XShield - INFO - Module OSINT state transition: RUNNING
+2026-03-24 16:02:13 - XShield - INFO - Module OSINT started
+2026-03-24 16:02:14 - XShield - ERROR - WHOIS lookup error: HTTPSConnectionPool(host='whois.whoisxml.com', port=443): Max retries exceeded with url: /whois.xml/whois.xml?domain=mintalitat.web.app&outputFormat=JSON (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1081)')))
+2026-03-24 16:02:18 - XShield - ERROR - Subdomain enumeration error for https://subdomainfinder.c99.nl/scans/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:02:18 - XShield - ERROR - Subdomain enumeration error for https://crt.sh/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:02:18 - XShield - INFO - Reports page entered
+2026-03-24 16:02:28 - XShield - ERROR - Subdomain enumeration error for https://riddler.io/search/https://mintalitat.web.app/: HTTPSConnectionPool(host='riddler.io', port=443): Max retries exceeded with url: /search/https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='riddler.io', port=443): Failed to resolve 'riddler.io' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:02:28 - XShield - ERROR - Subdomain enumeration error for https://dns.bufferover.run/dns?q=.https://mintalitat.web.app/: HTTPSConnectionPool(host='dns.bufferover.run', port=443): Max retries exceeded with url: /dns?q=.https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='dns.bufferover.run', port=443): Failed to resolve 'dns.bufferover.run' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:02:28 - XShield - ERROR - Module OSINT error: cannot access local variable 'found_subdomains' where it is not associated with a value
+2026-03-24 16:02:28 - XShield - INFO - Module osint completed. Results type: <class 'dict'>
+2026-03-24 16:02:28 - XShield - INFO - Module osint completed with 0 findings
+2026-03-24 16:02:32 - XShield - INFO - X-Shield Application closing
+2026-03-24 16:02:32 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 16:16:18 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 16:16:18 - XShield - INFO - Target Manager initialized
+2026-03-24 16:16:19 - XShield - INFO - Registered module: attack_stress
+2026-03-24 16:16:19 - XShield - INFO - Registered module: brute_force
+2026-03-24 16:16:19 - XShield - INFO - Registered module: network_scanner
+2026-03-24 16:16:19 - XShield - INFO - Registered module: osint
+2026-03-24 16:16:19 - XShield - INFO - Registered module: threat_intel
+2026-03-24 16:16:20 - XShield - INFO - Registered module: web_scanner
+2026-03-24 16:16:20 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 16:16:29 - XShield - INFO - Reports page entered
+2026-03-24 16:16:31 - XShield - INFO - Settings page entered
+2026-03-24 16:16:42 - XShield - INFO - Module network_scanner started
+2026-03-24 16:16:42 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:16:42 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:16:42 - XShield - ERROR - Module Network Scanner error: 'https://mintalitat.web.app//32' does not appear to be an IPv4 or IPv6 network
+2026-03-24 16:16:42 - XShield - INFO - Module network_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:16:42 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:16:47 - XShield - INFO - Module network_scanner started
+2026-03-24 16:16:47 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:16:47 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:16:47 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:16:47 - XShield - INFO - Module Network Scanner completed. Results type: <class 'float'>
+2026-03-24 16:16:47 - XShield - INFO - Module Network Scanner completed with non-dict results: 0.18585443496704102
+2026-03-24 16:16:47 - XShield - ERROR - Module Network Scanner error: 'Module' object has no attribute 'scan_complete'
+2026-03-24 16:16:47 - XShield - INFO - Module network_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:16:47 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:16:59 - XShield - INFO - Module web_scanner started
+2026-03-24 16:16:59 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:16:59 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:17:00 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:17:00 - XShield - INFO - Module Web Scanner completed. Results type: <class 'float'>
+2026-03-24 16:17:00 - XShield - INFO - Module Web Scanner completed with non-dict results: 0.7233803272247314
+2026-03-24 16:17:00 - XShield - INFO - Module web_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:17:00 - XShield - INFO - Module web_scanner completed with 0 findings
+2026-03-24 16:17:08 - XShield - INFO - Module osint started
+2026-03-24 16:17:08 - XShield - INFO - Module OSINT state transition: RUNNING
+2026-03-24 16:17:08 - XShield - INFO - Module OSINT started
+2026-03-24 16:17:09 - XShield - ERROR - WHOIS lookup error: HTTPSConnectionPool(host='whois.whoisxml.com', port=443): Max retries exceeded with url: /whois.xml/whois.xml?domain=mintalitat.web.app&outputFormat=JSON (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1081)')))
+2026-03-24 16:17:10 - XShield - INFO - Reports page entered
+2026-03-24 16:17:13 - XShield - ERROR - Subdomain enumeration error for https://riddler.io/search/https://mintalitat.web.app/: HTTPSConnectionPool(host='riddler.io', port=443): Max retries exceeded with url: /search/https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='riddler.io', port=443): Failed to resolve 'riddler.io' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:17:13 - XShield - ERROR - Subdomain enumeration error for https://dns.bufferover.run/dns?q=.https://mintalitat.web.app/: HTTPSConnectionPool(host='dns.bufferover.run', port=443): Max retries exceeded with url: /dns?q=.https://mintalitat.web.app/ (Caused by NameResolutionError("HTTPSConnection(host='dns.bufferover.run', port=443): Failed to resolve 'dns.bufferover.run' ([Errno 11001] getaddrinfo failed)"))
+2026-03-24 16:17:14 - XShield - ERROR - Subdomain enumeration error for https://subdomainfinder.c99.nl/scans/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:17:14 - XShield - ERROR - Subdomain enumeration error for https://crt.sh/https://mintalitat.web.app/: Expecting value: line 1 column 1 (char 0)
+2026-03-24 16:17:14 - XShield - ERROR - Module OSINT error: cannot access local variable 'found_subdomains' where it is not associated with a value
+2026-03-24 16:17:14 - XShield - INFO - Module osint completed. Results type: <class 'dict'>
+2026-03-24 16:17:14 - XShield - INFO - Module osint completed with 0 findings
+2026-03-24 16:17:16 - XShield - INFO - X-Shield Application closing
+2026-03-24 16:17:16 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 16:18:01 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 16:18:01 - XShield - INFO - Target Manager initialized
+2026-03-24 16:18:02 - XShield - INFO - Registered module: attack_stress
+2026-03-24 16:18:03 - XShield - INFO - Registered module: brute_force
+2026-03-24 16:18:03 - XShield - INFO - Registered module: network_scanner
+2026-03-24 16:18:03 - XShield - INFO - Registered module: osint
+2026-03-24 16:18:03 - XShield - INFO - Registered module: threat_intel
+2026-03-24 16:18:03 - XShield - INFO - Registered module: web_scanner
+2026-03-24 16:18:04 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 16:18:10 - XShield - INFO - Module network_scanner started
+2026-03-24 16:18:10 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:18:10 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:18:11 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:18:11 - XShield - INFO - Module Network Scanner completed. Results type: <class 'float'>
+2026-03-24 16:18:11 - XShield - INFO - Module Network Scanner completed with non-dict results: 0.18997454643249512
+2026-03-24 16:18:11 - XShield - ERROR - Module Network Scanner error: 'Module' object has no attribute 'scan_complete'
+2026-03-24 16:18:11 - XShield - INFO - Module network_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:18:11 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:18:27 - XShield - INFO - Module web_scanner started
+2026-03-24 16:18:27 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:18:27 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:18:28 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:18:28 - XShield - INFO - Module Web Scanner completed. Results type: <class 'float'>
+2026-03-24 16:18:28 - XShield - INFO - Module Web Scanner completed with non-dict results: 0.6828286647796631
+2026-03-24 16:18:28 - XShield - INFO - Module web_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:18:28 - XShield - INFO - Module web_scanner completed with 0 findings
+2026-03-24 16:18:32 - XShield - INFO - Module web_scanner started
+2026-03-24 16:18:32 - XShield - INFO - Module Web Scanner state transition: RUNNING
+2026-03-24 16:18:32 - XShield - INFO - Module Web Scanner started
+2026-03-24 16:18:32 - XShield - INFO - Module Web Scanner state transition: FINISHED
+2026-03-24 16:18:32 - XShield - INFO - Module Web Scanner completed. Results type: <class 'float'>
+2026-03-24 16:18:32 - XShield - INFO - Module Web Scanner completed with non-dict results: 0.615330696105957
+2026-03-24 16:18:32 - XShield - INFO - Module web_scanner completed. Results type: <class 'dict'>
+2026-03-24 16:18:32 - XShield - INFO - Module web_scanner completed with 0 findings
+2026-03-24 16:18:36 - XShield - INFO - Reports page entered
+2026-03-24 16:18:37 - XShield - INFO - Settings page entered
+2026-03-24 16:18:47 - XShield - INFO - X-Shield Application closing
+2026-03-24 16:18:47 - XShield - INFO - Target Manager cleanup completed
+2026-03-24 16:21:25 - XShield - INFO - Loaded 1 targets from file
+2026-03-24 16:21:25 - XShield - INFO - Target Manager initialized
+2026-03-24 16:21:26 - XShield - INFO - Registered module: attack_stress
+2026-03-24 16:21:26 - XShield - INFO - Registered module: brute_force
+2026-03-24 16:21:26 - XShield - INFO - Registered module: network_scanner
+2026-03-24 16:21:26 - XShield - INFO - Registered module: osint
+2026-03-24 16:21:26 - XShield - INFO - Registered module: threat_intel
+2026-03-24 16:21:27 - XShield - INFO - Registered module: web_scanner
+2026-03-24 16:21:27 - XShield - INFO - X-Shield Professional Application initialized
+2026-03-24 16:21:36 - XShield - INFO - Module network_scanner started
+2026-03-24 16:21:36 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:21:36 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:21:36 - XShield - ERROR - Module Network Scanner error: 'https://mintalitat.web.app//32' does not appear to be an IPv4 or IPv6 network
+2026-03-24 16:21:36 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:21:39 - XShield - INFO - Module network_scanner started
+2026-03-24 16:21:39 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:21:39 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:21:39 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:21:39 - XShield - INFO - Module Network Scanner completed
+2026-03-24 16:21:39 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:21:42 - XShield - INFO - Module network_scanner started
+2026-03-24 16:21:42 - XShield - INFO - Module Network Scanner state transition: RUNNING
+2026-03-24 16:21:42 - XShield - INFO - Module Network Scanner started
+2026-03-24 16:21:42 - XShield - INFO - Module Network Scanner state transition: FINISHED
+2026-03-24 16:21:42 - XShield - INFO - Module Network Scanner completed
+2026-03-24 16:21:42 - XShield - INFO - Module network_scanner completed with 0 findings
+2026-03-24 16:21:50 - XShield - INFO - X-Shield Application closing
+2026-03-24 16:21:50 - XShield - INFO - Target Manager cleanup completed

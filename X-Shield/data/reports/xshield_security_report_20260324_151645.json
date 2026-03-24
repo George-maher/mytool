@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "report_title": "Executive Summary - https://mintalitat.web.app/",
+    "generation_date": "2026-03-24 15:16:45",
+    "risk_score": 20
+  },
+  "summary": {
+    "total_vulnerabilities": 4,
+    "modules_executed": 3,
+    "scan_duration_minutes": 0.0,
+    "overall_risk_level": "low",
+    "remediation_priority": "Low - Address during next maintenance window"
+  },
+  "target": {
+    "primary_target": "https://mintalitat.web.app/",
+    "scan_scope": "Executive Summary",
+    "assessment_type": "Comprehensive Security Assessment"
+  },
+  "vulnerabilities": [
+    {
+      "description": "SSH server version may have known vulnerabilities",
+      "severity": "Medium",
+      "title": "SSH Version 7.4",
+      "target": "https://mintalitat.web.app/"
+    },
+    {
+      "description": "Server header exposes server information",
+      "severity": "Low",
+      "title": "HTTP Server Header",
+      "target": "https://mintalitat.web.app/"
+    },
+    {
+      "description": "Potential SQL injection in search parameter",
+      "severity": "High",
+      "title": "SQL Injection",
+      "target": "https://mintalitat.web.app/"
+    },
+    {
+      "description": "Cross-site scripting in comment field",
+      "severity": "Medium",
+      "title": "XSS Vulnerability",
+      "target": "https://mintalitat.web.app/"
+    }
+  ],
+  "modules": [
+    {
+      "name": "network_scanner",
+      "status": "completed",
+      "duration": 0,
+      "items_scanned": 0,
+      "issues_found": 2,
+      "summary": "Network scan completed for https://mintalitat.web.app/. Found 10 findings and 2 potential vulnerabilities."
+    },
+    {
+      "name": "web_scanner",
+      "status": "completed",
+      "duration": 0,
+      "items_scanned": 0,
+      "issues_found": 2,
+      "summary": "Web scan completed for https://mintalitat.web.app/. Found 6 findings and 2 vulnerabilities."
+    },
+    {
+      "name": "osint",
+      "status": "completed",
+      "duration": 0,
+      "items_scanned": 0,
+      "issues_found": 0,
+      "summary": "OSINT completed for https://mintalitat.web.app/. Found 7 pieces of information."
+    }
+  ],
+  "risk_distribution": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  }
+}

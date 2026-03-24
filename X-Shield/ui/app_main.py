@@ -5,7 +5,7 @@ Main Application with Modern Minimal design system and modular architecture
 
 import sys
 import os
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFrame
 from PySide6.QtCore import Qt, QTimer, Slot
 from PySide6.QtGui import QIcon
 
@@ -64,20 +64,27 @@ class XShieldApp(QMainWindow):
             self.setStyleSheet("QMainWindow { background-color: #09090b; color: white; }")
     
     def setup_ui(self):
-        """Setup main UI layout"""
+        """Setup main UI layout with improved spacing"""
         # Central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         
-        # Main layout
+        # Main layout with proper margins and spacing
         main_layout = QHBoxLayout(central_widget)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
+        main_layout.setContentsMargins(8, 8, 8, 8)  # Add breathing room around edges
+        main_layout.setSpacing(12)  # Space between sidebar and content
         
         # Create sidebar
         self.sidebar = Sidebar(self)
         self.sidebar.setObjectName("sidebar")
         main_layout.addWidget(self.sidebar)
+        
+        # Create content container with proper margins
+        content_container = QFrame()
+        content_container.setObjectName("content_area")
+        content_layout = QVBoxLayout(content_container)
+        content_layout.setContentsMargins(0, 0, 0, 0)
+        content_layout.setSpacing(0)
         
         # Create stacked content area
         self.stacked_content = StackedContent(
@@ -87,11 +94,14 @@ class XShieldApp(QMainWindow):
             self
         )
         self.stacked_content.setObjectName("content_area")
-        main_layout.addWidget(self.stacked_content)
+        content_layout.addWidget(self.stacked_content)
         
-        # Set layout proportions (20% sidebar, 80% content)
+        # Add content container to main layout
+        main_layout.addWidget(content_container)
+        
+        # Set layout proportions (25% sidebar, 75% content for better balance)
         main_layout.setStretchFactor(self.sidebar, 1)
-        main_layout.setStretchFactor(self.stacked_content, 4)
+        main_layout.setStretchFactor(content_container, 3)
     
     def setup_connections(self):
         """Setup signal connections"""

@@ -34,7 +34,7 @@ class ReportsPage(QWidget):
         """Setup reports UI with modern minimal design"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
-        layout.setSpacing(Spacing.XL)
+        layout.setSpacing(Spacing.SM)
 
         # Report Generation
         self.setup_report_generation(layout)
@@ -60,8 +60,8 @@ class ReportsPage(QWidget):
         """)
         
         gen_layout = QVBoxLayout(gen_frame)
-        gen_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        gen_layout.setSpacing(Spacing.XL)
+        gen_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        gen_layout.setSpacing(Spacing.SM)
         
         # Section title
         section_title = QLabel("Generate Audit Report")
@@ -70,7 +70,7 @@ class ReportsPage(QWidget):
         
         # Report options
         options_layout = QHBoxLayout()
-        options_layout.setSpacing(Spacing.XL)
+        options_layout.setSpacing(Spacing.SM)
         
         # Target Selection
         target_layout = QVBoxLayout()
@@ -137,8 +137,8 @@ class ReportsPage(QWidget):
         """)
         
         table_layout = QVBoxLayout(table_frame)
-        table_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        table_layout.setSpacing(Spacing.XL)
+        table_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        table_layout.setSpacing(Spacing.SM)
         
         # Section title
         section_title = QLabel("Archived Audits")
@@ -180,8 +180,8 @@ class ReportsPage(QWidget):
         """)
         
         details_layout = QVBoxLayout(details_frame)
-        details_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        details_layout.setSpacing(Spacing.MD)
+        details_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        details_layout.setSpacing(Spacing.SM)
         
         # Section title
         section_title = QLabel("Report Content Preview")
@@ -326,8 +326,8 @@ class ReportsPage(QWidget):
         """Create actions widget for report row with modern minimal style"""
         widget = QWidget()
         layout = QHBoxLayout(widget)
-        layout.setContentsMargins(Spacing.XS, Spacing.XS, Spacing.XS, Spacing.XS)
-        layout.setSpacing(Spacing.SM)
+        layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
+        layout.setSpacing(Spacing.XL)
         
         # View button
         view_btn = QPushButton("👁️")

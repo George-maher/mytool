@@ -35,46 +35,74 @@ class StackedContent(QWidget):
         self.setup_pages()
     
     def setup_ui(self):
-        """Setup main UI layout"""
+        """Setup main UI layout with improved spacing"""
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
+        layout.setContentsMargins(16, 16, 16, 16)  # Add proper margins
+        layout.setSpacing(12)  # Space between header and content
         
-        # Header bar
+        # Header bar with better styling
         header = self.create_header()
         layout.addWidget(header)
         
-        # Stacked widget for pages
+        # Stacked widget for pages with proper spacing
         self.stacked_widget = QStackedWidget()
-        self.stacked_widget.setStyleSheet(f"background-color: {Colors.BACKGROUND}; border: none;")
+        self.stacked_widget.setStyleSheet(f"""
+            QStackedWidget {{
+                background-color: {Colors.BACKGROUND}; 
+                border: none;
+                border-radius: 12px;
+            }}
+        """)
         layout.addWidget(self.stacked_widget)
     
     def create_header(self):
-        """Create header bar with page title"""
+        """Create header bar with improved styling"""
         header_frame = QFrame()
-        header_frame.setFixedHeight(80)
+        header_frame.setFixedHeight(60)  # Reduced from 80
         header_frame.setStyleSheet(f"""
             QFrame {{
-                background-color: {Colors.BACKGROUND};
-                border-bottom: 1px solid {Colors.BORDER};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+                    stop:0 {Colors.BACKGROUND}, stop:0.5 {Colors.SURFACE}, stop:1 {Colors.BACKGROUND});
+                border-bottom: 2px solid {Colors.PRIMARY};
+                border-radius: 8px 8px 0 0;
             }}
         """)
         
         header_layout = QHBoxLayout(header_frame)
-        header_layout.setContentsMargins(Spacing.XXL, 0, Spacing.XXL, 0)
+        header_layout.setContentsMargins(20, 12, 20, 12)  # Better padding
+        header_layout.setSpacing(16)
         
         # Page title
-        self.page_title = QLabel("Dashboard")
-        self.page_title.setObjectName("title")
-        self.page_title.setStyleSheet(f"color: {Colors.PRIMARY}; font-size: {Typography.H1_SIZE}; font-weight: 800; letter-spacing: -0.5px;")
+        self.page_title = QLabel("DASHBOARD")
+        self.page_title.setStyleSheet(f"""
+            QLabel {{
+                color: {Colors.PRIMARY};
+                font-weight: 800;
+                font-size: 18px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-family: {Typography.FAMILY_SANS};
+                text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+            }}
+        """)
         header_layout.addWidget(self.page_title)
         
         header_layout.addStretch()
         
         # Status indicator
-        self.status_indicator = QLabel("● System Operational")
-        self.status_indicator.setStyleSheet(f"color: {Colors.SUCCESS}; font-size: 13px; font-weight: 500;")
-        header_layout.addWidget(self.status_indicator)
+        status_label = QLabel("● ONLINE")
+        status_label.setStyleSheet(f"""
+            QLabel {{
+                color: {Colors.SUCCESS};
+                font-weight: 700;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-family: {Typography.FAMILY_SANS};
+                text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+            }}
+        """)
+        header_layout.addWidget(status_label)
         
         return header_frame
     

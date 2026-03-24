@@ -6,10 +6,10 @@ A professional, modular pentesting framework built with Python 3.10+ and PySide6
 
 ### Core Capabilities
 - **Modular Architecture**: Strictly separated modules for different pentesting tasks
-- **Modern GUI**: PySide6-based interface with dark mode support
+- **Modern GUI**: PySide6-based interface with modern minimal design
 - **Asynchronous Execution**: Non-blocking GUI with multi-threaded module execution
 - **Real-time Logging**: Centralized logging system with terminal-like display
-- **Professional Reporting**: HTML reports with Tailwind CSS and interactive charts
+- **Professional Reporting**: HTML reports with modern styling and interactive charts
 
 ### Pentesting Modules
 
@@ -24,39 +24,26 @@ A professional, modular pentesting framework built with Python 3.10+ and PySide6
 - SQL injection testing
 - CSRF vulnerability assessment
 - Security header analysis
+- Directory discovery
+
+#### OSINT (Open Source Intelligence)
+- Shodan integration
+- WHOIS lookups
+- Subdomain enumeration
+- Metadata extraction
+- Email harvesting
 
 #### Brute Force
 - Multi-threaded password cracking
 - Support for various wordlist formats
 - Web form authentication testing
-- File-based brute force attacks
 
-#### Exploitation
-- Payload execution framework
-- Exploit template system
-- Post-exploitation tools
-- Custom payload support
-
-#### OSINT (Open Source Intelligence)
-- Shodan integration
-- WHOIS lookups
-- Metadata extraction
-- Social media reconnaissance
-
-#### MITM & Sniffing
-- ARP spoofing capabilities
-- Packet capture and analysis
-- Network traffic monitoring
-- Protocol analysis
-
-#### DoS/DDoS Testing
-- Stress testing tools (authorized only)
-- Traffic generation
+#### Attack Stress Testing
 - Load testing capabilities
 - Performance assessment
+- Traffic generation
 
 #### Threat Intelligence
-- OWASP Top 10 integration
 - CVE database access
 - Live threat feeds
 - Security advisory aggregation
@@ -69,14 +56,14 @@ A professional, modular pentesting framework built with Python 3.10+ and PySide6
 
 ### Setup
 ```bash
-# Clone the repository
+# Clone repository
 git clone <repository-url>
 cd X-Shield
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the application
+# Run application
 python main.py
 ```
 
@@ -85,20 +72,19 @@ python main.py
 - **Scapy**: Packet manipulation and network scanning
 - **Requests**: HTTP library for web scanning
 - **BeautifulSoup4**: HTML parsing
-- **Plotly**: Interactive charts for reports
-- **Jinja2**: Template engine for reports
+- **python-nmap**: Network scanning capabilities
 - **Additional libraries**: See requirements.txt
 
 ## Usage
 
 ### Quick Start
 1. Launch X-Shield using `python main.py`
-2. Select a pentesting module from the left panel
-3. Configure target and parameters in the Module Config tab
-4. Click "Run Selected Module" to start the scan
-5. Monitor real-time progress in the terminal
-6. View results in the Results tab
-7. Generate professional HTML reports
+2. Navigate through modules using the sidebar
+3. Configure target and parameters in each module
+4. Click "Start" to begin scanning
+5. Monitor real-time progress in terminal
+6. View results in the terminal output
+7. Generate reports from the Reports page
 
 ### Module Configuration
 Each module has specific parameters:
@@ -108,13 +94,14 @@ Each module has specific parameters:
 - **Threads**: Adjust concurrent operations
 - **Custom Parameters**: Module-specific settings
 
-### Reporting
-- Automatic HTML report generation
-- Interactive charts and visualizations
-- CVSS-like risk scoring
-- Vulnerability categorization
-- Executive summary and technical details
-- Export to multiple formats
+### Available Modules
+- **Dashboard**: Overview of system status and recent activity
+- **Target Manager**: Centralized target management and enrollment
+- **Network Scanner**: ARP, TCP, and comprehensive network scanning
+- **Web Scanner**: Web application vulnerability assessment
+- **OSINT**: Open source intelligence gathering
+- **Reports**: Professional report generation and management
+- **Settings**: Application configuration and preferences
 
 ## Architecture
 
@@ -124,40 +111,47 @@ X-Shield/
 ├── main.py                 # Main application entry point
 ├── requirements.txt        # Python dependencies
 ├── core/                   # Core framework components
-│   ├── logger.py          # Centralized logging system
+│   ├── target_manager.py  # Target management system
 │   ├── module_manager.py  # Module execution manager
+│   ├── logger_new.py      # Centralized logging system
 │   └── base_module.py     # Base class for all modules
 ├── modules/               # Pentesting modules
 │   ├── network_scanner/   # Network discovery and scanning
 │   ├── web_scanner/       # Web application testing
-│   ├── brute_force/       # Password cracking tools
-│   ├── exploitation/      # Exploitation framework
 │   ├── osint/            # Open source intelligence
-│   ├── mitm_sniffing/    # MITM and packet analysis
-│   ├── dos/              # Stress testing tools
+│   ├── brute_force/       # Password cracking tools
+│   ├── attack_stress/    # Stress testing tools
 │   └── threat_intel/     # Threat intelligence
 ├── ui/                    # User interface components
-│   ├── main_window.py    # Main application window
-│   ├── terminal_widget.py # Real-time log display
-│   ├── module_widget.py  # Module configuration interface
-│   └── dashboard_widget.py # Overview and statistics
+│   ├── app_main.py       # Main application window
+│   ├── components/       # UI components
+│   │   ├── sidebar.py
+│   │   ├── stacked_content.py
+│   │   └── styles.py
+│   └── pages/           # Page implementations
+│       ├── dashboard_page.py
+│       ├── target_manager_page.py
+│       ├── network_scanner_page.py
+│       ├── web_scanner_page.py
+│       ├── osint_page.py
+│       ├── reports_page_new.py
+│       └── settings_page_new.py
+├── models/               # Data models
+├── views/               # View components
 ├── reports/               # Report generation
-│   ├── report_generator.py # HTML report engine
-│   └── templates/         # Report templates
-├── utils/                 # Utility functions
+│   └── advanced_report_generator.py
 ├── config/               # Configuration files
-└── data/                # Data storage
-    ├── wordlists/       # Password wordlists
-    └── reports/         # Generated reports
+├── data/                 # Data storage
+└── logs/                 # Application logs
 ```
 
 ### Module Development
-Create new modules by inheriting from `BaseModule`:
+Create new modules by inheriting from `BaseModule` or `NetworkModule`:
 
 ```python
-from core.base_module import BaseModule
+from core.base_module import NetworkModule
 
-class CustomModule(BaseModule):
+class CustomModule(NetworkModule):
     NAME = "Custom Module"
     DESCRIPTION = "Description of your module"
     VERSION = "1.0.0"
@@ -173,13 +167,10 @@ class CustomModule(BaseModule):
         }
     }
     
-    def run(self, target, parameters):
+    def execute(self, target, parameters):
         # Module implementation
-        pass
-    
-    def validate_target(self, target):
-        # Target validation
-        return True
+        self.add_finding("Custom finding", {"details": "Finding details"})
+        return self.results
 ```
 
 ## Security Considerations
@@ -225,9 +216,24 @@ class CustomModule(BaseModule):
 - Ensure proper permissions
 - Review module configuration
 
+## Current Status
+
+### Working Modules
+- **Network Scanner**: ARP, TCP, and comprehensive scanning
+- **Web Scanner**: XSS, SQLi, CSRF, and directory scanning
+- **OSINT**: WHOIS, DNS, subdomain enumeration
+- **Attack Stress**: Load testing capabilities
+- **Brute Force**: Password cracking tools
+- **Threat Intelligence**: CVE and threat data
+
+### Known Issues
+- Some OSINT APIs may require API keys for full functionality
+- Network scanning requires administrative privileges for ARP operations
+- Web scanner results may vary based on target security measures
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under MIT License - see LICENSE file for details.
 
 ## Disclaimer
 

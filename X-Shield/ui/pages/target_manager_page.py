@@ -86,7 +86,7 @@ class TargetManagerPage(QWidget):
         layout.addStretch()
 
     def setup_enrollment_form(self, parent_layout):
-        """Setup enrollment form on the left side"""
+        """Setup enrollment form on left side"""
         form_frame = QFrame()
         form_frame.setObjectName("card")
         form_frame.setFixedWidth(320)
@@ -125,11 +125,13 @@ class TargetManagerPage(QWidget):
         self.add_target_btn.setObjectName("primary_btn")
         form_layout.addWidget(self.add_target_btn)
 
+        parent_layout.addWidget(form_frame)
+
         form_layout.addStretch()
         parent_layout.addWidget(form_frame)
 
     def setup_inventory_table(self, parent_layout):
-        """Setup inventory table on the right side"""
+        """Setup inventory table on right side"""
         table_frame = QFrame()
         table_frame.setObjectName("card")
 

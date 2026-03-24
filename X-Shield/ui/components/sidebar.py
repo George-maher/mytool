@@ -86,7 +86,7 @@ class Sidebar(QFrame):
     
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setFixedWidth(280)
+        self.setFixedWidth(260)  # Reduced from 280 for better proportions
         self.setObjectName("sidebar")
         self.setAttribute(Qt.WA_StyledBackground, True)
         
@@ -97,24 +97,31 @@ class Sidebar(QFrame):
         self.set_active_page("dashboard")
     
     def setup_ui(self):
-        """Setup sidebar UI"""
+        """Setup sidebar UI with improved spacing"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
         
-        # Header
+        # Header with better spacing
         self.setup_header(layout)
         
-        # Navigation
-        self.setup_navigation(layout)
+        # Navigation with proper spacing
+        nav_container = QFrame()
+        nav_container.setStyleSheet("background: transparent; border: none;")
+        nav_layout = QVBoxLayout(nav_container)
+        nav_layout.setContentsMargins(12, 16, 12, 16)  # Add padding around navigation
+        nav_layout.setSpacing(4)  # Tight spacing between nav items
+        
+        self.setup_navigation(nav_layout)
+        layout.addWidget(nav_container)
         
         # Footer
         self.setup_footer(layout)
     
     def setup_header(self, parent_layout):
-        """Setup sidebar header"""
+        """Setup sidebar header with better spacing"""
         header_frame = QFrame()
-        header_frame.setFixedHeight(80)
+        header_frame.setFixedHeight(70)  # Reduced from 80
         header_frame.setStyleSheet(f"""
             QFrame {{
                 background-color: transparent;
@@ -123,19 +130,20 @@ class Sidebar(QFrame):
         """)
         
         header_layout = QHBoxLayout(header_frame)
-        header_layout.setContentsMargins(Spacing.XL, 0, Spacing.XL, 0)
+        header_layout.setContentsMargins(16, 12, 16, 12)  # Better padding
         header_layout.setSpacing(Spacing.MD)
         
         # Logo
         logo_label = QLabel("🛡️")
-        logo_label.setFont(QFont("Segoe UI Emoji", 18))
+        logo_label.setFont(QFont("Segoe UI Emoji", 16))
         logo_label.setAlignment(Qt.AlignCenter)
-        logo_label.setFixedSize(36, 36)
+        logo_label.setFixedSize(32, 32)  # Slightly smaller
         logo_label.setStyleSheet(f"""
             QLabel {{
-                background-color: {Colors.SURFACE_LIGHT};
-                border: 1px solid {Colors.BORDER};
-                border-radius: 10px;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                    stop:0 {Colors.SURFACE_LIGHT}, stop:1 {Colors.PRIMARY_MUTED});
+                border: 1px solid {Colors.PRIMARY};
+                border-radius: 8px;
             }}
         """)
         header_layout.addWidget(logo_label)

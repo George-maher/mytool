@@ -158,7 +158,6 @@ class Module(NetworkModule):
                 self.osint_status.emit(f"Completed {module} OSINT")
             
             self._finish_execution()
-            self.osint_complete.emit(self.results)
             return self.results
             
         except Exception as e:
@@ -332,10 +331,10 @@ class Module(NetworkModule):
             if self._stop_requested:
                 return []
             
+            found_subdomains = []
+            
             try:
                 response = requests.get(source_url, timeout=30)
-                
-                found_subdomains = []
                 
                 if 'crt.sh' in source_url:
                     # Parse CRT.sh results

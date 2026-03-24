@@ -5,28 +5,36 @@ Centralized styles, colors, and QSS templates for the entire application.
 
 import os
 
-# --- Color Palette (Black & Blue Theme) ---
+# --- Color Palette (Vibrant Cyberpunk Theme) ---
 class Colors:
-    BACKGROUND = "#000000"      # Pure Black
-    SURFACE = "#0a0a0a"         # Zinc 950
-    SURFACE_LIGHT = "#18181b"   # Zinc 900
-    BORDER = "#1e1e1e"          # Dark Gray
-    BORDER_HOVER = "#2a2a2a"    # Medium Gray
+    BACKGROUND = "#0a0e1a"      # Deep Dark Blue
+    SURFACE = "#1a1f2e"         # Dark Blue-Gray
+    SURFACE_LIGHT = "#2a3f5f"   # Medium Blue
+    BORDER = "#3a4f6f"          # Light Blue
+    BORDER_HOVER = "#4a5f7f"    # Lighter Blue
 
     TEXT_PRIMARY = "#ffffff"    # Pure White
-    TEXT_SECONDARY = "#a1a1aa"  # Zinc 400
-    TEXT_MUTED = "#52525b"      # Zinc 600
+    TEXT_SECONDARY = "#b8c5d6"  # Light Blue-Gray
+    TEXT_MUTED = "#6b7c93"      # Muted Blue
 
-    PRIMARY = "#3b82f6"         # Blue 500
-    PRIMARY_HOVER = "#60a5fa"   # Blue 400
-    PRIMARY_MUTED = "rgba(59, 130, 246, 0.1)"
+    PRIMARY = "#ff00ff"         # Bright Magenta
+    PRIMARY_HOVER = "#ff33ff"   # Lighter Magenta
+    PRIMARY_MUTED = "rgba(255, 0, 255, 0.1)"
 
-    SUCCESS = "#10b981"         # Emerald 500
-    WARNING = "#f59e0b"         # Amber 500
-    DANGER = "#ef4444"          # Red 500
-    INFO = "#3b82f6"            # Blue 500
-    ACCENT = "#8b5cf6"          # Violet 500
-    TERMINAL_BG = "#09090b"     # Zinc 950
+    SUCCESS = "#00ff88"         # Neon Green
+    WARNING = "#ffaa00"         # Golden Amber
+    DANGER = "#ff0066"          # Hot Pink
+    INFO = "#00ddff"            # Cyan
+    ACCENT = "#ff6b35"          # Orange Coral
+    TERMINAL_BG = "#0f172a"     # Dark Blue
+    
+    # Additional vibrant colors
+    PURPLE = "#8b5cf6"          # Violet
+    PINK = "#ec4899"            # Hot Pink
+    LIME = "#84cc16"            # Lime Green
+    TEAL = "#14b8a6"            # Teal
+    INDIGO = "#6366f1"          # Indigo
+    ROSE = "#f43f5e"            # Rose
 
 # --- Spacing System ---
 class Spacing:
@@ -105,22 +113,29 @@ def get_main_stylesheet():
 
     /* --- Buttons --- */
     QPushButton {{
-        background-color: {Colors.SURFACE_LIGHT};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.SURFACE}, stop:1 {Colors.SURFACE_LIGHT});
         color: {Colors.TEXT_PRIMARY};
         border: 1px solid {Colors.BORDER};
         padding: 8px 16px;
-        border-radius: 6px;
-        font-weight: 500;
+        border-radius: 8px;
+        font-weight: 600;
         min-height: 36px;
+        transition: all 0.3s ease;
     }}
 
     QPushButton:hover {{
-        background-color: {Colors.BORDER_HOVER};
-        border-color: {Colors.TEXT_MUTED};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.PRIMARY_MUTED}, stop:1 rgba(255, 0, 255, 0.2));
+        border-color: {Colors.PRIMARY};
+        color: {Colors.PRIMARY_HOVER};
+        transform: translateY(-1px);
     }}
 
     QPushButton:pressed {{
-        background-color: {Colors.SURFACE};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.PRIMARY}, stop:1 {Colors.PRIMARY_HOVER});
+        color: {Colors.TEXT_PRIMARY};
     }}
 
     QPushButton:disabled {{
@@ -131,15 +146,65 @@ def get_main_stylesheet():
 
     /* Primary Action Buttons */
     QPushButton#primary_btn, QPushButton.large {{
-        background-color: {Colors.PRIMARY};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.PRIMARY}, stop:1 {Colors.PRIMARY_HOVER});
         color: {Colors.TEXT_PRIMARY};
-        border: 1px solid {Colors.PRIMARY};
-        font-weight: 600;
+        border: 2px solid {Colors.PRIMARY};
+        font-weight: 700;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(255, 0, 255, 0.3);
     }}
 
     QPushButton#primary_btn:hover, QPushButton.large:hover {{
-        background-color: {Colors.PRIMARY_HOVER};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.PRIMARY_HOVER}, stop:1 #ff66ff);
         border-color: {Colors.PRIMARY_HOVER};
+        box-shadow: 0 6px 20px rgba(255, 0, 255, 0.5);
+    }}
+
+    /* Success Buttons */
+    QPushButton#success_btn {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.SUCCESS}, stop:1 #00ffaa);
+        color: {Colors.BACKGROUND};
+        border: 2px solid {Colors.SUCCESS};
+        font-weight: 700;
+    }}
+
+    QPushButton#success_btn:hover {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 #00ffaa, stop:1 #00ffcc);
+        box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+    }}
+
+    /* Warning Buttons */
+    QPushButton#warning_btn {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.WARNING}, stop:1 #ffcc00);
+        color: {Colors.BACKGROUND};
+        border: 2px solid {Colors.WARNING};
+        font-weight: 700;
+    }}
+
+    QPushButton#warning_btn:hover {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 #ffcc00, stop:0 #ffdd33);
+        box-shadow: 0 6px 20px rgba(255, 170, 0, 0.5);
+    }}
+
+    /* Danger Buttons */
+    QPushButton#danger_btn {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.DANGER}, stop:1 #ff3388);
+        color: {Colors.TEXT_PRIMARY};
+        border: 2px solid {Colors.DANGER};
+        font-weight: 700;
+    }}
+
+    QPushButton#danger_btn:hover {{
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 #ff3388, stop:1 #ff66aa);
+        box-shadow: 0 6px 20px rgba(255, 0, 102, 0.5);
     }}
 
     /* Small/Secondary Buttons */
@@ -147,6 +212,7 @@ def get_main_stylesheet():
         padding: 4px 12px;
         min-height: 28px;
         font-size: {Typography.SMALL_SIZE};
+        border-radius: 6px;
     }}
 
     /* --- Inputs --- */
@@ -228,14 +294,23 @@ def get_main_stylesheet():
 
     /* --- Frames & Containers --- */
     #card {{
-        background-color: {Colors.SURFACE};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.SURFACE}, stop:1 {Colors.SURFACE_LIGHT});
         border: 1px solid {Colors.BORDER};
         border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }}
+
+    #card:hover {{
+        border-color: {Colors.PRIMARY};
+        box-shadow: 0 6px 20px rgba(255, 0, 255, 0.2);
     }}
 
     #sidebar {{
-        background-color: {Colors.SURFACE};
-        border-right: 1px solid {Colors.BORDER};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+            stop:0 {Colors.SURFACE}, stop:1 {Colors.SURFACE_LIGHT});
+        border-right: 2px solid {Colors.PRIMARY};
+        box-shadow: 2px 0 10px rgba(255, 0, 255, 0.1);
     }}
 
     /* --- Tables --- */
@@ -294,17 +369,21 @@ def get_main_stylesheet():
 
     /* --- Progress Bar --- */
     QProgressBar {{
-        background-color: {Colors.SURFACE_LIGHT};
-        border: none;
-        border-radius: 4px;
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.SURFACE}, stop:1 {Colors.SURFACE_LIGHT});
+        border: 1px solid {Colors.BORDER};
+        border-radius: 6px;
         text-align: center;
-        height: 8px;
-        color: transparent;
+        height: 12px;
+        color: {Colors.TEXT_PRIMARY};
+        font-weight: 600;
     }}
 
     QProgressBar::chunk {{
-        background-color: {Colors.PRIMARY};
-        border-radius: 4px;
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+            stop:0 {Colors.PRIMARY}, stop:0.5 {Colors.INFO}, stop:1 {Colors.PRIMARY_HOVER});
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
     }}
 
     /* --- CheckBox --- */
@@ -332,23 +411,44 @@ def get_main_stylesheet():
 
     /* --- Specialized Components --- */
     .Terminal {{
-        background-color: {Colors.TERMINAL_BG};
-        border: 1px solid {Colors.BORDER};
-        border-radius: 8px;
-        color: {Colors.TEXT_PRIMARY};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+            stop:0 {Colors.TERMINAL_BG}, stop:1 #1a2332);
+        border: 2px solid {Colors.PRIMARY};
+        border-radius: 10px;
+        color: {Colors.SUCCESS};
         font-family: {Typography.FAMILY_MONO};
         font-size: 13px;
         padding: {Spacing.MD}px;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
     }}
 
     .StatusIndicator {{
-        font-weight: 600;
+        font-weight: 700;
         font-size: {Typography.SMALL_SIZE};
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }}
+
+    .StatusIndicator[status="online"] {{
+        color: {Colors.SUCCESS};
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }}
+
+    .StatusIndicator[status="warning"] {{
+        color: {Colors.WARNING};
+        text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+    }}
+
+    .StatusIndicator[status="error"] {{
+        color: {Colors.DANGER};
+        text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
     }}
 
     .ToolHeader {{
-        background-color: {Colors.BACKGROUND};
-        border-bottom: 1px solid {Colors.SURFACE_LIGHT};
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+            stop:0 {Colors.BACKGROUND}, stop:0.5 {Colors.SURFACE}, stop:1 {Colors.BACKGROUND});
+        border-bottom: 2px solid {Colors.PRIMARY};
         min-height: 60px;
+        border-radius: 8px 8px 0 0;
     }}
     """

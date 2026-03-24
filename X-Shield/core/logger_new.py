@@ -94,3 +94,24 @@ class XShieldLogger:
         for handler in self.logger.handlers:
             handler.close()
         self.logger.handlers.clear()
+    
+    def module_start(self, module_name: str):
+        """Log module start"""
+        self.logger.info(f"Module {module_name} started")
+    
+    def module_error(self, module_name: str, error: str):
+        """Log module error"""
+        self.logger.error(f"Module {module_name} error: {error}")
+    
+    def module_finished(self, module_name: str, results: dict):
+        """Log module completion"""
+        self.logger.info(f"Module {module_name} completed with {len(results.get('findings', []))} findings")
+    
+    def module_complete(self, module_name: str, results: dict = None):
+        """Log module completion"""
+        if results and isinstance(results, dict):
+            self.logger.info(f"Module {module_name} completed with {len(results.get('findings', []))} findings")
+        elif results:
+            self.logger.info(f"Module {module_name} completed")
+        else:
+            self.logger.info(f"Module {module_name} completed")

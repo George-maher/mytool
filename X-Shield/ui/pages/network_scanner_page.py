@@ -27,17 +27,17 @@ class NetworkScannerPage(QWidget):
         """Setup network scanner UI with modern minimal design"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
-        layout.setSpacing(Spacing.XL)
-
+        layout.setSpacing(Spacing.SM)
+        
         # Scanner Configuration
         self.setup_scanner_config(layout)
-
+        
         # Terminal Output
         self.setup_terminal_output(layout)
-
+        
         # Progress Section
         self.setup_progress_section(layout)
-
+        
         layout.addStretch()
 
     def setup_scanner_config(self, parent_layout):
@@ -46,8 +46,8 @@ class NetworkScannerPage(QWidget):
         config_frame.setObjectName("card")
 
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        config_layout.setSpacing(Spacing.XL)
+        config_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        config_layout.setSpacing(Spacing.SM)
 
         # Modern Section Title
         section_title = QLabel("Scan Configuration")
@@ -56,7 +56,7 @@ class NetworkScannerPage(QWidget):
 
         # Target selection
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(Spacing.MD)
+        target_layout.setSpacing(Spacing.SM)
 
         target_label = QLabel("Target")
         target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -74,7 +74,7 @@ class NetworkScannerPage(QWidget):
 
         # Modern Scan Type Selection
         scan_type_layout = QHBoxLayout()
-        scan_type_layout.setSpacing(Spacing.MD)
+        scan_type_layout.setSpacing(Spacing.SM)
 
         scan_type_label = QLabel("Scan Type")
         scan_type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -82,7 +82,7 @@ class NetworkScannerPage(QWidget):
 
         self.scan_type_combo = QComboBox()
         self.scan_type_combo.addItems([
-            "Quick Scan", "Full Scan", "Port Scan", "Service Scan", "OS Detection"
+            "arp", "tcp", "comprehensive"
         ])
         scan_type_layout.addWidget(self.scan_type_combo)
 
@@ -91,7 +91,7 @@ class NetworkScannerPage(QWidget):
 
         # Modern Control Buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(Spacing.MD)
+        buttons_layout.setSpacing(Spacing.SM)
 
         self.start_btn = QPushButton("Start Analysis")
         self.start_btn.setObjectName("primary_btn")
@@ -115,7 +115,7 @@ class NetworkScannerPage(QWidget):
 
         terminal_layout = QVBoxLayout(terminal_frame)
         terminal_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        terminal_layout.setSpacing(Spacing.MD)
+        terminal_layout.setSpacing(Spacing.XL)
 
         # Modern Section Title
         section_title = QLabel("Live Analysis Feed")
@@ -199,11 +199,11 @@ class NetworkScannerPage(QWidget):
 
         # Connect signals and run module
         # Note: In a real implementation, we would disconnect previous signals first
-        module_manager.module_finished.connect(self.on_result)
-        module_manager.module_error.connect(self.on_error)
-        module_manager.progress_updated.connect(self.on_progress)
+        self.module_manager.module_finished.connect(self.on_result)
+        self.module_manager.module_error.connect(self.on_error)
+        self.module_manager.progress_updated.connect(self.on_progress)
 
-        success = module_manager.run_module("network_scanner", target, {
+        success = self.module_manager.run_module("network_scanner", target, {
             'scan_type': self.scan_type_combo.currentText()
         })
 

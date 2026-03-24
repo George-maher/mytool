@@ -187,7 +187,6 @@ class Module(NetworkModule):
                 self.scan_status.emit(f"Completed {scan_type} scan")
             
             self._finish_execution()
-            self.scan_complete.emit(self.results)
             return self.results
             
         except Exception as e:

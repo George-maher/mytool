@@ -27,17 +27,17 @@ class WebScannerPage(QWidget):
         """Setup web scanner UI with modern minimal design"""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN, Spacing.PAGE_MARGIN)
-        layout.setSpacing(Spacing.XL)
-
+        layout.setSpacing(Spacing.SM)
+        
         # Scanner Configuration
         self.setup_scanner_config(layout)
-
+        
         # Terminal Output
         self.setup_terminal_output(layout)
-
+        
         # Progress Section
         self.setup_progress_section(layout)
-
+        
         layout.addStretch()
 
     def setup_scanner_config(self, parent_layout):
@@ -46,8 +46,8 @@ class WebScannerPage(QWidget):
         config_frame.setObjectName("card")
 
         config_layout = QVBoxLayout(config_frame)
-        config_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        config_layout.setSpacing(Spacing.XL)
+        config_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        config_layout.setSpacing(Spacing.SM)
 
         # Modern Section Title
         section_title = QLabel("Audit Parameters")
@@ -56,7 +56,7 @@ class WebScannerPage(QWidget):
 
         # Target selection
         target_layout = QHBoxLayout()
-        target_layout.setSpacing(Spacing.MD)
+        target_layout.setSpacing(Spacing.SM)
 
         target_label = QLabel("Target URL")
         target_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -74,7 +74,7 @@ class WebScannerPage(QWidget):
 
         # Modern Scan Type Selection
         scan_type_layout = QHBoxLayout()
-        scan_type_layout.setSpacing(Spacing.MD)
+        scan_type_layout.setSpacing(Spacing.SM)
 
         scan_type_label = QLabel("Scan Type")
         scan_type_label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-weight: 500; font-size: 13px;")
@@ -82,16 +82,15 @@ class WebScannerPage(QWidget):
 
         self.scan_type_combo = QComboBox()
         self.scan_type_combo.addItems([
-            "Quick Scan", "Full Scan", "Headers Only", "Directory Brute", "Vulnerability Scan"
+            "xss", "sqli", "csrf", "directory", "headers", "technologies"
         ])
         scan_type_layout.addWidget(self.scan_type_combo)
 
-        scan_type_layout.addStretch()
         config_layout.addLayout(scan_type_layout)
 
         # Modern Control Buttons
         buttons_layout = QHBoxLayout()
-        buttons_layout.setSpacing(Spacing.MD)
+        buttons_layout.setSpacing(Spacing.SM)
 
         self.start_btn = QPushButton("Start Web Audit")
         self.start_btn.setObjectName("primary_btn")
@@ -115,7 +114,7 @@ class WebScannerPage(QWidget):
 
         terminal_layout = QVBoxLayout(terminal_frame)
         terminal_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        terminal_layout.setSpacing(Spacing.MD)
+        terminal_layout.setSpacing(Spacing.XL)
 
         # Modern Section Title
         section_title = QLabel("Vulnerability Feed")
@@ -140,8 +139,8 @@ class WebScannerPage(QWidget):
         progress_frame.setObjectName("card")
 
         progress_layout = QVBoxLayout(progress_frame)
-        progress_layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.XL)
-        progress_layout.setSpacing(Spacing.MD)
+        progress_layout.setContentsMargins(Spacing.SM, Spacing.SM, Spacing.SM, Spacing.SM)
+        progress_layout.setSpacing(Spacing.SM)
 
         # Modern Status Label
         self.status_label = QLabel("Status: Ready")
@@ -200,11 +199,11 @@ class WebScannerPage(QWidget):
         self.add_terminal_message("INFO", f"Initiating web audit on {target}...")
 
         # Connect signals and run module
-        module_manager.module_finished.connect(self.on_result)
-        module_manager.module_error.connect(self.on_error)
-        module_manager.progress_updated.connect(self.on_progress)
+        self.module_manager.module_finished.connect(self.on_result)
+        self.module_manager.module_error.connect(self.on_error)
+        self.module_manager.progress_updated.connect(self.on_progress)
 
-        success = module_manager.run_module("web_scanner", target, {
+        success = self.module_manager.run_module("web_scanner", target, {
             'scan_type': self.scan_type_combo.currentText()
         })
 

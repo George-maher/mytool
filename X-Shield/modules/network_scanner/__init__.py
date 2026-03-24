@@ -110,7 +110,6 @@ class Module(NetworkModule):
                 raise ValueError(f"Unknown scan type: {scan_type}")
             
             self._finish_execution()
-            self.scan_complete.emit(results)
             return results
             
         except Exception as e:
