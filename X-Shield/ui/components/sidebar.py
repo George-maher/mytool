@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont, QIcon
-from ui.styles import Colors, Spacing, Typography
+from ui.components.styles import Colors, Spacing, Typography
 
 
 class SidebarButton(QPushButton):
@@ -56,12 +56,12 @@ class SidebarButton(QPushButton):
             QPushButton {{
                 background-color: transparent;
                 border: none;
-                border-radius: 6px;
+                border-radius: 8px;
                 color: {Colors.TEXT_SECONDARY};
                 text-align: left;
                 padding: 0px;
-                margin: 2px {Spacing.SM}px;
-                min-height: 40px;
+                margin: 4px {Spacing.MD}px;
+                min-height: 44px;
             }}
             QPushButton:hover {{
                 background-color: {Colors.SURFACE_LIGHT};
@@ -70,12 +70,15 @@ class SidebarButton(QPushButton):
             QPushButton:checked {{
                 background-color: {Colors.PRIMARY_MUTED};
                 color: {Colors.PRIMARY};
+                border-left: 3px solid {Colors.PRIMARY};
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
                 font-weight: 600;
             }}
         """)
 
 
-class Sidebar(QWidget):
+class Sidebar(QFrame):
     """Professional sidebar with Material Design icons and navigation"""
     
     # Signal emitted when navigation is requested
@@ -84,6 +87,8 @@ class Sidebar(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedWidth(280)
+        self.setObjectName("sidebar")
+        self.setAttribute(Qt.WA_StyledBackground, True)
         
         self.setup_ui()
         self.setup_connections()
@@ -130,7 +135,7 @@ class Sidebar(QWidget):
             QLabel {{
                 background-color: {Colors.SURFACE_LIGHT};
                 border: 1px solid {Colors.BORDER};
-                border-radius: 8px;
+                border-radius: 10px;
             }}
         """)
         header_layout.addWidget(logo_label)
@@ -251,11 +256,11 @@ class Sidebar(QWidget):
         user_info_layout.setSpacing(0)
         
         username_label = QLabel("Administrator")
-        username_label.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: 13px;")
+        username_label.setStyleSheet(f"border: none; background: transparent; color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: 13px;")
         user_info_layout.addWidget(username_label)
         
         status_label = QLabel("System Online")
-        status_label.setStyleSheet(f"color: {Colors.SUCCESS}; font-size: 11px; font-weight: 500;")
+        status_label.setStyleSheet(f"border: none; background: transparent; color: {Colors.SUCCESS}; font-size: 11px; font-weight: 500;")
         user_info_layout.addWidget(status_label)
         
         footer_layout.addLayout(user_info_layout)

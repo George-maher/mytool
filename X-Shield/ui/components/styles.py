@@ -25,6 +25,8 @@ class Colors:
     WARNING = "#f59e0b"         # Amber 500
     DANGER = "#ef4444"          # Red 500
     INFO = "#3b82f6"            # Blue 500
+    ACCENT = "#8b5cf6"          # Violet 500
+    TERMINAL_BG = "#09090b"     # Zinc 950
 
 # --- Spacing System ---
 class Spacing:
@@ -225,13 +227,13 @@ def get_main_stylesheet():
     }}
 
     /* --- Frames & Containers --- */
-    .QFrame#card {{
+    #card {{
         background-color: {Colors.SURFACE};
         border: 1px solid {Colors.BORDER};
         border-radius: 12px;
     }}
 
-    .QFrame#sidebar {{
+    #sidebar {{
         background-color: {Colors.SURFACE};
         border-right: 1px solid {Colors.BORDER};
     }}
@@ -326,5 +328,27 @@ def get_main_stylesheet():
 
     QCheckBox::indicator:hover {{
         border-color: {Colors.PRIMARY};
+    }}
+
+    /* --- Specialized Components --- */
+    .Terminal {{
+        background-color: {Colors.TERMINAL_BG};
+        border: 1px solid {Colors.BORDER};
+        border-radius: 8px;
+        color: {Colors.TEXT_PRIMARY};
+        font-family: {Typography.FAMILY_MONO};
+        font-size: 13px;
+        padding: {Spacing.MD}px;
+    }}
+
+    .StatusIndicator {{
+        font-weight: 600;
+        font-size: {Typography.SMALL_SIZE};
+    }}
+
+    .ToolHeader {{
+        background-color: {Colors.BACKGROUND};
+        border-bottom: 1px solid {Colors.SURFACE_LIGHT};
+        min-height: 60px;
     }}
     """

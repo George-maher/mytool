@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QHBoxLayout, QPus
 from PySide6.QtCore import Qt, QTimer, Signal
 from PySide6.QtGui import QFont, QColor, QTextCursor, QTextCharFormat
 from datetime import datetime
-from ui.styles import Colors, Spacing, Typography
+from ui.components.styles import Colors, Spacing, Typography
 
 
 class TerminalWidget(QWidget):

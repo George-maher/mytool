@@ -9,23 +9,26 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
-from ui.styles import Colors, Spacing, Typography
+from ui.components.styles import Colors, Spacing, Typography
 
 # Import all page components
-from ui.dashboard_page import DashboardPage
-from ui.target_manager_page import TargetManagerPage
-from ui.network_scanner_page import NetworkScannerPage
-from ui.web_scanner_page import WebScannerPage
-from ui.osint_page import OSINTPage
-from ui.reports_page_new import ReportsPage
-from ui.settings_page_new import SettingsPage
+from ui.pages.dashboard_page import DashboardPage
+from ui.pages.target_manager_page import TargetManagerPage
+from ui.pages.network_scanner_page import NetworkScannerPage
+from ui.pages.web_scanner_page import WebScannerPage
+from ui.pages.osint_page import OSINTPage
+from ui.pages.reports_page_new import ReportsPage
+from ui.pages.settings_page_new import SettingsPage
 
 
 class StackedContent(QWidget):
     """Dynamic content area with QStackedWidget for page switching"""
     
-    def __init__(self, parent=None):
+    def __init__(self, target_manager, module_manager, logger, parent=None):
         super().__init__(parent)
+        self.target_manager = target_manager
+        self.module_manager = module_manager
+        self.logger = logger
         self.pages = {}
         
         self.setup_ui()
@@ -63,7 +66,7 @@ class StackedContent(QWidget):
         # Page title
         self.page_title = QLabel("Dashboard")
         self.page_title.setObjectName("title")
-        self.page_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: {Typography.H1_SIZE}; font-weight: 700;")
+        self.page_title.setStyleSheet(f"color: {Colors.PRIMARY}; font-size: {Typography.H1_SIZE}; font-weight: 800; letter-spacing: -0.5px;")
         header_layout.addWidget(self.page_title)
         
         header_layout.addStretch()
@@ -77,41 +80,46 @@ class StackedContent(QWidget):
     
     def setup_pages(self):
         """Setup all pages and add to stacked widget"""
-        # Get parent application for dependencies
-        app = self.parent()
+        # Common dependencies
+        deps = {
+            'target_manager': self.target_manager,
+            'module_manager': self.module_manager,
+            'logger': self.logger,
+            'parent': self.parent()
+        }
         
         # Dashboard Page
-        dashboard_page = DashboardPage(app)
+        dashboard_page = DashboardPage(**deps)
         self.stacked_widget.addWidget(dashboard_page)
         self.pages["dashboard"] = dashboard_page
         
         # Target Manager Page
-        target_manager_page = TargetManagerPage(app)
+        target_manager_page = TargetManagerPage(**deps)
         self.stacked_widget.addWidget(target_manager_page)
         self.pages["target_manager"] = target_manager_page
         
         # Network Scanner Page
-        network_scanner_page = NetworkScannerPage(app)
+        network_scanner_page = NetworkScannerPage(**deps)
         self.stacked_widget.addWidget(network_scanner_page)
         self.pages["network_scanner"] = network_scanner_page
         
         # Web Scanner Page
-        web_scanner_page = WebScannerPage(app)
+        web_scanner_page = WebScannerPage(**deps)
         self.stacked_widget.addWidget(web_scanner_page)
         self.pages["web_scanner"] = web_scanner_page
         
         # OSINT Page
-        osint_page = OSINTPage(app)
+        osint_page = OSINTPage(**deps)
         self.stacked_widget.addWidget(osint_page)
         self.pages["osint"] = osint_page
         
         # Reports Page
-        reports_page = ReportsPage(app)
+        reports_page = ReportsPage(**deps)
         self.stacked_widget.addWidget(reports_page)
         self.pages["reports"] = reports_page
         
         # Settings Page
-        settings_page = SettingsPage(app)
+        settings_page = SettingsPage(**deps)
         self.stacked_widget.addWidget(settings_page)
         self.pages["settings"] = settings_page
         
