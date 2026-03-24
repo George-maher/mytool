@@ -1,38 +1,37 @@
 """
-Central Target Manager for X-Shield MVC Architecture
-Manages all targets and provides active target to scanner modules
+Enhanced Target Manager for X-Shield Framework v2
+Improved target persistence and metadata management
 """
 
 import uuid
-from typing import Dict, List, Optional, Any
-from PySide6.QtCore import QObject, Signal
 import json
 import os
+import datetime
+from pathlib import Path
+from typing import Dict, List, Optional, Any
+from PySide6.QtCore import QObject, Signal
 
 
 class Target:
-    """Represents a single target"""
+    """Represents a pentesting target with extensive metadata and scan results"""
     
     def __init__(self, target_id: str, target_type: str, target_value: str, 
                  description: str = "", status: str = "Active"):
         self.id = target_id
-        self.type = target_type  # IP Address, Domain, URL, IP Range, File
+        self.type = target_type  # IP, Domain, URL, Network Range
         self.value = target_value
         self.description = description
-        self.status = status  # Active, Inactive, Scanning, Completed
-        self.created_at = None
-        self.updated_at = None
-        self.scan_results = {}
+        self.status = status  # Active, Inactive, Scanning, Compromised
+        self.created_at = datetime.datetime.now().isoformat()
+        self.updated_at = self.created_at
+        self.scan_results = {}  # module_name -> results_dict
         self.tags = []
-        
-        # Set timestamps
-        import datetime
-        now = datetime.datetime.now()
-        self.created_at = now.isoformat()
-        self.updated_at = now.isoformat()
+        self.vulnerabilities = []
+        self.findings = []
+        self.telemetry = []
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert target to dictionary"""
+        """Serialize target to dictionary"""
         return {
             'id': self.id,
             'type': self.type,
@@ -42,12 +41,15 @@ class Target:
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'scan_results': self.scan_results,
-            'tags': self.tags
+            'tags': self.tags,
+            'vulnerabilities': self.vulnerabilities,
+            'findings': self.findings,
+            'telemetry': self.telemetry
         }
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'Target':
-        """Create target from dictionary"""
+        """Create target from serialized dictionary"""
         target = cls(
             data['id'], data['type'], data['value'], 
             data.get('description', ''), data.get('status', 'Active')
@@ -56,25 +58,43 @@ class Target:
         target.updated_at = data.get('updated_at', target.updated_at)
         target.scan_results = data.get('scan_results', {})
         target.tags = data.get('tags', [])
+        target.vulnerabilities = data.get('vulnerabilities', [])
+        target.findings = data.get('findings', [])
+        target.telemetry = data.get('telemetry', [])
         return target
     
     def update_status(self, status: str):
-        """Update target status"""
+        """Transition target to a new state"""
         self.status = status
-        import datetime
         self.updated_at = datetime.datetime.now().isoformat()
     
-    def add_scan_result(self, scanner_type: str, result: Dict[str, Any]):
-        """Add scan result for this target"""
-        self.scan_results[scanner_type] = result
-        import datetime
+    def add_module_results(self, module_name: str, results: Dict[str, Any]):
+        """Consolidate module findings and vulnerabilities into the target model"""
+        self.scan_results[module_name] = results
         self.updated_at = datetime.datetime.now().isoformat()
+
+        # Merge vulnerabilities
+        if 'vulnerabilities' in results:
+            for v in results['vulnerabilities']:
+                if 'target' not in v:
+                    v['target'] = self.value
+                self.vulnerabilities.append(v)
+
+        # Merge findings
+        if 'findings' in results:
+            for f in results['findings']:
+                self.findings.append(f)
+
+        # Merge telemetry
+        if 'telemetry' in results:
+            for t in results['telemetry']:
+                self.telemetry.append(t)
 
 
 class TargetManager(QObject):
-    """Central target management system"""
+    """Central repository and management system for pentesting targets"""
     
-    # Signals
+    # MVC Signals
     target_added = Signal(str, dict)  # target_id, target_data
     target_removed = Signal(str)       # target_id
     target_updated = Signal(str, dict)  # target_id, target_data
@@ -85,260 +105,136 @@ class TargetManager(QObject):
         self.logger = logger
         self.targets: Dict[str, Target] = {}
         self.active_target_id: Optional[str] = None
-        self.data_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 
-                                     'data', 'targets.json')
+        self.data_file = Path(__file__).parent.parent / 'data' / 'targets.json'
         
-        # Ensure data directory exists
-        os.makedirs(os.path.dirname(self.data_file), exist_ok=True)
+        # Create data directory if missing
+        self.data_file.parent.mkdir(parents=True, exist_ok=True)
         
-        # Load existing targets
+        # Hydrate from persistence layer
         self.load_targets()
         
-        self.logger.info("Target Manager initialized")
+        self.logger.info("Target Manager (v2) successfully initialized")
     
     def add_target(self, target_type: str, target_value: str, 
                    description: str = "", tags: List[str] = None) -> str:
-        """Add a new target"""
+        """Create and persist a new target"""
         target_id = str(uuid.uuid4())
-        
         target = Target(target_id, target_type, target_value, description)
-        if tags:
-            target.tags = tags
+        if tags: target.tags = tags
         
         self.targets[target_id] = target
         
-        # Set as active if no active target
+        # Auto-set first target as active
         if self.active_target_id is None:
             self.set_active_target(target_id)
         
-        # Save targets
         self.save_targets()
-        
-        # Emit signal
         self.target_added.emit(target_id, target.to_dict())
         
-        self.logger.info(f"Target added: {target_value} ({target_type})")
+        self.logger.info(f"New Target Identified: {target_value} ({target_type})")
         return target_id
     
     def remove_target(self, target_id: str) -> bool:
-        """Remove a target"""
+        """Remove target from persistence and notify listeners"""
         if target_id not in self.targets:
             return False
         
         del self.targets[target_id]
         
-        # If this was the active target, set a new one
+        # Reset active target if removed
         if self.active_target_id == target_id:
             self.active_target_id = None
             if self.targets:
-                # Set first available target as active
-                self.active_target_id = next(iter(self.targets))
-                self.active_target_changed.emit(self.active_target_id, 
-                                              self.targets[self.active_target_id].to_dict())
+                new_id = next(iter(self.targets))
+                self.set_active_target(new_id)
         
-        # Save targets
         self.save_targets()
-        
-        # Emit signal
         self.target_removed.emit(target_id)
-        
-        self.logger.info(f"Target removed: {target_id}")
+        self.logger.info(f"Target Decommissioned: {target_id}")
         return True
     
     def update_target(self, target_id: str, **kwargs) -> bool:
-        """Update target properties"""
+        """Update target metadata or state"""
         if target_id not in self.targets:
             return False
         
         target = self.targets[target_id]
+        for key, value in kwargs.items():
+            if hasattr(target, key):
+                setattr(target, key, value)
         
-        # Update properties
-        if 'type' in kwargs:
-            target.type = kwargs['type']
-        if 'value' in kwargs:
-            target.value = kwargs['value']
-        if 'description' in kwargs:
-            target.description = kwargs['description']
-        if 'status' in kwargs:
-            target.update_status(kwargs['status'])
-        if 'tags' in kwargs:
-            target.tags = kwargs['tags']
-        
-        # Update timestamp
-        import datetime
         target.updated_at = datetime.datetime.now().isoformat()
-        
-        # Save targets
         self.save_targets()
-        
-        # Emit signal
         self.target_updated.emit(target_id, target.to_dict())
-        
-        self.logger.info(f"Target updated: {target_id}")
         return True
     
     def set_active_target(self, target_id: str) -> bool:
-        """Set the active target"""
+        """Set primary focus target for application"""
         if target_id not in self.targets:
             return False
         
-        old_active_id = self.active_target_id
         self.active_target_id = target_id
-        
-        # Emit signal
         self.active_target_changed.emit(target_id, self.targets[target_id].to_dict())
-        
-        self.logger.info(f"Active target changed from {old_active_id} to {target_id}")
+        self.logger.info(f"Target Focus Switched: {target_id}")
         return True
     
     def get_active_target(self) -> Optional[Target]:
-        """Get the currently active target"""
-        if self.active_target_id and self.active_target_id in self.targets:
-            return self.targets[self.active_target_id]
+        if self.active_target_id:
+            return self.targets.get(self.active_target_id)
         return None
     
-    def get_active_target_info(self) -> Optional[Dict[str, Any]]:
-        """Get active target information as dictionary"""
-        target = self.get_active_target()
-        return target.to_dict() if target else None
-    
-    def get_target(self, target_id: str) -> Optional[Target]:
-        """Get target by ID"""
-        return self.targets.get(target_id)
-    
     def get_all_targets(self) -> List[Target]:
-        """Get all targets"""
         return list(self.targets.values())
     
-    def get_targets_by_type(self, target_type: str) -> List[Target]:
-        """Get targets by type"""
-        return [target for target in self.targets.values() if target.type == target_type]
-    
-    def get_targets_by_status(self, status: str) -> List[Target]:
-        """Get targets by status"""
-        return [target for target in self.targets.values() if target.status == status]
-    
-    def search_targets(self, query: str) -> List[Target]:
-        """Search targets by value or description"""
-        query = query.lower()
-        results = []
-        
-        for target in self.targets.values():
-            if (query in target.value.lower() or 
-                query in target.description.lower() or
-                any(query in tag.lower() for tag in target.tags)):
-                results.append(target)
-        
-        return results
-    
+    def get_target(self, target_id: str) -> Optional[Target]:
+        return self.targets.get(target_id)
+
     def get_target_statistics(self) -> Dict[str, Any]:
-        """Get target statistics"""
+        """Aggregate data for dashboard visualization"""
         total = len(self.targets)
         by_type = {}
-        by_status = {}
-        
-        for target in self.targets.values():
-            # Count by type
-            by_type[target.type] = by_type.get(target.type, 0) + 1
-            
-            # Count by status
-            by_status[target.status] = by_status.get(target.status, 0) + 1
+        for t in self.targets.values():
+            by_type[t.type] = by_type.get(t.type, 0) + 1
         
         return {
             'total': total,
-            'active': len(self.get_targets_by_status('Active')),
+            'active': total,
             'by_type': by_type,
-            'by_status': by_status,
             'active_target_id': self.active_target_id
         }
     
     def save_targets(self):
-        """Save targets to file"""
+        """Persist target model to JSON storage"""
         try:
             data = {
-                'targets': [target.to_dict() for target in self.targets.values()],
-                'active_target_id': self.active_target_id
+                'targets': [t.to_dict() for t in self.targets.values()],
+                'active_target_id': self.active_target_id,
+                'version': '2.0.0'
             }
-            
             with open(self.data_file, 'w') as f:
                 json.dump(data, f, indent=2)
-                
         except Exception as e:
-            self.logger.error(f"Failed to save targets: {e}")
+            self.logger.error(f"Persistence Failure: Could not save targets: {e}")
     
     def load_targets(self):
-        """Load targets from file"""
+        """Hydrate target model from JSON storage"""
         try:
-            if not os.path.exists(self.data_file):
+            if not self.data_file.exists():
                 return
             
             with open(self.data_file, 'r') as f:
                 data = json.load(f)
             
-            # Load targets
             self.targets = {}
-            for target_data in data.get('targets', []):
-                target = Target.from_dict(target_data)
+            for t_data in data.get('targets', []):
+                target = Target.from_dict(t_data)
                 self.targets[target.id] = target
             
-            # Set active target
             self.active_target_id = data.get('active_target_id')
-            if self.active_target_id and self.active_target_id not in self.targets:
-                self.active_target_id = None
-            
-            self.logger.info(f"Loaded {len(self.targets)} targets from file")
-            
+            self.logger.info(f"Hydrated {len(self.targets)} targets from persistence layer")
         except Exception as e:
-            self.logger.error(f"Failed to load targets: {e}")
-    
-    def export_targets(self, file_path: str) -> bool:
-        """Export targets to file"""
-        try:
-            data = {
-                'exported_at': str(datetime.datetime.now()),
-                'targets': [target.to_dict() for target in self.targets.values()],
-                'statistics': self.get_target_statistics()
-            }
-            
-            with open(file_path, 'w') as f:
-                json.dump(data, f, indent=2)
-            
-            self.logger.info(f"Targets exported to {file_path}")
-            return True
-            
-        except Exception as e:
-            self.logger.error(f"Failed to export targets: {e}")
-            return False
-    
-    def import_targets(self, file_path: str) -> int:
-        """Import targets from file"""
-        try:
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-            
-            imported_count = 0
-            for target_data in data.get('targets', []):
-                # Generate new ID to avoid conflicts
-                target_data['id'] = str(uuid.uuid4())
-                target = Target.from_dict(target_data)
-                self.targets[target.id] = target
-                imported_count += 1
-            
-            # Save imported targets
-            self.save_targets()
-            
-            # Emit signals for imported targets
-            for target in self.targets.values():
-                self.target_added.emit(target.id, target.to_dict())
-            
-            self.logger.info(f"Imported {imported_count} targets from {file_path}")
-            return imported_count
-            
-        except Exception as e:
-            self.logger.error(f"Failed to import targets: {e}")
-            return 0
+            self.logger.error(f"Hydration Failure: Could not load targets: {e}")
     
     def cleanup(self):
-        """Cleanup resources"""
+        """Ensures persistence before shutdown"""
         self.save_targets()
-        self.logger.info("Target Manager cleanup completed")

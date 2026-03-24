@@ -1,5 +1,5 @@
 """
-Dashboard Page for X-Shield MVC Architecture
+Dashboard Page for X-Shield Framework v2
 Visual overview with status cards and recent activity
 """
 
@@ -101,8 +101,8 @@ class DashboardPage(QWidget):
         layout.setSpacing(Spacing.XL)
         
         # Overview Section Title
-        overview_title = QLabel("Command Overview")
-        overview_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; font-size: {Typography.H2_SIZE};")
+        overview_title = QLabel("MISSION INTELLIGENCE")
+        overview_title.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 800; font-size: {Typography.H1_SIZE}; letter-spacing: 1px;")
         layout.addWidget(overview_title)
         
         # Status Cards
@@ -132,19 +132,19 @@ class DashboardPage(QWidget):
         self.cards = {}
         
         # Total Targets
-        self.cards['targets'] = StatusCard("Targets", "0", "ACTIVE NODES", Colors.PRIMARY, "🎯")
+        self.cards['targets'] = StatusCard("NODES", "0", "ACTIVE TARGETS", Colors.PRIMARY, "🎯")
         cards_layout.addWidget(self.cards['targets'], 0, 0)
         
         # Active Scans
-        self.cards['scans'] = StatusCard("Threads", "0", "SCAN OPERATIONS", Colors.WARNING, "🔍")
+        self.cards['scans'] = StatusCard("THREADS", "0", "OPERATIONS", Colors.WARNING, "🔍")
         cards_layout.addWidget(self.cards['scans'], 0, 1)
         
         # Vulnerabilities Found
-        self.cards['vulnerabilities'] = StatusCard("Findings", "0", "SECURITY THREATS", Colors.DANGER, "⚠️")
+        self.cards['vulnerabilities'] = StatusCard("THREATS", "0", "CRITICAL FINDINGS", Colors.DANGER, "⚠️")
         cards_layout.addWidget(self.cards['vulnerabilities'], 0, 2)
         
         # System Health
-        self.cards['health'] = StatusCard("Integrity", "100%", "CORE STATUS", Colors.SUCCESS, "🛡️")
+        self.cards['health'] = StatusCard("INTEGRITY", "100%", "CORE STATUS", Colors.SUCCESS, "🛡️")
         cards_layout.addWidget(self.cards['health'], 0, 3)
         
         parent_layout.addWidget(cards_frame)
@@ -159,18 +159,18 @@ class DashboardPage(QWidget):
         activity_layout.setSpacing(Spacing.LG)
         
         # Title
-        title_label = QLabel("LIVE TELEMETRY")
-        title_label.setStyleSheet(f"color: {Colors.ACCENT}; font-weight: 600; font-size: 12px; letter-spacing: 0.05em;")
+        title_label = QLabel("GLOBAL TELEMETRY FEED")
+        title_label.setStyleSheet(f"color: {Colors.ACCENT}; font-weight: 600; font-size: 11px; letter-spacing: 0.1em;")
         activity_layout.addWidget(title_label)
         
         # Activity log
         self.activity_log = QTextEdit()
         self.activity_log.setReadOnly(True)
-        self.activity_log.setMaximumHeight(300)
+        self.activity_log.setMaximumHeight(350)
         self.activity_log.setProperty("class", "Terminal")
         
         # Add initial log entries
-        self.add_activity_entry("System", "X-Shield Framework initialized", "system")
+        self.add_activity_entry("Core", "X-Shield Intelligence Core initialized", "system")
         
         activity_layout.addWidget(self.activity_log)
         parent_layout.addWidget(activity_frame, 2)
@@ -185,17 +185,17 @@ class DashboardPage(QWidget):
         health_layout.setSpacing(Spacing.LG)
         
         # Title
-        title_label = QLabel("SYSTEM HEALTH")
-        title_label.setStyleSheet(f"color: {Colors.ACCENT}; font-weight: 600; font-size: 12px; letter-spacing: 0.05em;")
+        title_label = QLabel("RESOURCE MONITOR")
+        title_label.setStyleSheet(f"color: {Colors.ACCENT}; font-weight: 600; font-size: 11px; letter-spacing: 0.1em;")
         health_layout.addWidget(title_label)
         
         # Health indicators
         self.health_indicators = {}
         
         indicators = [
-            ("CPU LOAD", "CPU LOAD", Colors.SUCCESS),
-            ("MEMORY", "MEMORY ADDR", Colors.PRIMARY),
-            ("STORAGE", "STORAGE", Colors.WARNING)
+            ("CPU", "PROCESSOR LOAD", Colors.SUCCESS),
+            ("MEMORY", "VIRTUAL MEMORY", Colors.PRIMARY),
+            ("STORAGE", "DISK CAPACITY", Colors.WARNING)
         ]
         
         for key, label_text, color in indicators:
@@ -203,12 +203,12 @@ class DashboardPage(QWidget):
             
             lbl_layout = QHBoxLayout()
             label = QLabel(label_text)
-            label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 10px; font-weight: 600;")
+            label.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 10px; font-weight: 700; text-transform: uppercase;")
             lbl_layout.addWidget(label)
             lbl_layout.addStretch()
             
             val_label = QLabel("0%")
-            val_label.setStyleSheet(f"color: {color}; font-family: {Typography.FAMILY_MONO}; font-size: 11px;")
+            val_label.setStyleSheet(f"color: {color}; font-family: {Typography.FAMILY_MONO}; font-size: 12px; font-weight: 700;")
             lbl_layout.addWidget(val_label)
             indicator_layout.addLayout(lbl_layout)
             
@@ -237,13 +237,12 @@ class DashboardPage(QWidget):
         try:
             if self.target_manager:
                 stats = self.target_manager.get_target_statistics()
-                self.cards['targets'].update_value(str(stats['total']), "Active targets")
-                self.cards['scans'].update_value(str(stats.get('active', 0)), "Running scans")
+                self.cards['targets'].update_value(str(stats['total']), "Identified nodes")
                 
                 total_vulns = 0
                 for target in self.target_manager.get_all_targets():
-                    total_vulns += len(target.scan_results.get('vulnerabilities', []))
-                self.cards['vulnerabilities'].update_value(str(total_vulns), "Total findings")
+                    total_vulns += len(target.vulnerabilities)
+                self.cards['vulnerabilities'].update_value(str(total_vulns), "Security findings")
 
             # Update system health
             try:
@@ -265,17 +264,16 @@ class DashboardPage(QWidget):
                 pass
                 
         except Exception as e:
-            if self.logger:
-                self.logger.error(f"Dashboard update error: {e}")
+            pass
     
     @Slot(str, dict)
     def on_target_added(self, target_id, target_data):
-        self.add_activity_entry("Target Added", f"{target_data['value']}", "success")
+        self.add_activity_entry("Target", f"New node enrolled: {target_data['value']}", "success")
         self.update_statistics()
     
     @Slot(str)
     def on_target_removed(self, target_id):
-        self.add_activity_entry("Target Removed", f"Node {target_id}", "warning")
+        self.add_activity_entry("Target", f"Node decommissioned", "warning")
         self.update_statistics()
     
     @Slot(str, dict)
@@ -284,16 +282,13 @@ class DashboardPage(QWidget):
     
     def add_activity_entry(self, source: str, message: str, entry_type: str = "info"):
         import datetime
-        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
-        colors = {
-            "system": Colors.ACCENT,
-            "info": Colors.TEXT_SECONDARY,
-            "warning": Colors.WARNING,
-            "error": Colors.DANGER,
-            "success": Colors.SUCCESS
-        }
-        color = colors.get(entry_type, Colors.TEXT_PRIMARY)
-        entry = f'<span style="color: {Colors.TEXT_MUTED};">[{timestamp}]</span> <span style="color: {Colors.PRIMARY}; font-weight: 600;">{source.upper()}:</span> <span style="color: {color};">{message}</span>'
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        color = Colors.TEXT_PRIMARY
+        if entry_type == "success": color = Colors.SUCCESS
+        elif entry_type == "warning": color = Colors.WARNING
+        elif entry_type == "system": color = Colors.ACCENT
+
+        entry = f'<span style="color: {Colors.TEXT_MUTED};">[{timestamp}]</span> <span style="color: {Colors.PRIMARY}; font-weight: 700;">{source.upper()}:</span> <span style="color: {color};">{message}</span>'
         self.activity_log.append(entry)
         if self.activity_log.document().blockCount() > 100:
             cursor = self.activity_log.textCursor()
