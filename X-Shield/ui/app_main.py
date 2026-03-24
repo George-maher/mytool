@@ -1,6 +1,6 @@
 """
 X-Shield Professional MVC Application
-Main Application with qt-material dark_teal theme and modular architecture
+Main Application with Modern Minimal design system and modular architecture
 """
 
 import sys
@@ -12,18 +12,19 @@ from PySide6.QtGui import QIcon
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from ui.sidebar import Sidebar
-from ui.stacked_content import StackedContent
-from ui.dashboard_page import DashboardPage
-from ui.target_manager_page import TargetManagerPage
-from ui.network_scanner_page import NetworkScannerPage
-from ui.web_scanner_page import WebScannerPage
-from ui.osint_page import OSINTPage
-from ui.reports_page_new import ReportsPage
-from ui.settings_page_new import SettingsPage
+from ui.components.sidebar import Sidebar
+from ui.components.stacked_content import StackedContent
+from ui.pages.dashboard_page import DashboardPage
+from ui.pages.target_manager_page import TargetManagerPage
+from ui.pages.network_scanner_page import NetworkScannerPage
+from ui.pages.web_scanner_page import WebScannerPage
+from ui.pages.osint_page import OSINTPage
+from ui.pages.reports_page_new import ReportsPage
+from ui.pages.settings_page_new import SettingsPage
 from core.target_manager import TargetManager
+from core.module_manager import ModuleManager
 from core.logger_new import XShieldLogger
-from ui.styles import get_main_stylesheet
+from ui.components.styles import get_main_stylesheet
 
 
 class XShieldApp(QMainWindow):
@@ -35,13 +36,14 @@ class XShieldApp(QMainWindow):
         # Initialize core components
         self.logger = XShieldLogger()
         self.target_manager = TargetManager(self.logger)
+        self.module_manager = ModuleManager(self.logger)
         
         # Window setup
         self.setWindowTitle("X-Shield Cybersecurity Framework")
         self.setGeometry(100, 100, 1000, 800)
         self.setMinimumSize(900, 800)
         
-        # Apply qt-material dark_teal theme
+        # Apply Modern Minimal design system
         self.apply_theme()
         
         # Setup UI
@@ -78,7 +80,12 @@ class XShieldApp(QMainWindow):
         main_layout.addWidget(self.sidebar)
         
         # Create stacked content area
-        self.stacked_content = StackedContent(self)
+        self.stacked_content = StackedContent(
+            self.target_manager,
+            self.module_manager,
+            self.logger,
+            self
+        )
         self.stacked_content.setObjectName("content_area")
         main_layout.addWidget(self.stacked_content)
         

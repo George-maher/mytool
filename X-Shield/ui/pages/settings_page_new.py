@@ -10,16 +10,17 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtGui import QFont
-from ui.styles import Colors, Spacing, Typography
+from ui.components.styles import Colors, Spacing, Typography
 
 
 class SettingsPage(QWidget):
     """Settings page for configuration management"""
     
-    def __init__(self, parent=None):
+    def __init__(self, target_manager, module_manager, logger, parent=None):
         super().__init__(parent)
-        self.app = parent
-        self.logger = parent.get_logger() if parent else None
+        self.target_manager = target_manager
+        self.module_manager = module_manager
+        self.logger = logger
         
         self.setup_ui()
         self.setup_connections()

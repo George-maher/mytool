@@ -1,13 +1,12 @@
 """
 X-Shield Cybersecurity Framework - Professional MVC Architecture
-Main entry point using the new modular MVC design
+Main entry point for the application
 """
 
 import sys
 import os
-from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import QTimer
 import warnings
+from PySide6.QtWidgets import QApplication
 
 # Suppress Qt warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -15,7 +14,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Import the new MVC application
+# Import the MVC application
 from ui.app_main import XShieldApp
 
 
@@ -23,7 +22,10 @@ def check_admin_privileges():
     """Check if running with administrator privileges"""
     try:
         import ctypes
-        return ctypes.windll.shell32.IsUserAnAdmin() != 0
+        if os.name == 'nt':
+            return ctypes.windll.shell32.IsUserAnAdmin() != 0
+        else:
+            return os.getuid() == 0
     except:
         return False
 
@@ -50,11 +52,11 @@ def main():
         
         print("X-Shield Professional MVC Framework started successfully!")
         print("Features:")
-        print("  - Professional qt-material dark_teal theme")
+        print("  - Professional Modern Minimal theme")
         print("  - Modular MVC architecture")
         print("  - Central target management")
-        print("  - Background threading for scanners")
-        print("  - Professional dashboard and UI")
+        print("  - Asynchronous background scanning")
+        print("  - Live telemetry dashboard")
         
         # Run application
         sys.exit(app.exec())

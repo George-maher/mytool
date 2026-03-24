@@ -87,18 +87,28 @@ class ModuleManager(QObject):
             'category': getattr(module_class, 'CATEGORY', 'General')
         }
     
-    def run_module(self, module_name, target, parameters=None):
-        """Run a module in a separate thread"""
+    def run_module(self, module_name: str, target: str, parameters: dict = None) -> bool:
+        """
+        Executes a pentesting module asynchronously within its own thread.
+
+        Args:
+            module_name: Unique identifier of the module to run.
+            target: The address (IP, domain, URL) to perform operations on.
+            parameters: Optional dictionary of module-specific configuration values.
+
+        Returns:
+            bool: True if the module was successfully initiated, False otherwise.
+        """
         if module_name not in self.loaded_modules:
-            self.logger.error(f"Module {module_name} not found")
+            self.logger.error(f"Execution Error: Module '{module_name}' is not registered.")
             return False
         
         if module_name in self.running_modules:
-            self.logger.warning(f"Module {module_name} already running")
+            self.logger.warning(f"Resource Conflict: Module '{module_name}' is already active.")
             return False
         
         try:
-            # Create module instance
+            # Instantiate module
             module_class = self.loaded_modules[module_name]
             module_instance = module_class(self.logger)
             
@@ -203,7 +213,7 @@ class ModuleThread(QThread):
                 )
             
             # Execute module
-            results = self.module_instance.run(self.target, self.parameters)
+            results = self.module_instance.execute(self.target, self.parameters)
             
             # Add execution time
             results['execution_time'] = time.time() - start_time
